@@ -230,31 +230,13 @@ Recomenda-se fazer o teste:
 - Ter privacidade
 - Ser tratado com respeito
 
-Se reconheces sinais de abuse, pede ajuda. Línea de Apoio: 800 202 048 (CAPS)|
+Se reconheces sinais de abuso, pede ajuda. Linha de Apoio: 800 202 048 (CAPS)
       },
       {
         id: "consentimento",
         title: "Consentimento",
         category: "Relações",
-        content: `Consentimento significa dar permissão de forma livre e informada para algo. Em contexto sexual, é essencial.
-
-**Princípios do consentimento:**
-- **Livre**: Não há pressão, coerção ou ameaça
-- **Informado**: Sabes exatamente no que estás a concordar
-- **Ativo**: É um "sim" claro, não a ausência de "não"
-- **Reversível**: Podes mudar de ideia a qualquer momento
-
-**Como dar e receber consentimento:**
-- Pergunta antes de cada passo
-- Aceita um "não" como resposta
-- Respeita se a pessoa parecer desconfortável
-- Não assumes que "sim" em algo significa "sim" em tudo
-
-**O consentimento NÃO é:**
-- Silêncio ou passividade
-- Um "sim" obtido sob pressão
-- Um "sim" quando está bêbado/a ou inconsciente
-- Um "sim" do passado`
+        content: "Consentimento significa dar permissão de forma livre e informada para algo. Em contexto sexual, é essencial.\n\n**Princípios do consentimento:**\n- **Livre**: Não há pressão, coerção ou ameaça\n- **Informado**: Sabes exatamente no que estás a concordar\n- **Ativo**: É um \"sim\" claro, não a ausência de \"não\"\n- **Reversível**: Podes mudar de ideia a qualquer momento\n\n**Como dar e receber consentimento:**\n- Pergunta antes de cada passo\n- Aceita um \"não\" como resposta\n- Respeita se a pessoa parecer desconfortável\n- Não assumes que \"sim\" em algo significa \"sim\" em tudo\n\n**O consentimento NÃO é:**\n- Silêncio ou passividade\n- Um \"sim\" obtido sob pressão\n- Um \"sim\" quando está bêbado/a ou inconsciente\n- Um \"sim\" do passado"
       }
     ]
   },
@@ -409,7 +391,7 @@ A contraceção de emergência não protege contra IST.`
 - Centro de Atendimento a Jovens (CAJ) - em várias cidades
 
 **Anonimato:**
-Todas as linhas respeitam a confidencialidade e匿名idade. Podes identificar-te ou não, como preferires.`
+Todas as linhas respeitam a confidencialidade e anonimato. Podes identificar-te ou não, como preferires.`
       },
       {
         id: "onde-saude-sexual",

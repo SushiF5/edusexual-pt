@@ -251,22 +251,7 @@ Se reconheces sinais de abuso, pede ajuda. Linha de Apoio: 800 202 048 (CAPS)
         id: "orientacao-sexual-o-que-e",
         title: "O que é orientação sexual?",
         category: "Orientação",
-        content: `A orientação sexual refere-se à atração emocional, romântica e/ou sexual que uma pessoa sente por outras pessoas.
-
-**Tipos de orientação sexual:**
-- **Heterossexual**: Atrtação por pessoas do sexo oposto
-- **Homosexual**: Atrração por pessoas do mesmo sexo
-- **Bissexual**: Atrração por pessoas de ambos os sexos
-- **Pansexual**: Atrração por pessoas independentemente do género
-- **Assexual**: Ausência ou baixa atração sexual
-
-**É importante saber:**
-- A orientação sexual não é uma escolha
-- Não é uma doença
-- Não pode ser "curada" ou alterada
-- É normal e natural
-
-A descoberta da própria orientação sexual pode ser um processo. É normal ter dúvidas e questionar. O mais importante é ser autêntico consigo mesmo.`
+        content: "A orientação sexual refere-se à atração emocional, romântica e/ou sexual que uma pessoa sente por outras pessoas.\n\n**Tipos de orientação sexual:**\n- **Heterossexual**: Atrtação por pessoas do sexo oposto\n- **Homosexual**: Atrração por pessoas do mesmo sexo\n- **Bissexual**: Atrração por pessoas de ambos os sexos\n- **Pansexual**: Atrração por pessoas independentemente do género\n- **Assexual**: Ausência ou baixa atração sexual\n\n**É importante saber:**\n- A orientação sexual não é uma escolha\n- Não é uma doença\n- Não pode ser \"curada\" ou alterada\n- É normal e natural\n\nA descoberta da própria orientação sexual pode ser um processo. É normal ter dúvidas e questionar. O mais importante é ser autêntico consigo mesmo."
       },
       {
         id: "identidade-genero",
@@ -285,7 +270,7 @@ A descoberta da própria orientação sexual pode ser um processo. É normal ter
 - É proibida a discriminação com base na identidade de género
 - O acesso a cuidados de saúde trans-specific é garantido
 
-**SeEstásaQuestionar-te:**
+**Se estás a questionar-te:**
 - É normal sentir confusão
 - Não há pressa para definir nada
 - Podes explorar à tua velocidade
@@ -311,7 +296,7 @@ A descoberta da própria orientação sexual pode ser um processo. É normal ter
 2. Os espermatozoides nadam em direção ao óvulo
 3. Se um deles atingir o óvulo, ocorre a fertilização
 4. O óvulo fertilizado desloca-se para o útero
-5. Implanta-se na parede do útero e começa a развиваться
+5. Implanta-se na parede do útero e começa a desenvolver-se
 
 **Fertilidade:**
 - A mulher só pode engravidar cerca de 6 dias por mês (janela fértil)

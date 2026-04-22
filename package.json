@@ -11,8 +11,7 @@
 "dependencies": {
     "react": "^19",
     "react-dom": "^19",
-    "next": "15.1.4",
-    "@google/stitch-sdk": "^1.0.0"
+    "next": "15.1.4"
   },
   "devDependencies": {
     "typescript": "^5",

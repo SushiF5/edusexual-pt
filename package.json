@@ -8,10 +8,10 @@
     "start": "next start",
     "lint": "next lint"
   },
-"dependencies": {
+  "dependencies": {
     "react": "^19",
     "react-dom": "^19",
-    "next": "15.1.4"
+    "next": "15.1.11"
   },
   "devDependencies": {
     "typescript": "^5",

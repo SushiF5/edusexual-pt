@@ -136,6 +136,37 @@ O ciclo dura, em média, 28 dias, mas pode variar muito, especialmente nos prime
         content: `Durante a puberdade, os rapazes notam o crescimento dos testículos e do pénis, o surgimento de pelos no rosto e corpo, e a voz que se torna mais grave.
         
 As poluções noturnas (ejaculações involuntárias durante o sono) são normais e fazem parte do amadurecimento do sistema reprodutor masculino.`
+      },
+      {
+        id: "sistema-feminino",
+        title: "O Sistema Reprodutor Feminino",
+        category: "Anatomia",
+        content: `O sistema reprodutor feminino é composto por:
+        - Vulva: a parte externa (inclui os lábios e o clitóris).
+        - Vagina: o canal que liga a vulva ao útero.
+        - Útero: onde o bebé cresce durante a gravidez.
+        - Trompas de Falópio: ligam os ovários ao útero.
+        - Ovários: onde são produzidos os óvulos e hormonas como o estrogénio.`
+      },
+      {
+        id: "sistema-masculino",
+        title: "O Sistema Reprodutor Masculino",
+        category: "Anatomia",
+        content: `O sistema reprodutor masculino é composto por:
+        - Pénis: órgão utilizado para a micção e relação sexual.
+        - Testículos: produzem espermatozoides e testosterona.
+        - Epidídimo: onde os espermatozoides amadurecem.
+        - Vasos deferentes: transportam os espermatozoides para a uretra.
+        - Próstata e Vesículas Seminais: produzem o líquido seminal que protege e nutre os espermatozoides.`
+      },
+      {
+        id: "primeira-vez-mitos",
+        title: "A Primeira Vez: Mitos e Realidades",
+        category: "Educação",
+        content: `Existe muita pressão social sobre a "primeira vez", mas a realidade é diferente dos filmes:
+        - Mito: Tem de ser perfeita. / Realidade: Muitas vezes é estranho, desajeitado ou até engraçado.
+        - Mito: A rapariga tem de sangrar. / Realidade: O hímen é elástico e nem sempre sangra; algumas pessoas já nascem com ele mais aberto.
+        - Mito: Apenas a rapariga deve decidir. / Realidade: O consentimento deve ser mútuo e entusiasta de ambas as partes.`
       }
     ]
   },
@@ -158,6 +189,25 @@ As poluções noturnas (ejaculações involuntárias durante o sono) são normai
 3. Longa Duração: DIU (dispositivo intra-uterino).
         
 A escolha do método deve ser feita com apoio médico, dependendo da saúde e do estilo de vida de cada pessoa.`
+      },
+      {
+        id: "preservativo-guia",
+        title: "Preservativo: Como usar corretamente",
+        category: "Guia",
+        content: `Para que o preservativo seja eficaz, segue estes passos:
+        1. Verifica a data de validade e se a embalagem tem ar (está selada).
+        2. Abre com a mão (nunca uses dentes ou tesouras para não furar).
+        3. Aperta a ponta para retirar o ar antes de colocar.
+        4. Desenrola até à base do pénis ereto.
+        5. Após a ejaculação, segura a base e retira com cuidado.`
+      },
+      {
+        id: "pilula-detalhes",
+        title: "A Pílula Contracetiva",
+        category: "Contracepção",
+        content: `A pílula é um método hormonal que impede a ovulação. 
+        
+Para funcionar, deve ser tomada todos os dias aproximadamente à mesma hora. Se esqueceres uma pílula, deves ler o folheto ou contactar o teu médico para saber como proceder. A pílula NÃO protege contra IST.`
       },
       {
         id: "pilula-dia-seguinte",
@@ -362,6 +412,36 @@ Se suspeitas de uma gravidez, o primeiro passo é fazer um teste de farmácia ou
         content: `Muitas imagens que vemos no Instagram ou TikTok usam filtros, ângulos específicos e edição (Photoshop).
         
 Comparar a tua vida real com a "vida perfeita" de alguém nas redes sociais é injusto contigo. Lembra-te que as pessoas só publicam os seus melhores momentos, não as suas imperfeições.`
+      }
+    ]
+  },
+  {
+    id: "saude-higiene-jovens",
+    title: "Saúde Sexual e Higiene",
+    slug: "saude-higiene",
+    description: "Cuidados diários e bem-estar",
+    icon: "🧼",
+    audience: "jovens",
+    articles: [
+      {
+        id: "higiene-intima",
+        title: "Higiene Íntima: O que fazer",
+        category: "Saúde",
+        content: `A higiene íntima deve ser simples. Para a maioria das pessoas, lavar a zona externa com água e um sabonete neutro é suficiente.
+        
+Atenção: evitar duchas vaginais ou sabonetes com perfumes fortes, pois podem alterar o pH natural e causar infeções. O corpo tem a sua própria forma de se equilibrar.`
+      },
+      {
+        id: "quando-medico",
+        title: "Quando deves consultar um médico?",
+        category: "Saúde",
+        content: `Deves procurar ajuda médica se notares:
+        - Alterações no odor ou cor dos fluxos vaginais ou penianos.
+        - Comichão, ardor ou feridas na zona genital.
+        - Dor durante a relação sexual.
+        - Mudanças súbitas no ciclo menstrual.
+        
+Não tenhas vergonha: os médicos e enfermeiros estão habituados e estão lá para ajudar.`
       }
     ]
   },

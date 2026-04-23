@@ -22,6 +22,7 @@ export default function Home() {
   const [showFaqAnswer, setShowFaqAnswer] = useState<number | null>(null);
   const [questionForm, setQuestionForm] = useState({ name: "", question: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   
   // Stitch states
   const [stitchLayout, setStitchLayout] = useState<{ htmlUrl: string } | null>(null);
@@ -115,7 +116,7 @@ export default function Home() {
         />
       )}
       {/* Header */}
-      <header className="bg-white/80 backdrop-blur-md border-b border-gray-100 py-4 px-6 sticky top-0 z-50 transition-all">
+      <header className="bg-white/80 backdrop-blur-md border-b border-gray-100 py-4 px-6 sticky top-0 z-50 transition-all relative">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <button onClick={() => setShowAudienceSelector(true)} className="flex items-center gap-3 hover:opacity-80 transition group">
             <div className="bg-primary/10 p-2 rounded-xl group-hover:bg-primary group-hover:text-white transition-colors">
@@ -127,22 +128,54 @@ export default function Home() {
             </div>
           </button>
           
-          <nav className="hidden md:flex bg-gray-100/50 p-1 rounded-full gap-1">
-            {[
-              { id: "home", label: "Início" },
-              { id: "quiz", label: "Quiz" },
-              { id: "faq", label: "FAQ" },
-              { id: "duvidas", label: "Dúvidas" }
-            ].map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id as any)}
-                className={`nav-link ${activeTab === tab.id ? "bg-primary text-white shadow-md" : "text-gray-600 hover:text-primary hover:bg-white"}`}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </nav>
+      <nav className="hidden md:flex bg-gray-100/50 p-1 rounded-full gap-1">
+        {[
+          { id: "home", label: "Início" },
+          { id: "quiz", label: "Quiz" },
+          { id: "faq", label: "FAQ" },
+          { id: "duvidas", label: "Dúvidas" }
+        ].map((tab) => (
+          <button
+            key={tab.id}
+            onClick={() => setActiveTab(tab.id as any)}
+            className={`nav-link ${activeTab === tab.id ? "bg-primary text-white shadow-md" : "text-gray-600 hover:text-primary hover:bg-white"}`}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </nav>
+
+      <button
+        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        className="md:hidden p-2 rounded-lg hover:bg-white/10 transition"
+      >
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          {mobileMenuOpen ? (
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          ) : (
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+          )}
+        </svg>
+      </button>
+
+      {mobileMenuOpen && (
+        <div className="absolute top-full left-0 right-0 bg-white shadow-lg md:hidden z-50 border-t">
+          {[
+            { id: "home", label: "Início" },
+            { id: "quiz", label: "Quiz" },
+            { id: "faq", label: "FAQ" },
+            { id: "duvidas", label: "Dúvidas" }
+          ].map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => { setActiveTab(tab.id as any); setMobileMenuOpen(false); }}
+              className={`w-full text-left px-6 py-4 border-b border-gray-100 transition ${activeTab === tab.id ? "bg-primary text-white font-bold" : "text-gray-700 hover:bg-gray-50"}`}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+      )}
           
           <button onClick={() => setShowAudienceSelector(true)} className="btn-primary text-sm py-2 px-6">
             Mudar Perfil

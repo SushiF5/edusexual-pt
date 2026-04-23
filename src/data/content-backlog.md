@@ -163,9 +163,9 @@
 
 ---
 
-## QUIZ - PERGUNTAS A CRIAR
+## QUIZ - PERGUNTAS IMPLEMENTADAS
 
-### Crianças
+### Crianças (6 perguntas)
 - [x] Toques indesejados: o que fazer?
 - [x] Quem pode tocar nas partes privadas?
 - [x] O que é um segredo mau?
@@ -173,7 +173,7 @@
 - [x] As famílias podem ser diferentes?
 - [x] O que faz um bom amigo?
 
-### Jovens
+### Jovens (13 perguntas)
 - [x] Único método que protege de gravidez e IST
 - [x] Qual é a idade média da primeira menstruação?
 - [x] A pílula do dia seguinte é um método contracetivo regular?
@@ -188,7 +188,7 @@
 - [x] Quando deves fazer rastreio de IST?
 - [x] Álcool e consentimento
 
-### Adultos
+### Adultos (5 perguntas)
 - [x] Idade para falar de consentimento
 - [x] A que idade começar a falar de anatomia com nomes corretos?
 - [x] O que é grooming online?
@@ -197,9 +197,9 @@
 
 ---
 
-## FAQ - PERGUNTAS FREQUENTES A ADICIONAR
+## FAQ - PERGUNTAS FREQUENTES IMPLEMENTADAS (23 total)
 
-### Geral
+### Geral (12)
 - [x] É normal ter dúvidas sobre sexualidade?
 - [x] A masturbação é normal?
 - [x] Como saber se estou pronto/a para ter relações sexuais?
@@ -213,14 +213,14 @@
 - [x] É normal ter fantasias sexuais?
 - [x] A pornografia representa a realidade?
 
-### Crianças (perguntas dos pais)
+### Pais/Educadores (5)
 - [x] A que idade devo começar a falar sobre sexualidade?
 - [x] Se eu falar de sexo, não vai estimular o meu filho a experimentar?
 - [x] O meu filho brinca com os órgãos genitais, é normal?
 - [x] Como explicar de onde vêm os bebés?
 - [x] O que fazer se a criança diz que foi tocada?
 
-### Jovens LGBTQI+
+### Jovens LGBTQI+ (5)
 - [x] Como saber a minha orientação sexual?
 - [x] A orientação sexual pode mudar?
 - [x] Onde posso encontrar apoio se sou LGBTQI+?
@@ -229,59 +229,80 @@
 
 ---
 
-## RECURSOS EM PORTUGAL (a adicionar ao site)
+## RECURSOS EM PORTUGAL — já referenciados nos artigos
 
-### Linhas de Apoio
-- [ ] Linha de Apoio à Vítima (APAV): 80 200 2200
+### Linhas de Apoio (mencionadas no content.ts)
+- [x] APAV: 800 200 2200
+- [x] SOS Criança / Linha Criança: 116 111
+- [x] Linha de Apoio à Mulher Vítima de Violência: 800 200 219
+- [x] SNS 24: 808 200 204
+- [x] Linha Saúde Sexual: DGS
+- [x] Linha do Arco-Íris (LGBTQI+)
+- [x] Voz de Apoio: 21 354 4090
 - [ ] Linha de Emergência Social: 144
-- [ ] SOS Criança: 116 111
-- [ ] Linha de Apoio à Mulher Vítima de Violência: 800 200 219
-- [ ] Linha Saúde Sexual: DGS
 
-### Instituições
-- [ ] APF - Associação para o Planeamento da Família
-- [ ] DGS - Direção-Geral da Saúde
-- [ ] DGE - Direção-Geral da Educação
+### Instituições (mencionadas no content.ts)
+- [x] APF - Associação para o Planeamento da Família
+- [x] DGS - Direção-Geral da Saúde
+- [x] DGE - Direção-Geral da Educação
+- [x] ILGA Portugal
+- [x] Opus Diversidades
+- [x] Panteras Rosa
+- [x] GRES - Grupo de Reflexão sobre Saúde Sexual
 - [ ] CASO - Centro de Atendimento a Vítimas de Abuso Sexual
-- [ ] ILGA Portugal
-- [ ] Opus Diversidades
-- [ ] Panteras Rosa
-- [ ] GRES - Grupo de Reflexão sobre Saúde
+- [x] CPCJ - Comissão de Proteção de Crianças e Jovens
 
-### Serviços de Saúde
-- [ ] Consultas de Planeamento Familiar nos Cuidados de Saúde Primários
-- [ ] Consultas Jovens nos Centros de Saúde
+### Serviços de Saúde (mencionados no content.ts)
+- [x] Consultas de Planeamento Familiar nos Cuidados de Saúde Primários
+- [x] Centros de Saúde / SNS
+- [ ] Consultas Jovens nos Centros de Saúde (menção direta)
 - [ ] Gabinetes de Apoio ao Estudante (escolas)
-- [ ] Serviço Nacional de Saúde (SNS) - como aceder
 
-### Recursos Online
+### Recursos Online (mencionados no content.ts)
+- [x] SexoComCiência (APF)
+- [x] Escola de Sexualidade (DGE)
+- [x] Portal DGS (dgs.pt)
+- [x] Portal DGE (dge.mec.pt)
 - [ ] Portal da Saúde (Ministério da Saúde)
-- [ ] SexoComCiência (APF)
-- [ ] Escola de Sexualidade (DGE)
 - [ ] Recursos educativos da OMS
+
+---
+
+## UI / FUNCIONALIDADE
+
+- [x] Seletor de audiência (Crianças / Jovens / Adultos)
+- [x] Tabs: Início, Quiz, FAQ, Tira Dúvidas
+- [x] FAQ filtrado por audiência
+- [x] Formulário Tira Dúvidas funcional (state ligado)
+- [x] Linhas de apoio por audiência no Tira Dúvidas
+- [x] StitchLayout + API de geração IA (requer env vars)
+- [x] Fix: stitch.ts não crasheia no build sem env vars
 
 ---
 
 ## NOTAS DE IMPLEMENTAÇÃO
 
-1. **Prioridade alta** (para já):
-   - Temas de Jovens (maior audiência prevista) ✅ CONCLUÍDO
-   - Quiz com mais perguntas ✅ CONCLUÍDO
-   - FAQ expandido ✅ CONCLUÍDO
+1. **Prioridade alta** (para já): CONCLUÍDO
+   - Temas de Jovens ✅
+   - Quiz com mais perguntas ✅
+   - FAQ expandido ✅
 
-2. **Prioridade média**:
-   - Secção de Adultos/Pais ✅ CONCLUÍDO
-   - Recursos em Portugal (parcial — linhas e instituições nos artigos, falta secção dedicada)
-   - Secção Crianças (expansão) ✅ CONCLUÍDO
+2. **Prioridade média**: CONCLUÍDO
+   - Secção de Adultos/Pais ✅
+   - Secção Crianças (expansão) ✅
+   - Recursos em Portugal (parcial — referenciados nos artigos, falta secção dedicada) ⚠️
 
 3. **Prioridade baixa** (fase 2):
-   - Vídeos educativos
-   - PDFs para download
-   - Sistema de perguntas com Supabase
+   - [ ] Vídeos educativos
+   - [ ] PDFs para download
+   - [ ] Sistema de perguntas com Supabase
+   - [ ] i18n (EN/ES)
+   - [ ] Modo escuro
+   - [ ] Acessibilidade WCAG 2.1
+   - [ ] Expandir áudios curtos para ~2 min (ciclo-menstrual, contracepcao-jovens, prevencao-ist)
 
 4. **Fontes a consultar**:
    - APF (apf.pt)
    - DGS (dgs.pt)
    - DGE (dge.mec.pt)
    - OMS/WHO (who.int)
-   - SIECUS (siccus.org)

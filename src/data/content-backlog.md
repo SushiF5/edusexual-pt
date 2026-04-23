@@ -12,25 +12,25 @@
 - [x] Toques bons e toques confusos
 - [x] Nomes corretos das partes do corpo
 - [x] As meninas e os meninos: semelhanças e diferenças
-- [ ] O que acontece quando cresço?
+- [x] O que acontece quando cresço?
 
 ### Tema: Limites e Segurança
 - [x] O que é o consentimento? (versão criança)
 - [x] Dizer "Não" é um superpoder
 - [x] Segredos bons e segredos maus
-- [ ] Como pedir ajuda se algo está errado
-- [ ] Regras de segurança online
+- [x] Como pedir ajuda se algo está errado
+- [x] Regras de segurança online
 
 ### Tema: Emoções e Relações
-- [ ] As minhas emoções são importantes
-- [ ] Amizade: o que é ser um bom amigo?
-- [ ] Respeitar os sentimentos dos outros
-- [ ] Quando me sinto triste ou confuso
+- [x] As minhas emoções são importantes
+- [x] Amizade: o que é ser um bom amigo?
+- [x] Respeitar os sentimentos dos outros
+- [x] Quando me sinto triste ou confuso
 
 ### Tema: Famílias
-- [ ] As famílias são diferentes e todas são especiais
-- [ ] Há famílias com pai e mãe, há famílias de outros modos
-- [ ] Bebés: de onde vêm? (versão adequada à idade)
+- [x] As famílias são diferentes e todas são especiais
+- [x] Há famílias com pai e mãe, há famílias de outros modos
+- [x] Bebés: de onde vêm? (versão adequada à idade)
 
 ---
 
@@ -38,23 +38,23 @@
 
 ### Tema: Anatomia e Fisiologia
 - [x] O que é a puberdade?
-- [ ] Mudanças no corpo feminino durante a puberdade
+- [x] Mudanças no corpo feminino durante a puberdade
 - [x] Mudanças no corpo masculino durante a puberdade
 - [x] O ciclo menstrual explicado
-- [ ] Ereções e ejaculações: o que é normal?
-- [ ] O sistema reprodutor feminino (anatomia)
-- [ ] O sistema reprodutor masculino (anatomia)
-- [ ] Primeira vez: mitos e realidades
+- [x] Ereções e ejaculações: o que é normal?
+- [x] O sistema reprodutor feminino (anatomia)
+- [x] O sistema reprodutor masculino (anatomia)
+- [x] Primeira vez: mitos e realidades
 
 ### Tema: Contracepção
 - [x] Métodos contracetivos (visão geral)
-- [ ] Preservativo masculino: como usar corretamente
-- [ ] Preservativo feminino
-- [ ] Pílula contracetiva: como funciona
-- [ ] DIU e implante: métodos de longa duração
+- [x] Preservativo masculino: como usar corretamente
+- [x] Preservativo feminino
+- [x] Pílula contracetiva: como funciona
+- [x] DIU e implante: métodos de longa duração
 - [x] Contraceção de emergência (pílula do dia seguinte)
-- [ ] Comparação de métodos: eficácia e vantagens
-- [ ] Mitos sobre contracepção que precisas de esquecer
+- [x] Comparação de métodos: eficácia e vantagens
+- [x] Mitos sobre contracepção que precisas de esquecer
 
 ### Tema: IST (Infeções Sexualmente Transmissíveis)
 - [x] O que são IST e como se transmitem
@@ -72,8 +72,8 @@
 - [x] Sinais de uma relação tóxica
 - [x] Amor e atração: diferenças
 - [x] Comunicação nas relações
-- [ ] Primeira relação sexual: como saber se estás pronto?
-- [ ] Relações à distância
+- [x] Primeira relação sexual: como saber se estás pronto?
+- [x] Relações à distância
 - [x] Fim de relação: como lidar com a separação
 - [x] Ciúmes: quando é que é demais?
 
@@ -97,30 +97,33 @@
 ### Tema: Gravidez e Planeamento Familiar
 - [x] Como acontece a gravidez
 - [x] Sinais de gravidez
-- [ ] Teste de gravidez: quando e como fazer
-- [ ] Opções perante uma gravidez não planeada
+- [x] Teste de gravidez: quando e como fazer
+- [x] Opções perante uma gravidez não planeada
 - [x] Interrupção voluntária da gravidez (IVG) em Portugal: a lei
-- [ ] Gravidez na adolescência: riscos e apoios
-- [ ] Pré-natal: cuidados na gravidez
+- [x] Gravidez na adolescência: riscos e apoios
+- [x] Pré-natal: cuidados na gravidez
 
 ### Tema: Corpo e Imagem
-- [ ] Imagem corporal: gostar de si mesmo
-- [ ] Comparação com redes sociais: o que não te dizem
-- [ ] Transtornos alimentares e sexualidade
-- [ ] A "normalidade" dos corpos: não existe corpo perfeito
+- [x] Imagem corporal: gostar de si mesmo
+- [x] Comparação com redes sociais: o que não te dizem
+- [x] Transtornos alimentares e sexualidade
+- [x] A "normalidade" dos corpos: não existe corpo perfeito
 
 ### Tema: Sexualidade e Prazer
-- [ ] Masturbação: é normal?
-- [ ] Prazer sexual: o que ninguém te ensina
-- [ ] Corpo e resposta sexual
-- [ ] Mitos sobre a primeira vez
-- [ ] Pornografia vs. realidade: o que precisas de saber
+- [x] Masturbação: é normal?
+- [x] Prazer sexual: o que ninguém te ensina
+- [x] Corpo e resposta sexual
+- [x] Pornografia vs. realidade: o que precisas de saber
 
-### Tema: Saúde Sexual
-- [ ] Consulta de planeamento familiar: o que esperar
-- [ ] Como colocar o preservativo: passo a passo
-- [ ] Higiene íntima: o que fazer (e o que não fazer)
-- [ ] Quando consultar o médico
+### Tema: Saúde Sexual e Higiene
+- [x] Consulta de planeamento familiar: o que esperar
+- [x] Como colocar o preservativo: passo a passo
+- [x] Higiene íntima: o que fazer (e o que não fazer)
+- [x] Quando consultar o médico
+
+### Tema: Recursos em Portugal
+- [x] Linhas de Apoio
+- [x] Instituições Especializadas
 
 ---
 
@@ -130,33 +133,33 @@
 - [x] Como iniciar a conversa
 - [x] Sinais de Alerta: Abuso Sexual
 - [x] Educação sexual por idade: o que dizer a cada fase
-- [ ] Respostas a perguntas difíceis das crianças
-- [ ] Como criar um ambiente de confiança em casa
-- [ ] A importância da linguagem correta (nomes anatómicos)
-- [ ] Filhos e internet: como proteger sem espiar
-- [ ] Falar de pornografia com os filhos
-- [ ] Orientação sexual do filho: como reagir e apoiar
+- [x] Respostas a perguntas difíceis das crianças
+- [x] Como criar um ambiente de confiança em casa
+- [x] A importância da linguagem correta (nomes anatómicos)
+- [x] Filhos e internet: como proteger sem espiar
+- [x] Falar de pornografia com os filhos
+- [x] Orientação sexual do filho: como reagir e apoiar
 
 ### Tema: Educação Sexual na Escola
-- [ ] O que diz a lei sobre educação sexual em Portugal
-- [ ] Educação sexual no currículo: DGE orienta
-- [ ] Como os professores podem abordar o tema
-- [ ] Recursos pedagógicos para educadores
-- [ ] Atividades e dinâmicas de grupo para a sala de aula
+- [x] O que diz a lei sobre educação sexual em Portugal
+- [x] Educação sexual no currículo: DGE orienta
+- [x] Como os professores podem abordar o tema
+- [x] Recursos pedagógicos para educadores
+- [x] Atividades e dinâmicas de grupo para a sala de aula
 
 ### Tema: Proteção e Prevenção
-- [ ] Como identificar sinais de abuso sexual em crianças
-- [ ] O que fazer se suspeitar de abuso
-- [ ] Grooming online: como reconhecer predadores
-- [ ] Ensinar regras de segurança corporal às crianças
-- [ ] Linhas de apoio e instituições em Portugal
+- [x] Como identificar sinais de abuso sexual em crianças
+- [x] O que fazer se suspeitar de abuso
+- [x] Grooming online: como reconhecer predadores
+- [x] Ensinar regras de segurança corporal às crianças
+- [x] Linhas de apoio e instituições em Portugal
 
 ### Tema: Sexualidade ao Longo da Vida
-- [ ] Sexualidade na gravidez
-- [ ] Sexualidade após o parto
-- [ ] Menopausa e sexualidade
-- [ ] Sexualidade na terceira idade
-- [ ] Quando o desejo muda: Factors físicos e emocionais
+- [x] Sexualidade na gravidez
+- [x] Sexualidade após o parto
+- [x] Menopausa e sexualidade
+- [x] Sexualidade na terceira idade
+- [x] Quando o desejo muda: Fatores físicos e emocionais
 
 ---
 
@@ -166,30 +169,31 @@
 - [x] Toques indesejados: o que fazer?
 - [x] Quem pode tocar nas partes privadas?
 - [x] O que é um segredo mau?
-- [ ] Se alguém te pede para guardar um segredo que te deixa triste...
-- [ ] As famílias podem ser diferentes?
-- [ ] O que faz um bom amigo?
+- [x] Se alguém te pede para guardar um segredo que te deixa triste...
+- [x] As famílias podem ser diferentes?
+- [x] O que faz um bom amigo?
 
 ### Jovens
 - [x] Único método que protege de gravidez e IST
-- [ ] Qual é a idade média da primeira menstruação?
-- [ ] A pílula do dia seguinte é um método contracetivo regular?
+- [x] Qual é a idade média da primeira menstruação?
+- [x] A pílula do dia seguinte é um método contracetivo regular?
 - [x] Qual IST pode causar cancro do colo do útero?
 - [x] O consentimento pode ser retirado a meio?
-- [ ] A masturbação faz mal à saúde?
-- [ ] Qual a eficácia do preservativo quando bem usado?
-- [ ] A pílula contracetiva protege de IST?
+- [x] A masturbação faz mal à saúde?
+- [x] Qual a eficácia do preservativo quando bem usado?
+- [x] A pílula contracetiva protege de IST?
 - [x] Uma pessoa com IST pode não ter sintomas?
-- [ ] O que é o espetro da sexualidade?
-- [ ] Qual a lei sobre IVG em Portugal?
-- [ ] Quando deves fazer rastreio de IST?
+- [x] O que é o espetro da sexualidade?
+- [x] Qual a lei sobre IVG em Portugal?
+- [x] Quando deves fazer rastreio de IST?
+- [x] Álcool e consentimento
 
 ### Adultos
 - [x] Idade para falar de consentimento
-- [ ] A que idade começar a falar de anatomia com nomes corretos?
+- [x] A que idade começar a falar de anatomia com nomes corretos?
 - [x] O que é grooming online?
-- [ ] A educação sexual é obrigatória nas escolas portuguesas?
-- [ ] Que profissional contactar se suspeitar de abuso?
+- [x] A educação sexual é obrigatória nas escolas portuguesas?
+- [x] Que profissional contactar se suspeitar de abuso?
 
 ---
 
@@ -199,29 +203,29 @@
 - [x] É normal ter dúvidas sobre sexualidade?
 - [x] A masturbação é normal?
 - [x] Como saber se estou pronto/a para ter relações sexuais?
-- [ ] O tamanho do pénis importa?
+- [x] O tamanho do pénis importa?
 - [x] A primeira vez dói sempre?
-- [ ] É possível engravidar durante a menstruação?
-- [ ] A pílula do dia seguinte faz mal se tomar muitas vezes?
-- [ ] Como falar com os meus pais sobre sexualidade?
-- [ ] Onde posso fazer um teste de gravidez grátis?
+- [x] É possível engravidar durante a menstruação?
+- [x] A pílula do dia seguinte faz mal se tomar muitas vezes?
+- [x] Como falar com os meus pais sobre sexualidade?
+- [x] Onde posso fazer um teste de gravidez grátis?
 - [x] Onde posso fazer rastreio de IST grátis em Portugal?
-- [ ] É normal ter fantasias sexuais?
-- [ ] A pornografia representa a realidade?
+- [x] É normal ter fantasias sexuais?
+- [x] A pornografia representa a realidade?
 
 ### Crianças (perguntas dos pais)
-- [ ] A que idade devo começar a falar sobre sexualidade?
-- [ ] Se eu falar de sexo, não vai estimular o meu filho a experimentar?
-- [ ] O meu filho brinca com os órgãos genitais, é normal?
-- [ ] Como explicar de onde vêm os bebés?
-- [ ] O que fazer se a criança diz que foi tocada?
+- [x] A que idade devo começar a falar sobre sexualidade?
+- [x] Se eu falar de sexo, não vai estimular o meu filho a experimentar?
+- [x] O meu filho brinca com os órgãos genitais, é normal?
+- [x] Como explicar de onde vêm os bebés?
+- [x] O que fazer se a criança diz que foi tocada?
 
 ### Jovens LGBTQI+
-- [ ] Como saber a minha orientação sexual?
-- [ ] A orientação sexual pode mudar?
-- [ ] Onde posso encontrar apoio se sou LGBTQI+?
-- [ ] Como fazer coming out para a família?
-- [ ] Será que isto é "só uma fase"?
+- [x] Como saber a minha orientação sexual?
+- [x] A orientação sexual pode mudar?
+- [x] Onde posso encontrar apoio se sou LGBTQI+?
+- [x] Como fazer coming out para a família?
+- [x] Será que isto é "só uma fase"?
 
 ---
 
@@ -261,14 +265,14 @@
 ## NOTAS DE IMPLEMENTAÇÃO
 
 1. **Prioridade alta** (para já):
-   - Temas de Jovens (maior audiência prevista)
-   - Quiz com mais perguntas
-   - FAQ expandido
+   - Temas de Jovens (maior audiência prevista) ✅ CONCLUÍDO
+   - Quiz com mais perguntas ✅ CONCLUÍDO
+   - FAQ expandido ✅ CONCLUÍDO
 
 2. **Prioridade média**:
-   - Secção de Adultos/Pais
-   - Recursos em Portugal
-   - Secção Crianças (expansão)
+   - Secção de Adultos/Pais ✅ CONCLUÍDO
+   - Recursos em Portugal (parcial — linhas e instituições nos artigos, falta secção dedicada)
+   - Secção Crianças (expansão) ✅ CONCLUÍDO
 
 3. **Prioridade baixa** (fase 2):
    - Vídeos educativos

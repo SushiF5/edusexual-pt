@@ -25,6 +25,18 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState<"home" | "podcast" | "quiz" | "faq" | "duvidas">("home");
   const [audience, setAudience] = useState<Audience>("jovens");
   const [showAudienceSelector, setShowAudienceSelector] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    setDarkMode(document.documentElement.classList.contains("dark"));
+  }, []);
+
+  const toggleDarkMode = () => {
+    const next = !darkMode;
+    setDarkMode(next);
+    document.documentElement.classList.toggle("dark", next);
+    localStorage.setItem("edusexual-theme", next ? "dark" : "light");
+  };
 
   const [quizState, setQuizState] = useState({
     currentQuestion: 0,
@@ -163,7 +175,7 @@ Estilo: Limpo, acessível para ${audience}.`;
       )}
 
       {/* Header */}
-      <header className="bg-white/80 backdrop-blur-md border-b border-gray-100 py-3 px-4 md:px-6 sticky top-0 z-50 transition-all relative">
+          <header className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-100 dark:border-gray-800 py-3 px-4 md:px-6 sticky top-0 z-50 transition-all relative">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
           <button
             onClick={() => setShowAudienceSelector(true)}
@@ -175,17 +187,17 @@ Estilo: Limpo, acessível para ${audience}.`;
             </div>
             <div className="text-left hidden sm:block">
               <h1 className="text-base md:text-xl font-heading font-bold text-primary leading-tight">EduSexual PT</h1>
-              <span className="text-[9px] md:text-[10px] uppercase tracking-widest font-bold text-gray-400">Perfil: {audienceLabels[audience]}</span>
+              <span className="text-[9px] md:text-[10px] uppercase tracking-widest font-bold text-gray-400 dark:text-gray-500">Perfil: {audienceLabels[audience]}</span>
             </div>
           </button>
 
           {/* Desktop nav */}
-          <nav className="hidden md:flex bg-gray-100 p-2 rounded-full gap-2 shadow-sm" aria-label="Navegação principal">
+          <nav className="hidden md:flex bg-gray-100 dark:bg-gray-800 p-2 rounded-full gap-2 shadow-sm" aria-label="Navegação principal">
             {navTabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`px-6 py-2 rounded-full transition-all duration-300 font-medium ${activeTab === tab.id ? "bg-primary text-white shadow-md" : "text-gray-600 hover:text-primary hover:bg-white"}`}
+                className={`px-6 py-2 rounded-full transition-all duration-300 font-medium ${activeTab === tab.id ? "bg-primary text-white shadow-md" : "text-gray-600 dark:text-gray-300 hover:text-primary hover:bg-white dark:hover:bg-gray-700"}`}
                 aria-current={activeTab === tab.id ? "page" : undefined}
               >
                 {tab.label}
@@ -196,7 +208,7 @@ Estilo: Limpo, acessível para ${audience}.`;
           {/* Mobile hamburger */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition"
+            className="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition"
             aria-label={mobileMenuOpen ? "Fechar menu" : "Abrir menu"}
             aria-expanded={mobileMenuOpen}
           >
@@ -209,35 +221,51 @@ Estilo: Limpo, acessível para ${audience}.`;
             </svg>
           </button>
 
-          {/* Desktop: Mudar Perfil */}
-          <button
-            onClick={() => setShowAudienceSelector(true)}
-            className="btn-primary text-xs md:text-sm py-2 px-3 md:px-6 hidden md:inline-flex"
-          >
-            Mudar Perfil
-          </button>
+          {/* Desktop: Mudar Perfil + Dark Mode */}
+          <div className="hidden md:flex items-center gap-2">
+            <button
+              onClick={toggleDarkMode}
+              className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition"
+              aria-label={darkMode ? "Ativar modo claro" : "Ativar modo escuro"}
+            >
+              {darkMode ? "☀️" : "🌙"}
+            </button>
+            <button
+              onClick={() => setShowAudienceSelector(true)}
+              className="btn-primary text-xs md:text-sm py-2 px-3 md:px-6"
+            >
+              Mudar Perfil
+            </button>
+          </div>
         </div>
 
         {/* Mobile dropdown menu */}
         {mobileMenuOpen && (
-          <div className="absolute top-full left-0 right-0 bg-white shadow-lg md:hidden z-50 border-t">
+          <div className="absolute top-full left-0 right-0 bg-white dark:bg-gray-900 shadow-lg md:hidden z-50 border-t dark:border-gray-800">
             {navTabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => { setActiveTab(tab.id as any); setMobileMenuOpen(false); }}
-                className={`w-full text-left px-6 py-4 border-b border-gray-100 transition flex items-center gap-3 ${activeTab === tab.id ? "bg-primary text-white font-bold" : "text-gray-700 hover:bg-gray-50"}`}
+                className={`w-full text-left px-6 py-4 border-b border-gray-100 dark:border-gray-800 transition flex items-center gap-3 ${activeTab === tab.id ? "bg-primary text-white font-bold" : "text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"}`}
               >
                 <span>{tab.icon}</span>
                 {tab.label}
               </button>
             ))}
-            <button
-              onClick={() => { setShowAudienceSelector(true); setMobileMenuOpen(false); }}
-              className="w-full text-left px-6 py-4 text-primary font-bold hover:bg-gray-50 flex items-center gap-3"
-            >
-              <span>🔄</span>
-              Mudar Perfil
-            </button>
+              <button
+                onClick={() => { setShowAudienceSelector(true); setMobileMenuOpen(false); }}
+                className="w-full text-left px-6 py-4 text-primary font-bold hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center gap-3"
+              >
+                <span>🔄</span>
+                Mudar Perfil
+              </button>
+              <button
+                onClick={() => { toggleDarkMode(); setMobileMenuOpen(false); }}
+                className="w-full text-left px-6 py-4 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center gap-3"
+              >
+                <span>{darkMode ? "☀️" : "🌙"}</span>
+                {darkMode ? "Modo Claro" : "Modo Escuro"}
+              </button>
           </div>
         )}
       </header>
@@ -265,7 +293,7 @@ Estilo: Limpo, acessível para ${audience}.`;
                 >
                   <div className="text-5xl md:text-7xl mb-3 md:mb-6 group-hover:scale-110 transition-transform">{p.icon}</div>
                   <h3 className="text-xl md:text-3xl font-bold mb-2 md:mb-3 text-primary">{p.title}</h3>
-                  <p className="text-gray-500 leading-relaxed text-sm md:text-base">{p.desc}</p>
+                  <p className="text-gray-500 dark:text-gray-400 leading-relaxed text-sm md:text-base">{p.desc}</p>
                 </button>
               ))}
             </div>
@@ -278,7 +306,7 @@ Estilo: Limpo, acessível para ${audience}.`;
         {activeTab === "home" && (
           <div className="space-y-12 md:space-y-20">
             {/* Hero Section */}
-            <section className="relative overflow-hidden rounded-[2rem] md:rounded-[3rem] bg-primary/5 p-6 md:p-16 hero-gradient">
+            <section className="relative overflow-hidden rounded-[2rem] md:rounded-[3rem] bg-primary/5 dark:bg-primary/10 p-6 md:p-16 hero-gradient">
               <div className="flex flex-col lg:flex-row items-center gap-8 md:gap-12">
                 <div className="flex-1 text-center lg:text-left z-10">
                   <div className="inline-block px-4 py-1 rounded-full bg-secondary/10 text-secondary font-bold text-sm mb-4 md:mb-6 uppercase tracking-widest">
@@ -289,7 +317,7 @@ Estilo: Limpo, acessível para ${audience}.`;
                      audience === 'adultos' ? 'Guia para Adultos e Educadores' :
                      'Sexualidade sem Tabus e com Segurança'}
                   </h2>
-                  <p className="text-base md:text-xl text-gray-600 mb-6 md:mb-10 leading-relaxed max-w-xl mx-auto lg:mx-0">
+                  <p className="text-base md:text-xl text-gray-600 dark:text-gray-300 mb-6 md:mb-10 leading-relaxed max-w-xl mx-auto lg:mx-0">
                     {audience === 'criancas' ? 'Um espaço divertido e seguro para descobrires como o teu corpo é especial.' :
                      audience === 'adultos' ? 'Informação técnica e pedagógica baseada em fontes oficiais para apoiar a educação.' :
                      'Um espaço 100% anónimo para aprenderes sobre saúde, relações e o teu corpo.'}
@@ -316,17 +344,17 @@ Estilo: Limpo, acessível para ${audience}.`;
                 <h3 className="text-2xl md:text-4xl font-heading font-bold text-primary mb-3 md:mb-4">
                   O que queres explorar hoje?
                 </h3>
-                <p className="text-gray-500 max-w-2xl mx-auto text-sm md:text-base">Temos conteúdo especializado preparado para o teu perfil. Escolhe um tema para começar a ler.</p>
+                <p className="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto text-sm md:text-base">Temos conteúdo especializado preparado para o teu perfil. Escolhe um tema para começar a ler.</p>
               </div>
 
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
                 {filteredTopics.map((topic) => (
-                  <div key={topic.id} className="card group hover:border-primary">
-                    <div className="bg-primary/5 w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center text-3xl md:text-4xl mb-4 md:mb-6 group-hover:bg-primary group-hover:text-white transition-all duration-500">
+              <div key={topic.id} className="card group hover:border-primary">
+              <div className="bg-primary/5 dark:bg-primary/20 w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center text-3xl md:text-4xl mb-4 md:mb-6 group-hover:bg-primary group-hover:text-white transition-all duration-500">
                       {topic.id === 'anatomia-jovens' ? '🧬' : topic.icon}
                     </div>
                     <h4 className="text-lg md:text-2xl font-heading font-bold mb-2 md:mb-3 text-primary">{topic.title}</h4>
-                    <p className="text-gray-500 mb-4 md:mb-6 line-clamp-2 leading-relaxed text-sm md:text-base">{topic.description}</p>
+                    <p className="text-gray-500 dark:text-gray-400 mb-4 md:mb-6 line-clamp-2 leading-relaxed text-sm md:text-base">{topic.description}</p>
 
                     <div className="space-y-3">
                       {topic.articles.map((article) => (
@@ -335,7 +363,7 @@ Estilo: Limpo, acessível para ${audience}.`;
                             <span className="flex items-center gap-2">📄 {article.title}</span>
                             <span className="text-xs opacity-50 group-open:rotate-180 transition-transform">▼</span>
                           </summary>
-                          <div className="mt-4 p-4 md:p-5 bg-gray-50 rounded-2xl text-sm text-gray-700 whitespace-pre-line leading-relaxed shadow-inner">
+                          <div className="mt-4 p-4 md:p-5 bg-gray-50 dark:bg-gray-700/50 rounded-2xl text-sm text-gray-700 dark:text-gray-300 whitespace-pre-line leading-relaxed shadow-inner">
                             {article.content}
                           </div>
                         </details>
@@ -354,11 +382,11 @@ Estilo: Limpo, acessível para ${audience}.`;
             <div className="text-center">
               <div className="bg-secondary/20 w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center text-3xl md:text-4xl mx-auto mb-4 md:mb-6">🎙️</div>
               <h3 className="text-2xl md:text-4xl font-heading font-bold text-primary mb-3">Descomplicando</h3>
-              <p className="text-gray-500 text-sm md:text-base max-w-2xl mx-auto">O podcast da EduSexual PT. Sofia e André descomplicam temas de educação sexual sem tabus, com conversas abertas e informação validada.</p>
+              <p className="text-gray-500 dark:text-gray-400 text-sm md:text-base max-w-2xl mx-auto">O podcast da EduSexual PT. Sofia e André descomplicam temas de educação sexual sem tabus, com conversas abertas e informação validada.</p>
             </div>
 
             <div className="card bg-primary/5 border-primary/20">
-              <p className="text-sm text-gray-600 mb-4 text-center">Ouve no Spotify ou diretamente aqui:</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 text-center">Ouve no Spotify ou diretamente aqui:</p>
               <iframe
                 src="https://open.spotify.com/embed/show/111d0d7cc?utm_source=generator&theme=0"
                 width="100%"
@@ -411,7 +439,7 @@ Estilo: Limpo, acessível para ${audience}.`;
                               {ep.duration && <span>{ep.duration}</span>}
                               {dateStr && <span>{dateStr}</span>}
                             </div>
-                            {ep.description && <p className="text-gray-500 text-xs mt-2 line-clamp-2">{ep.description}</p>}
+                            {ep.description && <p className="text-gray-500 dark:text-gray-400 text-xs mt-2 line-clamp-2">{ep.description}</p>}
                           </div>
                           {ep.link && (
                             <a href={ep.link} target="_blank" rel="noopener noreferrer" className="text-xs text-gray-400 hover:text-secondary transition underline shrink-0 text-center sm:text-right">
@@ -434,7 +462,7 @@ Estilo: Limpo, acessível para ${audience}.`;
             </div>
 
             <div className="card bg-accent/10 border-accent text-center">
-              <p className="text-sm text-gray-600">Segue o podcast no Spotify para não perder nenhum episódio!</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Segue o podcast no Spotify para não perder nenhum episódio!</p>
               <a
                 href="https://podcasters.spotify.com/pod/show/edusexual"
                 target="_blank"
@@ -456,10 +484,10 @@ Estilo: Limpo, acessível para ${audience}.`;
                   {/* Progress bar */}
                   <div className="mb-6">
                     <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm text-gray-500">Pergunta {quizState.currentQuestion + 1} de {filteredQuiz.length}</span>
+                      <span className="text-sm text-gray-500 dark:text-gray-400">Pergunta {quizState.currentQuestion + 1} de {filteredQuiz.length}</span>
                       <span className="text-primary font-semibold">Pontos: {quizState.score}</span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2" role="progressbar" aria-valuenow={quizState.currentQuestion + 1} aria-valuemin={1} aria-valuemax={filteredQuiz.length}>
+                    <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2" role="progressbar" aria-valuenow={quizState.currentQuestion + 1} aria-valuemin={1} aria-valuemax={filteredQuiz.length}>
                       <div
                         className="bg-primary h-2 rounded-full transition-all duration-500"
                         style={{ width: `${((quizState.currentQuestion + 1) / filteredQuiz.length) * 100}%` }}
@@ -470,12 +498,12 @@ Estilo: Limpo, acessível para ${audience}.`;
                   <h3 className="text-lg md:text-xl font-heading font-semibold mb-6">{filteredQuiz[quizState.currentQuestion].question}</h3>
                   <div className="space-y-3">
                     {filteredQuiz[quizState.currentQuestion].options.map((option, index) => {
-                      let btnClass = "w-full text-left p-3 md:p-4 rounded-lg border-2 transition text-sm md:text-base ";
-                      if (quizState.showExplanation) {
-                        if (index === filteredQuiz[quizState.currentQuestion].correctAnswer) btnClass += "border-green-500 bg-green-50";
-                        else if (quizState.selectedAnswer === index) btnClass += "border-red-500 bg-red-50";
-                      } else {
-                        btnClass += "border-gray-200 hover:border-primary";
+              let btnClass = "w-full text-left p-3 md:p-4 rounded-lg border-2 transition text-sm md:text-base ";
+              if (quizState.showExplanation) {
+                if (index === filteredQuiz[quizState.currentQuestion].correctAnswer) btnClass += "border-green-500 bg-green-50 dark:bg-green-900/30";
+                else if (quizState.selectedAnswer === index) btnClass += "border-red-500 bg-red-50 dark:bg-red-900/30";
+              } else {
+                btnClass += "border-gray-200 dark:border-gray-600 hover:border-primary";
                       }
                       return (
                         <button key={index} onClick={() => handleAnswer(index)} disabled={quizState.showExplanation} className={btnClass}>
@@ -485,8 +513,8 @@ Estilo: Limpo, acessível para ${audience}.`;
                     })}
                   </div>
                   {quizState.showExplanation && (
-                    <div className="mt-6 p-4 bg-accent/20 rounded-lg">
-                      <p className="text-gray-700 mb-4 text-sm md:text-base">{filteredQuiz[quizState.currentQuestion].explanation}</p>
+              <div className="mt-6 p-4 bg-accent/20 dark:bg-accent/10 rounded-lg">
+                <p className="text-gray-700 dark:text-gray-300 mb-4 text-sm md:text-base">{filteredQuiz[quizState.currentQuestion].explanation}</p>
                       <div className="flex gap-3">
                         <button onClick={nextQuestion} className="btn-primary flex-grow">
                           {quizState.currentQuestion < filteredQuiz.length - 1 ? "Seguinte" : "Ver Resultado"}
@@ -499,7 +527,7 @@ Estilo: Limpo, acessível para ${audience}.`;
                 <div className="card text-center">
                   <div className="text-5xl mb-4">{quizState.score === filteredQuiz.length ? '🏆' : quizState.score >= filteredQuiz.length / 2 ? '👏' : '📚'}</div>
                   <h3 className="text-2xl font-bold mb-2">Quiz Terminado!</h3>
-                  <p className="text-gray-500 mb-2">
+                  <p className="text-gray-500 dark:text-gray-400 mb-2">
                     {quizState.score === filteredQuiz.length ? 'Parabéns! Acertaste tudo!' :
                      quizState.score >= filteredQuiz.length / 2 ? 'Bom resultado! Continua a aprender.' :
                      'Não desanimes! Explora os temas e tenta de novo.'}
@@ -524,11 +552,11 @@ Estilo: Limpo, acessível para ${audience}.`;
           <div className="max-w-4xl mx-auto space-y-6 md:space-y-8">
             <div className="text-center mb-8 md:mb-12">
               <h3 className="text-3xl md:text-4xl font-heading font-bold text-primary mb-3 md:mb-4">Perguntas Frequentes</h3>
-              <p className="text-gray-500 text-sm md:text-base">
-                {audience === 'criancas' ? 'Respostas simples para as tuas dúvidas.' :
-                 audience === 'adultos' ? 'Dúvidas comuns de pais e educadores.' :
-                 'Esclarece as tuas dúvidas com as perguntas mais comuns.'}
-              </p>
+            <p className="text-gray-500 dark:text-gray-400 text-sm md:text-base">
+              {audience === 'criancas' ? 'Respostas simples para as tuas dúvidas.' :
+              audience === 'adultos' ? 'Dúvidas comuns de pais e educadores.' :
+              'Esclarece as tuas dúvidas com as perguntas mais comuns.'}
+            </p>
             </div>
 
             <div className="space-y-3 md:space-y-4">
@@ -554,14 +582,14 @@ Estilo: Limpo, acessível para ${audience}.`;
                   <div key={index} className="card !p-0 overflow-hidden">
                     <button
                       onClick={() => setShowFaqAnswer(showFaqAnswer === index ? null : index)}
-                      className="w-full text-left p-4 md:p-6 flex justify-between items-center hover:bg-gray-50 transition"
+                      className="w-full text-left p-4 md:p-6 flex justify-between items-center hover:bg-gray-50 dark:hover:bg-gray-700/50 transition"
                       aria-expanded={showFaqAnswer === index}
                     >
                       <span className="text-base md:text-lg font-bold text-primary pr-4">{faq.question}</span>
                       <span className={`text-2xl transition-transform shrink-0 ${showFaqAnswer === index ? "rotate-45" : ""}`}>+</span>
                     </button>
                     {showFaqAnswer === index && (
-                      <div className="p-4 md:p-6 bg-gray-50 border-t border-gray-100 text-gray-700 leading-relaxed text-sm md:text-base">
+                      <div className="p-4 md:p-6 bg-gray-50 dark:bg-gray-700/50 border-t border-gray-100 dark:border-gray-600 text-gray-700 dark:text-gray-300 leading-relaxed text-sm md:text-base">
                         {faq.answer}
                       </div>
                     )}
@@ -579,7 +607,7 @@ Estilo: Limpo, acessível para ${audience}.`;
                 <div className="text-center mb-6 md:mb-10">
                   <div className="bg-secondary/20 w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center text-3xl md:text-4xl mx-auto mb-4 md:mb-6">🕵️</div>
                   <h3 className="text-2xl md:text-3xl font-heading font-bold text-primary mb-2 md:mb-3">Tira as tuas Dúvidas</h3>
-                  <p className="text-gray-500 text-sm md:text-base">Envia a tua pergunta de forma 100% anónima. Não guardamos nenhuns dados pessoais.</p>
+                  <p className="text-gray-500 dark:text-gray-400 text-sm md:text-base">Envia a tua pergunta de forma 100% anónima. Não guardamos nenhuns dados pessoais.</p>
                 </div>
 
                 <form onSubmit={async (e) => {
@@ -601,24 +629,24 @@ Estilo: Limpo, acessível para ${audience}.`;
                   setSubmitted(true);
                 }} className="space-y-4 md:space-y-6">
                   <div>
-                    <label htmlFor="question-name" className="block text-sm font-bold text-gray-700 mb-2">Como te queres chamar? (Opcional)</label>
-                    <input
-                      id="question-name"
-                      type="text"
-                      value={questionForm.name}
-                      onChange={(e) => setQuestionForm((prev) => ({ ...prev, name: e.target.value }))}
-                      className="w-full p-3 md:p-4 rounded-2xl border-2 border-gray-100 focus:border-primary outline-none transition text-sm md:text-base"
-                      placeholder={audience === 'criancas' ? 'Ex: Explorador(a)' : audience === 'adultos' ? 'Ex: Pai/Mãe' : 'Ex: Jovem Curioso'}
-                    />
+              <label htmlFor="question-name" className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Como te queres chamar? (Opcional)</label>
+              <input
+                id="question-name"
+                type="text"
+                value={questionForm.name}
+                onChange={(e) => setQuestionForm((prev) => ({ ...prev, name: e.target.value }))}
+                className="w-full p-3 md:p-4 rounded-2xl border-2 border-gray-100 dark:border-gray-600 dark:bg-gray-700 focus:border-primary outline-none transition text-sm md:text-base"
+                placeholder={audience === 'criancas' ? 'Ex: Explorador(a)' : audience === 'adultos' ? 'Ex: Pai/Mãe' : 'Ex: Jovem Curioso'}
+              />
                   </div>
                   <div>
-                    <label htmlFor="question-text" className="block text-sm font-bold text-gray-700 mb-2">A tua pergunta</label>
-                    <textarea
-                      id="question-text"
-                      required
-                      value={questionForm.question}
-                      onChange={(e) => setQuestionForm((prev) => ({ ...prev, question: e.target.value }))}
-                      className="w-full p-3 md:p-4 rounded-2xl border-2 border-gray-100 focus:border-primary outline-none transition min-h-[120px] md:min-h-[150px] text-sm md:text-base"
+              <label htmlFor="question-text" className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">A tua pergunta</label>
+              <textarea
+                id="question-text"
+                required
+                value={questionForm.question}
+                onChange={(e) => setQuestionForm((prev) => ({ ...prev, question: e.target.value }))}
+                className="w-full p-3 md:p-4 rounded-2xl border-2 border-gray-100 dark:border-gray-600 dark:bg-gray-700 focus:border-primary outline-none transition min-h-[120px] md:min-h-[150px] text-sm md:text-base"
                       placeholder={
                         audience === 'criancas'
                           ? 'O que queres saber?'
@@ -636,7 +664,7 @@ Estilo: Limpo, acessível para ${audience}.`;
               <div className="card text-center py-10 md:py-16">
                 <div className="text-5xl md:text-6xl mb-4 md:mb-6">✅</div>
                 <h3 className="text-2xl md:text-3xl font-bold text-primary mb-3 md:mb-4">Pergunta Enviada!</h3>
-                <p className="text-gray-500 mb-6 md:mb-8 text-sm md:text-base">Obrigado pela tua confiança. A tua pergunta será analisada pela nossa equipa e poderá ser adicionada ao FAQ brevemente.</p>
+                <p className="text-gray-500 dark:text-gray-400 mb-6 md:mb-8 text-sm md:text-base">Obrigado pela tua confiança. A tua pergunta será analisada pela nossa equipa e poderá ser adicionada ao FAQ brevemente.</p>
                 <button onClick={() => { setSubmitted(false); setQuestionForm({ name: '', question: '' }); }} className="btn-secondary">Enviar outra pergunta</button>
               </div>
             )}
@@ -646,22 +674,22 @@ Estilo: Limpo, acessível para ${audience}.`;
                 {audience === 'criancas' ? '📞 Precisas de ajuda?' : '📞 Linhas de apoio em Portugal'}
               </h3>
               {audience === 'criancas' ? (
-                <ul className="space-y-2 text-sm text-gray-700">
-                  <li>📞 <strong>Linha Criança</strong> — 116 111 (grátis)</li>
-                  <li>📞 <strong>SOS Criança</strong> — 21 793 1629</li>
-                  <li>💬 Podes falar com um professor ou adulto de confiança</li>
-                </ul>
-              ) : audience === 'jovens' ? (
-                <ul className="space-y-2 text-sm text-gray-700">
-                  <li>📞 <strong>SNS 24</strong> — 808 200 204 (saúde)</li>
-                  <li>📞 <strong>APF</strong> — Planeamento Familiar grátis</li>
-                  <li>📞 <strong>Linha do Arco-Íris</strong> — apoio LGBTQI+</li>
+            <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+              <li>📞 <strong>Linha Criança</strong> — 116 111 (grátis)</li>
+              <li>📞 <strong>SOS Criança</strong> — 21 793 1629</li>
+              <li>💬 Podes falar com um professor ou adulto de confiança</li>
+            </ul>
+            ) : audience === 'jovens' ? (
+            <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+              <li>📞 <strong>SNS 24</strong> — 808 200 204 (saúde)</li>
+              <li>📞 <strong>APF</strong> — Planeamento Familiar grátis</li>
+              <li>📞 <strong>Linha do Arco-Íris</strong> — apoio LGBTQI+</li>
                   <li>📞 <strong>APAV</strong> — 800 200 2200 (vítimas de crime)</li>
                   <li>📞 <strong>Voz de Apoio</strong> — 21 354 4090</li>
                 </ul>
               ) : (
-                <ul className="space-y-2 text-sm text-gray-700">
-                  <li>📞 <strong>APAV</strong> — 800 200 2200 (apoio vítimas)</li>
+            <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+              <li>📞 <strong>APAV</strong> — 800 200 2200 (apoio vítimas)</li>
                   <li>📞 <strong>CPCJ</strong> — Comissão de Proteção de Crianças e Jovens</li>
                   <li>📞 <strong>APF</strong> — Consultas de Planeamento Familiar</li>
                   <li>📞 <strong>DGE</strong> — Educação Sexual nas Escolas</li>
@@ -674,7 +702,7 @@ Estilo: Limpo, acessível para ${audience}.`;
       </main>
 
       {/* Footer */}
-      <footer className="bg-gray-800 text-white py-8 md:py-12 mt-auto">
+          <footer className="bg-gray-800 dark:bg-gray-950 text-white py-8 md:py-12 mt-auto">
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-8">
             <div>

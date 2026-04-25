@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import { topics, quizQuestions, frequentlyAskedQuestions } from "@/data/content";
 import StitchLayout from "@/components/StitchLayout";
@@ -15,13 +15,14 @@ const audienceLabels: Record<Audience, string> = {
 
 const navTabs = [
   { id: "home", label: "Início", icon: "🏠" },
+  { id: "podcast", label: "Podcast", icon: "🎙️" },
   { id: "quiz", label: "Quiz", icon: "🧠" },
   { id: "faq", label: "FAQ", icon: "❓" },
   { id: "duvidas", label: "Dúvidas", icon: "💬" },
 ] as const;
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState<"home" | "quiz" | "faq" | "duvidas">("home");
+  const [activeTab, setActiveTab] = useState<"home" | "podcast" | "quiz" | "faq" | "duvidas">("home");
   const [audience, setAudience] = useState<Audience>("jovens");
   const [showAudienceSelector, setShowAudienceSelector] = useState(true);
 
@@ -37,6 +38,34 @@ export default function Home() {
   const [submitted, setSubmitted] = useState(false);
   const [isSending, setIsSending] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  type Episode = {
+    title: string;
+    description: string;
+    link: string;
+    pubDate: string;
+    duration: string;
+    episode: number | null;
+    season: number | null;
+    image: string | null;
+    audioUrl: string;
+  };
+  const [episodes, setEpisodes] = useState<Episode[]>([]);
+  const [podcastLoading, setPodcastLoading] = useState(false);
+  const [playingEpisode, setPlayingEpisode] = useState<Episode | null>(null);
+
+  useEffect(() => {
+    if (activeTab === "podcast" && episodes.length === 0) {
+      setPodcastLoading(true);
+      fetch("/api/podcast")
+        .then((r) => r.json())
+        .then((data) => {
+          if (data.episodes) setEpisodes(data.episodes);
+        })
+        .catch(() => {})
+        .finally(() => setPodcastLoading(false));
+    }
+  }, [activeTab, episodes.length]);
 
   const [stitchLayout, setStitchLayout] = useState<{ htmlUrl: string } | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
@@ -319,6 +348,105 @@ Estilo: Limpo, acessível para ${audience}.`;
           </div>
         )}
 
+        {/* PODCAST TAB */}
+        {activeTab === "podcast" && (
+          <div className="max-w-4xl mx-auto space-y-8 md:space-y-12">
+            <div className="text-center">
+              <div className="bg-secondary/20 w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center text-3xl md:text-4xl mx-auto mb-4 md:mb-6">🎙️</div>
+              <h3 className="text-2xl md:text-4xl font-heading font-bold text-primary mb-3">Descomplicando</h3>
+              <p className="text-gray-500 text-sm md:text-base max-w-2xl mx-auto">O podcast da EduSexual PT. Sofia e André descomplicam temas de educação sexual sem tabus, com conversas abertas e informação validada.</p>
+            </div>
+
+            <div className="card bg-primary/5 border-primary/20">
+              <p className="text-sm text-gray-600 mb-4 text-center">Ouve no Spotify ou diretamente aqui:</p>
+              <iframe
+                src="https://open.spotify.com/embed/show/111d0d7cc?utm_source=generator&theme=0"
+                width="100%"
+                height="232"
+                frameBorder="0"
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"
+                className="rounded-xl"
+                title="Podcast Descomplicando no Spotify"
+              ></iframe>
+            </div>
+
+            {playingEpisode && (
+              <div className="glass-card sticky top-20 z-40">
+                <div className="flex items-center gap-3 mb-3">
+                  <button onClick={() => setPlayingEpisode(null)} className="text-gray-400 hover:text-gray-600 transition text-lg" aria-label="Fechar player">✕</button>
+                  <p className="font-semibold text-primary text-sm md:text-base truncate flex-1">{playingEpisode.title}</p>
+                </div>
+                <audio controls autoPlay className="w-full rounded-xl" src={playingEpisode.audioUrl}>
+                  O teu browser não suporta áudio.
+                </audio>
+              </div>
+            )}
+
+            <div>
+              <h4 className="text-xl md:text-2xl font-heading font-bold text-primary mb-4 md:mb-6">Todos os Episódios</h4>
+              {podcastLoading ? (
+                <div className="text-center py-12 text-gray-400">
+                  <div className="animate-spin inline-block w-8 h-8 border-4 border-primary border-t-transparent rounded-full mb-4"></div>
+                  <p>A carregar episódios...</p>
+                </div>
+              ) : episodes.length > 0 ? (
+                <div className="space-y-3 md:space-y-4">
+                  {episodes.map((ep, i) => {
+                    const dateStr = ep.pubDate ? new Date(ep.pubDate).toLocaleDateString("pt-PT", { day: "numeric", month: "short", year: "numeric" }) : "";
+                    return (
+                      <div key={i} className="card group hover:border-secondary !p-4 md:!p-5">
+                        <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
+                          <button
+                            onClick={() => setPlayingEpisode(ep)}
+                            className="bg-secondary/10 hover:bg-secondary hover:text-white w-12 h-12 rounded-full flex items-center justify-center text-xl shrink-0 transition-all mx-auto sm:mx-0"
+                            aria-label={`Ouvir ${ep.title}`}
+                          >
+                            ▶
+                          </button>
+                          <div className="flex-1 min-w-0">
+                            <h5 className="font-heading font-semibold text-primary text-sm md:text-base group-hover:text-secondary transition line-clamp-2">{ep.title}</h5>
+                            <div className="flex flex-wrap items-center gap-2 mt-1 text-xs text-gray-400">
+                              {ep.episode !== null && <span className="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-semibold">Ep. {ep.episode}</span>}
+                              {ep.duration && <span>{ep.duration}</span>}
+                              {dateStr && <span>{dateStr}</span>}
+                            </div>
+                            {ep.description && <p className="text-gray-500 text-xs mt-2 line-clamp-2">{ep.description}</p>}
+                          </div>
+                          {ep.link && (
+                            <a href={ep.link} target="_blank" rel="noopener noreferrer" className="text-xs text-gray-400 hover:text-secondary transition underline shrink-0 text-center sm:text-right">
+                              Spotify ↗
+                            </a>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              ) : (
+                <div className="text-center py-12 text-gray-400">
+                  <p>Não foi possível carregar os episódios.</p>
+                  <a href="https://podcasters.spotify.com/pod/show/edusexual" target="_blank" rel="noopener noreferrer" className="text-secondary hover:underline mt-2 inline-block">
+                    Ouve no Spotify ↗
+                  </a>
+                </div>
+              )}
+            </div>
+
+            <div className="card bg-accent/10 border-accent text-center">
+              <p className="text-sm text-gray-600">Segue o podcast no Spotify para não perder nenhum episódio!</p>
+              <a
+                href="https://podcasters.spotify.com/pod/show/edusexual"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary inline-block mt-3"
+              >
+                Seguir no Spotify 🎧
+              </a>
+            </div>
+          </div>
+        )}
+
         {/* QUIZ TAB */}
         {activeTab === "quiz" && (
           <div className="max-w-2xl mx-auto">
@@ -556,8 +684,9 @@ Estilo: Limpo, acessível para ${audience}.`;
             <div>
               <h4 className="font-heading font-bold text-lg mb-3">Navegar</h4>
               <ul className="space-y-2 text-sm text-gray-400">
-                <li><button onClick={() => setActiveTab("home")} className="hover:text-white transition">Início</button></li>
-                <li><button onClick={() => setActiveTab("quiz")} className="hover:text-white transition">Quiz</button></li>
+              <li><button onClick={() => setActiveTab("home")} className="hover:text-white transition">Início</button></li>
+              <li><button onClick={() => setActiveTab("podcast")} className="hover:text-white transition">Podcast</button></li>
+              <li><button onClick={() => setActiveTab("quiz")} className="hover:text-white transition">Quiz</button></li>
                 <li><button onClick={() => setActiveTab("faq")} className="hover:text-white transition">FAQ</button></li>
                 <li><button onClick={() => setActiveTab("duvidas")} className="hover:text-white transition">Tira Dúvidas</button></li>
                 <li><button onClick={() => setShowAudienceSelector(true)} className="hover:text-white transition">Mudar Perfil</button></li>

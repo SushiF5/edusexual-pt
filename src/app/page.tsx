@@ -128,7 +128,7 @@ export default function Home() {
             </div>
           </button>
           
-      <nav className="hidden md:flex bg-gray-100/50 p-1 rounded-full gap-1">
+      <nav className="hidden md:flex bg-gray-100 p-2 rounded-full gap-2 shadow-sm">
         {[
           { id: "home", label: "Início" },
           { id: "quiz", label: "Quiz" },
@@ -138,7 +138,7 @@ export default function Home() {
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id as any)}
-            className={`nav-link ${activeTab === tab.id ? "bg-primary text-white shadow-md" : "text-gray-600 hover:text-primary hover:bg-white"}`}
+            className={`px-6 py-2 rounded-full transition-all duration-300 font-medium ${activeTab === tab.id ? "bg-primary text-white shadow-md" : "text-gray-600 hover:text-primary hover:bg-white"}`}
           >
             {tab.label}
           </button>
@@ -242,9 +242,9 @@ export default function Home() {
                 <div className="flex-1 relative">
                   <div className="absolute inset-0 bg-primary/10 blur-[100px] rounded-full"></div>
                   <img 
-                    src="/hero.png" 
+                    src={`/hero-${audience}.png`} 
                     alt="Educação Sexual" 
-                    className="relative z-10 rounded-3xl shadow-2xl animate-float"
+                    className="relative z-10 rounded-3xl shadow-2xl animate-float w-full object-cover"
                   />
                 </div>
               </div>

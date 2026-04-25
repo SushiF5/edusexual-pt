@@ -275,12 +275,39 @@ Alguns bébés nascem da barriga da mãe, outros vêm através de adoção ou de
 Nas raparigas, costuma acontecer entre os 8 e os 13 anos; nos rapazes, entre os 9 e os 14 anos. É normal que cada pessoa tenha o seu próprio ritmo. Não te compares com os teus amigos; o teu corpo sabe quando está pronto.`
       },
       {
-        id: "ciclo-menstrual",
-        title: "O ciclo menstrual explicado",
-        category: "Anatomia",
-        content: `A menstruação é a descamação do revestimento do útero (endométrio) quando não ocorre a fecundação de um óvulo.
-        
-O ciclo dura, em média, 28 dias, mas pode variar muito, especialmente nos primeiros anos. Sintomas como cólicas, acne e alterações de humor são comuns devido às hormonas. Usar pensos, tampões ou copas menstruais são formas de gerir a higiene durante estes dias.`
+id: "ciclo-menstrual",
+title: "O ciclo menstrual explicado",
+category: "Anatomia",
+content: `A menstruação é a descamação do revestimento do útero (endométrio) quando não ocorre a fecundação de um óvulo. É uma parte natural e saudável do corpo feminino.
+
+O ciclo menstrual dura, em média, 28 dias, mas pode variar muito — entre 21 e 35 dias é considerado normal, especialmente nos primeiros anos após a menarca (primeira menstruação).
+
+O ciclo divide-se em fases:
+
+1. Fase folicular (dias 1-13): O corpo prepara-se para a ovulação. As hormonas FSH e estrogénio estimulam o crescimento de um folículo no ovário. O endométrio começa a espessar-se.
+
+2. Ovulação (cerca do dia 14): O ovário liberta um óvulo maduro que viaja pelas trompas de Falópio. É o ponto mais fértil do ciclo. Algumas mulheres sentem uma leve dor no lado do abdómen (dor de ovulação ou "mittelschmerz").
+
+3. Fase lútea (dias 15-28): O corpo prepara-se para uma possível gravidez. O endométrio continua a espessar-se. Se não houver fecundação, os níveis de progesterona caem, o endométrio se descama e a menstruação recomeça.
+
+Sintomas comuns ao longo do ciclo:
+- Antes da menstruação (PMS): cólicas, inchaço, acne, alterações de humor, dores de cabeça, sensibilidade nas mamas.
+- Durante a menstruação: cólicas (dismenorreia), cansaço, alterações de humor.
+
+Gestão da higiene menstrual:
+- Pensos higiénicos: fáceis de usar, existem de vários tamanhos e absorções.
+- Tampões: inseridos na vagina, devem ser trocados a cada 4-8 horas para prevenir a Síndrome do Choque Tóxico (SCT).
+- Copas menstruais: reutilizáveis, ecológicas e económicas. Podem ser usadas até 12 horas.
+- Cuecas menstruais: absorvem o fluxo sem necessidade de produto adicional.
+
+Quando consultar um médico:
+- Ciclos inferiores a 21 ou superiores a 35 dias de forma regular.
+- Hemorragias muito abundantes (mudar penso/tampão a cada 1-2 horas).
+- Dor intensa que não melhora com analgésicos.
+- Ausência de menstruação durante 3+ meses (sem gravidez).
+- Sangramento entre menstruações.
+
+O mais importante: cada corpo é diferente. O teu ciclo é teu — aprende a conhecê-lo e não te compares com as outras.`
       },
       {
         id: "mudancas-masculinas",
@@ -360,16 +387,42 @@ O mais importante: não te compares com o que vês na pornografia — esses corp
     audience: "jovens",
     articles: [
       {
-        id: "metodos-contraceptivos",
-        title: "Métodos contracetivos",
-        category: "Contracepção",
-        content: `Os métodos contracetivos dividem-se em vários tipos:
-        
-1. Barreira: Preservativos (únicos que protegem de IST).
-2. Hormonais: Pílula, implante, injeções (impedem a ovulação).
-3. Longa Duração: DIU (dispositivo intra-uterino).
-        
-A escolha do método deve ser feita com apoio médico, dependendo da saúde e do estilo de vida de cada pessoa.`
+id: "metodos-contraceptivos",
+title: "Métodos contracetivos",
+category: "Contracepção",
+content: `Os métodos contracetivos dividem-se em vários tipos. Conhecer as opções ajuda-te a fazer uma escolha informada com o teu médico.
+
+1. Métodos de Barreira — impedem o contacto entre o esperma e o óvulo:
+- Preservativo masculino: O ÚNICO método que protege simultaneamente de gravidez e IST. Eficácia: 98% (uso correto). Disponível grátis nos Centros de Saúde e na APF.
+- Preservativo feminino: Colocado dentro da vagina, dá mais controlo à pessoa que o usa. Eficácia: 95% (uso correto).
+- Diafragma: Capa de silicone que cobre o colo do útero. Requer ajuste médico. Não protege de IST.
+
+2. Métodos Hormonais — impedem a ovulação:
+- Pílula combinada: Tomada diariamente, 21 dias + 7 de pausa. Eficácia: 99,7%. Pode causar efeitos secundários (náuseas, alterações de humor).
+- Pílula minipílula (só progesterona): Adequada para mulheres que não podem tomar estrogénio. Deve ser tomada sempre à mesma hora (tolerância de 3 horas).
+- Anel vaginal: Colocado uma vez por mês, liberta hormonas gradualmente.
+- Adesivo contracetivo: Aplicado na pele semanalmente.
+- Injeção (Depo-Provera): Administrada a cada 3 meses. Pode causar aumento de peso e atraso no regresso da fertilidade.
+
+3. Métodos de Longa Duração — os mais eficazes e "esquece-e-fica":
+- DIU de cobre: Sem hormonas, dura até 10 anos. Eficácia: 99%. Pode causar menstruações mais abundantes.
+- DIU hormonal (Mirena): Liberta progesterona localmente, dura até 5 anos. Reduz o fluxo menstrual.
+- Implante subcutâneo: Varetinha colocada no braço, dura 3 anos. Eficácia: 99,95% — o método mais eficaz que existe.
+
+4. Métodos Comportamentais — menos fiáveis:
+- Coito interrompido ("retirar antes"): Eficácia real de apenas 78%. Não é fiável nem protege de IST.
+- Métodos de awarenss da fertilidade (temperatura, muco): Exigem formação e disciplina. Eficácia: 75-88%.
+
+5. Contraceção de Emergência:
+- Pílula do dia seguinte: Tomada até 72h após a relação (quanto mais cedo, mais eficaz). Não é método regular.
+- DIU de cobre como emergência: Pode ser inserido até 5 dias após a relação, sendo a forma mais eficaz de contraceção de emergência.
+
+Importante saber:
+- Nenhum método é 100% eficaz, exceto a abstinência.
+- A dupla proteção (preservativo + outro método) é a melhor estratégia.
+- A escolha do método deve ser feita com apoio médico, dependendo da saúde, idade e estilo de vida de cada pessoa.
+- Podes obter contracepção gratuita nos Centros de Saúde (SNS) e na APF.
+- Tens direito à confidencialidade — não precisas de autorização dos pais para marcar consulta de planeamento familiar.`
       },
       {
         id: "preservativo-guia",
@@ -494,12 +547,47 @@ Realidade: O líquido pré-ejaculatório pode conter espermatozoides. Este méto
 Muitas IST não apresentam sintomas imediatos, o que significa que uma pessoa pode estar infetada e transmitir a infeção sem saber. Por isso, o rastreio regular é fundamental.`
       },
       {
-        id: "prevencao-ist",
-        title: "Como prevenir IST",
-        category: "Prevenção",
-        content: `A forma mais eficaz de prevenir a maioria das IST é a utilização correta e sistemática do preservativo.
-        
-Além disso, a vacinação (como a do HPV) e a comunicação aberta com o(a) parceiro(a) sobre a saúde sexual ajudam a reduzir os riscos.`
+id: "prevencao-ist",
+title: "Como prevenir IST",
+category: "Prevenção",
+content: `A prevenção das IST (Infeções Sexualmente Transmissíveis) é essencial para uma vida sexual saudável. Aqui estão as estratégias mais eficazes:
+
+1. Preservativo — a tua melhor defesa:
+- O preservativo masculino e feminino são os ÚNICOS métodos contracetivos que protegem contra a maioria das IST.
+- Deve ser usado em TODA a relação sexual — desde o início ao fim, não só antes da ejaculação.
+- Eficácia: Reduz o risco de VIH em 80-95%, gonorreia, clamídia e herpes quando usado corretamente.
+- Atenção: O preservativo NÃO protege completamente contra IST transmitidas por contacto pele-com-pele em áreas não cobertas (HPV, herpes, sífilis).
+
+2. Vacinação — proteção antes da exposição:
+- HPV: A vacina é recomendada para rapazes e raparigas entre os 9 e os 18 anos. Protege contra as estirpes que causam cancro do colo do útero, cancro anal e verrugas genitais. Em Portugal, é gratuita no SNS.
+- Hepatite B: A vacina faz parte do Plano Nacional de Vacinação e é dada na infância. Se não tomaste, podes tomá-la em qualquer idade.
+- Hepatite A: Recomendada para homens que fazem sexo com homens (HSH) e pessoas que viajam para zonas endémicas.
+
+3. Comunicação com o(a) parceiro(a):
+- Falar abertamente sobre saúde sexual não é "estranho" — é sinal de respeito e maturidade.
+- Pergunte: "Quando foi a última vez que fizeste um teste de IST?" e "Usamos sempre proteção?"
+- Partilhar o historial sexual é uma responsabilidade de ambas as partes.
+- Se não consegues falar sobre IST com alguém, talvez ainda não estejas pronto(a) para ter relações sexuais com essa pessoa.
+
+4. Rastreio regular — saber é proteger:
+- Faz testes de IST: Ao iniciar uma nova relação; anualmente se tens vida sexual ativa; a cada 3-6 meses se tens múltiplos parceiros.
+- Os testes são confidenciais e muitos são gratuitos (Centros de Saúde, APF).
+- Algumas IST (clamídia, gonorreia) podem ser assintomáticas — não esperes por sintomas para fazer testes.
+
+5. Práticas sexuais mais seguras:
+- Evita partilhar brinquedos sexuais (ou usa preservativo sobre eles).
+- Usa proteção no sexo oral (preservativo ou barreira de latex).
+- Não partilhes agulhas ou seringas.
+- Limita o número de parceiros sexuais — quanto mais parceiros, maior o risco.
+- A profilaxia pré-exposição (PrEP) está disponível em Portugal para pessoas com risco elevado de VIH. Pergunta no teu Centro de Saúde.
+
+6. Se achares que foste exposto(a):
+- Faz teste o mais rápido possível.
+- Para VIH, existe a Profilaxia Pós-Exposição (PEP) — deve ser iniciada nas primeiras 72 horas após a exposição.
+- Informa o(a) parceiro(a) — é uma questão de responsabilidade e respeito.
+- Não tenhas relações sexuais até saberes o resultado.
+
+Lembra-te: prevenir é sempre mais fácil do que tratar. A tua saúde sexual é tão importante como qualquer outra parte da tua saúde.`
       },
       {
         id: "rastreio-ist",

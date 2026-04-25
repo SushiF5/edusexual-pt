@@ -35,6 +35,7 @@ export default function Home() {
   const [showFaqAnswer, setShowFaqAnswer] = useState<number | null>(null);
   const [questionForm, setQuestionForm] = useState({ name: "", question: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [isSending, setIsSending] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const [stitchLayout, setStitchLayout] = useState<{ htmlUrl: string } | null>(null);
@@ -453,7 +454,24 @@ Estilo: Limpo, acessível para ${audience}.`;
                   <p className="text-gray-500 text-sm md:text-base">Envia a tua pergunta de forma 100% anónima. Não guardamos nenhuns dados pessoais.</p>
                 </div>
 
-                <form onSubmit={(e) => { e.preventDefault(); if (questionForm.question.trim()) setSubmitted(true); }} className="space-y-4 md:space-y-6">
+                <form onSubmit={async (e) => {
+                  e.preventDefault();
+                  if (!questionForm.question.trim() || isSending) return;
+                  setIsSending(true);
+                  try {
+                    await fetch("/api/telegram", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify({
+                        name: questionForm.name,
+                        question: questionForm.question,
+                        audience,
+                      }),
+                    });
+                  } catch {}
+                  setIsSending(false);
+                  setSubmitted(true);
+                }} className="space-y-4 md:space-y-6">
                   <div>
                     <label htmlFor="question-name" className="block text-sm font-bold text-gray-700 mb-2">Como te queres chamar? (Opcional)</label>
                     <input
@@ -482,7 +500,7 @@ Estilo: Limpo, acessível para ${audience}.`;
                       }
                     ></textarea>
                   </div>
-                  <button type="submit" className="btn-primary w-full py-3 md:py-4 text-base md:text-lg" disabled={!questionForm.question.trim()}>Submeter Pergunta Anónima</button>
+                  <button type="submit" className="btn-primary w-full py-3 md:py-4 text-base md:text-lg" disabled={!questionForm.question.trim() || isSending}>{isSending ? "A enviar..." : "Submeter Pergunta Anónima"}</button>
                   <p className="text-xs text-gray-400 text-center">🔒 A tua pergunta é anónima. Não recolhemos dados pessoais.</p>
                 </form>
               </div>

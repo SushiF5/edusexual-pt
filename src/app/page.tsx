@@ -150,12 +150,12 @@ Estilo: Limpo, acessível para ${audience}.`;
           </button>
 
           {/* Desktop nav */}
-          <nav className="hidden md:flex bg-gray-100/50 p-1 rounded-full gap-1" aria-label="Navegação principal">
+          <nav className="hidden md:flex bg-gray-100 p-2 rounded-full gap-2 shadow-sm" aria-label="Navegação principal">
             {navTabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`nav-link ${activeTab === tab.id ? "bg-primary text-white shadow-md" : "text-gray-600 hover:text-primary hover:bg-white"}`}
+                className={`px-6 py-2 rounded-full transition-all duration-300 font-medium ${activeTab === tab.id ? "bg-primary text-white shadow-md" : "text-gray-600 hover:text-primary hover:bg-white"}`}
                 aria-current={activeTab === tab.id ? "page" : undefined}
               >
                 {tab.label}

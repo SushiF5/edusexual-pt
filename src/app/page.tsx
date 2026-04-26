@@ -393,7 +393,7 @@ Estilo: Limpo, acessível para ${audience}.`;
             <div className="card bg-primary/5 border-primary/20">
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 text-center">Ouve no Spotify ou diretamente aqui:</p>
               <iframe
-                src="https://open.spotify.com/embed/show/111d0d7cc?utm_source=generator&theme=0"
+                src="https://podcasters.spotify.com/pod/show/edusexual/embed"
                 width="100%"
                 height="232"
                 frameBorder="0"

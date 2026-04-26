@@ -202,8 +202,8 @@ Estilo: Limpo, acessível para ${audience}.`;
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`px-6 py-2 rounded-full transition-all duration-300 font-medium ${activeTab === tab.id ? "bg-primary text-white shadow-md" : "text-gray-600 dark:text-gray-300 hover:text-primary hover:bg-white dark:hover:bg-gray-700"}`}
-                aria-current={activeTab === tab.id ? "page" : undefined}
+                  className={`px-6 py-2 rounded-full transition-all duration-300 font-medium ${activeTab === tab.id ? "bg-primary text-white shadow-md" : "text-gray-600 dark:text-gray-300 hover:text-primary hover:bg-white dark:hover:bg-gray-700"}`}
+                  aria-current={activeTab === tab.id ? "page" : undefined}
               >
                 {tab.label}
               </button>
@@ -363,8 +363,8 @@ Estilo: Limpo, acessível para ${audience}.`;
 
                     <div className="space-y-3">
                       {topic.articles.map((article) => (
-                        <details key={article.id} className="group border-t border-gray-50 pt-3">
-                          <summary className="cursor-pointer text-primary hover:text-secondary text-sm font-bold flex items-center justify-between list-none">
+                <details key={article.id} className="group border-t border-gray-50 dark:border-gray-700 pt-3">
+                  <summary className="cursor-pointer text-primary hover:text-secondary text-sm font-bold flex items-center justify-between list-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg px-1 py-0.5">
                             <span className="flex items-center gap-2">📄 {article.title}</span>
                             <span className="text-xs opacity-50 group-open:rotate-180 transition-transform">▼</span>
                           </summary>
@@ -405,7 +405,7 @@ Estilo: Limpo, acessível para ${audience}.`;
             </div>
 
             {playingEpisode && (
-              <div className="glass-card sticky top-20 z-40">
+              <div className="glass-card sticky top-20 z-40" role="region" aria-label="Player de áudio">
                 <div className="flex items-center gap-3 mb-3">
                   <button onClick={() => setPlayingEpisode(null)} className="text-gray-400 hover:text-gray-600 transition text-lg" aria-label="Fechar player">✕</button>
                   <p className="font-semibold text-primary text-sm md:text-base truncate flex-1">{playingEpisode.title}</p>
@@ -420,7 +420,7 @@ Estilo: Limpo, acessível para ${audience}.`;
               <h4 className="text-xl md:text-2xl font-heading font-bold text-primary mb-4 md:mb-6">Todos os Episódios</h4>
               {podcastLoading ? (
                 <div className="text-center py-12 text-gray-400">
-                  <div className="animate-spin inline-block w-8 h-8 border-4 border-primary border-t-transparent rounded-full mb-4"></div>
+                  <div className="animate-spin inline-block w-8 h-8 border-4 border-primary border-t-transparent rounded-full mb-4" role="status" aria-label="A carregar"></div>
                   <p>A carregar episódios...</p>
                 </div>
               ) : episodes.length > 0 ? (
@@ -738,12 +738,12 @@ Estilo: Limpo, acessível para ${audience}.`;
                       }
                     ></textarea>
                   </div>
-                  <button type="submit" className="btn-primary w-full py-3 md:py-4 text-base md:text-lg" disabled={!questionForm.question.trim() || isSending}>{isSending ? "A enviar..." : "Submeter Pergunta Anónima"}</button>
+                  <button type="submit" className="btn-primary w-full py-3 md:py-4 text-base md:text-lg" disabled={!questionForm.question.trim() || isSending} aria-busy={isSending}>{isSending ? "A enviar..." : "Submeter Pergunta Anónima"}</button>
                   <p className="text-xs text-gray-400 text-center">🔒 A tua pergunta é anónima. Não recolhemos dados pessoais.</p>
                 </form>
               </div>
             ) : (
-              <div className="card text-center py-10 md:py-16">
+              <div className="card text-center py-10 md:py-16" aria-live="polite">
                 <div className="text-5xl md:text-6xl mb-4 md:mb-6">✅</div>
                 <h3 className="text-2xl md:text-3xl font-bold text-primary mb-3 md:mb-4">Pergunta Enviada!</h3>
                 <p className="text-gray-500 dark:text-gray-400 mb-6 md:mb-8 text-sm md:text-base">Obrigado pela tua confiança. A tua pergunta será analisada pela nossa equipa e poderá ser adicionada ao FAQ brevemente.</p>

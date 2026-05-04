@@ -1,0 +1,58 @@
+import type { Metadata } from "next";
+import "./globals.css";
+import { I18nProvider } from "@/i18n/context";
+
+export const metadata: Metadata = {
+  title: "EduSexual PT — Educação Sexual para Todas as Idades",
+  description: "Portal de educação sexual em português para crianças, jovens e adultos. Conteúdo validado, quizzes, FAQ e linhas de apoio em Portugal. 100% anónimo.",
+  keywords: ["educação sexual", "saúde sexual", "Portugal", "contracepção", "IST", "consentimento", "jovens", "pais", "educadores"],
+  openGraph: {
+    title: "EduSexual PT — Educação Sexual para Todas as Idades",
+    description: "Portal de educação sexual em português. Conteúdo validado, quizzes, FAQ e linhas de apoio em Portugal.",
+    url: "https://edusexual.pt",
+    siteName: "EduSexual PT",
+    locale: "pt_PT",
+    type: "website",
+  },
+  robots: { index: true, follow: true },
+  manifest: "/manifest.json",
+  icons: {
+    icon: "/icon.svg",
+    apple: "/icon.svg",
+  },
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="pt-PT" suppressHydrationWarning>
+    <head>
+      <meta name="theme-color" content="#2D5A5A" />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+      <meta name="apple-mobile-web-app-title" content="EduSexual PT" />
+      <meta name="mobile-web-app-capable" content="yes" />
+      <meta name="format-detection" content="telephone=no" />
+      <link rel="manifest" href="/manifest.json" />
+      <script dangerouslySetInnerHTML={{ __html: `
+(function() {
+  try {
+    var theme = localStorage.getItem('edusexual-theme');
+    if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    }
+  } catch(e) {}
+})();
+` }} />
+      </head>
+      <body className="min-h-screen flex flex-col bg-background">
+        <I18nProvider>
+          {children}
+        </I18nProvider>
+      </body>
+    </html>
+  );
+}

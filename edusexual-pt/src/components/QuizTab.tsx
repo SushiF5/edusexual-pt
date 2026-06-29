@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useMemo } from "react";
-import { quizQuestions, useI18n } from "@/i18n/context";
-import { Locale } from "@/i18n/translations";
+import { useState, useMemo, useEffect } from "react";
+import { quizQuestions } from "@/data/content";
+import { useI18n } from "@/i18n/context";
 
 type Audience = "criancas" | "jovens" | "adultos";
 
@@ -10,21 +10,72 @@ interface QuizTabProps {
   audience: Audience;
 }
 
+const STORAGE_KEY = "edusexual-quiz";
+
+function loadState(audience: Audience) {
+  try {
+    const saved = localStorage.getItem(`${STORAGE_KEY}-${audience}`);
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      if (typeof parsed.currentQuestion === "number" && typeof parsed.score === "number") {
+        return parsed;
+      }
+    }
+  } catch {}
+  return null;
+}
+
+function saveState(audience: Audience, state: { currentQuestion: number; score: number; showResult: boolean }) {
+  try {
+    localStorage.setItem(`${STORAGE_KEY}-${audience}`, JSON.stringify(state));
+  } catch {}
+}
+
+function clearState(audience: Audience) {
+  try {
+    localStorage.removeItem(`${STORAGE_KEY}-${audience}`);
+  } catch {}
+}
+
 export default function QuizTab({ audience }: QuizTabProps) {
   const { t } = useI18n();
-
-  const [quizState, setQuizState] = useState({
-    currentQuestion: 0,
-    score: 0,
-    showResult: false,
-    selectedAnswer: null as number | null,
-    showExplanation: false,
-  });
 
   const filteredQuiz = useMemo(() =>
     quizQuestions.filter(q => q.audience === audience),
     [audience]
   );
+
+  const [quizState, setQuizState] = useState(() => {
+    const saved = loadState(audience);
+    if (saved && saved.currentQuestion < filteredQuiz.length) {
+      return {
+        currentQuestion: saved.currentQuestion,
+        score: saved.score,
+        showResult: saved.showResult,
+        selectedAnswer: null as number | null,
+        showExplanation: false,
+      };
+    }
+    return {
+      currentQuestion: 0,
+      score: 0,
+      showResult: false,
+      selectedAnswer: null as number | null,
+      showExplanation: false,
+    };
+  });
+
+  useEffect(() => {
+    if (quizState.showResult || quizState.currentQuestion === 0) {
+      clearState(audience);
+    } else {
+      saveState(audience, {
+        currentQuestion: quizState.currentQuestion,
+        score: quizState.score,
+        showResult: quizState.showResult,
+      });
+    }
+  }, [quizState.currentQuestion, quizState.score, quizState.showResult, audience]);
 
   const handleAnswer = (answerIndex: number) => {
     if (quizState.showExplanation) return;
@@ -44,6 +95,7 @@ export default function QuizTab({ audience }: QuizTabProps) {
       }));
     } else {
       setQuizState(prev => ({ ...prev, showResult: true }));
+      clearState(audience);
     }
   };
 
@@ -55,6 +107,7 @@ export default function QuizTab({ audience }: QuizTabProps) {
       selectedAnswer: null,
       showExplanation: false,
     });
+    clearState(audience);
   };
 
   if (filteredQuiz.length === 0) {
@@ -77,7 +130,6 @@ export default function QuizTab({ audience }: QuizTabProps) {
         <p className="text-4xl font-bold text-primary mb-6">{quizState.score} / {filteredQuiz.length}</p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <button onClick={resetQuiz} className="btn-primary">{t.tryAgain}</button>
-          <button onClick={() => window.location.reload()} className="btn-secondary">{t.exploreTopics}</button>
         </div>
       </div>
     );
@@ -86,7 +138,6 @@ export default function QuizTab({ audience }: QuizTabProps) {
   return (
     <div className="max-w-2xl mx-auto">
       <div className="card">
-        {/* Progress bar */}
         <div className="mb-6">
           <div className="flex justify-between items-center mb-2">
             <span className="text-sm text-gray-500 dark:text-gray-400">{t.questionOf} {quizState.currentQuestion + 1} / {filteredQuiz.length}</span>
@@ -104,15 +155,24 @@ export default function QuizTab({ audience }: QuizTabProps) {
         <div className="space-y-3">
           {filteredQuiz[quizState.currentQuestion].options.map((option, index) => {
             let btnClass = "w-full text-left p-3 md:p-4 rounded-lg border-2 transition text-sm md:text-base ";
+            let suffix = "";
             if (quizState.showExplanation) {
-              if (index === filteredQuiz[quizState.currentQuestion].correctAnswer) btnClass += "border-green-500 bg-green-50 dark:bg-green-900/30";
-              else if (quizState.selectedAnswer === index) btnClass += "border-red-500 bg-red-50 dark:bg-red-900/30";
+              if (index === filteredQuiz[quizState.currentQuestion].correctAnswer) {
+                btnClass += "border-green-500 bg-green-50 dark:bg-green-900/30";
+                suffix = " ✓";
+              } else if (quizState.selectedAnswer === index) {
+                btnClass += "border-red-500 bg-red-50 dark:bg-red-900/30";
+                suffix = " ✗";
+              }
             } else {
               btnClass += "border-gray-200 dark:border-gray-600 hover:border-primary";
             }
             return (
               <button key={index} onClick={() => handleAnswer(index)} disabled={quizState.showExplanation} className={btnClass}>
-                {option}
+                <span className="flex items-center justify-between">
+                  <span>{option}</span>
+                  {suffix && <span className="font-bold" aria-live="assertive">{suffix}</span>}
+                </span>
               </button>
             );
           })}

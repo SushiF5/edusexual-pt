@@ -1,6 +1,19 @@
 import type { Metadata } from "next";
+import { Outfit, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 import { I18nProvider } from "@/i18n/context";
+
+const outfit = Outfit({
+  subsets: ["latin"],
+  variable: "--font-outfit",
+  display: "swap",
+});
+
+const sourceSans = Source_Sans_3({
+  subsets: ["latin"],
+  variable: "--font-source-sans",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "EduSexual PT — Educação Sexual para Todas as Idades",
@@ -28,7 +41,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-PT" suppressHydrationWarning>
+    <html lang="pt-PT" suppressHydrationWarning className={`${outfit.variable} ${sourceSans.variable}`}>
     <head>
       <meta name="theme-color" content="#2D5A5A" />
       <meta name="apple-mobile-web-app-capable" content="yes" />

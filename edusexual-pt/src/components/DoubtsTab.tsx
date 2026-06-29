@@ -10,7 +10,7 @@ interface DoubtsTabProps {
   submitted: boolean;
   setSubmitted: (v: boolean) => void;
   questionForm: { name: string; question: string };
-  setQuestionForm: (v: { name: string; question: string }) => void;
+  setQuestionForm: React.Dispatch<React.SetStateAction<{ name: string; question: string }>>;
   isSending: boolean;
   setIsSending: (v: boolean) => void;
 }
@@ -69,7 +69,9 @@ export default function DoubtsTab({
               onChange={(e) => setQuestionForm((prev) => ({ ...prev, name: e.target.value }))}
               className="w-full p-3 md:p-4 rounded-2xl border-2 border-gray-100 dark:border-gray-600 dark:bg-gray-700 focus:border-primary outline-none transition text-sm md:text-base"
               placeholder={audience === 'criancas' ? t.namePlaceholderCrianca : audience === 'adultos' ? t.namePlaceholderAdulto : t.namePlaceholderJovem}
+              aria-describedby="name-help"
             />
+            <span id="name-help" className="sr-only">Nome opcional para a tua pergunta anónima</span>
           </div>
           <div>
             <label htmlFor="question-text" className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">{t.yourQuestion}</label>
@@ -86,7 +88,10 @@ export default function DoubtsTab({
                   ? t.questionPlaceholderAdulto
                   : t.questionPlaceholderJovem
               }
+              aria-describedby="question-help"
+              maxLength={2000}
             ></textarea>
+            <span id="question-help" className="sr-only">A tua pergunta é anónima. Mínimo 1 caractere, máximo 2000.</span>
           </div>
           <button type="submit" className="btn-primary w-full py-3 md:py-4 text-base md:text-lg flex items-center justify-center gap-2" disabled={!questionForm.question.trim() || isSending} aria-busy={isSending}>
             {isSending && <span className="animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full"></span>}

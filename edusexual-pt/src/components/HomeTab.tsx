@@ -1,22 +1,22 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { topics, useI18n } from "@/i18n/context";
-import { Locale } from "@/i18n/translations";
+import { topics } from "@/data/content";
+import { useI18n } from "@/i18n/context";
+import AudioPlayer from "@/components/AudioPlayer";
 
 type Audience = "criancas" | "jovens" | "adultos";
 
 interface HomeTabProps {
   audience: Audience;
-  setActiveTab: (tab: "home" | "podcast" | "recursos" | "quiz" | "faq" | "duvidas") => void;
-  searchQuery: string;
-  setSearchQuery: (q: string) => void;
+  setActiveTab?: (tab: "home" | "podcast" | "recursos" | "quiz" | "faq" | "duvidas") => void;
 }
 
-export default function HomeTab({ audience, setActiveTab, searchQuery, setSearchQuery }: HomeTabProps) {
+export default function HomeTab({ audience, setActiveTab }: HomeTabProps) {
   const { t } = useI18n();
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const heroImage = audience === 'criancas' ? '/hero-criancas.png' : audience === 'adultos' ? '/hero-adultos.png' : '/hero-jovens.png';
+  const heroImage = "/hero.png";
 
   const filteredTopics = useMemo(() => {
     const byAudience = topics.filter(topic => topic.audience === audience);
@@ -31,7 +31,6 @@ export default function HomeTab({ audience, setActiveTab, searchQuery, setSearch
 
   return (
     <div className="space-y-12 md:space-y-20">
-      {/* Hero Section */}
       <section aria-labelledby="hero-heading">
         <div className="relative overflow-hidden rounded-[2rem] md:rounded-[3rem] bg-primary/5 dark:bg-primary/10 p-6 md:p-16 hero-gradient">
           <div className="flex flex-col lg:flex-row items-center gap-8 md:gap-12">
@@ -49,16 +48,19 @@ export default function HomeTab({ audience, setActiveTab, searchQuery, setSearch
                 audience === 'adultos' ? t.heroDescAdulto :
                 t.heroDescJovem}
               </p>
-              <div className="flex flex-wrap justify-center lg:justify-start gap-4">
-                <button onClick={() => setActiveTab("quiz")} className="btn-primary">{t.startQuiz}</button>
-                <button onClick={() => setActiveTab("duvidas")} className="btn-secondary">{t.askQuestion}</button>
-              </div>
+              {setActiveTab && (
+                <div className="flex flex-wrap justify-center lg:justify-start gap-4">
+                  <button onClick={() => setActiveTab("quiz")} className="btn-primary">{t.startQuiz}</button>
+                  <button onClick={() => setActiveTab("duvidas")} className="btn-secondary">{t.askQuestion}</button>
+                </div>
+              )}
             </div>
             <div className="flex-1 relative max-w-md lg:max-w-none">
-              <div className="absolute inset-0 bg-primary/10 blur-[100px] rounded-full"></div>
+              <div className="absolute inset-0 bg-primary/10 blur-[100px] rounded-full" aria-hidden="true"></div>
               <img
                 src={heroImage}
-                alt={audience === 'criancas' ? 'Crianças a aprender' : audience === 'adultos' ? 'Pais e educadores' : 'Jovens e educação sexual'}
+                alt=""
+                aria-hidden="true"
                 className="relative z-10 rounded-3xl shadow-2xl animate-float w-full"
               />
             </div>
@@ -66,7 +68,6 @@ export default function HomeTab({ audience, setActiveTab, searchQuery, setSearch
         </div>
       </section>
 
-      {/* Topics Grid */}
       <section aria-labelledby="topics-heading">
         <div className="text-center mb-8 md:mb-12">
           <h3 id="topics-heading" className="text-2xl md:text-4xl font-heading font-bold text-primary mb-3 md:mb-4">
@@ -83,7 +84,7 @@ export default function HomeTab({ audience, setActiveTab, searchQuery, setSearch
                 className="w-full p-3 md:p-4 pl-12 rounded-full border-2 border-gray-100 dark:border-gray-600 dark:bg-gray-800 focus:border-primary outline-none transition text-sm md:text-base"
                 aria-label={t.searchTopics}
               />
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-lg">🔍</span>
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-lg" role="img" aria-hidden="true">🔍</span>
             </div>
           </div>
         </div>
@@ -91,18 +92,25 @@ export default function HomeTab({ audience, setActiveTab, searchQuery, setSearch
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
           {filteredTopics.map((topic) => (
             <div key={topic.id} className="card group hover:border-primary">
-              <div className="bg-primary/5 dark:bg-primary/20 w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center text-3xl md:text-4xl mb-4 md:mb-6 group-hover:bg-primary group-hover:text-white transition-all duration-500">
+              <div className="bg-primary/5 dark:bg-primary/20 w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center text-3xl md:text-4xl mb-4 md:mb-6 group-hover:bg-primary group-hover:text-white transition-all duration-500" role="img" aria-hidden="true">
                 {topic.id === 'anatomia-jovens' ? '🧬' : topic.icon}
               </div>
               <h4 className="text-lg md:text-2xl font-heading font-bold mb-2 md:mb-3 text-primary">{topic.title}</h4>
               <p className="text-gray-500 dark:text-gray-400 mb-4 md:mb-6 line-clamp-2 leading-relaxed text-sm md:text-base">{topic.description}</p>
 
+              {topic.audioUrl && (
+                <AudioPlayer src={topic.audioUrl} title={topic.title} />
+              )}
+
               <div className="space-y-3">
                 {topic.articles.map((article) => (
                   <details key={article.id} className="group border-t border-gray-50 dark:border-gray-700 pt-3">
                     <summary className="cursor-pointer text-primary hover:text-secondary text-sm font-bold flex items-center justify-between list-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg px-1 py-0.5">
-                      <span className="flex items-center gap-2">📄 {article.title}</span>
-                      <span className="text-xs opacity-50 group-open:rotate-180 transition-transform">▼</span>
+                      <span className="flex items-center gap-2">
+                        <span role="img" aria-hidden="true">📄</span>
+                        {article.title}
+                      </span>
+                      <span className="text-xs opacity-50 group-open:rotate-180 transition-transform" aria-hidden="true">▼</span>
                     </summary>
                     <div className="mt-4 p-4 md:p-5 bg-gray-50 dark:bg-gray-700/50 rounded-2xl text-sm text-gray-700 dark:text-gray-300 whitespace-pre-line leading-relaxed shadow-inner">
                       {article.content}

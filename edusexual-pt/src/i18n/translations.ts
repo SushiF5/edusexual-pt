@@ -9,6 +9,7 @@ export const localeNames: Record<Locale, string> = {
 export const locales: Locale[] = ["pt", "en", "es"];
 
 type TranslationKeys = {
+  home: string;
   skipToContent: string;
   profile: string;
   changeProfile: string;
@@ -120,6 +121,7 @@ const pt: TranslationKeys = {
   youthDesc: "Dúvidas sobre sexualidade e relações.",
   adultsDesc: "Guia para educadores e pais.",
   portalLabel: "Portal de Educação Sexual",
+  home: "Início",
   heroTitleCrianca: "Vamos aprender sobre o nosso corpo?",
   heroTitleJovem: "Sexualidade sem Tabus e com Segurança",
   heroTitleAdulto: "Guia para Adultos e Educadores",
@@ -214,6 +216,7 @@ const en: TranslationKeys = {
   youthDesc: "Questions about sexuality and relationships.",
   adultsDesc: "Guide for educators and parents.",
   portalLabel: "Sexual Education Portal",
+  home: "Home",
   heroTitleCrianca: "Shall we learn about our body?",
   heroTitleJovem: "Sexuality Without Taboos, With Safety",
   heroTitleAdulto: "Guide for Adults and Educators",
@@ -308,6 +311,7 @@ const es: TranslationKeys = {
   youthDesc: "Dudas sobre sexualidad y relaciones.",
   adultsDesc: "Guía para educadores y padres.",
   portalLabel: "Portal de Educación Sexual",
+  home: "Inicio",
   heroTitleCrianca: "¿Vamos a aprender sobre nuestro cuerpo?",
   heroTitleJovem: "Sexualidad Sin Tabúes, Con Seguridad",
   heroTitleAdulto: "Guía para Adultos y Educadores",
@@ -335,6 +339,7 @@ const es: TranslationKeys = {
   viewAllGuides: "Ver todas las guías",
   howToPdfTitle: "¿Cómo guardar como PDF?",
   howToPdfDesc: 'Abre una guía, haz clic en "Guardar como PDF" y el navegador abrirá la ventana de impresión. Elige "Guardar como PDF" en vez de imprimir.',
+  download: "Descargar HTML",
   questionOf: "Pregunta",
   points: "Puntos",
   next: "Siguiente",

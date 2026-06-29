@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
-import { frequentlyAskedQuestions, useI18n } from "@/i18n/context";
+import { useState, useMemo } from "react";
+import { frequentlyAskedQuestions } from "@/data/content";
+import { useI18n } from "@/i18n/context";
 
 type Audience = "criancas" | "jovens" | "adultos";
 
@@ -11,26 +12,12 @@ interface FaqTabProps {
 
 export default function FaqTab({ audience }: FaqTabProps) {
   const { t } = useI18n();
-  const [showFaqAnswer, setShowFaqAnswer] = useState<number | null>(null);
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
-  const parentQuestions = [
-    "A que idade devo começar a falar sobre sexualidade com o meu filho?",
-    "Se eu falar de sexo, não vai estimular o meu filho a experimentar?",
-    "O meu filho brinca com os órgãos genitais. É normal?",
-    "Como explicar de onde vêm os bebés a uma criança?",
-    "O que fazer se a criança diz que foi tocada?",
-  ];
-  const kidsQuestions = [
-    "É normal ter dúvidas sobre sexualidade?",
-    "O meu filho brinca com os órgãos genitais. É normal?",
-    "Como explicar de onde vêm os bebés a uma criança?",
-  ];
-
-  const filteredFaq = frequentlyAskedQuestions.filter((faq) => {
-    if (audience === "adultos") return parentQuestions.includes(faq.question);
-    if (audience === "criancas") return kidsQuestions.includes(faq.question);
-    return !parentQuestions.includes(faq.question) || kidsQuestions.includes(faq.question);
-  });
+  const filteredFaq = useMemo(
+    () => frequentlyAskedQuestions.filter((faq) => faq.audience.includes(audience)),
+    [audience]
+  );
 
   return (
     <div className="max-w-4xl mx-auto space-y-6 md:space-y-8">
@@ -48,15 +35,15 @@ export default function FaqTab({ audience }: FaqTabProps) {
           <div key={index} className="card !p-0 overflow-hidden">
             <button
               id={`faq-btn-${index}`}
-              onClick={() => setShowFaqAnswer(showFaqAnswer === index ? null : index)}
+              onClick={() => setExpandedIndex(expandedIndex === index ? null : index)}
               className="w-full text-left p-4 md:p-6 flex justify-between items-center hover:bg-gray-50 dark:hover:bg-gray-700/50 transition"
-              aria-expanded={showFaqAnswer === index}
+              aria-expanded={expandedIndex === index}
               aria-controls={`faq-panel-${index}`}
             >
               <span className="text-base md:text-lg font-bold text-primary pr-4">{faq.question}</span>
-              <span className={`text-2xl transition-transform shrink-0 ${showFaqAnswer === index ? "rotate-45" : ""}`}>+</span>
+              <span className={`text-2xl transition-transform shrink-0 ${expandedIndex === index ? "rotate-45" : ""}`} aria-hidden="true">+</span>
             </button>
-            {showFaqAnswer === index && (
+            {expandedIndex === index && (
               <div id={`faq-panel-${index}`} role="region" aria-labelledby={`faq-btn-${index}`} className="p-4 md:p-6 bg-gray-50 dark:bg-gray-700/50 border-t border-gray-100 dark:border-gray-600 text-gray-700 dark:text-gray-300 leading-relaxed text-sm md:text-base">
                 {faq.answer}
               </div>

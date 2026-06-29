@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { guides, useI18n } from "@/i18n/context";
+import { guides } from "@/data/content";
+import { useI18n } from "@/i18n/context";
 
 type Audience = "criancas" | "jovens" | "adultos";
 

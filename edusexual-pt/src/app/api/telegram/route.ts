@@ -1,17 +1,30 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
+import { checkRateLimit } from "@/lib/rateLimit";
+import { headers } from "next/headers";
 
 const TelegramSchema = z.object({
-  name: z.string().optional(),
-  question: z.string().min(1, "Question is required"),
+  name: z.string().max(100).optional(),
+  question: z.string().min(1, "Question is required").max(2000),
   audience: z.enum(["criancas", "jovens", "adultos"]),
 });
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json();
-    const { name, question, audience } = TelegramSchema.parse(body);
+    const ip = (await headers()).get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+    if (!checkRateLimit(ip)) {
+      return NextResponse.json({ error: "Too many requests. Try again later." }, { status: 429 });
+    }
 
+    const body = await req.json();
+    const parsed = TelegramSchema.safeParse(body);
+
+    if (!parsed.success) {
+      const errors = parsed.error.flatten().fieldErrors;
+      return NextResponse.json({ error: "Validation failed", details: errors }, { status: 422 });
+    }
+
+    const { name, question, audience } = parsed.data;
     const botToken = process.env.TELEGRAM_BOT_TOKEN;
     const chatId = process.env.TELEGRAM_CHAT_ID;
 

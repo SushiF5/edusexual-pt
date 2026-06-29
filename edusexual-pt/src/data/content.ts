@@ -1,10 +1,10 @@
 export interface Topic {
   id: string;
   title: string;
-  slug: string;
   description: string;
   icon: string;
   audience: "criancas" | "jovens" | "adultos";
+  audioUrl?: string;
   articles: Article[];
 }
 
@@ -30,7 +30,6 @@ export const topics: Topic[] = [
   {
     id: "corpo-criancas",
     title: "Conhecer o meu Corpo",
-    slug: "corpo-criancas",
     description: "Aprende os nomes das partes do corpo e como cuidar de ti.",
     icon: "🧑‍🤝‍🧑",
     audience: "criancas",
@@ -86,7 +85,6 @@ Cada pessoa cresce ao seu ritmo. O teu amigo pode crescer mais rápido que tu, e
   {
     id: "seguranca-criancas",
     title: "Limites e Segurança",
-    slug: "seguranca-criancas",
     description: "Aprende a proteger-te e a dizer não.",
     icon: "🛡️",
     audience: "criancas",
@@ -149,7 +147,6 @@ Lembra-te: na internet, as pessoas podem não ser quem dizem ser. Se algo parece
   {
     id: "emocoes-criancas",
     title: "Emoções e Relações",
-    slug: "emocoes-relacoes",
     description: "As tuas emoções importam e as amizades também!",
     icon: "💬",
     audience: "criancas",
@@ -213,7 +210,6 @@ Se te sentes assim muitas vezes, é importante contar a um adulto. Pedir ajuda �
   {
     id: "familias-criancas",
     title: "Famílias",
-    slug: "familias",
     description: "Todas as famílias são especiais!",
     icon: "👨‍👩‍👧",
     audience: "criancas",
@@ -261,10 +257,10 @@ Alguns bébés nascem da barriga da mãe, outros vêm através de adoção ou de
   {
     id: "anatomia-jovens",
     title: "Anatomia e Fisiologia",
-    slug: "anatomia-fisiologia",
     description: "Compreende o corpo humano e as suas mudanças",
     icon: "🫀",
     audience: "jovens",
+    audioUrl: "/audio/MP3/anatomia-jovens.mp3",
     articles: [
       {
         id: "puberdade",
@@ -381,10 +377,10 @@ O mais importante: não te compares com o que vês na pornografia — esses corp
   {
     id: "contracepcao-jovens",
     title: "Contracepção",
-    slug: "contracepcao",
     description: "Métodos para prevenir a gravidez",
     icon: "🛡️",
     audience: "jovens",
+    audioUrl: "/audio/MP3/contracepcao-jovens.mp3",
     articles: [
       {
 id: "metodos-contraceptivos",
@@ -533,10 +529,10 @@ Realidade: O líquido pré-ejaculatório pode conter espermatozoides. Este méto
   {
     id: "ist-jovens",
     title: "Infeções Sexualmente Transmissíveis (IST)",
-    slug: "ist",
     description: "Prevenção, sintomas e rastreio",
     icon: "⚠️",
     audience: "jovens",
+    audioUrl: "/audio/MP3/ist-jovens.mp3",
     articles: [
       {
         id: "o-que-sao-ist",
@@ -677,10 +673,10 @@ Ambas são curáveis com antibióticos, mas é crucial tratar cedo. Se não trat
   {
     id: "relacoes-jovens",
     title: "Relações e Afetos",
-    slug: "relacoes",
     description: "Amor, respeito e limites",
     icon: "❤️",
     audience: "jovens",
+    audioUrl: "/audio/MP3/relacoes-jovens.mp3",
     articles: [
       {
         id: "relacao-saudavel",
@@ -820,10 +816,10 @@ Quando a distância é um problema:
   {
     id: "consentimento-jovens",
     title: "Consentimento e Limites",
-    slug: "consentimento",
     description: "A regra do 'Sim' entusiástico",
     icon: "🤝",
     audience: "jovens",
+    audioUrl: "/audio/MP3/consentimento-jovens.mp3",
     articles: [
       {
         id: "regra-sim",
@@ -896,10 +892,10 @@ Se foste vítima de qualquer forma de violência sexual, denuncia:
   {
     id: "orientacao-jovens",
     title: "Orientação e Identidade",
-    slug: "orientacao-identidade",
     description: "Diversidade sexual e de género",
     icon: "🌈",
     audience: "jovens",
+    audioUrl: "/audio/MP3/orientacao-jovens.mp3",
     articles: [
       {
         id: "orientacao-sexual",
@@ -1006,10 +1002,10 @@ Lembra-te: não estás sozinho(a). Pedir ajuda é um sinal de coragem, não de f
   {
     id: "gravidez-jovens",
     title: "Gravidez e Planeamento",
-    slug: "gravidez-planeamento",
     description: "Como acontece e que opções existem",
     icon: "🤰",
     audience: "jovens",
+    audioUrl: "/audio/MP3/gravidez-jovens.mp3",
     articles: [
       {
         id: "como-acontece-gravidez",
@@ -1126,10 +1122,10 @@ Assim que souberes que estás grávida, contacta o teu Centro de Saúde para mar
   {
     id: "corpo-imagem-jovens",
     title: "Corpo e Imagem",
-    slug: "corpo-imagem",
     description: "Autoestima e a realidade dos corpos",
     icon: "✨",
     audience: "jovens",
+    audioUrl: "/audio/MP3/corpo-imagem-jovens.mp3",
     articles: [
       {
         id: "imagem-corporal",
@@ -1166,7 +1162,7 @@ Impacto emocional:
 
 Se sofres de um transtorno alimentar:
 - Não estás sozinho(a). Pedir ajuda é coragem.
-- Procura ajuda profissional: médico de família, psicólogo, ou o SOS Tutão (linha de apoio para transtornos alimentares).
+- Procura ajuda profissional: médico de família, psicólogo, ou linha de apoio para transtornos alimentares.
 - O tratamento existe e funciona — quanto mais cedo, melhor.
 
 Se conheces alguém nesta situação:
@@ -1198,10 +1194,10 @@ Lembra-te: o teu valor não se mede pela tua aparência. Um corpo saudável é u
   {
     id: "saude-higiene-jovens",
     title: "Saúde Sexual e Higiene",
-    slug: "saude-higiene",
     description: "Cuidados diários e bem-estar",
     icon: "🧼",
     audience: "jovens",
+    audioUrl: "/audio/MP3/saude-higiene-jovens.mp3",
     articles: [
       {
         id: "higiene-intima",
@@ -1252,7 +1248,7 @@ Prepara-te: Anota as dúvidas que tens antes da consulta. Não tenhas vergonha d
 
 Antes de começar:
 - Verifica a data de validade na embalagem.
-- Confirma que a embilagem tem ar (está selada) — se não tiver, pode estar furado.
+- Confirma que a embalagem tem ar (está selada) — se não tiver, pode estar furado.
 - Tem sempre um preservativo de reserva.
 
 Passo a passo:
@@ -1276,10 +1272,10 @@ Erros comuns a evitar:
   {
     id: "sexualidade-prazer",
     title: "Sexualidade e Prazer",
-    slug: "sexualidade-prazer",
     description: "Informação honesta sobre o teu corpo e prazer",
     icon: "💫",
     audience: "jovens",
+    audioUrl: "/audio/MP3/sexualidade-prazer.mp3",
     articles: [
       {
         id: "masturbacao",
@@ -1354,10 +1350,10 @@ O que fazer: Usar a pornografia como entretenimento é uma escolha pessoal, mas 
   {
     id: "recursos-portugal",
     title: "Recursos em Portugal",
-    slug: "recursos-portugal",
     description: "Onde encontrar apoio e informação",
     icon: "🇵🇹",
     audience: "jovens",
+    audioUrl: "/audio/MP3/recursos-portugal.mp3",
     articles: [
       {
         id: "linhas-apoio",
@@ -1385,7 +1381,6 @@ O que fazer: Usar a pornografia como entretenimento é uma escolha pessoal, mas 
   {
     id: "guia-pais",
     title: "Guia para Pais e Educadores",
-    slug: "guia-pais",
     description: "Como falar sobre sexualidade com os mais novos.",
     icon: "👨‍👩‍👧‍👦",
     audience: "adultos",
@@ -1533,7 +1528,6 @@ Impacto: Estudos mostram que jovens LGBTQI+ com famílias aceitantes têm 40% me
   {
     id: "educacao-sexual-escola",
     title: "Educação Sexual na Escola",
-    slug: "educacao-sexual-escola",
     description: "O que diz a lei e como funciona na prática",
     icon: "🏫",
     audience: "adultos",
@@ -1588,7 +1582,7 @@ O desafio: Muitas escolas não cumprem integralmente a lei por falta de formaç�
 
 6. Evite o medo: Não use mensagens de terror ("Se não usares preservativo, vais morrer"). Eduque de forma positiva e informada.
 
-7. Recursos: A DGE e a APF disponibilham materiais pedagógicos gratuitos.`
+7. Recursos: A DGE e a APF disponibilizam materiais pedagógicos gratuitos.`
       },
       {
         id: "recursos-pedagogicos",
@@ -1619,7 +1613,7 @@ Plataformas online:
         category: "Pedagogia",
         content: `Atividades práticas para educação sexual na sala de aula:
 
-1. Caixa de Perguntas Anónimas: Os alunos escrevem dúvidas em papeis e colocam numa caixa. O professor responde de forma informativa e sem julgamento.
+1. Caixa de Perguntas Anónimas: Os alunos escrevem dúvidas em papéis e colocam numa caixa. O professor responde de forma informativa e sem julgamento.
 
 2. Verdadeiro ou Falso: Apresentar afirmações ("A masturbação causa cegueira", "A pílula protege de IST") e os alunos debatem antes de revelar a resposta.
 
@@ -1636,7 +1630,6 @@ Plataformas online:
   {
     id: "protecao-prevencao",
     title: "Proteção e Prevenção",
-    slug: "protecao-prevencao",
     description: "Prevenir o abuso e proteger as crianças",
     icon: "🛡️",
     audience: "adultos",
@@ -1757,7 +1750,6 @@ Serviços de Saúde:
   {
     id: "sexualidade-vida",
     title: "Sexualidade ao Longo da Vida",
-    slug: "sexualidade-vida",
     description: "A sexualidade muda, mas não desaparece",
     icon: "🌿",
     audience: "adultos",
@@ -2092,92 +2084,120 @@ export const quizQuestions: QuizQuestion[] = [
   },
 ];
 
-export const frequentlyAskedQuestions = [
+export interface FAQEntry {
+  question: string;
+  answer: string;
+  audience: ("criancas" | "jovens" | "adultos")[];
+}
+
+export const frequentlyAskedQuestions: FAQEntry[] = [
   {
+    audience: ["criancas", "jovens"],
     question: "É normal ter dúvidas sobre sexualidade?",
     answer: "Sim, é completamente normal. Todos passam por um processo de descoberta e aprendizagem."
   },
   {
+    audience: ["jovens"],
     question: "A masturbação é normal?",
     answer: "Sim, a masturbação é uma prática normal e saudável de autoexploração do corpo e do prazer, desde que não interfira com a vida quotidiana."
   },
   {
+    audience: ["jovens"],
     question: "Como saber se estou pronto(a) para ter relações sexuais?",
     answer: "Não há uma idade 'certa'. Estás pronto(a) quando te sentes confortável, seguro(a), informado(a) sobre a proteção e quando a decisão é tua, sem pressões externas."
   },
   {
+    audience: ["jovens"],
     question: "Onde posso fazer rastreio de IST grátis em Portugal?",
     answer: "Podes dirigir-te ao teu Centro de Saúde, a consultas de planeamento familiar do SNS ou a instituições como a APF (Associação para o Planeamento da Família)."
   },
   {
+    audience: ["jovens"],
     question: "A primeira vez dói sempre?",
     answer: "Não. A dor pode ocorrer devido ao nervosismo, falta de lubrificação ou tensão muscular. Com relaxamento, comunicação e lubrificação, a experiência pode ser prazerosa."
   },
   {
+    audience: ["jovens"],
     question: "O tamanho do pénis importa?",
     answer: "Não. A maioria das mulheres atinge o orgasmo através da estimulação do clitóris (parte externa), não pela penetração profunda. A comunicação, o respeito e a atenção ao prazer do parceiro são muito mais importantes do que qualquer medida."
   },
   {
+    audience: ["jovens"],
     question: "É possível engravidar durante a menstruação?",
     answer: "Sim, embora seja menos provável. Os espermatozoides podem sobreviver no corpo até 5 dias, e se ovulares cedo, a fertilização é possível. Além disso, o que parece menstruação pode ser sangramento de ovulação. Por isso, use sempre proteção."
   },
   {
+    audience: ["jovens"],
     question: "A pílula do dia seguinte faz mal se tomar muitas vezes?",
     answer: "Não é abortiva nem causa danos permanentes, mas não deve ser usada como método regular. Tomá-la repetidamente pode causar irregularidades no ciclo menstrual e é menos eficaz que a contraceção regular. Se precisas frequentemente, consulta um médico sobre métodos contracetivos adequados para ti."
   },
   {
+    audience: ["jovens"],
     question: "Como falar com os meus pais sobre sexualidade?",
     answer: "Escolhe um momento calmo, sem pressa. Podes começar com algo como 'Tenho algumas dúvidas sobre...' ou usar um programa de TV ou notícia como desculpa para iniciar a conversa. Se não te sentes confortável com os teus pais, fala com um professor, enfermeiro do escola ou outro adulto de confiança."
   },
   {
+    audience: ["jovens"],
     question: "Onde posso fazer um teste de gravidez grátis?",
     answer: "Nos Centros de Saúde do SNS (Serviço Nacional de Saúde) podes fazer um teste de gravidez gratuito. Também nas consultas de Planeamento Familiar e na APF. Testes de farmácia são acessíveis (a partir de ~5€) e fiáveis a partir do primeiro dia de atraso da menstruação."
   },
   {
+    audience: ["jovens"],
     question: "É normal ter fantasias sexuais?",
     answer: "Sim, é completamente normal. As fantasias sexuais são uma parte natural da sexualidade e não significam que queiras vivê-las na realidade. Ter fantasias não te torna uma pessoa 'estranha' ou 'perigosa' — é algo que a maioria das pessoas experiencia."
   },
   {
+    audience: ["jovens"],
     question: "A pornografia representa a realidade?",
     answer: "Não. A pornografia é entretenimento encenado, com atores profissionais, edição de vídeo e atos planeados. Não mostra consentimento real, corpos médios, diálogo honesto nem o prazer real (especialmente feminino). Usar pornografia como educação sexual é como aprender a conduzir vendo filmes de ação — não reflete a realidade."
   },
   {
+    audience: ["jovens"],
     question: "A orientação sexual pode mudar ao longo da vida?",
     answer: "Sim, pode. A sexualidade é fluida e algumas pessoas notam mudanças na sua atração ao longo dos anos. Isso não significa que a orientação anterior era 'falsa' — significa que descobriram algo novo sobre si mesmas. Cada experiência é válida."
   },
   {
+    audience: ["jovens"],
     question: "Onde encontrar apoio se sou LGBTQI+?",
     answer: "Em Portugal, existem várias organizações: ILGA Portugal (apoio psicológico e jurídico), Opus Diversidades, Panteras Rosa, GRES e a APF. Também podes contactar a Linha do Arco-Íris. Nenhuma destas linhas requer identificação e são gratuitas."
   },
   {
+    audience: ["adultos"],
     question: "A que idade devo começar a falar sobre sexualidade com o meu filho?",
     answer: "Desde cedo! Aos 2-3 anos, pode usar os nomes anatómicos corretos. Aos 3-5, falar de privacidade e limites corporais. A educação sexual é um processo gradual que acompanha o desenvolvimento da criança — não uma 'conversa' única na adolescência."
   },
   {
+    audience: ["adultos"],
     question: "Se eu falar de sexo, não vai estimular o meu filho a experimentar?",
     answer: "Não. Estudos internacionais (OMS, UNESCO, OMS) demonstram que a educação sexual de qualidade NÃO adianta o início da atividade sexual. Pelo contrário: jovens informados tendem a iniciar mais tarde, com mais proteção e melhores decisões."
   },
   {
+    audience: ["criancas", "adultos"],
     question: "O meu filho brinca com os órgãos genitais. É normal?",
     answer: "Sim, é completamente normal em crianças pequenas. A exploração do corpo é uma fase natural do desenvolvimento. Não deve castigar ou envergonhar a criança — simplesmente redirecione a atenção para outra atividade e explique que isso se faz em privado."
   },
   {
+    audience: ["criancas", "adultos"],
     question: "Como explicar de onde vêm os bebés a uma criança?",
     answer: "Adapte à idade: aos 3-5 anos, 'O bebé cresce na barriga da mãe.' Aos 6-9, 'Um óvulo da mãe e um espermatozoide do pai juntam-se.' Aos 10+, pode explicar o processo com mais detalhe científico. Seja honesto mas não dê mais informação do que a criança pediu."
   },
   {
+    audience: ["adultos"],
     question: "O que fazer se a criança diz que foi tocada?",
-    answer: "Oua sem interromper, acredite na criança, não a culpe. Diga 'Obrigado por me contares' e 'Não foi culpa tua.' Contacte as autoridades (PSP/GNR), a CPCJ ou a APAV (800 200 2200). Não lave a criança ou as roupas — pode destruir provas. Não confronte o alegado agressor."
+    answer: "Ouça sem interromper, acredite na criança, não a culpe. Diga 'Obrigado por me contares' e 'Não foi culpa tua.' Contacte as autoridades (PSP/GNR), a CPCJ ou a APAV (800 200 2200). Não lave a criança ou as roupas — pode destruir provas. Não confronte o alegado agressor."
   },
   {
+    audience: ["jovens"],
     question: "Como saber a minha orientação sexual?",
-    answer: "Não há um teste. A orientação sexual é sobre quem te atrai emocional, romântica e/ou sexualmente. Pode demorar tempo a descobrir — e pode mudar. Não te pressiones para te rotularares. Explorar, questionar e experimentar são processos normais. Se precisares de apoio, fala com alguém de confiança ou contacta a ILGA Portugal."
+    answer: "Não há um teste. A orientação sexual é sobre quem te atrai emocional, romântica e/ou sexualmente. Pode demorar tempo a descobrir — e pode mudar. Não te pressiones para te rotulares. Explorar, questionar e experimentar são processos normais. Se precisares de apoio, fala com alguém de confiança ou contacta a ILGA Portugal."
   },
   {
+    audience: ["jovens"],
     question: "Como fazer coming out para a família?",
     answer: "Não há uma forma 'certa'. Faz no teu tempo, quando te sentires seguro(a). Pode ajudar: escolher um momento calmo; começar com uma pessoa de confiança; ter um plano de segurança (onde ficar se a reação for negativa). Prepara-te para perguntas, mas não te sintas obrigado(a) a responder a tudo. Se precisares de apoio antes ou depois, a ILGA Portugal e a Linha do Arco-Íris estão disponíveis."
   },
   {
+    audience: ["jovens"],
     question: "Será que a minha orientação é 'só uma fase'?",
     answer: "A orientação sexual pode ser fluida e evoluir ao longo da vida — mas isso não significa que o que sentes agora não é real. Mesmo que mude no futuro, os teus sentimentos atuais são válidos e merecem respeito. Não precises de justificar a tua orientação a ninguém."
   }

@@ -1,18 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, useMemo, ReactNode } from "react";
-
-interface Episode {
-  title: string;
-  description: string;
-  link: string;
-  pubDate: string;
-  duration: string;
-  episode: number | null;
-  season: number | null;
-  image: string | null;
-  audioUrl: string;
-}
+import { Episode } from "@/types";
 
 interface PodcastContextValue {
   episodes: Episode[];

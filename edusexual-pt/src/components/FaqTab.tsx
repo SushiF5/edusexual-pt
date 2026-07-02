@@ -3,8 +3,7 @@
 import { useState, useMemo } from "react";
 import { frequentlyAskedQuestions } from "@/data/content";
 import { useI18n } from "@/i18n/context";
-
-type Audience = "criancas" | "jovens" | "adultos";
+import { Audience } from "@/types";
 
 interface FaqTabProps {
   audience: Audience;

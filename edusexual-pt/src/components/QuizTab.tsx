@@ -3,8 +3,7 @@
 import { useState, useMemo, useEffect } from "react";
 import { quizQuestions } from "@/data/content";
 import { useI18n } from "@/i18n/context";
-
-type Audience = "criancas" | "jovens" | "adultos";
+import { Audience } from "@/types";
 
 interface QuizTabProps {
   audience: Audience;

@@ -4,12 +4,11 @@ import { useState, useMemo } from "react";
 import { topics } from "@/data/content";
 import { useI18n } from "@/i18n/context";
 import AudioPlayer from "@/components/AudioPlayer";
-
-type Audience = "criancas" | "jovens" | "adultos";
+import { Audience, TabId } from "@/types";
 
 interface HomeTabProps {
   audience: Audience;
-  setActiveTab?: (tab: "home" | "podcast" | "recursos" | "quiz" | "faq" | "duvidas") => void;
+  setActiveTab?: (tab: TabId) => void;
 }
 
 export default function HomeTab({ audience, setActiveTab }: HomeTabProps) {
@@ -61,6 +60,7 @@ export default function HomeTab({ audience, setActiveTab }: HomeTabProps) {
                 src={heroImage}
                 alt=""
                 aria-hidden="true"
+                loading="lazy"
                 className="relative z-10 rounded-3xl shadow-2xl animate-float w-full"
               />
             </div>

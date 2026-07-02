@@ -1,9 +1,11 @@
+import { Audience, Episode } from "@/types";
+
 export interface Topic {
   id: string;
   title: string;
   description: string;
   icon: string;
-  audience: "criancas" | "jovens" | "adultos";
+  audience: Audience;
   audioUrl?: string;
   articles: Article[];
 }
@@ -22,7 +24,7 @@ export interface QuizQuestion {
   correctAnswer: number;
   explanation: string;
   topic: string;
-  audience: "criancas" | "jovens" | "adultos";
+  audience: Audience;
 }
 
 export const topics: Topic[] = [
@@ -383,7 +385,7 @@ O mais importante: não te compares com o que vês na pornografia — esses corp
     audioUrl: "/audio/MP3/contracepcao-jovens.mp3",
     articles: [
       {
-id: "metodos-contraceptivos",
+    id: "metodos-contracetivos",
 title: "Métodos contracetivos",
 category: "Contracepção",
 content: `Os métodos contracetivos dividem-se em vários tipos. Conhecer as opções ajuda-te a fazer uma escolha informada com o teu médico.

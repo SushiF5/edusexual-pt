@@ -112,6 +112,9 @@ type TranslationKeys = {
   shortcutClose: string;
   noTopicsFound: string;
   tryOtherTerms: string;
+  podcastLoadError: string;
+  retry: string;
+  questionSendError: string;
 };
 
 const pt: TranslationKeys = {
@@ -218,6 +221,9 @@ const pt: TranslationKeys = {
   shortcutClose: "Fechar",
   noTopicsFound: "Nenhum tema encontrado para",
   tryOtherTerms: "Tenta com outros termos de pesquisa.",
+  podcastLoadError: "Erro ao carregar episódios.",
+  retry: "Tentar novamente",
+  questionSendError: "Erro ao enviar pergunta. Tenta novamente.",
 };
 
 const en: TranslationKeys = {
@@ -324,6 +330,9 @@ const en: TranslationKeys = {
   shortcutClose: "Close",
   noTopicsFound: "No topics found for",
   tryOtherTerms: "Try other search terms.",
+  podcastLoadError: "Error loading episodes.",
+  retry: "Try again",
+  questionSendError: "Error sending question. Please try again.",
 };
 
 const es: TranslationKeys = {
@@ -430,6 +439,9 @@ const es: TranslationKeys = {
   shortcutClose: "Cerrar",
   noTopicsFound: "No se encontraron temas para",
   tryOtherTerms: "Intenta con otros términos de búsqueda.",
+  podcastLoadError: "Error al cargar episodios.",
+  retry: "Intentar de nuevo",
+  questionSendError: "Error al enviar pregunta. Por favor, inténtalo de nuevo.",
 };
 
 export const translations: Record<Locale, TranslationKeys> = { pt, en, es };

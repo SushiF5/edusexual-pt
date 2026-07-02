@@ -1,16 +1,5 @@
 import { NextResponse } from "next/server";
-
-interface Episode {
-  title: string;
-  description: string;
-  link: string;
-  pubDate: string;
-  duration: string;
-  episode: number | null;
-  season: number | null;
-  image: string | null;
-  audioUrl: string;
-}
+import { Episode } from "@/types";
 
 const RSS_URL = "https://anchor.fm/s/111d0d7cc/podcast/rss";
 

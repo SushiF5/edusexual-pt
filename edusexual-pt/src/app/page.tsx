@@ -10,14 +10,13 @@ import HomeTab from "@/components/HomeTab";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import TabSkeleton from "@/components/TabSkeleton";
 import { useKeyboardShortcuts } from "@/lib/useKeyboardShortcuts";
+import { Audience, TabId } from "@/types";
 
 const QuizTab = dynamic(() => import("@/components/QuizTab"), { ssr: false, loading: () => <TabSkeleton /> });
 const FaqTab = dynamic(() => import("@/components/FaqTab"), { ssr: false, loading: () => <TabSkeleton /> });
 const DoubtsTab = dynamic(() => import("@/components/DoubtsTab"), { ssr: false, loading: () => <TabSkeleton /> });
 const PodcastTab = dynamic(() => import("@/components/PodcastTab"), { ssr: false, loading: () => <TabSkeleton /> });
 const ResourcesTab = dynamic(() => import("@/components/ResourcesTab"), { ssr: false, loading: () => <TabSkeleton /> });
-
-type Audience = "criancas" | "jovens" | "adultos";
 
 const navTabIds = [
   { id: "home" as const, icon: "🏠" },
@@ -27,8 +26,6 @@ const navTabIds = [
   { id: "faq" as const, icon: "❓" },
   { id: "duvidas" as const, icon: "💬" },
 ];
-
-type TabId = (typeof navTabIds)[number]["id"];
 
 interface HeaderNavProps {
   activeTab: TabId;
@@ -279,7 +276,7 @@ export default function Home() {
 
   const { helpOpen, setHelpOpen } = useKeyboardShortcuts({
     activeTab,
-    setActiveTab: (tab: string) => setActiveTab(tab as TabId),
+    setActiveTab,
     showAudienceSelector,
     setShowAudienceSelector,
     setMobileMenuOpen: () => {},
@@ -287,9 +284,9 @@ export default function Home() {
 
   useEffect(() => {
     setDarkMode(document.documentElement.classList.contains("dark"));
-    const savedAudience = localStorage.getItem("edusexual-audience") as Audience | null;
-    if (savedAudience && ["criancas", "jovens", "adultos"].includes(savedAudience)) {
-      setAudienceState(savedAudience);
+    const saved = localStorage.getItem("edusexual-audience");
+    if (saved && ["criancas", "jovens", "adultos"].includes(saved)) {
+      setAudienceState(saved as Audience);
       setShowAudienceSelector(false);
     }
   }, []);

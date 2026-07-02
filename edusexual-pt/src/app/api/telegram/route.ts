@@ -9,7 +9,7 @@ function escapeMarkdown(text: string): string {
 
 const TelegramSchema = z.object({
   name: z.string().max(100).optional(),
-  question: z.string().min(1, "Question is required").max(2000),
+  question: z.string().min(1, "A pergunta é obrigatória").max(2000),
   audience: z.enum(["criancas", "jovens", "adultos"]),
 });
 

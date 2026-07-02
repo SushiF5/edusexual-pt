@@ -2,18 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useI18n } from "@/i18n/context";
-
-interface Episode {
-  title: string;
-  description: string;
-  link: string;
-  pubDate: string;
-  duration: string;
-  episode: number | null;
-  season: number | null;
-  image: string | null;
-  audioUrl: string;
-}
+import { Episode } from "@/types";
 
 interface PodcastTabProps {
   episodes: Episode[];
@@ -29,19 +18,25 @@ export default function PodcastTab({
 }: PodcastTabProps) {
   const { t } = useI18n();
   const hasFetched = useRef(false);
+  const [fetchError, setFetchError] = useState(false);
 
   useEffect(() => {
     if (episodes.length === 0 && !hasFetched.current) {
       hasFetched.current = true;
       setPodcastLoading(true);
+      setFetchError(false);
       fetch("/api/podcast")
-        .then((r) => r.json())
+        .then((r) => {
+          if (!r.ok) throw new Error(`HTTP ${r.status}`);
+          return r.json();
+        })
         .then((data) => {
           if (data.episodes) setEpisodes(data.episodes);
         })
         .catch((e) => {
           console.error("Failed to load podcast episodes:", e);
           hasFetched.current = false;
+          setFetchError(true);
         })
         .finally(() => setPodcastLoading(false));
     }
@@ -87,6 +82,16 @@ export default function PodcastTab({
           <div className="text-center py-12 text-gray-400">
             <div className="animate-spin inline-block w-8 h-8 border-4 border-primary border-t-transparent rounded-full mb-4" role="status" aria-label="A carregar"></div>
             <p>{t.loadingEpisodes}</p>
+          </div>
+        ) : fetchError ? (
+          <div className="text-center py-12 text-gray-400">
+            <p className="text-red-500 dark:text-red-400 mb-2">{t.podcastLoadError || "Erro ao carregar episódios."}</p>
+            <button
+              onClick={() => { hasFetched.current = false; setPodcastLoading(true); }}
+              className="text-secondary hover:underline"
+            >
+              {t.retry || "Tentar novamente"}
+            </button>
           </div>
         ) : episodes.length > 0 ? (
           <div className="space-y-3 md:space-y-4">

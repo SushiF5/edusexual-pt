@@ -2,8 +2,7 @@
 
 import { useState } from "react";
 import { useI18n } from "@/i18n/context";
-
-type Audience = "criancas" | "jovens" | "adultos";
+import { Audience } from "@/types";
 
 interface DoubtsTabProps {
   audience: Audience;
@@ -19,11 +18,13 @@ export default function DoubtsTab({
   audience, submitted, setSubmitted, questionForm, setQuestionForm, isSending, setIsSending
 }: DoubtsTabProps) {
   const { t } = useI18n();
+  const [error, setError] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!questionForm.question.trim() || isSending) return;
     setIsSending(true);
+    setError(false);
     let success = false;
     try {
       const res = await fetch("/api/telegram", {
@@ -38,11 +39,13 @@ export default function DoubtsTab({
       if (!res.ok) {
         const errorText = await res.text();
         console.error("Telegram API error:", errorText);
+        setError(true);
       } else {
         success = true;
       }
     } catch (e) {
       console.error("Failed to send question:", e);
+      setError(true);
     }
     setIsSending(false);
     setSubmitted(success);
@@ -69,6 +72,11 @@ export default function DoubtsTab({
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
+          {error && (
+            <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-4 text-red-700 dark:text-red-400 text-sm" role="alert">
+              {t.questionSendError || "Erro ao enviar pergunta. Tenta novamente."}
+            </div>
+          )}
           <div>
             <label htmlFor="question-name" className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">{t.yourNameOptional}</label>
             <input
@@ -100,7 +108,12 @@ export default function DoubtsTab({
               aria-describedby="question-help"
               maxLength={2000}
             ></textarea>
-            <span id="question-help" className="sr-only">A tua pergunta é anónima. Mínimo 1 caractere, máximo 2000.</span>
+            <div className="flex justify-between items-center mt-1">
+              <span id="question-help" className="sr-only">A tua pergunta é anónima. Mínimo 1 caractere, máximo 2000.</span>
+              <span className={`text-xs ${questionForm.question.length > 1800 ? 'text-amber-500' : 'text-gray-400'}`} aria-live="polite">
+                {questionForm.question.length}/2000
+              </span>
+            </div>
           </div>
           <button type="submit" className="btn-primary w-full py-3 md:py-4 text-base md:text-lg flex items-center justify-center gap-2" disabled={!questionForm.question.trim() || isSending} aria-busy={isSending}>
             {isSending && <span className="animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full"></span>}

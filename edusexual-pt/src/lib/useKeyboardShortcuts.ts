@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useCallback, useState } from "react";
+import { TabId } from "@/types";
 
 interface KeyboardShortcutsProps {
-  activeTab: string;
-  setActiveTab: (tab: string) => void;
+  activeTab: TabId;
+  setActiveTab: (tab: TabId) => void;
   showAudienceSelector?: boolean;
   setShowAudienceSelector: (show: boolean) => void;
   setMobileMenuOpen: (open: boolean) => void;
@@ -72,7 +73,7 @@ export function useKeyboardShortcuts({
       default:
         if (/^[1-6]$/.test(e.key)) {
           e.preventDefault();
-          const tabs = ["home", "podcast", "recursos", "quiz", "faq", "duvidas"];
+          const tabs: TabId[] = ["home", "podcast", "recursos", "quiz", "faq", "duvidas"];
           const index = parseInt(e.key) - 1;
           if (index >= 0 && index < tabs.length) {
             setActiveTab(tabs[index]);

@@ -3,8 +3,7 @@
 import { useState } from "react";
 import { guides } from "@/data/content";
 import { useI18n } from "@/i18n/context";
-
-type Audience = "criancas" | "jovens" | "adultos";
+import { Audience } from "@/types";
 
 interface ResourcesTabProps {
   audience: Audience;

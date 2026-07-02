@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, useMemo, ReactNode } from "react";
 
 interface Episode {
   title: string;
@@ -37,8 +37,12 @@ export function PodcastProvider({ children }: { children: ReactNode }) {
   const [podcastLoading, setPodcastLoading] = useState(false);
   const [playingEpisode, setPlayingEpisode] = useState<Episode | null>(null);
 
+  const value = useMemo(() => ({
+    episodes, setEpisodes, podcastLoading, setPodcastLoading, playingEpisode, setPlayingEpisode
+  }), [episodes, podcastLoading, playingEpisode]);
+
   return (
-    <PodcastContext.Provider value={{ episodes, setEpisodes, podcastLoading, setPodcastLoading, playingEpisode, setPlayingEpisode }}>
+    <PodcastContext.Provider value={value}>
       {children}
     </PodcastContext.Provider>
   );

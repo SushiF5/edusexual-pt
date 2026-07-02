@@ -101,6 +101,17 @@ type TranslationKeys = {
   spotify: string;
   hearOnSpotify: string;
   searchTopics: string;
+  shortcutsTitle: string;
+  shortcutHome: string;
+  shortcutPodcast: string;
+  shortcutResources: string;
+  shortcutQuiz: string;
+  shortcutSearch: string;
+  shortcutNavigateTabs: string;
+  shortcutToggleHelp: string;
+  shortcutClose: string;
+  noTopicsFound: string;
+  tryOtherTerms: string;
 };
 
 const pt: TranslationKeys = {
@@ -196,6 +207,17 @@ const pt: TranslationKeys = {
   spotify: "Spotify",
   hearOnSpotify: "Ouve no Spotify ↗",
   searchTopics: "Pesquisar temas...",
+  shortcutsTitle: "Atalhos do Teclado",
+  shortcutHome: "Início",
+  shortcutPodcast: "Podcast",
+  shortcutResources: "Recursos",
+  shortcutQuiz: "Quiz",
+  shortcutSearch: "Pesquisar",
+  shortcutNavigateTabs: "Navegar por abas",
+  shortcutToggleHelp: "Mostrar/ocultar ajuda",
+  shortcutClose: "Fechar",
+  noTopicsFound: "Nenhum tema encontrado para",
+  tryOtherTerms: "Tenta com outros termos de pesquisa.",
 };
 
 const en: TranslationKeys = {
@@ -291,6 +313,17 @@ const en: TranslationKeys = {
   spotify: "Spotify",
   hearOnSpotify: "Listen on Spotify ↗",
   searchTopics: "Search topics...",
+  shortcutsTitle: "Keyboard Shortcuts",
+  shortcutHome: "Home",
+  shortcutPodcast: "Podcast",
+  shortcutResources: "Resources",
+  shortcutQuiz: "Quiz",
+  shortcutSearch: "Search",
+  shortcutNavigateTabs: "Navigate tabs",
+  shortcutToggleHelp: "Toggle help",
+  shortcutClose: "Close",
+  noTopicsFound: "No topics found for",
+  tryOtherTerms: "Try other search terms.",
 };
 
 const es: TranslationKeys = {
@@ -323,7 +356,7 @@ const es: TranslationKeys = {
   exploreTopics: "¿Qué quieres explorar hoy?",
   exploreTopicsDesc: "Tenemos contenido especializado preparado para tu perfil. Elige un tema para empezar a leer.",
   podcastTitle: "Descomplicando",
-  podcastSubtitle: "El podcast de EduSexual PT. Sofía y André desmystifican temas de educación sexual sin tabúes, con conversaciones abiertas e información validada.",
+  podcastSubtitle: "El podcast de EduSexual PT. Sofía y André desmitifican temas de educación sexual sin tabúes, con conversaciones abiertas e información validada.",
   listenOnSpotify: "Escucha en Spotify o directamente aquí:",
   allEpisodes: "Todos los Episodios",
   loadingEpisodes: "Cargando episodios...",
@@ -386,6 +419,17 @@ const es: TranslationKeys = {
   spotify: "Spotify",
   hearOnSpotify: "Escucha en Spotify ↗",
   searchTopics: "Buscar temas...",
+  shortcutsTitle: "Atajos de Teclado",
+  shortcutHome: "Inicio",
+  shortcutPodcast: "Podcast",
+  shortcutResources: "Recursos",
+  shortcutQuiz: "Quiz",
+  shortcutSearch: "Buscar",
+  shortcutNavigateTabs: "Navegar pestañas",
+  shortcutToggleHelp: "Mostrar/ocultar ayuda",
+  shortcutClose: "Cerrar",
+  noTopicsFound: "No se encontraron temas para",
+  tryOtherTerms: "Intenta con otros términos de búsqueda.",
 };
 
 export const translations: Record<Locale, TranslationKeys> = { pt, en, es };

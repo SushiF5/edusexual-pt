@@ -90,7 +90,12 @@ export default function HomeTab({ audience, setActiveTab }: HomeTabProps) {
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
-          {filteredTopics.map((topic) => (
+          {filteredTopics.length === 0 && searchQuery.trim() ? (
+            <div className="sm:col-span-2 lg:col-span-3 text-center py-12 text-gray-500 dark:text-gray-400" role="status" aria-live="polite">
+              <p className="text-lg mb-2">{t.noTopicsFound} &ldquo;{searchQuery}&rdquo;</p>
+              <p className="text-sm">{t.tryOtherTerms}</p>
+            </div>
+          ) : filteredTopics.map((topic) => (
             <div key={topic.id} className="card group hover:border-primary">
               <div className="bg-primary/5 dark:bg-primary/20 w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center text-3xl md:text-4xl mb-4 md:mb-6 group-hover:bg-primary group-hover:text-white transition-all duration-500" role="img" aria-hidden="true">
                 {topic.id === 'anatomia-jovens' ? '🧬' : topic.icon}

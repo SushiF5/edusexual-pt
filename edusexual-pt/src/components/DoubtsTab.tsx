@@ -24,8 +24,9 @@ export default function DoubtsTab({
     e.preventDefault();
     if (!questionForm.question.trim() || isSending) return;
     setIsSending(true);
+    let success = false;
     try {
-      await fetch("/api/telegram", {
+      const res = await fetch("/api/telegram", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -34,9 +35,17 @@ export default function DoubtsTab({
           audience,
         }),
       });
-    } catch {}
+      if (!res.ok) {
+        const errorText = await res.text();
+        console.error("Telegram API error:", errorText);
+      } else {
+        success = true;
+      }
+    } catch (e) {
+      console.error("Failed to send question:", e);
+    }
     setIsSending(false);
-    setSubmitted(true);
+    setSubmitted(success);
   };
 
   if (submitted) {

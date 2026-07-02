@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useI18n } from "@/i18n/context";
 
 interface Episode {
@@ -28,16 +28,21 @@ export default function PodcastTab({
   episodes, setEpisodes, podcastLoading, setPodcastLoading, playingEpisode, setPlayingEpisode
 }: PodcastTabProps) {
   const { t } = useI18n();
+  const hasFetched = useRef(false);
 
   useEffect(() => {
-    if (episodes.length === 0) {
+    if (episodes.length === 0 && !hasFetched.current) {
+      hasFetched.current = true;
       setPodcastLoading(true);
       fetch("/api/podcast")
         .then((r) => r.json())
         .then((data) => {
           if (data.episodes) setEpisodes(data.episodes);
         })
-        .catch(() => {})
+        .catch((e) => {
+          console.error("Failed to load podcast episodes:", e);
+          hasFetched.current = false;
+        })
         .finally(() => setPodcastLoading(false));
     }
   }, [episodes.length, setEpisodes, setPodcastLoading]);

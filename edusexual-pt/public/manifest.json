@@ -1,10 +1,11 @@
 {
   "name": "EduSexual PT",
   "short_name": "EduSexual",
+  "id": "/",
   "description": "Portal de educação sexual em português para todas as idades. Conteúdo validado, quizzes, FAQ e linhas de apoio em Portugal.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#FAFAF9",
+  "background_color": "#2D5A5A",
   "theme_color": "#2D5A5A",
   "orientation": "portrait-primary",
   "lang": "pt-PT",

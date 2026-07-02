@@ -3,6 +3,10 @@ import { z } from "zod";
 import { checkRateLimit } from "@/lib/rateLimit";
 import { headers } from "next/headers";
 
+function escapeMarkdown(text: string): string {
+  return text.replace(/[_*[\]()~`>#+=|{}.!-]/g, "\\$&");
+}
+
 const TelegramSchema = z.object({
   name: z.string().max(100).optional(),
   question: z.string().min(1, "Question is required").max(2000),
@@ -44,10 +48,10 @@ export async function POST(req: Request) {
     const text = [
       "📩 *Nova Pergunta Anónima*",
       "",
-      `👤 Nome: ${displayName}`,
-      `🎯 Perfil: ${audienceLabels[audience] || audience}`,
+      `👤 Nome: ${escapeMarkdown(displayName)}`,
+      `🎯 Perfil: ${escapeMarkdown(audienceLabels[audience] || audience)}`,
       `❓ Pergunta:`,
-      `${question.trim()}`,
+      `${escapeMarkdown(question.trim())}`,
     ].join("\n");
 
     const res = await fetch(

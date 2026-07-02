@@ -39,6 +39,14 @@ body {
   color: #9CA3AF;
 }
 
+.text-gray-400 {
+  color: #6B7280;
+}
+
+.text-gray-500 {
+  color: #4B5563;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-outfit), sans-serif;
 }

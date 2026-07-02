@@ -1,6 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { guides } from "@/data/content";
 
+function escapeHtml(text: string): string {
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const id = searchParams.get("id");
@@ -15,12 +24,14 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "Guide not found" }, { status: 404 });
   }
 
+  const safeFilename = guide.id.replace(/[^a-zA-Z0-9_-]/g, "");
+
   const html = `
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8" />
-<title>${guide.title}</title>
+<title>${escapeHtml(guide.title)}</title>
 <style>
 body { font-family: Arial, sans-serif; padding: 40px; line-height: 1.6; color: #333; }
 h1 { color: #2D5A5A; border-bottom: 2px solid #2D5A5A; padding-bottom: 10px; }
@@ -31,17 +42,17 @@ h2 { color: #2D5A5A; margin-top: 30px; }
 </head>
 <body>
 <div class="header">
-<h1>${guide.title}</h1>
-<p>${guide.description}</p>
+<h1>${escapeHtml(guide.title)}</h1>
+<p>${escapeHtml(guide.description)}</p>
 </div>
 ${guide.sections.map(section => `
 <div>
-<h2>${section.heading}</h2>
-<p>${section.body.replace(/\n/g, '<br/>')}</p>
+<h2>${escapeHtml(section.heading)}</h2>
+<p>${escapeHtml(section.body).replace(/\n/g, '<br/>')}</p>
 </div>
 `).join('')}
 <div class="footer">
-EduSexual PT — ${guide.title} — edusexual-pt.vercel.app
+EduSexual PT — ${escapeHtml(guide.title)} — edusexual.pt
 </div>
 </body>
 </html>
@@ -49,8 +60,8 @@ EduSexual PT — ${guide.title} — edusexual-pt.vercel.app
 
   return new NextResponse(html, {
     headers: {
-      "Content-Type": "text/html",
-      "Content-Disposition": `attachment; filename="${guide.id}.html"`,
+      "Content-Type": "text/html; charset=utf-8",
+      "Content-Disposition": `attachment; filename="${safeFilename}.html"`,
     },
   });
 }

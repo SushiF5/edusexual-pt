@@ -14,10 +14,6 @@ interface Episode {
 
 const RSS_URL = "https://anchor.fm/s/111d0d7cc/podcast/rss";
 
-let cachedEpisodes: Episode[] | null = null;
-let cachedAt = 0;
-const CACHE_TTL = 1000 * 60 * 15;
-
 function parseRSS(xml: string): Episode[] {
   const items: Episode[] = [];
   const itemRegex = /<item>([\s\S]*?)<\/item>/g;
@@ -26,8 +22,8 @@ function parseRSS(xml: string): Episode[] {
   while ((match = itemRegex.exec(xml)) !== null) {
     const block = match[1];
 
-    const titleMatch = block.match(/<title><!\[CDATA\[(.*?)\]\]><\/title>/);
-    const descMatch = block.match(/<description><!\[CDATA\[([\s\S]*?)\]\]><\/description>/);
+    const titleMatch = block.match(/<title>(?:<!\[CDATA\[)?(.*?)(?:\]\]>)?<\/title>/);
+    const descMatch = block.match(/<description>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/description>/);
     const linkMatch = block.match(/<link>(.*?)<\/link>/);
     const dateMatch = block.match(/<pubDate>(.*?)<\/pubDate>/);
     const durationMatch = block.match(/<itunes:duration>(.*?)<\/itunes:duration>/);
@@ -59,21 +55,21 @@ function parseRSS(xml: string): Episode[] {
 
 export async function GET() {
   try {
-    const now = Date.now();
-    if (cachedEpisodes && now - cachedAt < CACHE_TTL) {
-      return NextResponse.json({ episodes: cachedEpisodes });
-    }
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10000);
 
-    const res = await fetch(RSS_URL, { next: { revalidate: 900 } });
+    const res = await fetch(RSS_URL, {
+      next: { revalidate: 900 },
+      signal: controller.signal,
+    });
+    clearTimeout(timeout);
+
     if (!res.ok) {
       return NextResponse.json({ error: "Failed to fetch RSS" }, { status: 502 });
     }
 
     const xml = await res.text();
     const episodes = parseRSS(xml);
-
-    cachedEpisodes = episodes;
-    cachedAt = now;
 
     return NextResponse.json({ episodes });
   } catch (error) {

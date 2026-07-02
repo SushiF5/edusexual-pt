@@ -54,6 +54,6 @@ describe("/api/telegram", () => {
 
     const res = await POST(req);
     expect(res.status).toBe(200);
-    expect(res.body.fallback).toBe(true);
+    expect((res as any).body.fallback).toBe(true);
   });
 });

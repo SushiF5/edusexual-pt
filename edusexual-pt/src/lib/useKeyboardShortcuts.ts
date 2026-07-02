@@ -8,7 +8,6 @@ interface KeyboardShortcutsProps {
   showAudienceSelector?: boolean;
   setShowAudienceSelector: (show: boolean) => void;
   setMobileMenuOpen: (open: boolean) => void;
-  setSearchQuery: (query: string) => void;
 }
 
 export function useKeyboardShortcuts({
@@ -17,7 +16,6 @@ export function useKeyboardShortcuts({
   showAudienceSelector,
   setShowAudienceSelector,
   setMobileMenuOpen,
-  setSearchQuery,
 }: KeyboardShortcutsProps) {
   const [helpOpen, setHelpOpen] = useState(false);
 

@@ -30,6 +30,29 @@ const navTabIds = [
 
 type TabId = (typeof navTabIds)[number]["id"];
 
+interface HeaderNavProps {
+  activeTab: TabId;
+  setActiveTab: (tab: TabId) => void;
+  locale: Locale;
+  setLocale: (l: Locale) => void;
+  darkMode: boolean;
+  toggleDarkMode: () => void;
+  setShowAudienceSelector: (show: boolean) => void;
+  t: Record<string, string>;
+}
+
+interface AudienceSelectorProps {
+  show: boolean;
+  onSelect: (audience: Audience) => void;
+  t: Record<string, string>;
+}
+
+interface TabContentProps {
+  activeTab: TabId;
+  audience: Audience;
+  setActiveTab: (tab: TabId) => void;
+}
+
 function navLabel(tabId: TabId, t: Record<string, string>): string {
   const map: Record<TabId, string> = {
     home: t.home,
@@ -51,7 +74,7 @@ function HeaderNav({
   toggleDarkMode,
   setShowAudienceSelector,
   t,
-}: any) {
+}: HeaderNavProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
@@ -172,7 +195,7 @@ function HeaderNav({
   );
 }
 
-function AudienceSelector({ show, onSelect, t }: any) {
+function AudienceSelector({ show, onSelect, t }: AudienceSelectorProps) {
   if (!show) return null;
 
   const profiles = [
@@ -208,13 +231,13 @@ function AudienceSelector({ show, onSelect, t }: any) {
   );
 }
 
-function TabContent({ activeTab, audience }: any) {
+function TabContent({ activeTab, audience, setActiveTab }: TabContentProps) {
   const podcastCtx = usePodcast();
   const doubtsCtx = useDoubts();
 
   switch (activeTab) {
     case "home":
-      return <HomeTab audience={audience} />;
+      return <HomeTab audience={audience} setActiveTab={setActiveTab} />;
     case "podcast":
       return (
         <PodcastTab
@@ -260,7 +283,6 @@ export default function Home() {
     showAudienceSelector,
     setShowAudienceSelector,
     setMobileMenuOpen: () => {},
-    setSearchQuery: () => {},
   });
 
   useEffect(() => {
@@ -319,29 +341,29 @@ export default function Home() {
             <div
               className="fixed inset-0 z-[70] bg-black/50 flex items-center justify-center p-4"
               role="dialog"
-              aria-label="Atalhos do teclado"
+              aria-label={t.shortcutsTitle}
               onClick={() => setHelpOpen(false)}
             >
               <div
                 className="bg-white dark:bg-gray-800 rounded-2xl p-6 max-w-md w-full shadow-2xl"
                 onClick={(e) => e.stopPropagation()}
               >
-                <h2 className="text-xl font-heading font-bold mb-4 text-primary">⌨️ Atalhos do Teclado</h2>
+                <h2 className="text-xl font-heading font-bold mb-4 text-primary">⌨️ {t.shortcutsTitle}</h2>
                 <div className="space-y-2 text-sm">
-                  <div className="flex justify-between"><kbd className="bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded font-mono">H</kbd><span>Início</span></div>
-                  <div className="flex justify-between"><kbd className="bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded font-mono">P</kbd><span>Podcast</span></div>
-                  <div className="flex justify-between"><kbd className="bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded font-mono">R</kbd><span>Recursos</span></div>
-                  <div className="flex justify-between"><kbd className="bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded font-mono">Q</kbd><span>Quiz</span></div>
-                  <div className="flex justify-between"><kbd className="bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded font-mono">F</kbd><span>Pesquisar</span></div>
-                  <div className="flex justify-between"><kbd className="bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded font-mono">1-6</kbd><span>Navegar por abas</span></div>
-                  <div className="flex justify-between"><kbd className="bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded font-mono">?</kbd><span>Mostrar/ocultar ajuda</span></div>
-                  <div className="flex justify-between"><kbd className="bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded font-mono">Esc</kbd><span>Fechar</span></div>
+                  <div className="flex justify-between"><kbd className="bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded font-mono">H</kbd><span>{t.shortcutHome}</span></div>
+                  <div className="flex justify-between"><kbd className="bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded font-mono">P</kbd><span>{t.shortcutPodcast}</span></div>
+                  <div className="flex justify-between"><kbd className="bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded font-mono">R</kbd><span>{t.shortcutResources}</span></div>
+                  <div className="flex justify-between"><kbd className="bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded font-mono">Q</kbd><span>{t.shortcutQuiz}</span></div>
+                  <div className="flex justify-between"><kbd className="bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded font-mono">F</kbd><span>{t.shortcutSearch}</span></div>
+                  <div className="flex justify-between"><kbd className="bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded font-mono">1-6</kbd><span>{t.shortcutNavigateTabs}</span></div>
+                  <div className="flex justify-between"><kbd className="bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded font-mono">?</kbd><span>{t.shortcutToggleHelp}</span></div>
+                  <div className="flex justify-between"><kbd className="bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded font-mono">Esc</kbd><span>{t.shortcutClose}</span></div>
                 </div>
                 <button
                   onClick={() => setHelpOpen(false)}
                   className="mt-6 w-full py-2 bg-primary text-white rounded-xl font-bold hover:bg-primary/90 transition"
                 >
-                  Fechar
+                  {t.shortcutClose}
                 </button>
               </div>
             </div>
@@ -350,7 +372,7 @@ export default function Home() {
           <main id="main-content" className="max-w-6xl mx-auto px-4 md:px-6 py-6 md:py-8">
             <ErrorBoundary>
               <Suspense fallback={<TabSkeleton />}>
-                <TabContent activeTab={activeTab} audience={audience} />
+                <TabContent activeTab={activeTab} audience={audience} setActiveTab={setActiveTab} />
               </Suspense>
             </ErrorBoundary>
           </main>

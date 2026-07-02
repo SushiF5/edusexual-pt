@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, useMemo, ReactNode } from "react";
 
 interface DoubtsContextValue {
   questionForm: { name: string; question: string };
@@ -25,8 +25,12 @@ export function DoubtsProvider({ children }: { children: ReactNode }) {
   const [submitted, setSubmitted] = useState(false);
   const [isSending, setIsSending] = useState(false);
 
+  const value = useMemo(() => ({
+    questionForm, setQuestionForm, submitted, setSubmitted, isSending, setIsSending
+  }), [questionForm, submitted, isSending]);
+
   return (
-    <DoubtsContext.Provider value={{ questionForm, setQuestionForm, submitted, setSubmitted, isSending, setIsSending }}>
+    <DoubtsContext.Provider value={value}>
       {children}
     </DoubtsContext.Provider>
   );

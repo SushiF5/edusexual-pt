@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { guides } from "@/data/content";
 import { useI18n } from "@/i18n/context";
 
@@ -12,7 +12,6 @@ interface ResourcesTabProps {
 
 export default function ResourcesTab({ audience }: ResourcesTabProps) {
   const { t } = useI18n();
-  const printRef = useRef<HTMLDivElement>(null);
   const [selectedGuide, setSelectedGuide] = useState<string | null>(null);
 
   const handlePrint = () => {
@@ -28,7 +27,7 @@ export default function ResourcesTab({ audience }: ResourcesTabProps) {
       </div>
 
       {selectedGuide ? (
-        <div ref={printRef} className="space-y-6 print-area">
+        <div className="space-y-6 print-area">
           {(() => {
             const guide = guides.find((g) => g.id === selectedGuide);
             if (!guide) return null;

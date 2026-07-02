@@ -21,20 +21,26 @@ function loadState(audience: Audience) {
         return parsed;
       }
     }
-  } catch {}
+  } catch (e) {
+    console.warn("Failed to load quiz state:", e);
+  }
   return null;
 }
 
 function saveState(audience: Audience, state: { currentQuestion: number; score: number; showResult: boolean }) {
   try {
     localStorage.setItem(`${STORAGE_KEY}-${audience}`, JSON.stringify(state));
-  } catch {}
+  } catch (e) {
+    console.warn("Failed to save quiz state:", e);
+  }
 }
 
 function clearState(audience: Audience) {
   try {
     localStorage.removeItem(`${STORAGE_KEY}-${audience}`);
-  } catch {}
+  } catch (e) {
+    console.warn("Failed to clear quiz state:", e);
+  }
 }
 
 export default function QuizTab({ audience }: QuizTabProps) {
@@ -79,10 +85,13 @@ export default function QuizTab({ audience }: QuizTabProps) {
 
   const handleAnswer = (answerIndex: number) => {
     if (quizState.showExplanation) return;
-    setQuizState(prev => ({ ...prev, selectedAnswer: answerIndex, showExplanation: true }));
-    if (answerIndex === filteredQuiz[quizState.currentQuestion].correctAnswer) {
-      setQuizState(prev => ({ ...prev, score: prev.score + 1 }));
-    }
+    const isCorrect = answerIndex === filteredQuiz[quizState.currentQuestion].correctAnswer;
+    setQuizState(prev => ({
+      ...prev,
+      selectedAnswer: answerIndex,
+      showExplanation: true,
+      score: isCorrect ? prev.score + 1 : prev.score,
+    }));
   };
 
   const nextQuestion = () => {
@@ -143,7 +152,7 @@ export default function QuizTab({ audience }: QuizTabProps) {
             <span className="text-sm text-gray-500 dark:text-gray-400">{t.questionOf} {quizState.currentQuestion + 1} / {filteredQuiz.length}</span>
             <span className="text-primary font-semibold">{t.points}: {quizState.score}</span>
           </div>
-          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2" role="progressbar" aria-valuenow={quizState.currentQuestion + 1} aria-valuemin={1} aria-valuemax={filteredQuiz.length}>
+          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2" role="progressbar" aria-valuenow={quizState.currentQuestion + 1} aria-valuemin={1} aria-valuemax={filteredQuiz.length} aria-label={`Pergunta ${quizState.currentQuestion + 1} de ${filteredQuiz.length}`}>
             <div
               className="bg-primary h-2 rounded-full transition-all duration-500"
               style={{ width: `${((quizState.currentQuestion + 1) / filteredQuiz.length) * 100}%` }}
@@ -154,21 +163,25 @@ export default function QuizTab({ audience }: QuizTabProps) {
         <h3 className="text-lg md:text-xl font-heading font-semibold mb-6">{filteredQuiz[quizState.currentQuestion].question}</h3>
         <div className="space-y-3">
           {filteredQuiz[quizState.currentQuestion].options.map((option, index) => {
+            const optionLetter = String.fromCharCode(65 + index);
             let btnClass = "w-full text-left p-3 md:p-4 rounded-lg border-2 transition text-sm md:text-base ";
             let suffix = "";
+            let ariaLabel = `${optionLetter}) ${option}`;
             if (quizState.showExplanation) {
               if (index === filteredQuiz[quizState.currentQuestion].correctAnswer) {
                 btnClass += "border-green-500 bg-green-50 dark:bg-green-900/30";
                 suffix = " ✓";
+                ariaLabel += " - Resposta correta";
               } else if (quizState.selectedAnswer === index) {
                 btnClass += "border-red-500 bg-red-50 dark:bg-red-900/30";
                 suffix = " ✗";
+                ariaLabel += " - Resposta incorreta";
               }
             } else {
               btnClass += "border-gray-200 dark:border-gray-600 hover:border-primary";
             }
             return (
-              <button key={index} onClick={() => handleAnswer(index)} disabled={quizState.showExplanation} className={btnClass}>
+              <button key={index} onClick={() => handleAnswer(index)} disabled={quizState.showExplanation} className={btnClass} aria-label={ariaLabel}>
                 <span className="flex items-center justify-between">
                   <span>{option}</span>
                   {suffix && <span className="font-bold" aria-live="assertive">{suffix}</span>}

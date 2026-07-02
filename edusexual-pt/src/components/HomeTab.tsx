@@ -118,6 +118,9 @@ export default function HomeTab({ audience, setActiveTab }: HomeTabProps) {
                       <span className="text-xs opacity-50 group-open:rotate-180 transition-transform" aria-hidden="true">▼</span>
                     </summary>
                     <div className="mt-4 p-4 md:p-5 bg-gray-50 dark:bg-gray-700/50 rounded-2xl text-sm text-gray-700 dark:text-gray-300 whitespace-pre-line leading-relaxed shadow-inner">
+                      {article.audioUrl && (
+                        <AudioPlayer src={article.audioUrl} title={article.title} />
+                      )}
                       {article.content}
                     </div>
                   </details>

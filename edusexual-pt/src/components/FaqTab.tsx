@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef, useCallback } from "react";
 import { frequentlyAskedQuestions } from "@/data/content";
 import { useI18n } from "@/i18n/context";
 import { Audience } from "@/types";
@@ -12,11 +12,42 @@ interface FaqTabProps {
 export default function FaqTab({ audience }: FaqTabProps) {
   const { t } = useI18n();
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+  const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   const filteredFaq = useMemo(
     () => frequentlyAskedQuestions.filter((faq) => faq.audience.includes(audience)),
     [audience]
   );
+
+  const handleKeyDown = useCallback((e: React.KeyboardEvent, index: number) => {
+    const total = filteredFaq.length;
+    if (total === 0) return;
+
+    let nextIndex = index;
+
+    switch (e.key) {
+      case "ArrowDown":
+        e.preventDefault();
+        nextIndex = (index + 1) % total;
+        break;
+      case "ArrowUp":
+        e.preventDefault();
+        nextIndex = (index - 1 + total) % total;
+        break;
+      case "Home":
+        e.preventDefault();
+        nextIndex = 0;
+        break;
+      case "End":
+        e.preventDefault();
+        nextIndex = total - 1;
+        break;
+      default:
+        return;
+    }
+
+    buttonRefs.current[nextIndex]?.focus();
+  }, [filteredFaq.length]);
 
   return (
     <div className="max-w-4xl mx-auto space-y-6 md:space-y-8">
@@ -29,12 +60,14 @@ export default function FaqTab({ audience }: FaqTabProps) {
         </p>
       </div>
 
-      <div className="space-y-3 md:space-y-4">
+      <div className="space-y-3 md:space-y-4" role="group" aria-label={t.faqTitle}>
         {filteredFaq.map((faq, index) => (
           <div key={index} className="card !p-0 overflow-hidden">
             <button
+              ref={(el) => { buttonRefs.current[index] = el; }}
               id={`faq-btn-${index}`}
               onClick={() => setExpandedIndex(expandedIndex === index ? null : index)}
+              onKeyDown={(e) => handleKeyDown(e, index)}
               className="w-full text-left p-4 md:p-6 flex justify-between items-center hover:bg-gray-50 dark:hover:bg-gray-700/50 transition"
               aria-expanded={expandedIndex === index}
               aria-controls={`faq-panel-${index}`}

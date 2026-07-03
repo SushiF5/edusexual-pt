@@ -10,6 +10,7 @@ import HomeTab from "@/components/HomeTab";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import TabSkeleton from "@/components/TabSkeleton";
 import { useKeyboardShortcuts } from "@/lib/useKeyboardShortcuts";
+import { useFocusTrap } from "@/lib/useFocusTrap";
 import { Audience, TabId } from "@/types";
 
 const QuizTab = dynamic(() => import("@/components/QuizTab"), { ssr: false, loading: () => <TabSkeleton /> });
@@ -73,6 +74,7 @@ function HeaderNav({
   t,
 }: HeaderNavProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const mobileMenuRef = useFocusTrap(mobileMenuOpen);
 
   return (
     <header className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-100 dark:border-gray-800 py-3 px-4 md:px-6 sticky top-0 z-50 transition-all relative">
@@ -150,7 +152,7 @@ function HeaderNav({
       </div>
 
       {mobileMenuOpen && (
-        <div className="absolute top-full left-0 right-0 bg-white dark:bg-gray-900 shadow-lg md:hidden z-50 border-t dark:border-gray-800" role="dialog" aria-modal="true" aria-label={t.navigate}>
+        <div ref={mobileMenuRef} className="absolute top-full left-0 right-0 bg-white dark:bg-gray-900 shadow-lg md:hidden z-50 border-t dark:border-gray-800" role="dialog" aria-modal="true" aria-label={t.navigate}>
           {navTabIds.map((tab) => (
             <button
               key={tab.id}
@@ -193,6 +195,7 @@ function HeaderNav({
 }
 
 function AudienceSelector({ show, onSelect, t }: AudienceSelectorProps) {
+  const trapRef = useFocusTrap(show);
   if (!show) return null;
 
   const profiles = [
@@ -202,7 +205,7 @@ function AudienceSelector({ show, onSelect, t }: AudienceSelectorProps) {
   ];
 
   return (
-    <div className="fixed inset-0 z-[60] bg-primary/40 flex items-center justify-center p-4 md:p-6 backdrop-blur-xl overflow-y-auto" role="dialog" aria-modal="true" aria-label={t.selectProfile}>
+    <div ref={trapRef} className="fixed inset-0 z-[60] bg-primary/40 flex items-center justify-center p-4 md:p-6 backdrop-blur-xl overflow-y-auto" role="dialog" aria-modal="true" aria-label={t.selectProfile}>
       <div className="max-w-5xl w-full text-center py-4 md:py-0">
         <div className="mb-6 md:mb-12 animate-float">
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-heading font-bold mb-2 md:mb-4 text-white drop-shadow-lg">{t.welcomeTitle}</h2>
@@ -272,7 +275,12 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState<TabId>("home");
   const [audience, setAudienceState] = useState<Audience>("jovens");
   const [showAudienceSelector, setShowAudienceSelector] = useState(true);
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+    if (typeof window !== "undefined") {
+      return document.documentElement.classList.contains("dark");
+    }
+    return false;
+  });
 
   const { helpOpen, setHelpOpen } = useKeyboardShortcuts({
     activeTab,
@@ -283,7 +291,6 @@ export default function Home() {
   });
 
   useEffect(() => {
-    setDarkMode(document.documentElement.classList.contains("dark"));
     const saved = localStorage.getItem("edusexual-audience");
     if (saved && ["criancas", "jovens", "adultos"].includes(saved)) {
       setAudienceState(saved as Audience);

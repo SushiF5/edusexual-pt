@@ -21,9 +21,9 @@ export function useKeyboardShortcuts({
   const [helpOpen, setHelpOpen] = useState(false);
 
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
-    const target = e.target as HTMLElement;
-    const tagName = target.tagName.toLowerCase();
-    const isInput = tagName === "input" || tagName === "textarea" || target.isContentEditable;
+    const target = e.target as HTMLElement | null;
+    const tagName = target?.tagName?.toLowerCase() ?? "";
+    const isInput = tagName === "input" || tagName === "textarea" || target?.isContentEditable;
     if (isInput && !(e.ctrlKey || e.metaKey || e.altKey)) return;
 
     if (e.key === "Escape") {

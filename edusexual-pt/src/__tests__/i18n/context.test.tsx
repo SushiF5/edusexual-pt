@@ -15,16 +15,16 @@ function TestComponent() {
   );
 }
 
-function mockLanguage(lang: string) {
-  Object.defineProperty(window.navigator, "language", {
-    value: lang,
-    writable: true,
-    configurable: true,
-  });
-}
-
 describe("I18n Context", () => {
-  const originalDescriptor = Object.getOwnPropertyDescriptor(window.navigator, "language");
+  const originalLanguage = Object.getOwnPropertyDescriptor(window.navigator, "language");
+
+  function mockLanguage(lang: string) {
+    Object.defineProperty(window.navigator, "language", {
+      value: lang,
+      writable: true,
+      configurable: true,
+    });
+  }
 
   beforeEach(() => {
     localStorage.clear();
@@ -32,84 +32,80 @@ describe("I18n Context", () => {
   });
 
   afterEach(() => {
-    if (originalDescriptor) {
-      Object.defineProperty(window.navigator, "language", originalDescriptor);
+    if (originalLanguage) {
+      Object.defineProperty(window.navigator, "language", originalLanguage);
     }
   });
 
-  it("defaults to Portuguese when navigator is pt", async () => {
+  it("defaults to Portuguese", () => {
     render(
       <I18nProvider>
         <TestComponent />
       </I18nProvider>
     );
-    await waitFor(() => {
-      expect(screen.getByTestId("locale")).toHaveTextContent("pt");
-    });
+    expect(screen.getByTestId("locale")).toHaveTextContent("pt");
     expect(screen.getByTestId("title")).toHaveTextContent("Início");
   });
 
-  it("switches locale to English", async () => {
+  it("switches locale to English", () => {
     render(
       <I18nProvider>
         <TestComponent />
       </I18nProvider>
     );
-    await act(async () => {
+    act(() => {
       screen.getByText("Switch EN").click();
     });
     expect(screen.getByTestId("locale")).toHaveTextContent("en");
     expect(screen.getByTestId("title")).toHaveTextContent("Home");
   });
 
-  it("switches locale to Spanish", async () => {
+  it("switches locale to Spanish", () => {
     render(
       <I18nProvider>
         <TestComponent />
       </I18nProvider>
     );
-    await act(async () => {
+    act(() => {
       screen.getByText("Switch ES").click();
     });
     expect(screen.getByTestId("locale")).toHaveTextContent("es");
     expect(screen.getByTestId("title")).toHaveTextContent("Inicio");
   });
 
-  it("persists locale to localStorage", async () => {
+  it("persists locale to localStorage", () => {
     render(
       <I18nProvider>
         <TestComponent />
       </I18nProvider>
     );
-    await act(async () => {
+    act(() => {
       screen.getByText("Switch EN").click();
     });
     expect(localStorage.getItem("edusexual-locale")).toBe("en");
   });
 
-  it("restores locale from localStorage", async () => {
+  it("restores locale from localStorage", () => {
     localStorage.setItem("edusexual-locale", "es");
     render(
       <I18nProvider>
         <TestComponent />
       </I18nProvider>
     );
-    await waitFor(() => {
-      expect(screen.getByTestId("locale")).toHaveTextContent("es");
-    });
+    expect(screen.getByTestId("locale")).toHaveTextContent("es");
   });
 
-  it("switches back to Portuguese from another locale", async () => {
+  it("switches back to Portuguese from another locale", () => {
     render(
       <I18nProvider>
         <TestComponent />
       </I18nProvider>
     );
-    await act(async () => {
+    act(() => {
       screen.getByText("Switch EN").click();
     });
     expect(screen.getByTestId("locale")).toHaveTextContent("en");
-    await act(async () => {
+    act(() => {
       screen.getByText("Switch PT").click();
     });
     expect(screen.getByTestId("locale")).toHaveTextContent("pt");

@@ -115,6 +115,12 @@ type TranslationKeys = {
   podcastLoadError: string;
   retry: string;
   questionSendError: string;
+  tabPodcast: string;
+  tabQuiz: string;
+  tabFaq: string;
+  tabResources: string;
+  tabDoubts: string;
+  loadingContent: string;
 };
 
 const pt: TranslationKeys = {
@@ -224,6 +230,12 @@ const pt: TranslationKeys = {
   podcastLoadError: "Erro ao carregar episódios.",
   retry: "Tentar novamente",
   questionSendError: "Erro ao enviar pergunta. Tenta novamente.",
+  tabPodcast: "Podcast",
+  tabQuiz: "Quiz",
+  tabFaq: "FAQ",
+  tabResources: "Recursos",
+  tabDoubts: "Dúvidas",
+  loadingContent: "A carregar conteúdo",
 };
 
 const en: TranslationKeys = {
@@ -333,6 +345,12 @@ const en: TranslationKeys = {
   podcastLoadError: "Error loading episodes.",
   retry: "Try again",
   questionSendError: "Error sending question. Please try again.",
+  tabPodcast: "Podcast",
+  tabQuiz: "Quiz",
+  tabFaq: "FAQ",
+  tabResources: "Resources",
+  tabDoubts: "Doubts",
+  loadingContent: "Loading content",
 };
 
 const es: TranslationKeys = {
@@ -442,6 +460,12 @@ const es: TranslationKeys = {
   podcastLoadError: "Error al cargar episodios.",
   retry: "Intentar de nuevo",
   questionSendError: "Error al enviar pregunta. Por favor, inténtalo de nuevo.",
+  tabPodcast: "Podcast",
+  tabQuiz: "Quiz",
+  tabFaq: "FAQ",
+  tabResources: "Recursos",
+  tabDoubts: "Dudas",
+  loadingContent: "Cargando contenido",
 };
 
 export const translations: Record<Locale, TranslationKeys> = { pt, en, es };

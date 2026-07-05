@@ -209,7 +209,7 @@ export const quizQuestions: QuizQuestion[] = [
     question: "A educação sexual é obrigatória nas escolas portuguesas?",
     options: ["Não, é opcional", "Sim, é obrigatória por lei", "Só no ensino secundário", "Depende do diretor da escola"],
     correctAnswer: 1,
-    explanation: "A Lei n.º 60/2002 torna a educação sexual obrigatória em todas as escolas do ensino básico e secundário em Portugal."
+    explanation: "A Lei n.º 60/2013 torna a educação sexual obrigatória em todas as escolas do ensino básico e secundário em Portugal."
   },
   {
     id: "qa5",

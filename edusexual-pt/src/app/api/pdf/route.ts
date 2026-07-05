@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { guides } from "@/data/content";
+import { checkRateLimit } from "@/lib/rateLimit";
+import { headers } from "next/headers";
 
 function escapeHtml(text: string): string {
   return text
@@ -11,6 +13,11 @@ function escapeHtml(text: string): string {
 }
 
 export async function GET(request: NextRequest) {
+  const ip = (await headers()).get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+  if (!checkRateLimit(ip)) {
+    return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+  }
+
   const { searchParams } = new URL(request.url);
   const id = searchParams.get("id");
 

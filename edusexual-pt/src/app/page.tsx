@@ -10,8 +10,8 @@ import HomeTab from "@/components/HomeTab";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import TabSkeleton from "@/components/TabSkeleton";
 import { useKeyboardShortcuts } from "@/lib/useKeyboardShortcuts";
-import { useFocusTrap } from "@/lib/useFocusTrap";
 import { Audience, TabId } from "@/types";
+import { useFocusTrap } from "@/lib/useFocusTrap";
 
 const QuizTab = dynamic(() => import("@/components/QuizTab"), { ssr: false, loading: () => <TabSkeleton /> });
 const FaqTab = dynamic(() => import("@/components/FaqTab"), { ssr: false, loading: () => <TabSkeleton /> });
@@ -54,11 +54,11 @@ interface TabContentProps {
 function navLabel(tabId: TabId, t: Record<string, string>): string {
   const map: Record<TabId, string> = {
     home: t.home,
-    podcast: "Podcast",
-    recursos: t.resourcesTitle,
-    quiz: "Quiz",
-    faq: "FAQ",
-    duvidas: t.askQuestion,
+    podcast: t.tabPodcast || "Podcast",
+    recursos: t.tabResources || t.resourcesTitle,
+    quiz: t.tabQuiz || "Quiz",
+    faq: t.tabFaq || "FAQ",
+    duvidas: t.tabDoubts || t.askQuestion,
   };
   return map[tabId];
 }
@@ -195,7 +195,7 @@ function HeaderNav({
 }
 
 function AudienceSelector({ show, onSelect, t }: AudienceSelectorProps) {
-  const trapRef = useFocusTrap(show);
+  const dialogRef = useFocusTrap(show);
   if (!show) return null;
 
   const profiles = [
@@ -205,7 +205,7 @@ function AudienceSelector({ show, onSelect, t }: AudienceSelectorProps) {
   ];
 
   return (
-    <div ref={trapRef} className="fixed inset-0 z-[60] bg-primary/40 flex items-center justify-center p-4 md:p-6 backdrop-blur-xl overflow-y-auto" role="dialog" aria-modal="true" aria-label={t.selectProfile}>
+    <div ref={dialogRef} className="fixed inset-0 z-[60] bg-primary/40 flex items-center justify-center p-4 md:p-6 backdrop-blur-xl overflow-y-auto" role="dialog" aria-modal="true" aria-label={t.selectProfile}>
       <div className="max-w-5xl w-full text-center py-4 md:py-0">
         <div className="mb-6 md:mb-12 animate-float">
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-heading font-bold mb-2 md:mb-4 text-white drop-shadow-lg">{t.welcomeTitle}</h2>
@@ -275,12 +275,7 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState<TabId>("home");
   const [audience, setAudienceState] = useState<Audience>("jovens");
   const [showAudienceSelector, setShowAudienceSelector] = useState(true);
-  const [darkMode, setDarkMode] = useState(() => {
-    if (typeof window !== "undefined") {
-      return document.documentElement.classList.contains("dark");
-    }
-    return false;
-  });
+  const [darkMode, setDarkMode] = useState(false);
 
   const { helpOpen, setHelpOpen } = useKeyboardShortcuts({
     activeTab,
@@ -290,7 +285,10 @@ export default function Home() {
     setMobileMenuOpen: () => {},
   });
 
+  const shortcutsDialogRef = useFocusTrap(helpOpen);
+
   useEffect(() => {
+    setDarkMode(document.documentElement.classList.contains("dark"));
     const saved = localStorage.getItem("edusexual-audience");
     if (saved && ["criancas", "jovens", "adultos"].includes(saved)) {
       setAudienceState(saved as Audience);
@@ -343,6 +341,7 @@ export default function Home() {
 
           {helpOpen && (
             <div
+              ref={shortcutsDialogRef}
               className="fixed inset-0 z-[70] bg-black/50 flex items-center justify-center p-4"
               role="dialog"
               aria-label={t.shortcutsTitle}
@@ -392,10 +391,10 @@ export default function Home() {
                   <h4 className="font-heading font-bold text-lg mb-3">{t.navigate}</h4>
                   <ul className="space-y-2 text-sm text-gray-400">
                     <li><button onClick={() => setActiveTab("home")} className="hover:text-white transition">{t.home}</button></li>
-                    <li><button onClick={() => setActiveTab("podcast")} className="hover:text-white transition">Podcast</button></li>
-                    <li><button onClick={() => setActiveTab("recursos")} className="hover:text-white transition">{t.resourcesTitle}</button></li>
-                    <li><button onClick={() => setActiveTab("quiz")} className="hover:text-white transition">Quiz</button></li>
-                    <li><button onClick={() => setActiveTab("faq")} className="hover:text-white transition">FAQ</button></li>
+                    <li><button onClick={() => setActiveTab("podcast")} className="hover:text-white transition">{t.tabPodcast || "Podcast"}</button></li>
+                    <li><button onClick={() => setActiveTab("recursos")} className="hover:text-white transition">{t.tabResources || t.resourcesTitle}</button></li>
+                    <li><button onClick={() => setActiveTab("quiz")} className="hover:text-white transition">{t.tabQuiz || "Quiz"}</button></li>
+                    <li><button onClick={() => setActiveTab("faq")} className="hover:text-white transition">{t.tabFaq || "FAQ"}</button></li>
                     <li><button onClick={() => setActiveTab("duvidas")} className="hover:text-white transition">{t.askQuestion}</button></li>
                     <li><button onClick={() => setShowAudienceSelector(true)} className="hover:text-white transition">{t.changeProfile}</button></li>
                   </ul>

@@ -29,6 +29,7 @@ export interface QuizQuestion {
 }
 
 export interface FAQEntry {
+  id: string;
   question: string;
   answer: string;
   audience: Audience[];

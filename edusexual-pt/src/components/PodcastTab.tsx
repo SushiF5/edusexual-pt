@@ -80,7 +80,7 @@ export default function PodcastTab({
         <h4 className="text-xl md:text-2xl font-heading font-bold text-primary mb-4 md:mb-6">{t.allEpisodes}</h4>
         {podcastLoading ? (
           <div className="text-center py-12 text-gray-400">
-            <div className="animate-spin inline-block w-8 h-8 border-4 border-primary border-t-transparent rounded-full mb-4" role="status" aria-label="A carregar"></div>
+            <div className="animate-spin inline-block w-8 h-8 border-4 border-primary border-t-transparent rounded-full mb-4" role="status" aria-label={t.loadingContent || t.loadingEpisodes}></div>
             <p>{t.loadingEpisodes}</p>
           </div>
         ) : fetchError ? (
@@ -95,10 +95,10 @@ export default function PodcastTab({
           </div>
         ) : episodes.length > 0 ? (
           <div className="space-y-3 md:space-y-4">
-            {episodes.map((ep, i) => {
+            {episodes.map((ep) => {
               const dateStr = ep.pubDate ? new Date(ep.pubDate).toLocaleDateString("pt-PT", { day: "numeric", month: "short", year: "numeric" }) : "";
               return (
-                <div key={i} className="card group hover:border-secondary !p-4 md:!p-5">
+                <div key={ep.guid} className="card group hover:border-secondary !p-4 md:!p-5">
                   <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
                     <button
                       onClick={() => setPlayingEpisode(ep)}

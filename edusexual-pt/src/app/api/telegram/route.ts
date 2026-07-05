@@ -34,7 +34,10 @@ export async function POST(req: Request) {
 
     if (!botToken || !chatId) {
       console.warn("Telegram env vars not configured — question was not sent.");
-      return NextResponse.json({ success: true, fallback: true });
+      return NextResponse.json(
+        { error: "Serviço temporariamente indisponível. Tenta novamente mais tarde." },
+        { status: 503 }
+      );
     }
 
     const audienceLabels: Record<string, string> = {

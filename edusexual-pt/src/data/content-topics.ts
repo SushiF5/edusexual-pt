@@ -48,7 +48,7 @@ Embora a maioria das pessoas seja menino ou menina, a maior diferença está nas
         content: `À medida que cresces, o teu corpo vai mudar. Isso chama-se puberdade e é algo que acontece a toda a gente!
 
 Algumas coisas que podem acontecer:
-- Ficas mais alto(a) e mais forte.
+- Ficas mais alto(a) e mais robusto(a).
 - Começam a crescer pelos em novas partes do corpo.
 - A tua pele pode ficar mais oleosa (e às vezes surgem borbulhas — é normal!).
 - As meninas começam a ter a menstruação e os meninos começam a ter a voz mais grave.
@@ -1554,7 +1554,7 @@ Impacto: Estudos mostram que jovens LGBTQI+ com famílias aceitantes têm 40% me
 
 O que a lei prevê:
 - A educação sexual não se limita à biologia — aborda também afetos, relações, igualdade de género e prevenção de violência.
-- Os pais podem acompanhar o projeto da escola mas NÃO podem impedir a participação do filho(a).
+- Os pais podem acompanhar o projeto da escola mas NÃO podem impedir a participação do(a) filho(a).
 - A escola deve informar os pais sobre o conteúdo programático.`
       },
       {
@@ -1672,7 +1672,7 @@ Importante: Estes sinais podem ter outras causas. Não acuse sem provas, mas nã
         content: `Se suspeita de abuso sexual de uma criança, aja com urgência mas com cuidado:
 
 Passos a seguir:
-1. Oua a criança: Se ela disser algo, ouça sem interromper, sem pressionar e sem fazer perguntas que sugiram a resposta.
+1. Ouça a criança: Se ela disser algo, ouça sem interromper, sem pressionar e sem fazer perguntas que sugiram a resposta.
 2. Não lave roupas ou o corpo da criança: Pode destruir provas.
 3. Registe o que a criança disse: Use as palavras exatas dela, sem interpretar.
 4. Contacte as autoridades:

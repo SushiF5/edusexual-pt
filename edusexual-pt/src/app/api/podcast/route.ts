@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { Episode } from "@/types";
+import { checkRateLimit } from "@/lib/rateLimit";
+import { headers } from "next/headers";
 
 const RSS_URL = "https://anchor.fm/s/111d0d7cc/podcast/rss";
 
@@ -20,6 +22,7 @@ function parseRSS(xml: string): Episode[] {
     const seasonMatch = block.match(/<itunes:season>(.*?)<\/itunes:season>/);
     const imageMatch = block.match(/<itunes:image href="(.*?)"\/>/);
     const audioMatch = block.match(/<enclosure url="(.*?)"/);
+    const guidMatch = block.match(/<guid[^>]*>(.*?)<\/guid>/);
 
     if (titleMatch && audioMatch) {
       let description = descMatch ? descMatch[1].replace(/<[^>]*>/g, "").trim() : "";
@@ -35,6 +38,7 @@ function parseRSS(xml: string): Episode[] {
         season: seasonMatch ? parseInt(seasonMatch[1]) : null,
         image: imageMatch ? imageMatch[1] : null,
         audioUrl: audioMatch[1],
+        guid: guidMatch ? guidMatch[1] : audioMatch[1],
       });
     }
   }
@@ -44,6 +48,11 @@ function parseRSS(xml: string): Episode[] {
 
 export async function GET() {
   try {
+    const ip = (await headers()).get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+    if (!checkRateLimit(ip, 15, 60000)) {
+      return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+    }
+
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 10000);
 

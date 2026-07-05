@@ -12,4 +12,5 @@ export interface Episode {
   season: number | null;
   image: string | null;
   audioUrl: string;
+  guid: string;
 }

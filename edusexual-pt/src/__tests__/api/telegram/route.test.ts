@@ -44,7 +44,7 @@ describe("/api/telegram", () => {
     expect(res.status).toBe(422);
   });
 
-  it("should return fallback success when env vars missing", async () => {
+  it("should return 503 when env vars missing", async () => {
     delete process.env.TELEGRAM_BOT_TOKEN;
     delete process.env.TELEGRAM_CHAT_ID;
 
@@ -53,7 +53,6 @@ describe("/api/telegram", () => {
     } as unknown as Request;
 
     const res = await POST(req);
-    expect(res.status).toBe(200);
-    expect((res as any).body.fallback).toBe(true);
+    expect(res.status).toBe(503);
   });
 });

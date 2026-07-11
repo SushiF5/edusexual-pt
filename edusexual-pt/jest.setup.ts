@@ -1,11 +1,11 @@
 import "@testing-library/jest-dom";
 
 if (typeof globalThis.Request === "undefined") {
-  globalThis.Request = class Request {
+  class MockRequest {
     url: string;
     method: string;
     headers: Headers;
-    private _body: string;
+    _body: string;
 
     constructor(url: string, init?: RequestInit) {
       this.url = url;
@@ -17,13 +17,14 @@ if (typeof globalThis.Request === "undefined") {
     async json() {
       return JSON.parse(this._body);
     }
-  } as any;
+  }
+  globalThis.Request = MockRequest as unknown as typeof Request;
 }
 
 if (typeof globalThis.Response === "undefined") {
-  globalThis.Response = class Response {
+  class MockResponse {
     status: number;
-    private _body: string;
+    _body: string;
 
     constructor(body: string, init?: ResponseInit) {
       this._body = body;
@@ -33,5 +34,6 @@ if (typeof globalThis.Response === "undefined") {
     async json() {
       return JSON.parse(this._body);
     }
-  } as any;
+  }
+  globalThis.Response = MockResponse as unknown as typeof Response;
 }

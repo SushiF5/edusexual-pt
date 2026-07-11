@@ -121,6 +121,12 @@ type TranslationKeys = {
   tabResources: string;
   tabDoubts: string;
   loadingContent: string;
+  notFoundTitle: string;
+  notFoundDesc: string;
+  notFoundBack: string;
+  errorTitle: string;
+  errorDesc: string;
+  errorBack: string;
 };
 
 const pt: TranslationKeys = {
@@ -236,6 +242,12 @@ const pt: TranslationKeys = {
   tabResources: "Recursos",
   tabDoubts: "Dúvidas",
   loadingContent: "A carregar conteúdo",
+  notFoundTitle: "Página não encontrada",
+  notFoundDesc: "O URL que procuras não existe. Verifica se está correto ou volta à página inicial.",
+  notFoundBack: "Voltar ao início",
+  errorTitle: "Algo correu mal",
+  errorDesc: "Ocorreu um erro inesperado. Tenta novamente ou volta à página inicial.",
+  errorBack: "Voltar ao início",
 };
 
 const en: TranslationKeys = {
@@ -351,6 +363,12 @@ const en: TranslationKeys = {
   tabResources: "Resources",
   tabDoubts: "Doubts",
   loadingContent: "Loading content",
+  notFoundTitle: "Page not found",
+  notFoundDesc: "The URL you're looking for doesn't exist. Check if it's correct or go back to the homepage.",
+  notFoundBack: "Back to homepage",
+  errorTitle: "Something went wrong",
+  errorDesc: "An unexpected error occurred. Try again or go back to the homepage.",
+  errorBack: "Back to homepage",
 };
 
 const es: TranslationKeys = {
@@ -466,6 +484,12 @@ const es: TranslationKeys = {
   tabResources: "Recursos",
   tabDoubts: "Dudas",
   loadingContent: "Cargando contenido",
+  notFoundTitle: "Página no encontrada",
+  notFoundDesc: "La URL que buscas no existe. Verifica si es correcta o vuelve a la página de inicio.",
+  notFoundBack: "Volver al inicio",
+  errorTitle: "Algo salió mal",
+  errorDesc: "Ocurrió un error inesperado. Inténtalo de nuevo o vuelve a la página de inicio.",
+  errorBack: "Volver al inicio",
 };
 
 export const translations: Record<Locale, TranslationKeys> = { pt, en, es };

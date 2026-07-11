@@ -3,15 +3,15 @@
 import { useState, useEffect, Suspense } from "react";
 import dynamic from "next/dynamic";
 import { useI18n } from "@/i18n/context";
-import { Locale, localeNames, locales } from "@/i18n/translations";
+import { Locale, localeNames, locales, T } from "@/i18n/translations";
+import { useFocusTrap } from "@/lib/useFocusTrap";
+import TabSkeleton from "@/components/TabSkeleton";
+import { Audience, TabId } from "@/types";
 import { PodcastProvider, usePodcast } from "@/contexts/PodcastContext";
 import { DoubtsProvider, useDoubts } from "@/contexts/DoubtsContext";
 import HomeTab from "@/components/HomeTab";
 import ErrorBoundary from "@/components/ErrorBoundary";
-import TabSkeleton from "@/components/TabSkeleton";
 import { useKeyboardShortcuts } from "@/lib/useKeyboardShortcuts";
-import { Audience, TabId } from "@/types";
-import { useFocusTrap } from "@/lib/useFocusTrap";
 
 const QuizTab = dynamic(() => import("@/components/QuizTab"), { ssr: false, loading: () => <TabSkeleton /> });
 const FaqTab = dynamic(() => import("@/components/FaqTab"), { ssr: false, loading: () => <TabSkeleton /> });
@@ -36,13 +36,13 @@ interface HeaderNavProps {
   darkMode: boolean;
   toggleDarkMode: () => void;
   setShowAudienceSelector: (show: boolean) => void;
-  t: Record<string, string>;
+  t: T;
 }
 
 interface AudienceSelectorProps {
   show: boolean;
   onSelect: (audience: Audience) => void;
-  t: Record<string, string>;
+  t: T;
 }
 
 interface TabContentProps {
@@ -51,7 +51,7 @@ interface TabContentProps {
   setActiveTab: (tab: TabId) => void;
 }
 
-function navLabel(tabId: TabId, t: Record<string, string>): string {
+function navLabel(tabId: TabId, t: T): string {
   const map: Record<TabId, string> = {
     home: t.home,
     podcast: t.tabPodcast || "Podcast",

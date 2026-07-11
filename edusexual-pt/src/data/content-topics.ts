@@ -967,13 +967,13 @@ Usar os pronomes corretos (ele, ela, elu — ou outros que a pessoa preferir) é
         audioUrl: "/audio/MP3/coming-out.mp3",
         content: `"Coming out" é o processo de partilhar a orientação sexual ou identidade de género com outras pessoas. Não é um evento único — pode acontecer muitas vezes ao longo da vida.
 
-Se estás a fazer coming out:
+Se estás a partilhar a tua orientação:
 - Fazê-lo no teu tempo e da forma que te sentir seguro(a). Não há pressa.
 - Nem toda a gente precisa de saber ao mesmo tempo. Podes começar com pessoas de confiança.
 - Se receias uma reação negativa, prepara um plano de segurança (onde ficar, quem contactar).
 - Não é "uma fase" e não deves ser tratado(a) como tal.
 
-Se alguém te faz coming out:
+Se alguém partilha a sua orientação contigo:
 - Ouve sem julgar. Diz algo simples como "Obrigado por partilhares comigo".
 - Não faças perguntas intrusivas sobre o corpo ou a vida sexual da pessoa.
 - Não digas "Eu sempre soube!" ou "Tens a certeza?" — isso pode ser invalidante.
@@ -1526,7 +1526,7 @@ O que FAZER:
 O que NÃO FAZER:
 - Não diga "É só uma fase" — mesmo que seja, a experiência atual é real.
 - Não diga "Eu sempre soube" — pode ser invalidante.
-- Não conte a outros sem permissão — o coming out é da pessoa.
+- Não conte a outros sem permissão — a partilha é da pessoa.
 - Não tente "converter" ou "curar" — a orientação/identidade não é uma doença.
 - Não compare com outros: "O teu primo também é gay" não é útil.
 

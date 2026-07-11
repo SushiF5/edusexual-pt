@@ -26,6 +26,13 @@ export const metadata: Metadata = {
     siteName: "EduSexual PT",
     locale: "pt_PT",
     type: "website",
+    images: [{ url: "https://edusexual.pt/og-image.svg", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "EduSexual PT — Educação Sexual",
+    description: "Portal de educação sexual para crianças, jovens e adultos.",
+    images: ["https://edusexual.pt/og-image.svg"],
   },
   robots: { index: true, follow: true },
   manifest: "/manifest.json",

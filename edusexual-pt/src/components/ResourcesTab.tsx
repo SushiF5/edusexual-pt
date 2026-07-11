@@ -43,7 +43,7 @@ export default function ResourcesTab({ audience }: ResourcesTabProps) {
                 </div>
                 <div className="space-y-6">
                   {guide.sections.map((section, i) => (
-                    <div key={i}>
+                    <div key={`${guide.id}-s${i}`}>
                       <h5 className="text-lg font-heading font-semibold text-primary mb-3">{section.heading}</h5>
                       <p className="text-gray-700 dark:text-gray-300 whitespace-pre-line leading-relaxed text-sm md:text-base">{section.body}</p>
                     </div>

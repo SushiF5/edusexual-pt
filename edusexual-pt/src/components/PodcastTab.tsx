@@ -56,10 +56,9 @@ export default function PodcastTab({
           src="https://podcasters.spotify.com/pod/show/edusexual/embed"
           width="100%"
           height="232"
-          frameBorder="0"
           allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
           loading="lazy"
-          className="rounded-xl"
+          className="rounded-xl border-none"
           title="Podcast Descomplicando no Spotify"
         ></iframe>
       </div>

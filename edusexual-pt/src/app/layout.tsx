@@ -64,6 +64,9 @@ export default function RootLayout({
     if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.classList.add('dark');
     }
+    var locale = localStorage.getItem('edusexual-locale');
+    if (locale === 'en') document.documentElement.lang = 'en-GB';
+    else if (locale === 'es') document.documentElement.lang = 'es-ES';
   } catch(e) {}
 })();
 ` }} />

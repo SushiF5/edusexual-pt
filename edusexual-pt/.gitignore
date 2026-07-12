@@ -29,7 +29,7 @@ yarn-error.log*
 .vercel
 
 # TypeScript
-*.ts.buildinfo
+*.tsbuildinfo
 next-env.d.ts
 
 # API Keys - NEVER COMMIT

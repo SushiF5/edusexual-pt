@@ -276,6 +276,7 @@ export default function Home() {
   const [audience, setAudienceState] = useState<Audience>("jovens");
   const [showAudienceSelector, setShowAudienceSelector] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
   const { helpOpen, setHelpOpen } = useKeyboardShortcuts({
     activeTab,
@@ -294,6 +295,10 @@ export default function Home() {
       setAudienceState(saved as Audience);
       setShowAudienceSelector(false);
     }
+
+    const onScroll = () => setShowScrollTop(window.scrollY > 500);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const setAudience = (a: Audience) => {
@@ -415,6 +420,16 @@ export default function Home() {
               </div>
             </div>
           </footer>
+
+          {showScrollTop && (
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              className="fixed bottom-6 right-6 z-50 bg-primary text-white w-12 h-12 rounded-full shadow-lg hover:bg-primary/90 transition flex items-center justify-center text-xl no-print"
+              aria-label="Voltar ao topo"
+            >
+              ↑
+            </button>
+          )}
         </div>
       </DoubtsProvider>
     </PodcastProvider>

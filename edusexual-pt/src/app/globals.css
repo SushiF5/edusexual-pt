@@ -149,3 +149,14 @@ h1, h2, h3, h4, h5, h6 {
   white-space: nowrap;
   border-width: 0;
 }
+
+/* --- Print styles --- */
+@media print {
+  .no-print { display: none !important; }
+  body { background: white !important; color: black !important; }
+  .card, .glass-card { box-shadow: none !important; border: 1px solid #ccc !important; }
+  header, footer, nav, .btn-primary, .btn-secondary, .sticky, .backdrop-blur-md { display: none !important; }
+  a { color: black !important; text-decoration: underline; }
+  .print-area { padding: 0 !important; margin: 0 !important; }
+  .print-card { border: none !important; padding: 20px !important; }
+}

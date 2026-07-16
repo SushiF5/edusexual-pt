@@ -127,6 +127,9 @@ type TranslationKeys = {
   errorTitle: string;
   errorDesc: string;
   errorBack: string;
+  scrollToTop: string;
+  nameHelp: string;
+  questionHelp: string;
 };
 
 const pt: TranslationKeys = {
@@ -248,6 +251,9 @@ const pt: TranslationKeys = {
   errorTitle: "Algo correu mal",
   errorDesc: "Ocorreu um erro inesperado. Tenta novamente ou volta à página inicial.",
   errorBack: "Voltar ao início",
+  scrollToTop: "Voltar ao topo",
+  nameHelp: "Nome opcional para a tua pergunta anónima",
+  questionHelp: "A tua pergunta é anónima. Mínimo 1 carácter, máximo 2000.",
 };
 
 const en: TranslationKeys = {
@@ -369,6 +375,9 @@ const en: TranslationKeys = {
   errorTitle: "Something went wrong",
   errorDesc: "An unexpected error occurred. Try again or go back to the homepage.",
   errorBack: "Back to homepage",
+  scrollToTop: "Back to top",
+  nameHelp: "Optional name for your anonymous question",
+  questionHelp: "Your question is anonymous. Minimum 1 character, maximum 2000.",
 };
 
 const es: TranslationKeys = {
@@ -490,6 +499,9 @@ const es: TranslationKeys = {
   errorTitle: "Algo salió mal",
   errorDesc: "Ocurrió un error inesperado. Inténtalo de nuevo o vuelve a la página de inicio.",
   errorBack: "Volver al inicio",
+  scrollToTop: "Volver arriba",
+  nameHelp: "Nombre opcional para tu pregunta anónima",
+  questionHelp: "Tu pregunta es anónima. Mínimo 1 carácter, máximo 2000.",
 };
 
 export const translations: Record<Locale, TranslationKeys> = { pt, en, es };

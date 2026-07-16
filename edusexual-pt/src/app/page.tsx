@@ -425,7 +425,7 @@ export default function Home() {
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
               className="fixed bottom-6 right-6 z-50 bg-primary text-white w-12 h-12 rounded-full shadow-lg hover:bg-primary/90 transition flex items-center justify-center text-xl no-print"
-              aria-label="Voltar ao topo"
+              aria-label={t.scrollToTop}
             >
               ↑
             </button>

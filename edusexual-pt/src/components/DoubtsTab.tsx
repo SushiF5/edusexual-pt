@@ -88,7 +88,7 @@ export default function DoubtsTab({
               placeholder={audience === 'criancas' ? t.namePlaceholderCrianca : audience === 'adultos' ? t.namePlaceholderAdulto : t.namePlaceholderJovem}
               aria-describedby="name-help"
             />
-            <span id="name-help" className="sr-only">Nome opcional para a tua pergunta anónima</span>
+            <span id="name-help" className="sr-only">{t.nameHelp}</span>
           </div>
           <div>
             <label htmlFor="question-text" className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">{t.yourQuestion}</label>
@@ -109,7 +109,7 @@ export default function DoubtsTab({
               maxLength={2000}
             ></textarea>
             <div className="flex justify-between items-center mt-1">
-              <span id="question-help" className="sr-only">A tua pergunta é anónima. Mínimo 1 caractere, máximo 2000.</span>
+              <span id="question-help" className="sr-only">{t.questionHelp}</span>
               <span className={`text-xs ${questionForm.question.length > 1800 ? 'text-amber-500' : 'text-gray-400'}`} aria-live="polite">
                 {questionForm.question.length}/2000
               </span>

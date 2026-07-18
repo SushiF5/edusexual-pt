@@ -36,6 +36,8 @@ interface HeaderNavProps {
   darkMode: boolean;
   toggleDarkMode: () => void;
   setShowAudienceSelector: (show: boolean) => void;
+  mobileMenuOpen: boolean;
+  setMobileMenuOpen: (open: boolean) => void;
   t: T;
 }
 
@@ -71,9 +73,10 @@ function HeaderNav({
   darkMode,
   toggleDarkMode,
   setShowAudienceSelector,
+  mobileMenuOpen,
+  setMobileMenuOpen,
   t,
 }: HeaderNavProps) {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const mobileMenuRef = useFocusTrap(mobileMenuOpen);
 
   return (
@@ -277,13 +280,14 @@ export default function Home() {
   const [showAudienceSelector, setShowAudienceSelector] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const { helpOpen, setHelpOpen } = useKeyboardShortcuts({
     activeTab,
     setActiveTab,
     showAudienceSelector,
     setShowAudienceSelector,
-    setMobileMenuOpen: () => {},
+    setMobileMenuOpen,
   });
 
   const shortcutsDialogRef = useFocusTrap(helpOpen);
@@ -335,6 +339,8 @@ export default function Home() {
             darkMode={darkMode}
             toggleDarkMode={toggleDarkMode}
             setShowAudienceSelector={setShowAudienceSelector}
+            mobileMenuOpen={mobileMenuOpen}
+            setMobileMenuOpen={setMobileMenuOpen}
             t={t}
           />
 

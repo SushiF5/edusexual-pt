@@ -53,7 +53,7 @@ export default function DoubtsTab({
 
   if (submitted) {
     return (
-      <div className="card text-center py-10 md:py-16" aria-live="polite">
+      <div className="card text-center py-10 md:py-16" role="status">
         <div className="text-5xl md:text-6xl mb-4 md:mb-6">✅</div>
         <h3 className="text-2xl md:text-3xl font-bold text-primary mb-3 md:mb-4">{t.questionSent}</h3>
         <p className="text-gray-500 dark:text-gray-400 mb-6 md:mb-8 text-sm md:text-base">{t.questionSentDesc}</p>

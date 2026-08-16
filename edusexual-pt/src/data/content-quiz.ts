@@ -216,9 +216,81 @@ export const quizQuestions: QuizQuestion[] = [
     audience: "adultos",
     topic: "Proteção",
     question: "Se suspeitar de abuso sexual de uma criança, quem devo contactar?",
-    options: ["Ninguém, não é da minha conta", "A polícia (GNR/PSP) ou a Comissão de Proteção de Crianças", "O padre da paróquia", "Esperar que a criança fale sozinha"],
+    options: ["Ninguém, não é da minha conta", "A polícia (PSP/GNR) ou a Comissão de Proteção de Crianças", "O padre da paróquia", "Esperar que a criança fale sozinha"],
     correctAnswer: 1,
-    explanation: "Deves contactar as autoridades (PSP, GNR), a CPCJ ou a APAV. Não esperes — a proteção da criança é prioritária."
+    explanation: "Deves contactar as autoridades (PSP, GNR), a CPCJ ou a APAV (800 200 2200). Não esperes — a proteção da criança é prioritária."
+  },
+  // Additional questions for JOVENS — Relações e Afetos / Consentimento
+  {
+    id: "q14",
+    audience: "jovens",
+    topic: "Relações e Afetos",
+    question: "Qual destes sinais indica uma relação tóxica?",
+    options: [
+      "Comunicação aberta sobre sentimentos",
+      "Ciúmes excessivos e pedidos de passwords das redes sociais",
+      "Espaço dado para amizades e hobbies individuais",
+      "Decisões tomadas em comum, sem pressões"
+    ],
+    correctAnswer: 1,
+    explanation: "Ciúmes excessivos, controlo de redes sociais e isolamento são sinais de alerta de relações tóxicas. Numa relação saudável, há respeito pelo espaço individual."
+  },
+  {
+    id: "q15",
+    audience: "jovens",
+    topic: "Relações e Afetos",
+    question: "Qual a diferença entre atração e amor?",
+    options: [
+      "Atração é um impulso inicial; amor é um compromisso mais profundo e duradouro",
+      "Atração dura para sempre; amor é passageiro",
+      "Ambos são exatamente iguais, só mudam de nome",
+      "Atração é só física; amor nunca tem componente física"
+    ],
+    correctAnswer: 0,
+    explanation: "Atração é o impulso inicial (física, emocional ou intelectual) e pode ser passageira. Amor envolve compromisso, respeito, conhecimento mútuo e cuidado — e constrói-se com o tempo."
+  },
+  {
+    id: "q16",
+    audience: "jovens",
+    topic: "Consentimento",
+    question: "Se uma pessoa concordou com um beijo, isso significa consentimento para tudo o resto?",
+    options: [
+      "Sim, se disse sim ao beijo",
+      "Não, consentimento é específico para cada atividade",
+      "Sim, desde que haja relação",
+      "Não, só conta se foi na primeira vez"
+    ],
+    correctAnswer: 1,
+    explanation: "O consentimento é específico. Um 'sim' a um beijo não significa 'sim' a outra atividade. Cada passo requer consentimento claro, entusiástico e revogável."
+  },
+  {
+    id: "q17",
+    audience: "jovens",
+    topic: "Relações e Afetos",
+    question: "O que é uma atitude de ciúme saudável numa relação?",
+    options: [
+      "Verificar o telemóvel do parceiro sem aviso",
+      "Sentir um leve desconforto, falar sobre isso abertamente e confiar na pessoa",
+      "Exigir que o parceiro não tenha amigos do sexo oposto",
+      "Ficar encantado quando o parceiro dá ciúmes"
+    ],
+    correctAnswer: 1,
+    explanation: "Ciúmes saudável significa reconhecer o sentimento, falar sobre ele sem acusar e confiar na pessoa. Ciúme que controla (ver telemóvel, exigir isolamento) é tóxico."
+  },
+  // Additional question for JOVENS — Sexualidade e Prazer
+  {
+    id: "q18",
+    audience: "jovens",
+    topic: "Sexualidade e Prazer",
+    question: "Por que é que mais de 70% das mulheres precisam de estimulação clitoriana direta para atingir o orgasmo?",
+    options: [
+      "Porque a penetração não é suficiente para a maioria",
+      "Porque o clitóris tem mais de 8.000 terminações nervosas e é o principal órgão do prazer",
+      "Porque as mulheres são mais exigentes",
+      "Porque não gostam de relações sexuais"
+    ],
+    correctAnswer: 1,
+    explanation: "O clitóris é o principal órgão do prazer feminino com mais de 8.000 terminações nervosas. A penetração sozinha raramente é suficiente — a estimulação direta do clitóris é normal e essencial para a maioria."
   },
 ];
 

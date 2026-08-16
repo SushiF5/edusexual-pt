@@ -132,6 +132,36 @@ export const frequentlyAskedQuestions: FAQEntry[] = [
     audience: ["jovens"],
     question: "Será que a minha orientação é 'só uma fase'?",
     answer: "A orientação sexual pode ser fluida e evoluir ao longo da vida — mas isso não significa que o que sentes agora não é real. Mesmo que mude no futuro, os teus sentimentos atuais são válidos e merecem respeito. Não precises de justificar a tua orientação a ninguém."
+  },
+  {
+    id: "faq-relacao-toxica",
+    audience: ["jovens"],
+    question: "Como reconhecer uma relação tóxica?",
+    answer: "Sinais de alerta: ciúmes excessivos, controlo (exigir passwords, limitar amizades), pressão para sexo, críticas constantes, Isolamento e violência. Numa relação saudável sentes liberdade, respeito e comunicação aberta. Se reconheces estes padrões, procura apoio de um adulto de confiança — não estás sozinho(a)."
+  },
+  {
+    id: "faq-amor-atracao",
+    audience: ["jovens"],
+    question: "Qual a diferença entre atração e amor?",
+    answer: "Atração é o impulso inicial — física, emocional ou intelectual — e tende a ser intensa e passageira. Amor é mais profundo: envolve compromisso, conhecimento mútuo, respeito e cuidado. Podes sentir atração sem amar e amar sem sentir atração. Ambas são experiências válidas."
+  },
+  {
+    id: "faq-consentimento-por-ato",
+    audience: ["jovens"],
+    question: "Se concordei com um beijo, significa que concordo com tudo?",
+    answer: "Não. O consentimento é específico para cada atividade. Um 'sim' a um beijo não significa 'sim' a outra coisa. Cada passo na intimidade exige consentimento claro, entusiástico e que pode ser retirado a qualquer momento. Comunica sempre o que queres e respeita os limites do outro."
+  },
+  {
+    id: "faq-ciumes-saudavel",
+    audience: ["jovens"],
+    question: "Como lidar com os ciúmes de forma saudável?",
+    answer: "Primeiro, reconhece o sentimento sem te julgar. Ciúmes saudável é falar abertamente sobre como te sentes sem acusar: 'Sinto ciúmes e preciso de reforço'. Evita comportamentos controladores (ver o telemóvel, limitar amizades). Trabalha a confiança e, se os ciúmes forem intensos ou te fizerem agir de forma tóxica, busca apoio psicológico."
+  },
+  {
+    id: "faq-orgasmo-feminino",
+    audience: ["jovens"],
+    question: "A penetração sozinha é suficiente para o prazer feminino?",
+    answer: "Não, para a maioria das mulheres (70-80%) a estimulação direta do clitóris é necessária para atingir o orgasmo. A penetração sozinha raramente é suficiente — e isso é completamente normal. Comunica com o teu parceiro sobre o que te gosta. O prazer não é uma competição."
   }
 ];
 

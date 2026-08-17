@@ -12,11 +12,18 @@ interface FaqTabProps {
 export default function FaqTab({ audience }: FaqTabProps) {
   const { t } = useI18n();
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredFaq = useMemo(
-    () => frequentlyAskedQuestions.filter((faq) => faq.audience.includes(audience)),
-    [audience]
-  );
+  const filteredFaq = useMemo(() => {
+    const byAudience = frequentlyAskedQuestions.filter((faq) => faq.audience.includes(audience));
+    const q = searchQuery.trim().toLowerCase();
+    if (!q) return byAudience;
+    return byAudience.filter(
+      (faq) =>
+        faq.question.toLowerCase().includes(q) ||
+        faq.answer.toLowerCase().includes(q)
+    );
+  }, [audience, searchQuery]);
 
   return (
     <div className="max-w-4xl mx-auto space-y-6 md:space-y-8">
@@ -27,8 +34,27 @@ export default function FaqTab({ audience }: FaqTabProps) {
           audience === 'adultos' ? t.faqDescAdulto :
           t.faqDescJovem}
         </p>
+        <div className="max-w-md mx-auto mt-4 md:mt-6">
+          <div className="relative">
+            <input
+              type="search"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder={t.searchFaq}
+              className="w-full p-3 md:p-4 pl-12 rounded-full border-2 border-gray-100 dark:border-gray-600 dark:bg-gray-800 focus:border-primary outline-none transition text-sm md:text-base"
+              aria-label={t.searchFaq}
+            />
+            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-lg" role="img" aria-hidden="true">🔍</span>
+          </div>
+        </div>
       </div>
 
+      {filteredFaq.length === 0 && searchQuery.trim() ? (
+        <div className="text-center py-12 text-gray-500 dark:text-gray-400" role="status" aria-live="polite">
+          <p className="text-lg mb-2">{t.noFaqFound} &ldquo;{searchQuery}&rdquo;</p>
+          <p className="text-sm">{t.tryOtherTerms}</p>
+        </div>
+      ) : (
       <div className="space-y-3 md:space-y-4">
         {filteredFaq.map((faq, index) => (
           <div key={faq.id} className="card !p-0 overflow-hidden">
@@ -50,6 +76,7 @@ export default function FaqTab({ audience }: FaqTabProps) {
           </div>
         ))}
       </div>
+      )}
     </div>
   );
 }

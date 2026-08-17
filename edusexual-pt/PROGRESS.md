@@ -2,6 +2,43 @@
 
 Log de execuções e melhorias implementadas.
 
+## Execução — 17 Ago 2026 (2)
+
+### Melhoria: Pesquisa na FAQ
+
+A FAQ só permitia filtrar por audiência. Adicionei uma caixa de pesquisa
+para os utilizadores encontrarem perguntas por palavra-chave (pergunta ou
+resposta), além do filtro existente por audiência.
+
+### Implementado
+
+1. **Pesquisa na FAQ** (`src/components/FaqTab.tsx`):
+   - Campo de pesquisa (`type="search"`) com `aria-label` e ícone.
+   - Filtra por `question` e `answer` (case-insensitive), mantendo o
+     filtro por audiência.
+   - Estado vazio dedicado (`noFaqFound` + `tryOtherTerms`) com live region.
+
+2. **Chaves i18n** (`src/i18n/translations.ts`): `searchFaq` e `noFaqFound`
+   adicionadas em PT, EN e ES (mantém paridade validada pelos testes).
+
+3. **Testes** (`src/__tests__/components/FaqTab.test.tsx`):
+   - Filtragem por pesquisa (mostra/esconde corretamente).
+   - Estado vazio quando não há correspondência.
+
+### Verificação
+
+- 229 testes passam (incluindo integridade i18n e testes da FAQ).
+- TypeScript limpo nos ficheiros alterados.
+
+### Próximas melhorias pendentes (sugeridas)
+
+- [ ] Expandir áudios para todos os artigos (ciclo-menstrual, contraceção, IST)
+- [ ] Lazy loading de conteúdo por audiência
+- [ ] Acessibilidade WCAG 2.1 completa (auditoria)
+- [ ] Testes E2E (Playwright)
+
+---
+
 ## Execução — 17 Ago 2026
 
 ### Próxima melhoria: Expansão do Quiz e FAQ

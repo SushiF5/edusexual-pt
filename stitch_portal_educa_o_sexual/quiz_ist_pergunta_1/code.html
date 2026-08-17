@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-PT"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Quiz: O que sabes sobre ISTs? - EduSafe</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-dim": "#d6dbdb",
+                        "inverse-on-surface": "#edf2f2",
+                        "tertiary": "#396018",
+                        "on-tertiary-fixed-variant": "#2a5007",
+                        "on-primary-fixed": "#002022",
+                        "background": "#f5fafa",
+                        "outline": "#6e797a",
+                        "tertiary-fixed": "#c1f197",
+                        "error": "#ba1a1a",
+                        "secondary": "#126c40",
+                        "primary-container": "#0d7a80",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed": "#00210f",
+                        "surface-container-low": "#eff5f5",
+                        "inverse-primary": "#7dd4db",
+                        "surface-container": "#eaefef",
+                        "error-container": "#ffdad6",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#0c2000",
+                        "on-surface-variant": "#3e4949",
+                        "primary-fixed": "#99f1f7",
+                        "tertiary-container": "#50792e",
+                        "on-surface": "#171d1d",
+                        "surface-tint": "#00696e",
+                        "outline-variant": "#bdc9c9",
+                        "on-secondary": "#ffffff",
+                        "surface": "#f5fafa",
+                        "on-error-container": "#93000a",
+                        "secondary-container": "#a1f5bc",
+                        "tertiary-fixed-dim": "#a6d47e",
+                        "surface-variant": "#dee3e3",
+                        "on-primary-fixed-variant": "#004f53",
+                        "secondary-fixed-dim": "#85d8a2",
+                        "surface-container-high": "#e4e9e9",
+                        "primary-fixed-dim": "#7dd4db",
+                        "on-primary-container": "#c7fbff",
+                        "surface-bright": "#f5fafa",
+                        "on-secondary-container": "#1c7245",
+                        "secondary-fixed": "#a1f5bc",
+                        "surface-container-highest": "#dee3e3",
+                        "on-tertiary": "#ffffff",
+                        "primary": "#006065",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed-variant": "#00522d",
+                        "on-background": "#171d1d",
+                        "on-tertiary-container": "#d4ffad",
+                        "inverse-surface": "#2c3132"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "24px",
+                        "xs": "4px",
+                        "base": "8px",
+                        "sm": "12px",
+                        "lg": "48px",
+                        "xl": "80px",
+                        "container-max": "1200px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Plus Jakarta Sans"],
+                        "h2": ["Plus Jakarta Sans"],
+                        "h3": ["Plus Jakarta Sans"],
+                        "caption": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "h1": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "h2": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "h3": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "caption": ["12px", { "lineHeight": "1.4", "fontWeight": "500" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "h1": ["40px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background antialiased h-screen flex flex-col md:hidden">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-4 h-16 bg-slate-50 border-b border-teal-50 shadow-sm shadow-teal-900/5">
+<button class="w-10 h-10 flex items-center justify-center text-teal-700 hover:bg-teal-50 rounded-full transition-colors duration-200 active:scale-95">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">close</span>
+</button>
+<h1 class="font-['Plus_Jakarta_Sans'] text-base font-semibold tracking-tight text-teal-700">Educação IST</h1>
+<button class="w-10 h-10 flex items-center justify-center text-teal-700 hover:bg-teal-50 rounded-full transition-colors duration-200 active:scale-95">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">info</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-20 pb-24 px-6 overflow-y-auto">
+<!-- Progress Indicator -->
+<div class="mb-8">
+<div class="flex justify-between items-center mb-2">
+<span class="font-label-md text-label-md text-on-surface-variant">Pergunta 1 de 5</span>
+<span class="font-caption text-caption text-primary">20%</span>
+</div>
+<div class="h-2 w-full bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 20%;"></div>
+</div>
+</div>
+<!-- Quiz Header -->
+<div class="flex items-center gap-3 mb-6">
+<div class="w-12 h-12 rounded-xl bg-secondary-container flex items-center justify-center text-on-secondary-container shrink-0 shadow-sm shadow-teal-900/5">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">health_and_safety</span>
+</div>
+<h2 class="font-h3 text-h3 text-on-surface">Qual destas é a forma mais eficaz de prevenir a transmissão de ISTs?</h2>
+</div>
+<!-- Options Bento Box -->
+<div class="flex flex-col gap-sm">
+<!-- Option A -->
+<label class="group relative flex items-center p-4 bg-surface-container-lowest rounded-xl border border-surface-variant cursor-pointer hover:border-inverse-primary transition-colors shadow-[0_2px_8px_rgba(13,122,128,0.04)]">
+<input class="peer sr-only" name="quiz_q1" type="radio"/>
+<div class="w-6 h-6 rounded-full border-2 border-outline peer-checked:border-primary peer-checked:bg-primary flex items-center justify-center mr-4 transition-all">
+<span class="material-symbols-outlined text-[16px] text-on-primary opacity-0 peer-checked:opacity-100" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div class="flex-grow">
+<p class="font-body-md text-body-md text-on-surface">A) Lavar as mãos</p>
+</div>
+<!-- Subtle Focus Glow for accessibility/interaction mapping -->
+<div class="absolute inset-0 rounded-xl ring-2 ring-transparent peer-focus-visible:ring-inverse-primary pointer-events-none transition-all"></div>
+</label>
+<!-- Option B -->
+<label class="group relative flex items-center p-4 bg-surface-container-lowest rounded-xl border border-surface-variant cursor-pointer hover:border-inverse-primary transition-colors shadow-[0_2px_8px_rgba(13,122,128,0.04)]">
+<input class="peer sr-only" name="quiz_q1" type="radio"/>
+<div class="w-6 h-6 rounded-full border-2 border-outline peer-checked:border-primary peer-checked:bg-primary flex items-center justify-center mr-4 transition-all">
+<span class="material-symbols-outlined text-[16px] text-on-primary opacity-0 peer-checked:opacity-100" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div class="flex-grow">
+<p class="font-body-md text-body-md text-on-surface">B) Uso correto do preservativo</p>
+</div>
+<div class="absolute inset-0 rounded-xl ring-2 ring-transparent peer-focus-visible:ring-inverse-primary pointer-events-none transition-all"></div>
+</label>
+<!-- Option C -->
+<label class="group relative flex items-center p-4 bg-surface-container-lowest rounded-xl border border-surface-variant cursor-pointer hover:border-inverse-primary transition-colors shadow-[0_2px_8px_rgba(13,122,128,0.04)]">
+<input class="peer sr-only" name="quiz_q1" type="radio"/>
+<div class="w-6 h-6 rounded-full border-2 border-outline peer-checked:border-primary peer-checked:bg-primary flex items-center justify-center mr-4 transition-all">
+<span class="material-symbols-outlined text-[16px] text-on-primary opacity-0 peer-checked:opacity-100" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div class="flex-grow">
+<p class="font-body-md text-body-md text-on-surface">C) Tomar vitaminas</p>
+</div>
+<div class="absolute inset-0 rounded-xl ring-2 ring-transparent peer-focus-visible:ring-inverse-primary pointer-events-none transition-all"></div>
+</label>
+<!-- Option D -->
+<label class="group relative flex items-center p-4 bg-surface-container-lowest rounded-xl border border-surface-variant cursor-pointer hover:border-inverse-primary transition-colors shadow-[0_2px_8px_rgba(13,122,128,0.04)]">
+<input class="peer sr-only" name="quiz_q1" type="radio"/>
+<div class="w-6 h-6 rounded-full border-2 border-outline peer-checked:border-primary peer-checked:bg-primary flex items-center justify-center mr-4 transition-all">
+<span class="material-symbols-outlined text-[16px] text-on-primary opacity-0 peer-checked:opacity-100" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div class="flex-grow">
+<p class="font-body-md text-body-md text-on-surface">D) Evitar piscinas públicas</p>
+</div>
+<div class="absolute inset-0 rounded-xl ring-2 ring-transparent peer-focus-visible:ring-inverse-primary pointer-events-none transition-all"></div>
+</label>
+</div>
+</main>
+<!-- Bottom Action Area (Task Focused, replaces BottomNavBar) -->
+<div class="fixed bottom-0 left-0 w-full p-4 bg-surface-container-lowest border-t border-surface-variant z-40">
+<button class="w-full py-4 px-6 bg-primary text-on-primary font-label-md text-label-md rounded-xl hover:scale-[1.02] active:scale-[0.98] transition-transform shadow-sm flex items-center justify-center gap-2">
+            Seguinte
+            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 0;">arrow_forward</span>
+</button>
+</div>
+</body></html>

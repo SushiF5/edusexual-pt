@@ -9,6 +9,9 @@ jest.mock("@/i18n/context", () => ({
       faqDescCrianca: "Respostas simples",
       faqDescJovem: "Dúvidas comuns",
       faqDescAdulto: "Dúvidas de pais",
+      searchFaq: "Pesquisar perguntas...",
+      noFaqFound: "Nenhuma pergunta encontrada para",
+      tryOtherTerms: "Tenta com outros termos.",
     },
   }),
 }));
@@ -96,5 +99,22 @@ describe("FaqTab", () => {
   it("renders children audience description", () => {
     render(<FaqTab audience="criancas" />);
     expect(screen.getByText("Respostas simples")).toBeInTheDocument();
+  });
+
+  it("filters FAQs by search query", () => {
+    render(<FaqTab audience="jovens" />);
+    fireEvent.change(screen.getByLabelText("Pesquisar perguntas..."), {
+      target: { value: "preservativo" },
+    });
+    expect(screen.getByText("Como usar preservativo?")).toBeInTheDocument();
+    expect(screen.queryByText("O que é consentimento?")).not.toBeInTheDocument();
+  });
+
+  it("shows empty state when no FAQ matches search", () => {
+    render(<FaqTab audience="jovens" />);
+    fireEvent.change(screen.getByLabelText("Pesquisar perguntas..."), {
+      target: { value: "xyznonexistent" },
+    });
+    expect(screen.getByText(/Nenhuma pergunta encontrada para/)).toBeInTheDocument();
   });
 });

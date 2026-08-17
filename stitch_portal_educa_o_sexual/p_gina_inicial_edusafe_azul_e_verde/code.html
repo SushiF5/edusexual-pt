@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html lang="pt-PT"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EduSafe - Educação Sexual Clara e Segura</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#1a4a6b",
+                        "error": "#ba1a1a",
+                        "secondary-fixed-dim": "#a7d0b7",
+                        "tertiary-fixed": "#b9ecee",
+                        "primary": "#0f4262",
+                        "on-secondary-fixed": "#002113",
+                        "outline-variant": "#c2c7ce",
+                        "on-primary-container": "#a5d1f7",
+                        "inverse-on-surface": "#eff1f1",
+                        "surface-container-low": "#f2f4f4",
+                        "on-tertiary-fixed-variant": "#1a4e50",
+                        "surface-container-highest": "#e1e3e3",
+                        "on-tertiary-fixed": "#002021",
+                        "tertiary-container": "#2d5e60",
+                        "inverse-primary": "#a0cbf1",
+                        "on-primary": "#ffffff",
+                        "on-secondary-container": "#456a56",
+                        "on-surface": "#191c1d",
+                        "surface-tint": "#366284",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#d8dada",
+                        "background": "#f8fafa",
+                        "on-surface-variant": "#42474d",
+                        "surface-container": "#eceeee",
+                        "surface-container-high": "#e6e8e9",
+                        "on-error-container": "#93000a",
+                        "secondary-container": "#c0e9d0",
+                        "secondary": "#416652",
+                        "primary-fixed-dim": "#a0cbf1",
+                        "inverse-surface": "#2e3131",
+                        "primary-container": "#2d5a7b",
+                        "tertiary": "#104648",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#001e31",
+                        "on-secondary-fixed-variant": "#294e3b",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed": "#c3ecd2",
+                        "surface-variant": "#e1e3e3",
+                        "surface-bright": "#f8fafa",
+                        "on-tertiary": "#ffffff",
+                        "surface": "#f8fafa",
+                        "primary-fixed": "#cbe6ff",
+                        "outline": "#72787e",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#9ecfd1",
+                        "on-background": "#191c1d",
+                        "on-tertiary-container": "#a3d5d7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "stack-lg": "32px",
+                        "container-max": "1200px",
+                        "margin-mobile": "16px",
+                        "unit": "8px",
+                        "section-gap": "64px",
+                        "stack-md": "16px",
+                        "stack-sm": "8px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Plus Jakarta Sans"],
+                        "h1": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "caption": ["Plus Jakarta Sans"],
+                        "h3": ["Plus Jakarta Sans"],
+                        "h2": ["Plus Jakarta Sans"],
+                        "display": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "h1": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "caption": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+                        "h3": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "h2": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "display": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md antialiased flex flex-col min-h-screen pt-[72px]">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800 shadow-sm dark:shadow-none">
+<nav class="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
+<div class="text-xl font-bold text-teal-800 dark:text-teal-200">
+                EduSafe
+            </div>
+<ul class="hidden md:flex gap-8 items-center font-plus-jakarta text-sm font-medium tracking-tight">
+<li><a class="text-slate-600 dark:text-slate-400 hover:text-teal-600 dark:hover:text-teal-300 transition-colors scale-95 active:duration-100" href="#">Tópicos</a></li>
+<li><a class="text-slate-600 dark:text-slate-400 hover:text-teal-600 dark:hover:text-teal-300 transition-colors scale-95 active:duration-100" href="#">Biblioteca</a></li>
+<li><a class="text-slate-600 dark:text-slate-400 hover:text-teal-600 dark:hover:text-teal-300 transition-colors scale-95 active:duration-100" href="#">Recursos</a></li>
+<li><a class="text-slate-600 dark:text-slate-400 hover:text-teal-600 dark:hover:text-teal-300 transition-colors scale-95 active:duration-100" href="#">Sobre Nós</a></li>
+</ul>
+<button class="bg-error text-on-error px-4 py-2 rounded-full font-label-md text-label-md flex items-center gap-2 hover:bg-on-error-container transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">warning</span>
+                Emergência
+            </button>
+</nav>
+</header>
+<main class="flex-grow">
+<!-- Hero Section -->
+<section class="relative px-margin-mobile md:px-gutter py-section-gap flex flex-col items-center justify-center text-center overflow-hidden">
+<div class="absolute inset-0 -z-10 bg-gradient-to-b from-primary-fixed/30 to-background"></div>
+<div class="absolute top-1/4 left-10 w-64 h-64 bg-secondary-fixed-dim/20 rounded-full blur-3xl -z-10"></div>
+<div class="absolute bottom-10 right-10 w-96 h-96 bg-tertiary-fixed-dim/20 rounded-full blur-3xl -z-10"></div>
+<div class="max-w-[800px] mx-auto flex flex-col items-center gap-stack-lg">
+<div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface-container-high border border-outline-variant/30 font-label-md text-label-md text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-secondary">verified_user</span>
+                    Informação validada por especialistas
+                </div>
+<h1 class="font-display text-display text-on-surface">
+                    Educação Sexual <span class="text-primary">Clara</span> e <span class="text-secondary">Segura</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-[600px]">
+                    Um espaço de confiança para explorar, aprender e tirar dúvidas sem julgamentos. Conhecimento adaptado a ti, para escolhas conscientes.
+                </p>
+<div class="flex flex-col sm:flex-row gap-stack-md mt-4">
+<button class="h-[48px] px-8 bg-primary text-on-primary rounded-full font-label-md text-label-md shadow-sm hover:shadow-md transition-all flex items-center justify-center gap-2">
+                        Explorar Tópicos
+                        <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<button class="h-[48px] px-8 bg-surface text-secondary border border-secondary rounded-full font-label-md text-label-md hover:bg-secondary-fixed transition-all flex items-center justify-center">
+                        Saber Mais
+                    </button>
+</div>
+</div>
+</section>
+<!-- Main Grid: Tópicos -->
+<section class="px-margin-mobile md:px-gutter py-section-gap max-w-container-max mx-auto">
+<div class="flex flex-col gap-stack-md mb-12 text-center md:text-left">
+<h2 class="font-h2 text-h2 text-on-surface">Módulos de Aprendizagem</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Explora os temas essenciais ao teu próprio ritmo.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-stack-md">
+<!-- Card 1 -->
+<div class="group bg-surface rounded-2xl border border-outline-variant p-6 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all cursor-pointer flex flex-col gap-4 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary-fixed/20 rounded-bl-[100px] -z-10 group-hover:scale-110 transition-transform"></div>
+<div class="w-12 h-12 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="accessibility_new">accessibility_new</span>
+</div>
+<div>
+<h3 class="font-h3 text-h3 text-on-surface mb-2">Anatomia</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Compreende o corpo humano, o seu desenvolvimento e as mudanças ao longo da vida.</p>
+</div>
+<div class="mt-auto pt-4 flex items-center text-primary font-label-md text-label-md group-hover:gap-2 transition-all gap-1">
+                        Ver módulo <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group bg-surface rounded-2xl border border-outline-variant p-6 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all cursor-pointer flex flex-col gap-4 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-secondary-fixed/20 rounded-bl-[100px] -z-10 group-hover:scale-110 transition-transform"></div>
+<div class="w-12 h-12 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="shield_with_heart">shield_with_heart</span>
+</div>
+<div>
+<h3 class="font-h3 text-h3 text-on-surface mb-2">Contraceção</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Informação detalhada sobre os diferentes métodos contracetivos disponíveis e a sua eficácia.</p>
+</div>
+<div class="mt-auto pt-4 flex items-center text-primary font-label-md text-label-md group-hover:gap-2 transition-all gap-1">
+                        Ver módulo <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group bg-surface rounded-2xl border border-outline-variant p-6 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all cursor-pointer flex flex-col gap-4 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-tertiary-fixed/20 rounded-bl-[100px] -z-10 group-hover:scale-110 transition-transform"></div>
+<div class="w-12 h-12 rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="healing">healing</span>
+</div>
+<div>
+<h3 class="font-h3 text-h3 text-on-surface mb-2">IST</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Prevenção, sintomas e tratamento das Infeções Sexualmente Transmissíveis.</p>
+</div>
+<div class="mt-auto pt-4 flex items-center text-primary font-label-md text-label-md group-hover:gap-2 transition-all gap-1">
+                        Ver módulo <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="group bg-surface rounded-2xl border border-outline-variant p-6 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all cursor-pointer flex flex-col gap-4 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-secondary-fixed-dim/20 rounded-bl-[100px] -z-10 group-hover:scale-110 transition-transform"></div>
+<div class="w-12 h-12 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="handshake">handshake</span>
+</div>
+<div>
+<h3 class="font-h3 text-h3 text-on-surface mb-2">Consentimento</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">O que significa, como comunicar e respeitar limites nas relações interpessoais.</p>
+</div>
+<div class="mt-auto pt-4 flex items-center text-primary font-label-md text-label-md group-hover:gap-2 transition-all gap-1">
+                        Ver módulo <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</div>
+</div>
+<!-- Card 5 (Span 2 cols on lg) -->
+<div class="group bg-surface rounded-2xl border border-outline-variant p-6 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all cursor-pointer flex flex-col gap-4 relative overflow-hidden lg:col-span-2">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary-fixed/10 rounded-bl-full -z-10 group-hover:scale-105 transition-transform"></div>
+<div class="w-12 h-12 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+</div>
+<div class="max-w-xl">
+<h3 class="font-h3 text-h3 text-on-surface mb-2">Relações</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Explora a dinâmica das relações saudáveis, comunicação eficaz, afeto e a importância do respeito mútuo em todos os tipos de vínculos emocionais.</p>
+</div>
+<div class="mt-auto pt-4 flex items-center text-primary font-label-md text-label-md group-hover:gap-2 transition-all gap-1">
+                        Ver módulo <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Featured Section: Quiz -->
+<section class="px-margin-mobile md:px-gutter py-section-gap">
+<div class="max-w-container-max mx-auto bg-surface-container-low rounded-3xl p-8 md:p-12 flex flex-col md:flex-row items-center gap-12 overflow-hidden relative">
+<!-- Decorative background shape -->
+<div class="absolute right-0 top-0 w-1/2 h-full bg-primary-fixed-dim/20 skew-x-12 translate-x-1/4 -z-10"></div>
+<div class="flex-1 flex flex-col gap-6">
+<div class="inline-block px-3 py-1 bg-tertiary-container text-on-tertiary-container rounded-full font-caption text-caption uppercase tracking-wider self-start">
+                        Interativo
+                    </div>
+<h2 class="font-h1 text-h1 text-on-surface">Teste os seus conhecimentos</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+                        Descubra o que já sabe e o que pode aprender com os nossos quizzes rápidos e interativos. Uma forma segura e privada de avaliar o seu conhecimento.
+                    </p>
+<button class="h-[48px] px-8 bg-primary text-on-primary rounded-full font-label-md text-label-md self-start flex items-center gap-2 hover:bg-on-primary-fixed-variant transition-colors shadow-sm">
+                        Começar o Quiz
+                        <span class="material-symbols-outlined">quiz</span>
+</button>
+</div>
+<div class="flex-1 w-full max-w-md">
+<!-- Glassmorphism abstract representation of a quiz interface -->
+<div class="bg-surface/80 backdrop-blur-md border border-outline-variant/50 rounded-2xl p-6 shadow-sm">
+<div class="w-full h-2 bg-surface-variant rounded-full mb-6">
+<div class="w-1/3 h-full bg-secondary rounded-full"></div>
+</div>
+<div class="h-4 w-3/4 bg-surface-variant rounded mb-8"></div>
+<div class="flex flex-col gap-3">
+<div class="h-12 w-full bg-surface rounded-xl border border-outline-variant/30 flex items-center px-4">
+<div class="w-4 h-4 rounded-full border-2 border-outline-variant mr-3"></div>
+<div class="h-2 w-1/2 bg-surface-variant rounded"></div>
+</div>
+<div class="h-12 w-full bg-secondary-container/30 border border-secondary/30 rounded-xl flex items-center px-4">
+<div class="w-4 h-4 rounded-full bg-secondary mr-3 flex items-center justify-center">
+<div class="w-1.5 h-1.5 bg-surface rounded-full"></div>
+</div>
+<div class="h-2 w-2/3 bg-secondary/70 rounded"></div>
+</div>
+<div class="h-12 w-full bg-surface rounded-xl border border-outline-variant/30 flex items-center px-4">
+<div class="w-4 h-4 rounded-full border-2 border-outline-variant mr-3"></div>
+<div class="h-2 w-1/3 bg-surface-variant rounded"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full mt-auto bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800">
+<div class="flex flex-col md:flex-row justify-between items-center px-8 py-12 max-w-7xl mx-auto gap-8">
+<div class="text-lg font-semibold text-teal-800 dark:text-teal-200">
+                EduSafe
+            </div>
+<ul class="flex flex-wrap justify-center gap-6 font-plus-jakarta text-xs text-slate-500">
+<li><a class="text-slate-500 dark:text-slate-400 hover:underline hover:text-teal-700 transition-all duration-200" href="#">Privacidade</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:underline hover:text-teal-700 transition-all duration-200" href="#">Termos de Utilização</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:underline hover:text-teal-700 transition-all duration-200" href="#">Apoio</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:underline hover:text-teal-700 transition-all duration-200" href="#">Contactos</a></li>
+</ul>
+<div class="font-plus-jakarta text-xs text-slate-500">
+                © 2024 EduSafe. Todos os direitos reservados.
+            </div>
+</div>
+</footer>
+</body></html>

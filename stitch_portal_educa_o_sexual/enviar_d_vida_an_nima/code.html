@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-PT"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EduSafe Portal - Enviar Dúvida Anónima</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "primary-container": "#2d6a4f",
+                      "on-surface": "#191c1e",
+                      "on-surface-variant": "#404943",
+                      "secondary-fixed-dim": "#a4c9ff",
+                      "tertiary-container": "#4d6553",
+                      "on-primary-fixed": "#002114",
+                      "on-error-container": "#93000a",
+                      "error": "#ba1a1a",
+                      "outline": "#707973",
+                      "inverse-primary": "#95d4b3",
+                      "on-primary-container": "#a8e7c5",
+                      "primary-fixed-dim": "#95d4b3",
+                      "on-secondary-container": "#003869",
+                      "background": "#f7f9fb",
+                      "error-container": "#ffdad6",
+                      "on-primary-fixed-variant": "#0e5138",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-container": "#eceef0",
+                      "on-secondary-fixed": "#001c39",
+                      "on-error": "#ffffff",
+                      "on-tertiary-fixed": "#092012",
+                      "surface-variant": "#e0e3e5",
+                      "secondary-container": "#58a3fe",
+                      "outline-variant": "#bfc9c1",
+                      "on-secondary-fixed-variant": "#004884",
+                      "on-secondary": "#ffffff",
+                      "secondary": "#005fad",
+                      "surface-tint": "#2c694e",
+                      "surface-container-high": "#e6e8ea",
+                      "on-background": "#191c1e",
+                      "on-tertiary": "#ffffff",
+                      "surface": "#f7f9fb",
+                      "on-primary": "#ffffff",
+                      "secondary-fixed": "#d4e3ff",
+                      "tertiary-fixed": "#cee9d3",
+                      "on-tertiary-container": "#c6e1ca",
+                      "primary-fixed": "#b1f0ce",
+                      "inverse-surface": "#2d3133",
+                      "tertiary-fixed-dim": "#b3cdb7",
+                      "surface-bright": "#f7f9fb",
+                      "tertiary": "#364d3c",
+                      "surface-container-low": "#f2f4f6",
+                      "primary": "#0f5238",
+                      "surface-container-highest": "#e0e3e5",
+                      "on-tertiary-fixed-variant": "#354c3b",
+                      "surface-dim": "#d8dadc",
+                      "inverse-on-surface": "#eff1f3"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xs": "4px",
+                      "margin": "32px",
+                      "xl": "48px",
+                      "sm": "8px",
+                      "unit": "4px",
+                      "md": "16px",
+                      "lg": "24px",
+                      "gutter": "24px"
+              },
+              "fontFamily": {
+                      "headline-md": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "headline-xl": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "body-lg": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "body-md": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "label-md": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "label-sm": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "headline-lg": [
+                              "Plus Jakarta Sans"
+                      ]
+              },
+              "fontSize": {
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-xl": [
+                              "40px",
+                              {
+                                      "lineHeight": "48px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+          body {
+              font-family: 'Plus Jakarta Sans', sans-serif;
+              background-color: #f0f7fb; /* Light blue custom background as requested, approximating secondary-fixed-dim softly */
+          }
+      </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-gutter">
+<!-- Intent: Transactional/Task-focused form, so global nav shell is suppressed based on Shared Components Logic -->
+<main class="w-full max-w-lg mx-auto">
+<!-- Form Card -->
+<div class="bg-surface-container-lowest rounded-xl shadow-[0_8px_30px_rgb(72,149,239,0.08)] p-xl border border-surface-container-low">
+<div class="text-center mb-margin">
+<div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-secondary-fixed mb-md">
+<span class="material-symbols-outlined text-secondary font-variation-settings-'FILL' 1" data-icon="help_outline" data-weight="fill">help_outline</span>
+</div>
+<h1 class="font-headline-md text-headline-md text-on-surface mb-sm">Enviar Dúvida</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Sente-se seguro para perguntar. O seu anonimato é garantido.</p>
+</div>
+<!-- Form State -->
+<form action="#" class="space-y-lg" method="POST">
+<!-- Nome Field (Optional as per context of anonymous, but requested) -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-xs" for="nome">Nome (Opcional)</label>
+<input class="w-full px-md py-sm bg-surface rounded-lg border border-outline-variant text-on-surface font-body-md text-body-md focus:border-secondary focus:ring-4 focus:ring-secondary/20 transition-all outline-none" id="nome" name="nome" placeholder="Como prefere ser chamado?" type="text"/>
+</div>
+<!-- E-mail Field (Optional as per context, but requested) -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-xs" for="email">E-mail (Opcional)</label>
+<input class="w-full px-md py-sm bg-surface rounded-lg border border-outline-variant text-on-surface font-body-md text-body-md focus:border-secondary focus:ring-4 focus:ring-secondary/20 transition-all outline-none" id="email" name="email" placeholder="Para receber uma resposta direta" type="email"/>
+</div>
+<!-- Dúvida Field (Required) -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-xs" for="duvida">Dúvida <span class="text-error">*</span></label>
+<textarea class="w-full px-md py-sm bg-surface rounded-lg border border-outline-variant text-on-surface font-body-md text-body-md focus:border-secondary focus:ring-4 focus:ring-secondary/20 transition-all outline-none resize-y" id="duvida" name="duvida" placeholder="Escreva aqui a sua dúvida..." required="" rows="4"></textarea>
+</div>
+<!-- Privacy note -->
+<div class="flex items-start gap-sm bg-surface p-md rounded-lg border border-surface-variant">
+<span class="material-symbols-outlined text-primary text-lg mt-0.5" data-icon="lock">lock</span>
+<p class="font-label-sm text-label-sm text-on-surface-variant">A sua identidade é protegida. Os campos de nome e e-mail não serão associados publicamente à sua dúvida.</p>
+</div>
+<!-- Submit Button -->
+<button class="w-full flex items-center justify-center gap-sm bg-primary text-on-primary font-label-md text-label-md py-md px-lg rounded-lg hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-sm" type="button">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+                    Enviar Dúvida
+                </button>
+</form>
+<!-- Success Message State (Hidden by default, shown here for design purposes) -->
+<!-- To view the form, comment out this div. To view the success state, uncomment it and comment out the form above. -->
+<div class="hidden text-center py-margin">
+<div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary-fixed mb-md">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="check_circle">check_circle</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-sm">Mensagem Recebida</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-lg">A tua dúvida foi enviada com sucesso e anonimato.</p>
+<button class="inline-flex items-center justify-center gap-sm bg-transparent border border-secondary text-secondary font-label-md text-label-md py-sm px-lg rounded-lg hover:bg-secondary-fixed hover:text-on-secondary-container transition-colors" type="button">
+                    Enviar nova dúvida
+                </button>
+</div>
+</div>
+</main>
+</body></html>

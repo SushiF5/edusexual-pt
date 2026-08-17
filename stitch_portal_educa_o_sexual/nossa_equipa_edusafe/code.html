@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-PT"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>A Nossa Equipa - EduSafe</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+<!-- Tailwind CSS with custom config -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "tertiary-fixed-dim": "#9ecfd1",
+                        "tertiary-container": "#2d5e60",
+                        "primary-container": "#2d5a7b",
+                        "surface-tint": "#366284",
+                        "on-surface-variant": "#42474d",
+                        "primary-fixed": "#cbe6ff",
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#c2c7ce",
+                        "on-error-container": "#93000a",
+                        "inverse-surface": "#2e3131",
+                        "inverse-on-surface": "#eff1f1",
+                        "on-surface": "#191c1d",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed": "#001e31",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#a0cbf1",
+                        "on-primary-fixed-variant": "#1a4a6b",
+                        "on-primary-container": "#a5d1f7",
+                        "on-background": "#191c1d",
+                        "tertiary": "#104648",
+                        "secondary-fixed-dim": "#a7d0b7",
+                        "secondary-fixed": "#c3ecd2",
+                        "surface-dim": "#d8dada",
+                        "surface-container": "#eceeee",
+                        "surface-variant": "#e1e3e3",
+                        "surface-container-high": "#e6e8e9",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#456a56",
+                        "secondary": "#416652",
+                        "primary": "#0f4262",
+                        "surface-container-highest": "#e1e3e3",
+                        "on-secondary-fixed": "#002113",
+                        "surface-container-low": "#f2f4f4",
+                        "on-primary": "#ffffff",
+                        "secondary-container": "#c0e9d0",
+                        "outline": "#72787e",
+                        "background": "#f8fafa",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#294e3b",
+                        "inverse-primary": "#a0cbf1",
+                        "on-tertiary-container": "#a3d5d7",
+                        "surface": "#f8fafa",
+                        "on-tertiary-fixed": "#002021",
+                        "surface-bright": "#f8fafa",
+                        "on-tertiary-fixed-variant": "#1a4e50",
+                        "tertiary-fixed": "#b9ecee"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "stack-lg": "32px",
+                        "section-gap": "64px",
+                        "container-max": "1200px",
+                        "unit": "8px",
+                        "margin-mobile": "16px",
+                        "stack-sm": "8px",
+                        "stack-md": "16px",
+                        "gutter": "24px"
+                    },
+                    fontFamily: {
+                        "h3": ["Plus Jakarta Sans"],
+                        "h2": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "caption": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "h1": ["Plus Jakarta Sans"],
+                        "display": ["Plus Jakarta Sans"]
+                    },
+                    fontSize: {
+                        "h3": ["20px", { lineHeight: "28px", fontWeight: "600" }],
+                        "h2": ["24px", { lineHeight: "32px", fontWeight: "600" }],
+                        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                        "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+                        "caption": ["12px", { lineHeight: "16px", fontWeight: "400" }],
+                        "label-md": ["14px", { lineHeight: "20px", letterSpacing: "0.01em", fontWeight: "500" }],
+                        "h1": ["32px", { lineHeight: "40px", fontWeight: "700" }],
+                        "display": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased flex flex-col min-h-screen">
+<!-- TopAppBar (Web) -->
+<header class="hidden md:block docked full-width top-0 sticky z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-100 dark:border-slate-800 transition-all duration-200 ease-in-out">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto">
+<!-- Brand -->
+<div class="text-xl font-bold text-[#2D5A7B] dark:text-sky-400 tracking-tight flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">health_and_safety</span>
+                EduSafe
+            </div>
+<!-- Navigation -->
+<nav class="flex items-center gap-8 font-['Plus_Jakarta_Sans'] text-sm font-medium">
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#2D5A7B] transition-colors" href="#">Início</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#2D5A7B] transition-colors" href="#">Biblioteca</a>
+<a aria-current="page" class="text-[#2D5A7B] font-bold border-b-2 border-[#2D5A7B] pb-1" href="#">Equipa</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#2D5A7B] transition-colors" href="#">Sobre Nós</a>
+</nav>
+<!-- Trailing Action -->
+<button class="bg-[#2D5A7B] text-white px-5 py-2.5 rounded-lg hover:bg-opacity-90 font-['Plus_Jakarta_Sans'] text-sm font-medium transition-all duration-200 ease-in-out">
+                Entrar
+            </button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 w-full max-w-container-max mx-auto px-margin-mobile md:px-gutter pb-[calc(72px+env(safe-area-inset-bottom))] md:pb-section-gap pt-stack-lg md:pt-section-gap flex flex-col gap-section-gap">
+<!-- Hero Section -->
+<section class="flex flex-col items-center text-center max-w-3xl mx-auto">
+<h1 class="font-display text-display text-primary mb-stack-sm">A Nossa Equipa</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+                Conheça os profissionais de saúde dedicados a fornecer educação sexual fiável, empática e baseada em evidências científicas.
+            </p>
+</section>
+<!-- Team Grid -->
+<section>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-stack-lg">
+<!-- Team Member Card 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden flex flex-col">
+<div class="aspect-square bg-surface-container-low w-full relative">
+<img alt="Dra. Ana Silva" class="w-full h-full object-cover" data-alt="Portrait of a female medical professional smiling warmly, wearing a white coat and stethoscope, natural bright lighting, clinic background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5kbn7c1UEkQ3gVsNLvN2DIwSisnQNVygvsh5V_Pg-AOKfSU8ho_3xm5dvDDGm9CIBon6kpp_OcFur4Izun0uOxvbAp-unzj4keUqIDe5AKKt-l12dd9Zp8W9KdNv_4TmUurZOpyv3e3VmU6zAXAYOvH4MkZ2kfeUbRqynEPriV4CUVKvichMgUUnnTNTPNmxoYjKPq1t4RXCuTMZI10qIogP_dDOwcfMFEbnDApaUxg_dWq2hS8VJXns-PaXra1ucWdLsd09hhQ"/>
+</div>
+<div class="p-stack-md flex flex-col flex-1">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed w-fit mb-stack-sm">
+<span class="material-symbols-outlined text-[14px]">gynecology</span>
+<span class="font-label-md text-label-md">Ginecologia</span>
+</div>
+<h3 class="font-h3 text-h3 text-on-surface mb-stack-sm">Dra. Ana Silva</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-1">
+                            Especialista em saúde reprodutiva com mais de 10 anos de experiência clínica. Focada no empoderamento através do conhecimento anatómico claro.
+                        </p>
+</div>
+</div>
+<!-- Team Member Card 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden flex flex-col">
+<div class="aspect-square bg-surface-container-low w-full relative">
+<img alt="Dr. João Santos" class="w-full h-full object-cover" data-alt="Portrait of a male psychologist sitting in a comfortable chair, warm natural light, wearing smart casual attire, approachable and empathetic expression." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4XvbM7xfpuAEEV6laP27rxjKj8Zl65ymGXIxS2zhNXXxyzJOswpD-HNoAb5lANiPiKyWAYKxrWTLx1gRnNxTf2xdD6jwTSU79K_iDqxj-MiaeBX4Mx8Uw8jYKssxRFP5O8rIyIxovEvpVY-Wq3vRht59xTdi08l8JKBBAMX1fMJGInY3ZA3524R1FyV3ne0BGqYbsN2PyQzwdzvCktupWvQr3hfJa4LRPkIeWsb8UbFDemCtt5H32Cey_QJZtU-aeZhiXQXUWGA"/>
+</div>
+<div class="p-stack-md flex flex-col flex-1">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed w-fit mb-stack-sm">
+<span class="material-symbols-outlined text-[14px]">psychology</span>
+<span class="font-label-md text-label-md">Psicologia</span>
+</div>
+<h3 class="font-h3 text-h3 text-on-surface mb-stack-sm">Dr. João Santos</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-1">
+                            Especializado em desenvolvimento adolescente e dinâmicas relacionais. Promove um espaço seguro para discussões sobre consentimento e emoções.
+                        </p>
+</div>
+</div>
+<!-- Team Member Card 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden flex flex-col">
+<div class="aspect-square bg-surface-container-low w-full relative">
+<img alt="Enf. Marta Costa" class="w-full h-full object-cover" data-alt="Portrait of a young female nurse standing in a bright corridor, wearing blue scrubs, smiling gently, professional and caring demeanor." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBo8f2njLR9Ur5JLfRv_k3mqC9Q4GDZCL-PACnw8Q9JaYRG-u9y_5A93ef9ahZ8QR-UFXvM6Wb-DpV6NLhHqEJpUk9tzN_mpZn6sNFQ9G8pSl7nlIejrPBhROyNG4WeX9LrdB2Y32KUpgESIk0MKq-K-a8G9eGNl94QnS5F0oNMB1FMbf6WZB9G3RDoA6HfqIrqvjoK5k38XL6e_7KX8B4pLh2hmI0o_QRh4z1s9n_uTfHKCwc_AJfaGjj1D9Y8bUZ8zgGDtVV-bA"/>
+</div>
+<div class="p-stack-md flex flex-col flex-1">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed w-fit mb-stack-sm">
+<span class="material-symbols-outlined text-[14px]">local_hospital</span>
+<span class="font-label-md text-label-md">Saúde Pública</span>
+</div>
+<h3 class="font-h3 text-h3 text-on-surface mb-stack-sm">Enf. Marta Costa</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-1">
+                            Educadora de saúde pública focada na prevenção e literacia em saúde sexual para jovens adultos em ambiente escolar.
+                        </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Partners Section -->
+<section class="bg-surface-container rounded-xl p-stack-lg md:p-section-gap text-center">
+<h2 class="font-h2 text-h2 text-primary mb-stack-lg">Os Nossos Parceiros Institucionais</h2>
+<div class="flex flex-wrap justify-center items-center gap-stack-lg md:gap-section-gap opacity-70">
+<!-- Placeholder Logos using Material Symbols in circles -->
+<div class="flex flex-col items-center gap-stack-sm">
+<div class="w-16 h-16 rounded-full bg-surface-container-highest flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-3xl">medical_services</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant">Clínica Vida</span>
+</div>
+<div class="flex flex-col items-center gap-stack-sm">
+<div class="w-16 h-16 rounded-full bg-surface-container-highest flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-3xl">volunteer_activism</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant">Fundação Saúde</span>
+</div>
+<div class="flex flex-col items-center gap-stack-sm">
+<div class="w-16 h-16 rounded-full bg-surface-container-highest flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-3xl">school</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant">Univ. de Ciências</span>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="bg-primary-container rounded-xl p-stack-lg md:p-section-gap flex flex-col items-center text-center relative overflow-hidden">
+<!-- Decorative subtle gradient -->
+<div class="absolute inset-0 bg-gradient-to-tr from-primary to-transparent opacity-50 pointer-events-none"></div>
+<div class="relative z-10 flex flex-col items-center">
+<h2 class="font-h2 text-h2 text-on-primary mb-stack-md">Pronto para aprender de forma segura?</h2>
+<p class="font-body-lg text-body-lg text-on-primary-container mb-stack-lg max-w-2xl">
+                    Explore os nossos módulos de aprendizagem criados por especialistas e inicie a sua jornada de conhecimento hoje mesmo.
+                </p>
+<button class="bg-secondary text-on-secondary px-8 py-4 rounded-lg font-label-md text-label-md flex items-center gap-2 hover:bg-opacity-90 transition-colors shadow-sm min-h-[48px]">
+                    Aprenda Mais
+                    <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full mt-auto border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 px-6 py-12 flex flex-col items-center gap-6">
+<div class="text-lg font-bold text-[#2D5A7B] flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">health_and_safety</span>
+            EduSafe
+        </div>
+<nav class="flex flex-wrap justify-center gap-x-8 gap-y-4 font-['Plus_Jakarta_Sans'] text-xs text-slate-500">
+<a class="hover:text-[#2D5A7B] dark:hover:text-sky-400 transition-colors cursor-pointer opacity-80 hover:opacity-100" href="#">Privacidade</a>
+<a class="hover:text-[#2D5A7B] dark:hover:text-sky-400 transition-colors cursor-pointer opacity-80 hover:opacity-100" href="#">Termos</a>
+<a class="hover:text-[#2D5A7B] dark:hover:text-sky-400 transition-colors cursor-pointer opacity-80 hover:opacity-100" href="#">Contactos</a>
+<a class="hover:text-[#2D5A7B] dark:hover:text-sky-400 transition-colors cursor-pointer opacity-80 hover:opacity-100" href="#">Parceiros</a>
+</nav>
+<p class="font-['Plus_Jakarta_Sans'] text-xs text-slate-500">
+            © 2024 EduSafe - Educação Sexual com Confiança.
+        </p>
+</footer>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 border-t border-slate-100 dark:border-slate-800 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] bg-white dark:bg-slate-900 px-4 py-3 pb-safe flex justify-around items-center font-['Plus_Jakarta_Sans'] text-[10px] font-semibold">
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 active:opacity-80 scale-95 transition-transform duration-150 gap-1 w-16" href="#">
+<span class="material-symbols-outlined text-[24px]">home</span>
+<span>Início</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 active:opacity-80 scale-95 transition-transform duration-150 gap-1 w-16" href="#">
+<span class="material-symbols-outlined text-[24px]">search</span>
+<span>Explorar</span>
+</a>
+<a aria-current="page" class="flex flex-col items-center justify-center text-[#2D5A7B] dark:text-sky-400 bg-sky-50 dark:bg-sky-900/30 rounded-xl px-3 py-1 active:opacity-80 scale-95 transition-transform duration-150 gap-1 w-16" href="#">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">groups</span>
+<span>Equipa</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 active:opacity-80 scale-95 transition-transform duration-150 gap-1 w-16" href="#">
+<span class="material-symbols-outlined text-[24px]">person</span>
+<span>Perfil</span>
+</a>
+</nav>
+</body></html>

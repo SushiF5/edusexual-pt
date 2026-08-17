@@ -69,6 +69,8 @@ type TranslationKeys = {
   faqDescCrianca: string;
   faqDescJovem: string;
   faqDescAdulto: string;
+  searchFaq: string;
+  noFaqFound: string;
   doubtsTitle: string;
   doubtsSubtitle: string;
   yourName: string;
@@ -193,6 +195,8 @@ const pt: TranslationKeys = {
   faqDescCrianca: "Respostas simples para as tuas dúvidas.",
   faqDescJovem: "Esclarece as tuas dúvidas com as perguntas mais comuns.",
   faqDescAdulto: "Dúvidas comuns de pais e educadores.",
+  searchFaq: "Pesquisar perguntas...",
+  noFaqFound: "Nenhuma pergunta encontrada para",
   doubtsTitle: "Tira as tuas Dúvidas",
   doubtsSubtitle: "Envia a tua pergunta de forma 100% anónima. Não guardamos nenhuns dados pessoais.",
   yourName: "Como te queres chamar?",
@@ -317,6 +321,8 @@ const en: TranslationKeys = {
   faqDescCrianca: "Simple answers to your questions.",
   faqDescJovem: "Clarify your doubts with the most common questions.",
   faqDescAdulto: "Common questions from parents and educators.",
+  searchFaq: "Search questions...",
+  noFaqFound: "No questions found for",
   doubtsTitle: "Ask Your Questions",
   doubtsSubtitle: "Send your question 100% anonymously. We don't store any personal data.",
   yourName: "What would you like to be called?",
@@ -441,6 +447,8 @@ const es: TranslationKeys = {
   faqDescCrianca: "Respuestas simples para tus dudas.",
   faqDescJovem: "Aclara tus dudas con las preguntas más comunes.",
   faqDescAdulto: "Dudas comunes de padres y educadores.",
+  searchFaq: "Buscar preguntas...",
+  noFaqFound: "No se encontraron preguntas para",
   doubtsTitle: "Haz tus Preguntas",
   doubtsSubtitle: "Envía tu pregunta 100% de forma anónima. No guardamos ningún dato personal.",
   yourName: "¿Cómo te llamas?",

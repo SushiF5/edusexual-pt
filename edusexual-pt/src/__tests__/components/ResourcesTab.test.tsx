@@ -124,4 +124,17 @@ describe("ResourcesTab", () => {
     expect(link).toHaveAttribute("href", "/api/pdf?id=guia-consentimento");
     expect(link).toHaveAttribute("download", "guia-consentimento.html");
   });
+
+  it("calls window.print when print button clicked", () => {
+    const printSpy = jest.spyOn(window, "print").mockImplementation(() => {});
+    
+    render(<ResourcesTab audience="jovens" />);
+    fireEvent.click(screen.getByText("Guia de Consentimento"));
+    
+    expect(screen.getByText("Guia de Consentimento")).toBeInTheDocument();
+    fireEvent.click(screen.getByText("Guardar como PDF"));
+    
+    expect(printSpy).toHaveBeenCalledTimes(1);
+    printSpy.mockRestore();
+  });
 });

@@ -241,6 +241,7 @@ Alguns bébés nascem da barriga da mãe, outros vêm através de adoção ou de
         id: "puberdade",
         title: "O que é a puberdade?",
         category: "Anatomia",
+        audioUrl: "/audio/MP3/puberdade.mp3",
         content: `A puberdade é o período de transição entre a infância e a idade adulta. É quando o corpo começa a produzir hormonas que provocam mudanças físicas e emocionais.
         
 Nas raparigas, costuma acontecer entre os 8 e os 13 anos; nos rapazes, entre os 9 e os 14 anos. É normal que cada pessoa tenha o seu próprio ritmo. Não te compares com os teus amigos; o teu corpo sabe quando está pronto.`
@@ -368,6 +369,7 @@ O mais importante: não te compares com o que vês na pornografia — esses corp
         id: "metodos-contracetivos",
         title: "Métodos contracetivos",
         category: "Contracepção",
+        audioUrl: "/audio/MP3/metodos-contracetivos.mp3",
         content: `Os métodos contracetivos dividem-se em vários tipos. Conhecer as opções ajuda-te a fazer uma escolha informada com o teu médico.
 
 1. Métodos de Barreira — impedem o contacto entre o esperma e o óvulo:
@@ -527,6 +529,7 @@ Realidade: O líquido pré-ejaculatório pode conter espermatozoides. Este méto
         id: "o-que-sao-ist",
         title: "O que são IST?",
         category: "Saúde",
+        audioUrl: "/audio/MP3/o-que-sao-ist.mp3",
         content: `As IST são infeções transmitidas principalmente através do contacto sexual (vaginal, anal ou oral) sem proteção. São causadas por bactérias, vírus ou parasitas.
         
 Muitas IST não apresentam sintomas imediatos, o que significa que uma pessoa pode estar infetada e transmitir a infeção sem saber. Por isso, o rastreio regular é fundamental.`
@@ -678,6 +681,7 @@ Ambas são curáveis com antibióticos, mas é crucial tratar cedo. Se não trat
         id: "relacao-saudavel",
         title: "O que é uma relação saudável?",
         category: "Psicologia",
+        audioUrl: "/audio/MP3/relacao-saudavel.mp3",
         content: `Uma relação saudável baseia-se no respeito mútuo, na confiança, na comunicação aberta e na honestidade.
         
 Numa relação saudável, sentes-te livre para seres tu próprio, tens espaço para as tuas amizades e hobbies, e as decisões são tomadas em comum, sem pressões ou manipulações.`
@@ -828,6 +832,7 @@ Quando a distância é um problema:
         id: "regra-sim",
         title: "O que é o Consentimento?",
         category: "Ética",
+        audioUrl: "/audio/MP3/regra-sim.mp3",
         content: `O consentimento é um acordo livre, voluntário e entusiasta para participar numa atividade sexual.
 
 Para ser válido, o consentimento deve ser:
@@ -907,6 +912,7 @@ Se foste vítima de qualquer forma de violência sexual, denuncia:
         id: "orientacao-sexual",
         title: "O que é a Orientação Sexual?",
         category: "Identidade",
+        audioUrl: "/audio/MP3/orientacao-sexual.mp3",
         content: `A orientação sexual refere-se a quem sentimos atração emocional, romântica ou sexual. 
         
 Exemplos comuns incluem a heterossexualidade, homossexualidade, bissexualidade e assexualidade. A sexualidade é um espetro e pode evoluir ao longo da vida.`
@@ -1023,6 +1029,7 @@ Lembra-te: não estás sozinho(a). Pedir ajuda é um sinal de coragem, não de f
         id: "como-acontece-gravidez",
         title: "Como acontece a gravidez?",
         category: "Anatomia",
+        audioUrl: "/audio/MP3/como-acontece-gravidez.mp3",
         content: `A gravidez ocorre quando um espermatozoide fertiliza um óvulo. Isto acontece normalmente durante a ovulação (meio do ciclo menstrual).
         
 O óvulo fertilizado viaja até ao útero, onde se implanta e começa a crescer. É por isto que o uso de contracetivos é fundamental para quem não pretende engravidar.`
@@ -1149,6 +1156,7 @@ Assim que souberes que estás grávida, contacta o teu Centro de Saúde para mar
         id: "imagem-corporal",
         title: "Imagem Corporal: Gostar de si mesmo",
         category: "Psicologia",
+        audioUrl: "/audio/MP3/imagem-corporal.mp3",
         content: `A forma como vemos o nosso corpo é influenciada por muitas coisas: família, amigos e redes sociais. 
         
 É importante lembrar que a perfeição não existe. Cada corpo é diferente e tem a sua própria beleza e funcionalidade. Focar no que o teu corpo consegue FAZER (correr, abraçar, pensar) é mais saudável do que focar apenas em como ele se PARECE.`
@@ -1224,6 +1232,7 @@ Lembra-te: o teu valor não se mede pela tua aparência. Um corpo saudável é u
         id: "higiene-intima",
         title: "Higiene Íntima: O que fazer",
         category: "Saúde",
+        audioUrl: "/audio/MP3/higiene-intima.mp3",
         content: `A higiene íntima deve ser simples. Para a maioria das pessoas, lavar a zona externa com água e um sabonete neutro é suficiente.
         
 Atenção: evitar duchas vaginais ou sabonetes com perfumes fortes, pois podem alterar o pH natural e causar infeções. O corpo tem a sua própria forma de se equilibrar.`
@@ -1305,6 +1314,7 @@ Erros comuns a evitar:
         id: "masturbacao",
         title: "Masturbação: é normal?",
         category: "Saúde Sexual",
+        audioUrl: "/audio/MP3/masturbacao.mp3",
         content: `A masturbação é uma prática normal e saudável que a maioria das pessoas faz em alguma altura da vida. É uma forma de conhecer o teu corpo, descobrir o que te dá prazer e aliviar tensão.
 
 O que deves saber:
@@ -1386,6 +1396,7 @@ O que fazer: Usar a pornografia como entretenimento é uma escolha pessoal, mas 
         id: "linhas-apoio",
         title: "Linhas de Apoio",
         category: "Ajuda",
+        audioUrl: "/audio/MP3/linhas-apoio.mp3",
         content: `Se precisares de ajuda imediata, existem várias linhas gratuitas e anónimas:
         - APAV (Apoio à Vítima): 800 200 2200
         - Linha Emergência Social: 144

@@ -2,6 +2,50 @@
 
 Log de execuções e melhorias implementadas.
 
+## Execução — 18 Ago 2026 (2)
+
+### Melhoria: Cobertura total de áudios dos artigos (Jovens)
+
+Concluída a tarefa pendente "Gerar os MP3 em falta" referida na execução
+anterior. Foram gerados os 11 ficheiros MP3 que faltavam para a secção
+Jovens e vinculados via `audioUrl` no `content-topics.ts`.
+
+### Implementado
+
+1. **Geração de áudios** (`gerar_audios2.py`):
+   - Corrigido o *parser* de extração: o regex global original dava falsos
+     negativos (falhava em 11 artigos que têm `category` entre `title` e
+     `content`), pelo que não eram gerados. Substituído por extração
+     isolada por `id:` (bloco-a-bloco), robusta e sem omissões.
+   - Gerados 11 MP3: `puberdade`, `metodos-contracetivos`, `o-que-sao-ist`,
+     `relacao-saudavel`, `regra-sim`, `orientacao-sexual`,
+     `como-acontece-gravidez`, `imagem-corporal`, `higiene-intima`,
+     `masturbacao`, `linhas-apoio`.
+
+2. **Vinculação de `audioUrl`** (`src/data/content-topics.ts`):
+   - Adicionado `audioUrl: "/audio/MP3/<id>.mp3"` a cada um dos 11 artigos
+     (colocado após `category:`, seguindo a convenção canónica).
+   - Resultado: 75 referências `audioUrl` locais, 0 apontando para ficheiros
+     em falta (100% dos artigos com MP3 gerado estão vinculados).
+
+### Verificação
+
+- 229 testes passam (inclui integridade de conteúdo que valida `audioUrl`
+  → ficheiro existente, e testes do `HomeTab`/`AudioPlayer`).
+- `npx tsc --noEmit` limpo nos ficheiros alterados (erros pré-existentes
+  apenas em ficheiros de teste não tocados: `pdf/route.test.ts`,
+  `PodcastTab.test.tsx`).
+- Auditoria: nenhum `audioUrl` aponta para ficheiro inexistente.
+
+### Próximas melhorias pendentes (sugeridas)
+
+- [ ] Lazy loading de conteúdo por audiência
+- [ ] Acessibilidade WCAG 2.1 completa (auditoria)
+- [ ] Testes E2E (Playwright)
+- [ ] Expandir áudios para as secções Crianças e Adultos (o script cobre só Jovens)
+
+---
+
 ## Execução — 18 Ago 2026
 
 ### Melhoria: Expansão dos áudios dos artigos (vinculação completa)

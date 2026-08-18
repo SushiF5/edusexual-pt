@@ -54,7 +54,7 @@ Algumas coisas que podem acontecer:
 - As meninas começam a ter a menstruação e os meninos começam a ter a voz mais grave.
 
 Cada pessoa cresce ao seu ritmo. O teu amigo pode crescer mais rápido que tu, e tudo bem! O teu corpo tem o seu próprio calendário e não há motivo para te preocupares.`
-      }
+      },
     ]
   },
   {
@@ -116,7 +116,7 @@ Lembra-te: se a primeira pessoa a quem pedes ajuda não te ouvir, pede a outra, 
 5. Usa as definições de privacidade e não aceites pedidos de amizade de desconhecidos.
 
 Lembra-te: na internet, as pessoas podem não ser quem dizem ser. Se algo parece estranho, provavelmente é!`
-      }
+      },
     ]
   },
   {
@@ -179,7 +179,7 @@ O que podes fazer:
 - Lembra-te: os maus dias passam. Não são para sempre.
 
 Se te sentes assim muitas vezes, é importante contar a um adulto. Pedir ajuda é um sinal de coragem, não de fraqueza.`
-      }
+      },
     ]
   },
   {
@@ -224,7 +224,7 @@ Todas estas famílias são verdadeiras e todas merecem respeito. Nunca deves goz
 Um bebé começa a formar-se quando uma parte do corpo do pai (o espermatozoide) se junta a uma parte do corpo da mãe (o óvulo). Isso acontece dentro do corpo da mãe, numa zona especial chamada útero, que é como uma "sala de espera" muito confortável onde o bebé cresce durante 9 meses.
 
 Alguns bébés nascem da barriga da mãe, outros vêm através de adoção ou de outras formas. O que importa é que todo o bebé é fruto de amor e cuidado.`
-      }
+      },
     ]
   },
 
@@ -246,10 +246,11 @@ Alguns bébés nascem da barriga da mãe, outros vêm através de adoção ou de
 Nas raparigas, costuma acontecer entre os 8 e os 13 anos; nos rapazes, entre os 9 e os 14 anos. É normal que cada pessoa tenha o seu próprio ritmo. Não te compares com os teus amigos; o teu corpo sabe quando está pronto.`
       },
       {
-id: "ciclo-menstrual",
-title: "O ciclo menstrual explicado",
-category: "Anatomia",
-content: `A menstruação é a descamação do revestimento do útero (endométrio) quando não ocorre a fecundação de um óvulo. É uma parte natural e saudável do corpo feminino.
+        id: "ciclo-menstrual",
+        title: "O ciclo menstrual explicado",
+        category: "Anatomia",
+        audioUrl: "/audio/MP3/ciclo-menstrual.mp3",
+        content: `A menstruação é a descamação do revestimento do útero (endométrio) quando não ocorre a fecundação de um óvulo. É uma parte natural e saudável do corpo feminino.
 
 O ciclo menstrual dura, em média, 28 dias, mas pode variar muito — entre 21 e 35 dias é considerado normal, especialmente nos primeiros anos após a menarca (primeira menstruação).
 
@@ -327,6 +328,7 @@ As poluções noturnas (ejaculações involuntárias durante o sono) são normai
         id: "mudancas-femininas",
         title: "Mudanças no corpo feminino durante a puberdade",
         category: "Anatomia",
+        audioUrl: "/audio/MP3/mudancas-femininas.mp3",
         content: `Durante a puberdade, o corpo das raparigas passa por várias transformações:
 
 - Crescimento das mamas: Costuma ser o primeiro sinal, iniciando entre os 8 e os 13 anos. Uma mama pode crescer antes da outra — é normal.
@@ -342,6 +344,7 @@ Cada rapariga tem o seu ritmo. Não te compares com as amigas — o teu corpo es
         id: "erecoes-ejaculacoes",
         title: "Ereções e Ejaculações: o que é normal?",
         category: "Anatomia",
+        audioUrl: "/audio/MP3/erecoes-ejaculacoes.mp3",
         content: `Durante a puberdade, os rapazes experienciam mudanças que podem surpreender:
 
 - Ereções espontâneas: Acontecem sem estímulo sexual — no meio da aula, ao acordar, durante o desporto. São causadas por hormonas e são completamente normais. Com o tempo, tornam-se menos frequentes.
@@ -350,7 +353,7 @@ Cada rapariga tem o seu ritmo. Não te compares com as amigas — o teu corpo es
 - Prepúcio: A pele que cobre a ponta do pénis. Em algumas pessoas é mais apertado (fimose), o que pode ser tratado medicalmente se causar desconforto.
 
 O mais importante: não te compares com o que vês na pornografia — esses corpos não representam a média real.`
-      }
+      },
     ]
   },
   {
@@ -362,10 +365,10 @@ O mais importante: não te compares com o que vês na pornografia — esses corp
     audioUrl: "/audio/MP3/contracepcao-jovens.mp3",
     articles: [
       {
-    id: "metodos-contracetivos",
-title: "Métodos contracetivos",
-category: "Contracepção",
-content: `Os métodos contracetivos dividem-se em vários tipos. Conhecer as opções ajuda-te a fazer uma escolha informada com o teu médico.
+        id: "metodos-contracetivos",
+        title: "Métodos contracetivos",
+        category: "Contracepção",
+        content: `Os métodos contracetivos dividem-se em vários tipos. Conhecer as opções ajuda-te a fazer uma escolha informada com o teu médico.
 
 1. Métodos de Barreira — impedem o contacto entre o esperma e o óvulo:
 - Preservativo masculino: O ÚNICO método que protege simultaneamente de gravidez e IST. Eficácia: 98% (uso correto). Disponível grátis nos Centros de Saúde e na APF.
@@ -433,6 +436,7 @@ Ela não é um método regular e não é abortiva. Quanto mais cedo for tomada a
         id: "preservativo-feminino",
         title: "Preservativo Feminino",
         category: "Contracepção",
+        audioUrl: "/audio/MP3/preservativo-feminino.mp3",
         content: `O preservativo feminino é um dispositivo de poliuretano ou nitrilo que se coloca dentro da vagina antes da relação sexual.
 
 Vantagens:
@@ -449,6 +453,7 @@ Onde conseguir: Em algumas farmácias e centros de planeamento familiar (nem sem
         id: "diu-implante",
         title: "DIU e Implante: métodos de longa duração",
         category: "Contracepção",
+        audioUrl: "/audio/MP3/diu-implante.mp3",
         content: `**DIU (Dispositivo Intra-Uterino):**
 - É um pequeno dispositivo em forma de T que é colocado dentro do útero por um profissional de saúde.
 - Existem dois tipos: hormonal (Mirena, Jaydess) e de cobre (sem hormonas).
@@ -470,6 +475,7 @@ Ambos são reversíveis — ao remover, a fertilidade regressa rapidamente. Fala
         id: "comparacao-metodos",
         title: "Comparação de Métodos: Eficácia e Vantagens",
         category: "Contracepção",
+        audioUrl: "/audio/MP3/comparacao-metodos.mp3",
         content: `| Método | Eficácia (uso correto) | Eficácia (uso típico) | Protege de IST? |
 |---|---|---|---|
 | Preservativo masculino | 98% | 85% | ✅ Sim |
@@ -488,6 +494,7 @@ Ambos são reversíveis — ao remover, a fertilidade regressa rapidamente. Fala
         id: "mitos-contracepcao",
         title: "Mitos sobre Contracepção que Precisas de Esquecer",
         category: "Contracepção",
+        audioUrl: "/audio/MP3/mitos-contracepcao.mp3",
         content: `Mito 1: "A pílula faz engordar."
 Realidade: Os contracetivos hormonais modernos têm doses muito baixas e a maioria das pessoas não ganha peso significativo.
 
@@ -505,7 +512,7 @@ Realidade: Podes engravidar em QUALQUER relação sexual sem proteção, seja a 
 
 Mito 6: "O coito interrompido (retirar antes) funciona."
 Realidade: O líquido pré-ejaculatório pode conter espermatozoides. Este método tem uma eficácia de apenas 78% no uso típico — não é fiável.`
-      }
+      },
     ]
   },
   {
@@ -525,10 +532,11 @@ Realidade: O líquido pré-ejaculatório pode conter espermatozoides. Este méto
 Muitas IST não apresentam sintomas imediatos, o que significa que uma pessoa pode estar infetada e transmitir a infeção sem saber. Por isso, o rastreio regular é fundamental.`
       },
       {
-id: "prevencao-ist",
-title: "Como prevenir IST",
-category: "Prevenção",
-content: `A prevenção das IST (Infeções Sexualmente Transmissíveis) é essencial para uma vida sexual saudável. Aqui estão as estratégias mais eficazes:
+        id: "prevencao-ist",
+        title: "Como prevenir IST",
+        category: "Prevenção",
+        audioUrl: "/audio/MP3/prevencao-ist.mp3",
+        content: `A prevenção das IST (Infeções Sexualmente Transmissíveis) é essencial para uma vida sexual saudável. Aqui estão as estratégias mais eficazes:
 
 1. Preservativo — a tua melhor defesa:
 - O preservativo masculino e feminino são os ÚNICOS métodos contracetivos que protegem contra a maioria das IST.
@@ -591,7 +599,7 @@ Podes fazer isto no teu Centro de Saúde ou na APF.`
 Hoje em dia, com a Terapia Antirretroviral (TARV), as pessoas com VIH podem viver vidas longas e saudáveis. Quando a carga viral é indetetável, o vírus não é transmitido (Indetetável = Intransmissível).`
       },
       {
-      id: "hpv-vacina",
+        id: "hpv-vacina",
         title: "HPV e a Vacina",
         category: "Prevenção",
         audioUrl: "/audio/MP3/hpv-vacina.mp3",
@@ -655,7 +663,7 @@ Se suspeitas de herpes, consulta um médico. Não tenhas vergonha — é uma inf
 - Se não tratada, pode causar infertilidade.
 
 Ambas são curáveis com antibióticos, mas é crucial tratar cedo. Se não tratadas, podem ter consequências graves e permanentes. Faz rastreio regular!`
-      }
+      },
     ]
   },
   {
@@ -768,6 +776,7 @@ Se és vítima de ciúmes controladores:
         id: "primeira-relacao",
         title: "Primeira Relação Sexual: como saber se estás pronto(a)?",
         category: "Psicologia",
+        audioUrl: "/audio/MP3/primeira-relacao.mp3",
         content: `Não existe uma idade "certa" para ter a primeira relação sexual. A decisão é tua e só tua.
 
 Sinais de que podes estar pronto(a):
@@ -789,6 +798,7 @@ Lembra-te: esperar não é "ser quadrado(a)" — é ser inteligente. A primeira 
         id: "relacoes-distancia",
         title: "Relações à Distância",
         category: "Psicologia",
+        audioUrl: "/audio/MP3/relacoes-distancia.mp3",
         content: `Uma relação à distância pode funcionar, mas exige mais esforço e comunicação:
 
 Dicas para manter a relação saudável:
@@ -803,7 +813,7 @@ Quando a distância é um problema:
 - Se um de vós não quer estar na relação à distância, é melhor ser honesto.
 - Se a relação se torna fonte de ansiedade constante, avalia se vale a pena.
 - Não há problema em terminar se a distância não funciona para ti — não és "fraco(a)" por isso.`
-      }
+      },
     ]
   },
   {
@@ -882,7 +892,7 @@ Se foste vítima de qualquer forma de violência sexual, denuncia:
 - GNRC: 217 809 200
 - APAV: 800 200 2200 (gratuito)
 - Em caso de emergência: 112`
-      }
+      },
     ]
   },
   {
@@ -931,6 +941,7 @@ A orientação pode mudar ao longo da vida — e isso é normal. Não precisas d
         id: "pessoas-trans",
         title: "Pessoas Trans: o que precisas de saber",
         category: "Identidade",
+        audioUrl: "/audio/MP3/pessoas-trans.mp3",
         content: `Uma pessoa transgénero (trans) é alguém cuja identidade de género não corresponde ao sexo que lhe foi atribuído ao nascer.
 
 Por exemplo: uma pessoa que nasceu com corpo de rapaz, mas se identifica como mulher, é uma mulher trans. O inverso é um homem trans.
@@ -997,7 +1008,7 @@ Recursos: ILGA Portugal, Opus Diversidades, Panteras Rosa, GRES.`
 - **Linha do Arco-Íris**: Apoio telefónico e online para pessoas LGBTQI+.
 
 Lembra-te: não estás sozinho(a). Pedir ajuda é um sinal de coragem, não de fraqueza.`
-      }
+      },
     ]
   },
   {
@@ -1042,6 +1053,7 @@ Se suspeitas de uma gravidez, o primeiro passo é fazer um teste de farmácia ou
         id: "teste-gravidez",
         title: "Teste de Gravidez: Quando e Como Fazer",
         category: "Saúde",
+        audioUrl: "/audio/MP3/teste-gravidez.mp3",
         content: `Deves fazer um teste de gravidez se tens atraso na menstruação ou outros sintomas (náuseas, mamas sensíveis, cansaço).
 
 Tipos de teste:
@@ -1061,6 +1073,7 @@ Se positivo, marca consulta no Centro de Saúde para confirmação e aconselhame
         id: "opcoes-gravidez-nao-planeada",
         title: "Opções perante uma Gravidez Não Planeada",
         category: "Apoio",
+        audioUrl: "/audio/MP3/opcoes-gravidez-nao-planeada.mp3",
         content: `Se descobrires que estás grávida e não estava planeado, respira fundo — tens opções e tempo para decidir.
 
 As tuas opções:
@@ -1079,6 +1092,7 @@ A APAV e a APF oferecem apoio psicológico gratuito neste processo.`
         id: "gravidez-adolescencia",
         title: "Gravidez na Adolescência: Riscos e Apoios",
         category: "Saúde",
+        audioUrl: "/audio/MP3/gravidez-adolescencia.mp3",
         content: `Uma gravidez na adolescência traz desafios específicos:
 
 Riscos para a saúde:
@@ -1103,6 +1117,7 @@ O mais importante: procura ajuda médica o mais cedo possível — independentem
         id: "pre-natal",
         title: "Pré-Natal: Cuidados na Gravidez",
         category: "Saúde",
+        audioUrl: "/audio/MP3/pre-natal.mp3",
         content: `O acompanhamento pré-natal é fundamental e gratuito no SNS.
 
 O que inclui:
@@ -1119,7 +1134,7 @@ Cuidados importantes:
 - Evitar alimentos crus ou não pasteurizados.
 
 Assim que souberes que estás grávida, contacta o teu Centro de Saúde para marcar a primeira consulta.`
-      }
+      },
     ]
   },
   {
@@ -1151,6 +1166,7 @@ Comparar a tua vida real com a "vida perfeita" de alguém nas redes sociais é i
         id: "transtornos-alimentares",
         title: "Transtornos Alimentares e Sexualidade",
         category: "Psicologia",
+        audioUrl: "/audio/MP3/transtornos-alimentares.mp3",
         content: `Os transtornos alimentares (anorexia, bulimia, compulsão alimentar) afetam profundamente a sexualidade:
 
 Impacto físico:
@@ -1177,6 +1193,7 @@ Se conheces alguém nesta situação:
         id: "normalidade-corpos",
         title: "A Normalidade dos Corpos: Não Existe Corpo Perfeito",
         category: "Educação",
+        audioUrl: "/audio/MP3/normalidade-corpos.mp3",
         content: `A "normalidade" dos corpos é um mito. Não existe um corpo perfeito — existe uma enorme variedade de corpos saudáveis.
 
 O que é "normal":
@@ -1192,7 +1209,7 @@ O que NÃO é normal:
 - Fazeres dietas extremas ou exercício excessivo para mudar a tua aparência.
 
 Lembra-te: o teu valor não se mede pela tua aparência. Um corpo saudável é um corpo que te permite viver, amar, aprender e ser feliz.`
-      }
+      },
     ]
   },
   {
@@ -1228,6 +1245,7 @@ Não tenhas vergonha: os médicos e enfermeiros estão habituados e estão lá p
         id: "consulta-planeamento-familiar",
         title: "Consulta de Planeamento Familiar: o que esperar",
         category: "Saúde",
+        audioUrl: "/audio/MP3/consulta-planeamento-familiar.mp3",
         content: `A consulta de planeamento familiar é gratuita no SNS e é para TODOS — homens e mulheres, jovens e adultos.
 
 O que acontece na consulta:
@@ -1249,6 +1267,7 @@ Prepara-te: Anota as dúvidas que tens antes da consulta. Não tenhas vergonha d
         id: "preservativo-passo-passo",
         title: "Como Colocar o Preservativo: Passo a Passo",
         category: "Guia",
+        audioUrl: "/audio/MP3/preservativo-passo-passo.mp3",
         content: `Colocar o preservativo corretamente é essencial para a sua eficácia. Segue estes passos:
 
 Antes de começar:
@@ -1271,7 +1290,7 @@ Erros comuns a evitar:
 - Colocar o preservativo do lado errado e depois virar — pode transferir fluidos. Usa um novo.
 - Não apertar a ponta — fica ar preso e o preservativo pode rebentar.
 - Usar dois preservativos ao mesmo tempo — o atrito entre eles faz rasgar.`
-      }
+      },
     ]
   },
   {
@@ -1352,7 +1371,7 @@ Prazer feminino:
 - Realidade: Cerca de 70-80% das mulheres precisam de estimulação clitoridiana direta para atingir o orgasmo.
 
 O que fazer: Usar a pornografia como entretenimento é uma escolha pessoal, mas nunca a uses como guia de como a sexualidade funciona na vida real. A educação sexual de qualidade é a melhor ferramenta.`
-      }
+      },
     ]
   },
   {
@@ -1382,7 +1401,7 @@ O que fazer: Usar a pornografia como entretenimento é uma escolha pessoal, mas 
         - APF (Associação para o Planeamento da Família): Consultas, contracepção e aconselhamento.
         - ILGA Portugal: Apoio especializado para a comunidade LGBTQI+.
         - Centros de Saúde (SNS): Planeamento familiar e rastreios de IST.`
-      }
+      },
     ]
   },
 
@@ -1531,7 +1550,7 @@ O que NÃO FAZER:
 - Não compare com outros: "O teu primo também é gay" não é útil.
 
 Impacto: Estudos mostram que jovens LGBTQI+ com famílias aceitantes têm 40% menos risco de depressão e tentativas de suicídio. A sua aceitação pode salvar a vida do seu filho(a).`
-      }
+      },
     ]
   },
   {
@@ -1633,7 +1652,7 @@ Plataformas online:
 5. Análise de Mídia: Comparar imagens de redes sociais vs. realidade, ou cenas de séries/filmes — discutir o que é real e o que é ficção.
 
 6. Mapa de Recursos: Os alunos investigam e criam um mapa com os recursos de saúde sexual disponíveis na sua zona (centros de saúde, APF, linhas de apoio).`
-      }
+      },
     ]
   },
   {
@@ -1753,7 +1772,7 @@ Serviços de Saúde:
 - Centros de Saúde (SNS): Planeamento familiar, rastreios, consultas jovens.
 - Consultas Jovens: Atendimento específico para adolescentes.
 - Gabinetes de Apoio ao Estudante: Nas escolas.`
-      }
+      },
     ]
   },
   {
@@ -1866,7 +1885,7 @@ O que fazer:
 - Considere terapia individual ou de casal.
 - Fale abertamente com o parceiro(a) — o silêncio é o maior inimigo da intimidade.
 - Não se culpe — as flutuações do desejo são parte da vida.`
-      }
+      },
     ]
   }
 ];

@@ -2,6 +2,46 @@
 
 Log de execuções e melhorias implementadas.
 
+## Execução — 18 Ago 2026
+
+### Melhoria: Expansão dos áudios dos artigos (vinculação completa)
+
+O objetivo pendente "Expandir áudios para todos os artigos" foi concluído: todos os
+artigos cujo ficheiro MP3 existe em `public/audio/MP3/` agora têm `audioUrl` e
+apresentam o `AudioPlayer` na respetiva secção (componente `HomeTab`).
+
+Foram corrigidas também inconsistências de indentação em blocos de artigos
+introduzidas por alterações não finalizadas, normalizando a formatação para o
+padrão canónico (6 espaços no `{`, 8 nas propriedades).
+
+### Implementado
+
+1. **Vinculação de áudios** (`src/data/content-topics.ts`):
+   - 19 artigos passaram a referenciar o respetivo MP3 (`audioUrl`).
+   - Apenas se ligam ficheiros que **existem** no disco — evita-se players
+     quebrados (404). Artigos sem MP3 correspondente mantêm-se sem áudio.
+   - Resultado: 64 referências `audioUrl` locais, 0 apontando para ficheiros
+     inexistentes.
+
+2. **Normalização de indentação** dos blocos de artigo (formatação canónica).
+
+### Verificação
+
+- 229 testes passam (HomeTab inclui os players de áudio por artigo).
+- `tsc --noEmit` limpo em `content-topics.ts` (erros pré-existentes apenas no
+  ficheiro de teste `translations.integrity.test.ts`, não tocado).
+- Auditoria: nenhum `audioUrl` aponta para ficheiro em falta.
+
+### Próximas melhorias pendentes (sugeridas)
+
+- [ ] Gerar os MP3 em falta (ex.: `puberdade`, `metodos-contracetivos`,
+      `o-que-sao-ist`) via `gerar_audios2.py` para cobrir 100% dos artigos
+- [ ] Lazy loading de conteúdo por audiência
+- [ ] Acessibilidade WCAG 2.1 completa (auditoria)
+- [ ] Testes E2E (Playwright)
+
+---
+
 ## Execução — 17 Ago 2026 (2)
 
 ### Melhoria: Pesquisa na FAQ

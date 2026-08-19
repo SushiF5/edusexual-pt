@@ -2,6 +2,54 @@
 
 Log de execuções e melhorias implementadas.
 
+## Execução — 19 Ago 2026 (3)
+
+### Melhoria: Lazy loading dos players de áudio (LazyAudioPlayer)
+
+A página inicial renderizava, de forma eager, todos os elementos `<audio>`
+presentes nas fichas (até 116 MP3 nas três audiências). Cada `<audio>` com
+`<source src>` faz o navegador pré-carregar metadados, pesando a página no
+arranque. Implementei carregamento preguiçoso (lazy) por visibilidade.
+
+### Implementado
+
+1. **`LazyAudioPlayer`** (`src/components/AudioPlayer.tsx`):
+   - Novo componente que adia a montagem do `AudioPlayer` até o elemento
+     entrar (ou aproximar-se, `rootMargin: 300px`) do viewport, via
+     `IntersectionObserver`.
+   - Sem `IntersectionObserver` (ex.: jsdom nos testes) ou em navegadores
+     antigos, recorre a um botão "Carregar áudio" que revela o player sob
+     demanda — garante sempre acesso ao conteúdo (degradação graciosa).
+   - `AudioPlayer` mantém-se inalterado para os testes existentes.
+
+2. **`preload="none"`** no `<audio>`: o navegador só vai buscar o ficheiro
+   quando o utilizador clica em "Reproduzir", poupando largura de banda.
+
+3. **Integração** (`src/components/HomeTab.tsx`): os players de tópico e de
+   artigo passaram a usar `LazyAudioPlayer` (com a chave i18n `loadAudio`,
+   PT/EN/ES).
+
+4. **i18n** (`src/i18n/translations.ts`): nova chave `loadAudio` com paridade
+   PT/EN/ES (validada pelo teste de integridade).
+
+5. **Testes** (`src/__tests__/components/LazyAudioPlayer.test.tsx`): 3 testes
+   cobrem renderização após montagem, botão de placeholder e `loadLabel`.
+
+### Verificação
+
+- 235 testes passam (suite completa).
+- `tsc --noEmit` limpo nos ficheiros alterados (erros pré-existentes apenas
+  em ficheiros de teste não tocados: `PodcastTab.test.tsx`,
+  `translations.integrity.test.ts`).
+
+### Próximas melhorias pendentes (sugeridas)
+
+- [ ] Acessibilidade WCAG 2.1 completa (auditoria)
+- [ ] Testes E2E (Playwright)
+- [ ] Lazy loading de blocos de tópicos por audiência (fora do ecrã)
+
+---
+
 ## Execução — 19 Ago 2026 (2)
 
 ### Melhoria: Expansão de áudios para Crianças e Adultos

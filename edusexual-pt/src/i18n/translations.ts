@@ -138,6 +138,7 @@ type TranslationKeys = {
   scrollToTop: string;
   nameHelp: string;
   questionHelp: string;
+  loadAudio: string;
 };
 
 const pt: TranslationKeys = {
@@ -268,6 +269,7 @@ const pt: TranslationKeys = {
   errorDesc: "Ocorreu um erro inesperado. Tenta novamente ou volta à página inicial.",
   errorBack: "Voltar ao início",
   scrollToTop: "Voltar ao topo",
+  loadAudio: "Carregar áudio",
   nameHelp: "Nome opcional para a tua pergunta anónima",
   questionHelp: "A tua pergunta é anónima. Mínimo 1 carácter, máximo 2000.",
 };
@@ -400,6 +402,7 @@ const en: TranslationKeys = {
   errorDesc: "An unexpected error occurred. Try again or go back to the homepage.",
   errorBack: "Back to homepage",
   scrollToTop: "Back to top",
+  loadAudio: "Load audio",
   nameHelp: "Optional name for your anonymous question",
   questionHelp: "Your question is anonymous. Minimum 1 character, maximum 2000.",
 };
@@ -532,6 +535,7 @@ const es: TranslationKeys = {
   errorDesc: "Ocurrió un error inesperado. Inténtalo de nuevo o vuelve a la página de inicio.",
   errorBack: "Volver al inicio",
   scrollToTop: "Volver arriba",
+  loadAudio: "Cargar audio",
   nameHelp: "Nombre opcional para tu pregunta anónima",
   questionHelp: "Tu pregunta es anónima. Mínimo 1 carácter, máximo 2000.",
 };

@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import { topics } from "@/data/content";
 import { useI18n } from "@/i18n/context";
-import AudioPlayer from "@/components/AudioPlayer";
+import AudioPlayer, { LazyAudioPlayer } from "@/components/AudioPlayer";
 import { Audience, TabId } from "@/types";
 
 interface HomeTabProps {
@@ -104,7 +104,7 @@ export default function HomeTab({ audience, setActiveTab }: HomeTabProps) {
               <p className="text-gray-500 dark:text-gray-400 mb-4 md:mb-6 line-clamp-2 leading-relaxed text-sm md:text-base">{topic.description}</p>
 
               {topic.audioUrl && (
-                <AudioPlayer src={topic.audioUrl} title={topic.title} />
+                <LazyAudioPlayer src={topic.audioUrl} title={topic.title} loadLabel={t.loadAudio} />
               )}
 
               <div className="space-y-3">
@@ -119,7 +119,7 @@ export default function HomeTab({ audience, setActiveTab }: HomeTabProps) {
                     </summary>
                     <div className="mt-4 p-4 md:p-5 bg-gray-50 dark:bg-gray-700/50 rounded-2xl text-sm text-gray-700 dark:text-gray-300 whitespace-pre-line leading-relaxed shadow-inner">
                       {article.audioUrl && (
-                        <AudioPlayer src={article.audioUrl} title={article.title} />
+                        <LazyAudioPlayer src={article.audioUrl} title={article.title} loadLabel={t.loadAudio} />
                       )}
                       {article.content}
                     </div>

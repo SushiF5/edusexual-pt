@@ -17,6 +17,12 @@ jest.mock("@/i18n/context", () => ({
       noQuizQuestions: "Sem perguntas",
       exploreTopics: "Explorar",
       startQuiz: "Começar Quiz",
+      quizReviewTitle: "Revisão",
+      quizReviewIntro: "Revisão intro",
+      quizYourAnswer: "Tua resposta",
+      quizCorrectAnswerLabel: "Correta",
+      quizNotAnswered: "Sem resposta",
+      quizReviewOnlyWrong: "Apenas erradas",
     },
   }),
 }));
@@ -281,5 +287,37 @@ describe("QuizTab", () => {
     render(<QuizTab audience="jovens" />);
     fireEvent.click(screen.getByText("Resposta A"));
     expect(screen.getByText("A é a correta")).toBeInTheDocument();
+  });
+
+  it("shows a review section after finishing the quiz", () => {
+    render(<QuizTab audience="jovens" />);
+    fireEvent.click(screen.getByText("Resposta A"));
+    fireEvent.click(screen.getByText("Seguinte"));
+    fireEvent.click(screen.getByText("Opção Y"));
+    fireEvent.click(screen.getByText("Ver Resultado"));
+    expect(screen.getByText("Revisão")).toBeInTheDocument();
+    expect(screen.getAllByText(/Tua resposta:/)).toHaveLength(2);
+  });
+
+  it("review flags the wrong answer and shows the correct one", () => {
+    render(<QuizTab audience="jovens" />);
+    fireEvent.click(screen.getByText("Resposta B"));
+    fireEvent.click(screen.getByText("Seguinte"));
+    fireEvent.click(screen.getByText("Opção X"));
+    fireEvent.click(screen.getByText("Ver Resultado"));
+    expect(screen.getByText(/Tua resposta: Resposta B/)).toBeInTheDocument();
+    expect(screen.getByText(/Correta: Opção Y/)).toBeInTheDocument();
+  });
+
+  it("review filter hides correct answers when toggled", () => {
+    render(<QuizTab audience="jovens" />);
+    fireEvent.click(screen.getByText("Resposta A"));
+    fireEvent.click(screen.getByText("Seguinte"));
+    fireEvent.click(screen.getByText("Opção X"));
+    fireEvent.click(screen.getByText("Ver Resultado"));
+    expect(screen.getByText(/Tua resposta: Resposta A/)).toBeInTheDocument();
+    fireEvent.click(screen.getByLabelText("Apenas erradas"));
+    expect(screen.queryByText(/Tua resposta: Resposta A/)).not.toBeInTheDocument();
+    expect(screen.getByText(/Tua resposta: Opção X/)).toBeInTheDocument();
   });
 });

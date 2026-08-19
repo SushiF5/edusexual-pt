@@ -26,7 +26,10 @@ function loadState(audience: Audience) {
   return null;
 }
 
-function saveState(audience: Audience, state: { currentQuestion: number; score: number; showResult: boolean }) {
+function saveState(
+  audience: Audience,
+  state: { currentQuestion: number; score: number; showResult: boolean; userAnswers: (number | null)[] }
+) {
   try {
     localStorage.setItem(`${STORAGE_KEY}-${audience}`, JSON.stringify(state));
   } catch (e) {
@@ -52,6 +55,10 @@ export default function QuizTab({ audience }: QuizTabProps) {
 
   const [quizState, setQuizState] = useState(() => {
     const saved = loadState(audience);
+    const initialAnswers = Array<number | null>(filteredQuiz.length).fill(null);
+    if (saved && Array.isArray(saved.userAnswers) && saved.userAnswers.length === filteredQuiz.length) {
+      saved.userAnswers.forEach((a: number | null, i: number) => { initialAnswers[i] = a; });
+    }
     if (saved && saved.currentQuestion < filteredQuiz.length) {
       return {
         currentQuestion: saved.currentQuestion,
@@ -59,6 +66,7 @@ export default function QuizTab({ audience }: QuizTabProps) {
         showResult: saved.showResult,
         selectedAnswer: null as number | null,
         showExplanation: false,
+        userAnswers: initialAnswers,
       };
     }
     return {
@@ -67,8 +75,11 @@ export default function QuizTab({ audience }: QuizTabProps) {
       showResult: false,
       selectedAnswer: null as number | null,
       showExplanation: false,
+      userAnswers: initialAnswers,
     };
   });
+
+  const [reviewOnlyWrong, setReviewOnlyWrong] = useState(false);
 
   useEffect(() => {
     if (quizState.showResult || quizState.currentQuestion === 0) {
@@ -78,19 +89,25 @@ export default function QuizTab({ audience }: QuizTabProps) {
         currentQuestion: quizState.currentQuestion,
         score: quizState.score,
         showResult: quizState.showResult,
+        userAnswers: quizState.userAnswers,
       });
     }
-  }, [quizState.currentQuestion, quizState.score, quizState.showResult, audience]);
+  }, [quizState.currentQuestion, quizState.score, quizState.showResult, quizState.userAnswers, audience]);
 
   const handleAnswer = (answerIndex: number) => {
     if (quizState.showExplanation) return;
     const isCorrect = answerIndex === filteredQuiz[quizState.currentQuestion].correctAnswer;
-    setQuizState(prev => ({
-      ...prev,
-      selectedAnswer: answerIndex,
-      showExplanation: true,
-      score: isCorrect ? prev.score + 1 : prev.score,
-    }));
+    setQuizState(prev => {
+      const userAnswers = [...prev.userAnswers];
+      userAnswers[prev.currentQuestion] = answerIndex;
+      return {
+        ...prev,
+        selectedAnswer: answerIndex,
+        showExplanation: true,
+        score: isCorrect ? prev.score + 1 : prev.score,
+        userAnswers,
+      };
+    });
   };
 
   const nextQuestion = () => {
@@ -114,7 +131,9 @@ export default function QuizTab({ audience }: QuizTabProps) {
       showResult: false,
       selectedAnswer: null,
       showExplanation: false,
+      userAnswers: Array<number | null>(filteredQuiz.length).fill(null),
     });
+    setReviewOnlyWrong(false);
     clearState(audience);
   };
 
@@ -127,18 +146,63 @@ export default function QuizTab({ audience }: QuizTabProps) {
   }
 
   if (quizState.showResult) {
+    const reviewItems = filteredQuiz
+      .map((q, index) => ({ q, index, chosen: quizState.userAnswers[index] }))
+      .filter(({ q, chosen }) => !reviewOnlyWrong || chosen !== q.correctAnswer);
+
     return (
-      <div className="card text-center">
-        <div className="text-5xl mb-4">{quizState.score === filteredQuiz.length ? '🏆' : quizState.score >= filteredQuiz.length / 2 ? '👏' : '📚'}</div>
-        <h3 className="text-2xl font-bold mb-2">{t.quizFinished}</h3>
-        <p className="text-gray-500 dark:text-gray-400 mb-2">
-          {quizState.score === filteredQuiz.length ? t.quizPerfect :
-          quizState.score >= filteredQuiz.length / 2 ? t.quizGood : t.quizTryAgain}
-        </p>
-        <p className="text-4xl font-bold text-primary mb-6">{quizState.score} / {filteredQuiz.length}</p>
-        <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <button onClick={resetQuiz} className="btn-primary">{t.tryAgain}</button>
+      <div className="max-w-2xl mx-auto space-y-6">
+        <div className="card text-center">
+          <div className="text-5xl mb-4">{quizState.score === filteredQuiz.length ? '🏆' : quizState.score >= filteredQuiz.length / 2 ? '👏' : '📚'}</div>
+          <h3 className="text-2xl font-bold mb-2">{t.quizFinished}</h3>
+          <p className="text-gray-500 dark:text-gray-400 mb-2">
+            {quizState.score === filteredQuiz.length ? t.quizPerfect :
+            quizState.score >= filteredQuiz.length / 2 ? t.quizGood : t.quizTryAgain}
+          </p>
+          <p className="text-4xl font-bold text-primary mb-6">{quizState.score} / {filteredQuiz.length}</p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <button onClick={resetQuiz} className="btn-primary">{t.tryAgain}</button>
+          </div>
         </div>
+
+        <section className="card" aria-labelledby="quiz-review-title">
+          <h4 id="quiz-review-title" className="text-xl font-heading font-bold mb-1 text-primary">{t.quizReviewTitle}</h4>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">{t.quizReviewIntro}</p>
+          <label className="flex items-center gap-2 mb-4 text-sm cursor-pointer select-none">
+            <input
+              type="checkbox"
+              checked={reviewOnlyWrong}
+              onChange={(e) => setReviewOnlyWrong(e.target.checked)}
+              className="w-4 h-4 accent-primary"
+            />
+            {t.quizReviewOnlyWrong}
+          </label>
+
+          <ol className="space-y-4">
+            {reviewItems.map(({ q, index, chosen }) => {
+              const isCorrect = chosen === q.correctAnswer;
+              return (
+                <li key={q.id} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                  <p className="font-semibold mb-3">
+                    <span className="text-gray-400 mr-1">{index + 1}.</span>{q.question}
+                  </p>
+                  <div className="space-y-1 text-sm">
+                    <p className={isCorrect ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}>
+                      {t.quizYourAnswer}: {chosen === null || chosen === undefined ? t.quizNotAnswered : q.options[chosen]}
+                      {isCorrect ? " ✓" : " ✗"}
+                    </p>
+                    {!isCorrect && (
+                      <p className="text-green-600 dark:text-green-400">
+                        {t.quizCorrectAnswerLabel}: {q.options[q.correctAnswer]} ✓
+                      </p>
+                    )}
+                    <p className="text-gray-600 dark:text-gray-300 pt-1">{q.explanation}</p>
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
+        </section>
       </div>
     );
   }

@@ -65,6 +65,12 @@ type TranslationKeys = {
   quizTryAgain: string;
   tryAgain: string;
   noQuizQuestions: string;
+  quizReviewTitle: string;
+  quizReviewIntro: string;
+  quizYourAnswer: string;
+  quizCorrectAnswerLabel: string;
+  quizNotAnswered: string;
+  quizReviewOnlyWrong: string;
   faqTitle: string;
   faqDescCrianca: string;
   faqDescJovem: string;
@@ -191,6 +197,12 @@ const pt: TranslationKeys = {
   quizTryAgain: "Não desanimes! Explora os temas e tenta de novo.",
   tryAgain: "Tentar de novo",
   noQuizQuestions: "Ainda não há perguntas para este perfil.",
+  quizReviewTitle: "Revisão das respostas",
+  quizReviewIntro: "Vê as perguntas, a tua resposta e a explicação para cada uma.",
+  quizYourAnswer: "A tua resposta",
+  quizCorrectAnswerLabel: "Resposta correta",
+  quizNotAnswered: "Sem resposta",
+  quizReviewOnlyWrong: "Mostrar apenas as que errei",
   faqTitle: "Perguntas Frequentes",
   faqDescCrianca: "Respostas simples para as tuas dúvidas.",
   faqDescJovem: "Esclarece as tuas dúvidas com as perguntas mais comuns.",
@@ -317,6 +329,12 @@ const en: TranslationKeys = {
   quizTryAgain: "Don't give up! Explore the topics and try again.",
   tryAgain: "Try again",
   noQuizQuestions: "No questions available for this profile yet.",
+  quizReviewTitle: "Review your answers",
+  quizReviewIntro: "See each question, your answer and the explanation.",
+  quizYourAnswer: "Your answer",
+  quizCorrectAnswerLabel: "Correct answer",
+  quizNotAnswered: "No answer",
+  quizReviewOnlyWrong: "Show only the ones I got wrong",
   faqTitle: "Frequently Asked Questions",
   faqDescCrianca: "Simple answers to your questions.",
   faqDescJovem: "Clarify your doubts with the most common questions.",
@@ -443,6 +461,12 @@ const es: TranslationKeys = {
   quizTryAgain: "¡No te desanimes! Explora los temas e inténtalo de nuevo.",
   tryAgain: "Intentar de nuevo",
   noQuizQuestions: "Aún no hay preguntas para este perfil.",
+  quizReviewTitle: "Revisión de respuestas",
+  quizReviewIntro: "Mira cada pregunta, tu respuesta y la explicación.",
+  quizYourAnswer: "Tu respuesta",
+  quizCorrectAnswerLabel: "Respuesta correcta",
+  quizNotAnswered: "Sin respuesta",
+  quizReviewOnlyWrong: "Mostrar solo las que fallé",
   faqTitle: "Preguntas Frecuentes",
   faqDescCrianca: "Respuestas simples para tus dudas.",
   faqDescJovem: "Aclara tus dudas con las preguntas más comunes.",

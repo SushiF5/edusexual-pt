@@ -2,6 +2,50 @@
 
 Log de execuções e melhorias implementadas.
 
+## Execução — 19 Ago 2026
+
+### Melhoria: Modo de Revisão do Quiz
+
+Após terminar o quiz, os utilizadores podiam ver apenas a pontuação. Adicionei
+uma secção de **revisão** que lista cada pergunta com a resposta dada, a
+resposta correta (quando errou) e a explicação — reforçando a aprendizagem.
+
+### Implementado
+
+1. **Secção de revisão** (`src/components/QuizTab.tsx`):
+   - Registo das respostas dadas (`userAnswers`) ao longo do quiz.
+   - Ecrã de resultado agora inclui uma lista ordenada (`<ol>`) com, para cada
+     pergunta: a resposta escolhida (✓/✗), a resposta correta (só quando
+     errada) e a explicação.
+   - Filtro opcional "Mostrar apenas as que errei" (`checkbox` com
+     `reviewOnlyWrong`) para rever só os erros.
+   - Semântica acessível: `<section aria-labelledby>`, `<ol>`, `aria-label`.
+
+2. **Persistência** (`QuizTab.tsx`): `userAnswers` passou a ser guardado/
+   restaurado em `localStorage` juntamente com o estado do quiz.
+
+3. **i18n** (`src/i18n/translations.ts`): novas chaves `quizReviewTitle`,
+   `quizReviewIntro`, `quizYourAnswer`, `quizCorrectAnswerLabel`,
+   `quizNotAnswered`, `quizReviewOnlyWrong` em PT/EN/ES (paridade mantida).
+
+4. **Testes** (`src/__tests__/components/QuizTab.test.tsx`): 3 novos testes
+   cobrem a secção de revisão, a marcação de erro/correto e o filtro.
+
+### Verificação
+
+- 232 testes passam (suite completa, incluindo integridade i18n e QuizTab).
+- `tsc --noEmit` limpo nos ficheiros alterados (erros pré-existentes apenas no
+  ficheiro de teste `translations.integrity.test.ts`, não tocado).
+
+### Próximas melhorias pendentes (sugeridas)
+
+- [ ] Expandir áudios para as secções Crianças e Adultos (o script cobre só Jovens)
+- [ ] Lazy loading de conteúdo por audiência
+- [ ] Acessibilidade WCAG 2.1 completa (auditoria)
+- [ ] Testes E2E (Playwright)
+
+---
+
 ## Execução — 18 Ago 2026 (2)
 
 ### Melhoria: Cobertura total de áudios dos artigos (Jovens)

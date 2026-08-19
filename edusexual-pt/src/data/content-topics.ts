@@ -17,34 +17,38 @@ export const topics: Topic[] = [
         
 É importante saberes que o teu corpo pertence-te a ti. Ninguém deve tocar nas tuas partes privadas sem a tua autorização, a menos que seja por uma questão de saúde (como o médico ou os pais para te limparem).`
       },
-      {
-        id: "toques-seguros",
+      {id: "toques-seguros",
         title: "Toques bons e toques confusos",
         category: "Segurança",
+        audioUrl: "/audio/MP3/toques-seguros.mp3",
+
         content: `Existem toques que nos fazem sentir bem, como um abraço da avó ou um "passa aqui" de um amigo. Esses são toques bons!
         
 Mas se algum toque te deixar confuso, triste ou com medo, deves dizer "Não!" e contar logo a um adulto em quem confies (como o pai, a mãe ou um professor). Não deves guardar segredos que te deixem desconfortável.`
       },
-      {
-        id: "nomes-corretos",
+      {id: "nomes-corretos",
         title: "Os nomes das partes do corpo",
         category: "Corpo",
+        audioUrl: "/audio/MP3/nomes-corretos.mp3",
+
         content: `Tal como temos um nome para o nariz e para os ouvidos, as partes privadas também têm nomes. 
         
 As meninas têm a vulva e os meninos têm o pénis e os testículos. Usar os nomes certos ajuda-nos a comunicar melhor e a dizer exatamente o que se passa se tivermos algum problema ou dúvida.`
       },
-      {
-        id: "diferencas-corpos",
+      {id: "diferencas-corpos",
         title: "Meninos e Meninas: O que muda?",
         category: "Corpo",
+        audioUrl: "/audio/MP3/diferencas-corpos.mp3",
+
         content: `Toda a gente é diferente e isso é o que torna o mundo interessante!
 
 Embora a maioria das pessoas seja menino ou menina, a maior diferença está nas partes privadas e na forma como o corpo cresce. Mas lembra-te: independentemente de sermos meninos ou meninas, todos temos sentimentos e todos merecemos respeito.`
       },
-      {
-        id: "crescer-corpo",
+      {id: "crescer-corpo",
         title: "O que acontece quando cresço?",
         category: "Corpo",
+        audioUrl: "/audio/MP3/crescer-corpo.mp3",
+
         content: `À medida que cresces, o teu corpo vai mudar. Isso chama-se puberdade e é algo que acontece a toda a gente!
 
 Algumas coisas que podem acontecer:
@@ -72,26 +76,29 @@ Cada pessoa cresce ao seu ritmo. O teu amigo pode crescer mais rápido que tu, e
 
 Por exemplo, antes de dares um abraço a um amigo, podes perguntar: "Posso dar-te um abraço?". Se ele disser "Sim", podes dar. Se disser "Não", tudo bem, respeitamos a vontade dele. O mesmo vale para ti: tu podes dizer "Não" se não quiseres um abraço!`
       },
-      {
-        id: "superpoder-nao",
+      {id: "superpoder-nao",
         title: "Dizer 'Não' é um superpoder",
         category: "Segurança",
+        audioUrl: "/audio/MP3/superpoder-nao.mp3",
+
         content: `Sabias que tens um superpoder? Chama-se a palavra "NÃO".
 
 Sempre que sentires que algo não está certo, ou que alguém está a fazer algo que te deixa desconfortável, podes usar o teu superpoder. Não precisas de ser educada se alguém estiver a desrespeitar o teu corpo. Diz "NÃO" com voz firme e afasta-te.`
       },
-      {
-        id: "segredos-bons-maus",
+      {id: "segredos-bons-maus",
         title: "Segredos bons e segredos maus",
         category: "Segurança",
+        audioUrl: "/audio/MP3/segredos-bons-maus.mp3",
+
         content: `Há segredos que são divertidos, como uma festa surpresa para o pai ou um presente escondido. Esses são segredos bons porque nos deixam felizes!
 
 Mas há segredos que nos deixam com um "nó na barriga" ou tristes. Se alguém te pedir para guardar um segredo sobre o teu corpo ou sobre algo que te deixou assustado, esse é um segredo mau. Segredos maus DEVEM ser contados a um adulto de confiança.`
       },
-      {
-        id: "pedir-ajuda",
+      {id: "pedir-ajuda",
         title: "Como pedir ajuda se algo está errado",
         category: "Segurança",
+        audioUrl: "/audio/MP3/pedir-ajuda.mp3",
+
         content: `Se alguma coisa te deixa triste, com medo ou confuso, é muito importante pedires ajuda. Nunca estás sozinho(a)!
 
 A quem podes pedir ajuda:
@@ -103,10 +110,11 @@ A quem podes pedir ajuda:
 
 Lembra-te: se a primeira pessoa a quem pedes ajuda não te ouvir, pede a outra, e outra, até alguém te ajude. Tu mereces ser ouvido(a) e protegido(a).`
       },
-      {
-        id: "seguranca-online",
+      {id: "seguranca-online",
         title: "Regras de segurança na internet",
         category: "Segurança",
+        audioUrl: "/audio/MP3/seguranca-online.mp3",
+
         content: `A internet é divertida, mas também tem regras para te manteres seguro(a):
 
 1. Nunca partilhes o teu nome completo, morada ou escola com pessoas que não conheces online.
@@ -136,10 +144,11 @@ Todas as emoções são importantes — mesmo as que nos fazem sentir mal. Senti
 
 Dica: Quando sentires uma emoção forte, para um momento, respira fundo e pensa: "O que é que estou a sentir? Porquê?" Dar nome às emoções ajuda-te a compreendê-las melhor.`
       },
-      {
-        id: "amizade-bom-amigo",
+      {id: "amizade-bom-amigo",
         title: "Amizade: o que é ser um bom amigo?",
         category: "Amizade",
+        audioUrl: "/audio/MP3/amizade-bom-amigo.mp3",
+
         content: `Um bom amigo é alguém que:
 - Te respeita e nunca te força a fazer algo que não queres.
 - Te ouve quando precisas de falar.
@@ -152,10 +161,11 @@ Tu também deves ser assim com os teus amigos! A amizade é uma via de mão dupl
 
 Se um "amigo" te manda, te insulta ou te exclui, talvez não seja um verdadeiro amigo. E tudo bem — podes encontrar amigos melhores!`
       },
-      {
-        id: "respeitar-sentimentos",
+      {id: "respeitar-sentimentos",
         title: "Respeitar os sentimentos dos outros",
         category: "Emoções",
+        audioUrl: "/audio/MP3/respeitar-sentimentos.mp3",
+
         content: `Assim como os teus sentimentos são importantes, os sentimentos dos outros também são!
 
 Isto significa que:
@@ -166,10 +176,11 @@ Isto significa que:
 
 Não precisas de concordar com tudo o que os outros sentem, mas deves sempre respeitar. Tratar os outros com bondade faz de ti uma pessoa incrível!`
       },
-      {
-        id: "triste-confuso",
+      {id: "triste-confuso",
         title: "Quando me sinto triste ou confuso",
         category: "Emoções",
+        audioUrl: "/audio/MP3/triste-confuso.mp3",
+
         content: `Há dias em que nos sentimos triste, confuso ou simplesmente "não estamos para aí". Isso acontece a toda a gente — até aos adultos!
 
 O que podes fazer:
@@ -199,10 +210,11 @@ Algumas famílias têm pai e mãe. Outras têm duas mães ou dois pais. Há fam�
 
 O que torna uma família especial não é como ela é formada, mas sim o amor e o cuidado que as pessoas têm umas pelas outras. A tua família é especial porque é a TUA família!`
       },
-      {
-        id: "tipos-familias",
+      {id: "tipos-familias",
         title: "Há famílias de muitos modos",
         category: "Família",
+        audioUrl: "/audio/MP3/tipos-familias.mp3",
+
         content: `Na tua escola, provavelmente existem muitos tipos de famílias:
 
 - Famílias com pai e mãe.
@@ -215,10 +227,11 @@ O que torna uma família especial não é como ela é formada, mas sim o amor e 
 
 Todas estas famílias são verdadeiras e todas merecem respeito. Nunca deves gozar com a família de alguém — cada pessoa tem a sua história e o seu amor.`
       },
-      {
-        id: "de-onde-vem-bebes",
+      {id: "de-onde-vem-bebes",
         title: "Bébés: de onde vêm?",
         category: "Família",
+        audioUrl: "/audio/MP3/de-onde-vem-bebes.mp3",
+
         content: `Esta é uma pergunta que muitas crianças fazem! A resposta verdadeira e simples é:
 
 Um bebé começa a formar-se quando uma parte do corpo do pai (o espermatozoide) se junta a uma parte do corpo da mãe (o óvulo). Isso acontece dentro do corpo da mãe, numa zona especial chamada útero, que é como uma "sala de espera" muito confortável onde o bebé cresce durante 9 meses.
@@ -1435,10 +1448,11 @@ Dicas para pais:
 2. Aproveite momentos do dia-a-dia (um anúncio na TV, uma gravidez na família) para falar sobre o tema de forma natural.
 3. Se não souber a resposta, diga "Vou investigar e depois respondo-te".`
       },
-      {
-        id: "sinais-alerta",
+      {id: "sinais-alerta",
         title: "Sinais de Alerta: Abuso Sexual",
         category: "Proteção",
+        audioUrl: "/audio/MP3/sinais-alerta.mp3",
+
         content: `É fundamental estar atento a mudanças súbitas no comportamento da criança:
         - Pesadelos frequentes ou medo de dormir sozinho.
         - Comportamentos sexuais desadequados para a idade.
@@ -1447,19 +1461,21 @@ Dicas para pais:
         
 Mantenha sempre um canal de comunicação aberto e sem julgamentos.`
       },
-      {
-        id: "educacao-idade",
+      {id: "educacao-idade",
         title: "Educação Sexual por Idade",
         category: "Pedagogia",
+        audioUrl: "/audio/MP3/educacao-idade.mp3",
+
         content: `A abordagem deve adaptar-se ao desenvolvimento da criança:
 - 3-6 anos: Nomes das partes do corpo, privacidade e consentimento básico.
 - 6-11 anos: Mudanças do corpo, diversidade familiar, higiene.
 - 12+ anos: Puberdade, contraceção, IST, relações saudáveis.`
       },
-      {
-        id: "perguntas-dificeis",
+      {id: "perguntas-dificeis",
         title: "Respostas a Perguntas Difíceis das Crianças",
         category: "Pedagogia",
+        audioUrl: "/audio/MP3/perguntas-dificeis.mp3",
+
         content: `As crianças fazem perguntas que podem surpreender. O importante é responder com honestidade e calma:
 
 "De onde vêm os bebés?"
@@ -1478,10 +1494,11 @@ Regras de ouro:
 - Não rias da pergunta. Se rires, a criança vai aprender que não deve perguntar.
 - Responde só ao que foi perguntado — não dês mais informação do que a criança pediu.`
       },
-      {
-        id: "ambiente-confianca",
+      {id: "ambiente-confianca",
         title: "Como Criar um Ambiente de Confiança em Casa",
         category: "Pedagogia",
+        audioUrl: "/audio/MP3/ambiente-confianca.mp3",
+
         content: `Para que as crianças e jovens falem abertamente sobre sexualidade, precisam de sentir que o ambiente em casa é seguro:
 
 1. Seja abordável: Mostre que está disponível para conversar sem julgamentos.
@@ -1491,10 +1508,11 @@ Regras de ouro:
 5. Não force conversas: Esteja disponível, mas não pressione. O diálogo acontece naturalmente quando há confiança.
 6. Seja o exemplo: Trate o seu parceiro/a com respeito — as crianças aprendem pelo que veem.`
       },
-      {
-        id: "linguagem-correta",
+      {id: "linguagem-correta",
         title: "A Importância da Linguagem Correta (Nomes Anatómicos)",
         category: "Pedagogia",
+        audioUrl: "/audio/MP3/linguagem-correta.mp3",
+
         content: `Usar os nomes anatómicos corretos (vulva, pénis, testículos, vagina, útero) em vez de eufemismos ("pássaro", "pilinha", "coiso") é fundamental por várias razões:
 
 1. Proteção: Se uma criança disser "o senhor tocou na minha vulva", um adulto entende imediatamente o que aconteceu. Se disser "tocou no meu pilinha", pode haver mal-entendidos.
@@ -1505,10 +1523,11 @@ Regras de ouro:
 
 4. Respeito pelo corpo: Usar os nomes certos ensina que todas as partes do corpo merecem respeito — não há partes de que envergonhar.`
       },
-      {
-        id: "filhos-internet",
+      {id: "filhos-internet",
         title: "Filhos e Internet: Como Proteger sem Espiar",
         category: "Proteção",
+        audioUrl: "/audio/MP3/filhos-internet.mp3",
+
         content: `Equilibrar a proteção com a privacidade do jovem é um desafio. Algumas orientações:
 
 1. Eduque antes de controlar: Explique os riscos (grooming, cyberbullying, conteúdo inapropriado) e ensine o que fazer se algo correr mal.
@@ -1523,10 +1542,11 @@ Regras de ouro:
 
 6. Saiba os sinais de alerta: O jovem esconde o ecrã quando se aproxima, fica ansioso após usar o telemóvel, tem amigos online desconhecidos.`
       },
-      {
-        id: "falar-pornografia",
+      {id: "falar-pornografia",
         title: "Como Falar de Pornografia com os Filhos",
         category: "Educação",
+        audioUrl: "/audio/MP3/falar-pornografia.mp3",
+
         content: `A maioria dos jovens já viu pornografia antes dos 15 anos. Ignorar isto não vai fazer desaparecer. Falar abertamente é essencial:
 
 Como abordar:
@@ -1540,10 +1560,11 @@ Mensagens-chave a transmitir:
 - O consentimento, o respeito e a comunicação não aparecem na pornografia, mas são essenciais na vida real.
 - Não há problema em ter curiosidade — mas é importante ter informação de qualidade para distinguir fantasia de realidade.`
       },
-      {
-        id: "orientacao-filho",
+      {id: "orientacao-filho",
         title: "Orientação Sexual do Filho: Como Reagir e Apoiar",
         category: "Apoio",
+        audioUrl: "/audio/MP3/orientacao-filho.mp3",
+
         content: `Se o seu filho(a) partilhar a orientação sexual ou identidade de género, a sua reação tem um impacto enorme no bem-estar dele(a):
 
 O que FAZER:
@@ -1587,10 +1608,11 @@ O que a lei prevê:
 - Os pais podem acompanhar o projeto da escola mas NÃO podem impedir a participação do(a) filho(a).
 - A escola deve informar os pais sobre o conteúdo programático.`
       },
-      {
-        id: "curriculo-dge",
+      {id: "curriculo-dge",
         title: "Educação Sexual no Currículo: Orientações da DGE",
         category: "Pedagogia",
+        audioUrl: "/audio/MP3/curriculo-dge.mp3",
+
         content: `A Direção-Geral da Educação (DGE) publicou orientações para a educação sexual nas escolas:
 
 Áreas temáticas por ciclo:
@@ -1603,10 +1625,11 @@ A DGE disponibiliza recursos em: dge.mec.pt
 
 O desafio: Muitas escolas não cumprem integralmente a lei por falta de formação dos docentes ou por resistência interna. Os pais podem e devem exigir o cumprimento.`
       },
-      {
-        id: "professores-abordagem",
+      {id: "professores-abordagem",
         title: "Como os Professores Podem Abordar o Tema",
         category: "Pedagogia",
+        audioUrl: "/audio/MP3/professores-abordagem.mp3",
+
         content: `Para os professores que implementam educação sexual, aqui vão dicas práticas:
 
 1. Crie um ambiente seguro: Estabeleça regras — sem risadas, sem gozos, respeito mútuo. As perguntas são sempre válidas.
@@ -1623,10 +1646,11 @@ O desafio: Muitas escolas não cumprem integralmente a lei por falta de formaç�
 
 7. Recursos: A DGE e a APF disponibilizam materiais pedagógicos gratuitos.`
       },
-      {
-        id: "recursos-pedagogicos",
+      {id: "recursos-pedagogicos",
         title: "Recursos Pedagógicos para Educadores",
         category: "Recursos",
+        audioUrl: "/audio/MP3/recursos-pedagogicos.mp3",
+
         content: `Recursos gratuitos para educação sexual em Portugal:
 
 Instituições:
@@ -1646,10 +1670,11 @@ Plataformas online:
 - SexoComCiência (APF): Informação validada cientificamente.
 - Escola de Sexualidade (DGE): Plataforma de recursos para docentes.`
       },
-      {
-        id: "atividades-sala-aula",
+      {id: "atividades-sala-aula",
         title: "Atividades e Dinâmicas de Grupo para a Sala de Aula",
         category: "Pedagogia",
+        audioUrl: "/audio/MP3/atividades-sala-aula.mp3",
+
         content: `Atividades práticas para educação sexual na sala de aula:
 
 1. Caixa de Perguntas Anónimas: Os alunos escrevem dúvidas em papéis e colocam numa caixa. O professor responde de forma informativa e sem julgamento.
@@ -1695,10 +1720,11 @@ Sinais físicos:
 
 Importante: Estes sinais podem ter outras causas. Não acuse sem provas, mas não ignore — investigue com profissionais.`
       },
-      {
-        id: "o-que-fazer-abuso",
+      {id: "o-que-fazer-abuso",
         title: "O que Fazer se Suspeitar de Abuso",
         category: "Proteção",
+        audioUrl: "/audio/MP3/o-que-fazer-abuso.mp3",
+
         content: `Se suspeita de abuso sexual de uma criança, aja com urgência mas com cuidado:
 
 Passos a seguir:
@@ -1718,10 +1744,11 @@ O que NÃO fazer:
 - Não prometa o que não pode cumprir ("Vais ver que tudo fica bem").
 - Não guarde silêncio para "proteger a família" — proteja a criança.`
       },
-      {
-        id: "grooming-online-reconhecer",
+      {id: "grooming-online-reconhecer",
         title: "Grooming Online: Como Reconhecer Predadores",
         category: "Proteção",
+        audioUrl: "/audio/MP3/grooming-online-reconhecer.mp3",
+
         content: `Grooming é o processo pelo qual um adulto manipula uma criança ou jovem online para obter confiança e, posteriormente, abusar sexualmente dela.
 
 Sinais de grooming:
@@ -1738,10 +1765,11 @@ Como prevenir:
 - Incentive: "Se alguém te pede segredos ou fotos, conta logo."
 - Mantenha o diálogo aberto — a criança precisa de saber que pode pedir ajuda sem ser castigada.`
       },
-      {
-        id: "regras-seguranca-corporal",
+      {id: "regras-seguranca-corporal",
         title: "Ensinar Regras de Segurança Corporal às Crianças",
         category: "Proteção",
+        audioUrl: "/audio/MP3/regras-seguranca-corporal.mp3",
+
         content: `Desde cedo, as crianças podem aprender regras simples de segurança corporal:
 
 As 5 regras de segurança do corpo:
@@ -1758,10 +1786,11 @@ Como ensinar:
 - Repita as regras regularmente — uma conversa não chega.
 - Livros infantis sobre o tema podem ajudar (ex: "O Meu Corpo é Meu").`
       },
-      {
-        id: "linhas-apoio-instituicoes",
+      {id: "linhas-apoio-instituicoes",
         title: "Linhas de Apoio e Instituições em Portugal",
         category: "Recursos",
+        audioUrl: "/audio/MP3/linhas-apoio-instituicoes.mp3",
+
         content: `Se precisa de ajuda ou informação, existem recursos gratuitos em Portugal:
 
 Linhas de Apoio (gratuitas e anónimas):
@@ -1813,10 +1842,11 @@ Quando evitar relações sexuais:
 
 Dica: Comuniquem abertamente. Há muitas formas de intimidade além da penetração.`
       },
-      {
-        id: "sexualidade-pos-parto",
+      {id: "sexualidade-pos-parto",
         title: "Sexualidade Após o Parto",
         category: "Saúde",
+        audioUrl: "/audio/MP3/sexualidade-pos-parto.mp3",
+
         content: `O retorno à atividade sexual após o parto varia muito de mulher para mulher:
 
 O que esperar:
@@ -1831,10 +1861,11 @@ Recomendações:
 - Usem contraceção — a amamentação NÃO é um método contracetivo fiável.
 - Se a dor persistir após 6 semanas, consulte o médico.`
       },
-      {
-        id: "menopausa-sexualidade",
+      {id: "menopausa-sexualidade",
         title: "Menopausa e Sexualidade",
         category: "Saúde",
+        audioUrl: "/audio/MP3/menopausa-sexualidade.mp3",
+
         content: `A menopausa (habitualmente entre os 45 e os 55 anos) traz mudanças que podem afetar a sexualidade:
 
 Mudanças comuns:
@@ -1850,10 +1881,11 @@ O que ajuda:
 - Atividade sexual regular — "usa-se ou perde-se" aplica-se parcialmente: a atividade sexual mantém a elasticidade e lubrificação.
 - Consulta de ginecologia para avaliação individualizada.`
       },
-      {
-        id: "sexualidade-terceira-idade",
+      {id: "sexualidade-terceira-idade",
         title: "Sexualidade na Terceira Idade",
         category: "Saúde",
+        audioUrl: "/audio/MP3/sexualidade-terceira-idade.mp3",
+
         content: `A sexualidade não tem data de validade. Muitas pessoas continuam a ter uma vida sexual ativa e satisfatória após os 60, 70 e 80 anos.
 
 Mudanças naturais:
@@ -1872,10 +1904,11 @@ O que ajuda:
 - Comunicação com o parceiro(a) ou profissional de saúde.
 - Adaptar as expectativas: A sexualidade pode ser diferente mas continua prazerosa.`
       },
-      {
-        id: "desejo-muda",
+      {id: "desejo-muda",
         title: "Quando o Desejo Muda: Fatores Físicos e Emocionais",
         category: "Saúde",
+        audioUrl: "/audio/MP3/desejo-muda.mp3",
+
         content: `A variação do desejo sexual ao longo da vida é normal. No entanto, uma mudança significativa e persistente pode ter causas identificáveis:
 
 Fatores físicos:

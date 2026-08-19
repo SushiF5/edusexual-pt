@@ -2,6 +2,46 @@
 
 Log de execuções e melhorias implementadas.
 
+## Execução — 19 Ago 2026 (2)
+
+### Melhoria: Expansão de áudios para Crianças e Adultos
+
+Concluída a melhoria pendente "Expandir áudios para as secções Crianças e
+Adultos". Até agora, os MP3 cobriam apenas a secção Jovens (75 ficheiros).
+Foram agora gerados e vinculados os áudios de todas as fichas das secções
+Crianças (17) e Adultos (24), totalizando 116 MP3 no disco.
+
+### Implementado
+
+1. **Geração de áudios** (`gerar_audios2.py`):
+   - O script já percorre as três secções (Crianças, Jovens, Adultos) e
+     seleciona a voz adequada (Raquel para Crianças/Jovens, Duarte para
+     Adultos). Apenas faltavam gerar os ficheiros das duas secções novas —
+     executado com sucesso (116 MP3 no total).
+   - Os grupos-pai (ex.: `corpo-criancas`, `guia-pais`) não têm `content:`
+     próprio, pelo que são corretamente ignorados pelo extrator.
+
+2. **Vinculação de `audioUrl`** (`src/data/content-topics.ts`):
+   - Adicionado `audioUrl: "/audio/MP3/<id>.mp3"` a 33 fichas das secções
+     Crianças e Adultos (colocado antes de `content:`, seguindo a
+     convenção canónica).
+   - Resultado: 108 referências `audioUrl` locais, 0 apontando para
+     ficheiros em falta (100% das fichas com MP3 gerado estão vinculadas).
+
+### Verificação
+
+- 232 testes passam (suite completa, incluindo integridade de conteúdo que
+  valida `audioUrl` → ficheiro existente).
+- Auditoria: nenhum `audioUrl` aponta para ficheiro inexistente.
+
+### Próximas melhorias pendentes (sugeridas)
+
+- [ ] Lazy loading de conteúdo por audiência
+- [ ] Acessibilidade WCAG 2.1 completa (auditoria)
+- [ ] Testes E2E (Playwright)
+
+---
+
 ## Execução — 19 Ago 2026
 
 ### Melhoria: Modo de Revisão do Quiz

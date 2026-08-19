@@ -22,8 +22,9 @@ jest.mock("@/i18n/context", () => ({
       listen: "Ouvir",
       noTopicsFound: "Nenhum tema encontrado",
       tryOtherTerms: "Tenta outros termos",
-      audioPlayer: "Player de áudio",
-    },
+       audioPlayer: "Player de áudio",
+       loadingTopic: "A carregar tópico…",
+     },
   }),
 }));
 

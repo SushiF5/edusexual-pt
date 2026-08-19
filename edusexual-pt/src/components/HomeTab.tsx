@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import { topics } from "@/data/content";
 import { useI18n } from "@/i18n/context";
 import AudioPlayer, { LazyAudioPlayer } from "@/components/AudioPlayer";
+import { LazySection } from "@/components/LazySection";
 import { Audience, TabId } from "@/types";
 
 interface HomeTabProps {
@@ -96,37 +97,39 @@ export default function HomeTab({ audience, setActiveTab }: HomeTabProps) {
               <p className="text-sm">{t.tryOtherTerms}</p>
             </div>
           ) : filteredTopics.map((topic) => (
-            <div key={topic.id} className="card group hover:border-primary">
-              <div className="bg-primary/5 dark:bg-primary/20 w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center text-3xl md:text-4xl mb-4 md:mb-6 group-hover:bg-primary group-hover:text-white transition-all duration-500" role="img" aria-hidden="true">
-                {topic.id === 'anatomia-jovens' ? '🧬' : topic.icon}
-              </div>
-              <h4 className="text-lg md:text-2xl font-heading font-bold mb-2 md:mb-3 text-primary">{topic.title}</h4>
-              <p className="text-gray-500 dark:text-gray-400 mb-4 md:mb-6 line-clamp-2 leading-relaxed text-sm md:text-base">{topic.description}</p>
+            <LazySection key={topic.id} title={topic.title}>
+              <div className="card group hover:border-primary">
+                <div className="bg-primary/5 dark:bg-primary/20 w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center text-3xl md:text-4xl mb-4 md:mb-6 group-hover:bg-primary group-hover:text-white transition-all duration-500" role="img" aria-hidden="true">
+                  {topic.id === 'anatomia-jovens' ? '🧬' : topic.icon}
+                </div>
+                <h4 className="text-lg md:text-2xl font-heading font-bold mb-2 md:mb-3 text-primary">{topic.title}</h4>
+                <p className="text-gray-500 dark:text-gray-400 mb-4 md:mb-6 line-clamp-2 leading-relaxed text-sm md:text-base">{topic.description}</p>
 
-              {topic.audioUrl && (
-                <LazyAudioPlayer src={topic.audioUrl} title={topic.title} loadLabel={t.loadAudio} />
-              )}
+                {topic.audioUrl && (
+                  <LazyAudioPlayer src={topic.audioUrl} title={topic.title} loadLabel={t.loadAudio} />
+                )}
 
-              <div className="space-y-3">
-                {topic.articles.map((article) => (
-                  <details key={article.id} className="group border-t border-gray-50 dark:border-gray-700 pt-3">
-                    <summary className="cursor-pointer text-primary hover:text-secondary text-sm font-bold flex items-center justify-between list-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg px-1 py-0.5">
-                      <span className="flex items-center gap-2">
-                        <span role="img" aria-hidden="true">📄</span>
-                        {article.title}
-                      </span>
-                      <span className="text-xs opacity-50 group-open:rotate-180 transition-transform" aria-hidden="true">▼</span>
-                    </summary>
-                    <div className="mt-4 p-4 md:p-5 bg-gray-50 dark:bg-gray-700/50 rounded-2xl text-sm text-gray-700 dark:text-gray-300 whitespace-pre-line leading-relaxed shadow-inner">
-                      {article.audioUrl && (
-                        <LazyAudioPlayer src={article.audioUrl} title={article.title} loadLabel={t.loadAudio} />
-                      )}
-                      {article.content}
-                    </div>
-                  </details>
-                ))}
+                <div className="space-y-3">
+                  {topic.articles.map((article) => (
+                    <details key={article.id} className="group border-t border-gray-50 dark:border-gray-700 pt-3">
+                      <summary className="cursor-pointer text-primary hover:text-secondary text-sm font-bold flex items-center justify-between list-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg px-1 py-0.5">
+                        <span className="flex items-center gap-2">
+                          <span role="img" aria-hidden="true">📄</span>
+                          {article.title}
+                        </span>
+                        <span className="text-xs opacity-50 group-open:rotate-180 transition-transform" aria-hidden="true">▼</span>
+                      </summary>
+                      <div className="mt-4 p-4 md:p-5 bg-gray-50 dark:bg-gray-700/50 rounded-2xl text-sm text-gray-700 dark:text-gray-300 whitespace-pre-line leading-relaxed shadow-inner">
+                        {article.audioUrl && (
+                          <LazyAudioPlayer src={article.audioUrl} title={article.title} loadLabel={t.loadAudio} />
+                        )}
+                        {article.content}
+                      </div>
+                    </details>
+                  ))}
+                </div>
               </div>
-            </div>
+            </LazySection>
           ))}
         </div>
       </section>

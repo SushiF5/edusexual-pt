@@ -2,7 +2,59 @@
 
 Log de execuções e melhorias implementadas.
 
-## Execução — 19 Ago 2026 (3)
+## Execução — 19 Ago 2026 (4)
+
+### Melhoria: Lazy loading de blocos de tópicos (LazySection)
+
+A página inicial (HomeTab) renderizava, de forma eager, **todos** os blocos de
+tópicos da audiência selecionada, incluindo os que estavam fora do ecrã. Cada
+bloco contém artwork, áudio (LazyAudioPlayer), e múltiplos artigos expandíveis
+(`details`/`summary`). Com 108 referências `audioUrl` e dezenas de artigos por
+audiência, a carga inicial poderia ser pesada.
+
+Implementei carregamento preguiçoso (lazy) por visibilidade para blocos de
+tópicos, reutilizando o mesmo padrão já existente em `LazyAudioPlayer`.
+
+### Implementado
+
+1. **`LazySection`** (`src/components/LazySection.tsx`):
+   - Novo componente genérico que adia a montagem do seu conteúdo até o
+     elemento entrar (ou aproximar-se, `rootMargin: 300px`) do viewport, via
+     `IntersectionObserver`.
+   - Enquanto não é visível, mostra um skeleton acessível (`role="status"`,
+     `aria-live="polite"`) com label `loadingTopic` (PT/EN/ES).
+   - Sem `IntersectionObserver` (ex.: jsdom nos testes) ou navegadores
+     antigos, renderiza o conteúdo imediatamente — garante acesso ao conteúdo
+     (degradação graciosa).
+
+2. **Integração** (`src/components/HomeTab.tsx`): cada *topic card* no seu
+   grid passou a ser envolto por `<LazySection title={topic.title}>`, mantendo
+   a chave `key` no wrapper.
+
+3. **i18n** (`src/i18n/translations.ts`): nova chave `loadingTopic` com
+   paridade PT/EN/ES:
+   - PT: "A carregar tópico…"
+   - EN: "Loading topic…"
+   - ES: "Cargando tema…"
+
+4. **Testes** (`src/__tests__/components/LazySection.test.tsx`): 4 testes
+   cobrem renderização imediata (fallback), skeleton no placeholder,
+   renderização após interseção, e label sem título.
+
+### Verificação
+
+- 239 testes passam (235 originais + 4 novos).
+- `tsc --noEmit` limpo nos ficheiros alterados (erros pré-existentes apenas em
+  ficheiros de teste não tocados: `pdf/route.test.ts`,
+  `PodcastTab.test.tsx`, `translations.integrity.test.ts`).
+- Teste de integridade i18n continua a passar (paridade PT/EN/ES mantida).
+
+### Próximas melhorias pendentes (sugeridas)
+
+- [ ] Acessibilidade WCAG 2.1 completa (auditoria)
+- [ ] Testes E2E (Playwright)
+
+---
 
 ### Melhoria: Lazy loading dos players de áudio (LazyAudioPlayer)
 

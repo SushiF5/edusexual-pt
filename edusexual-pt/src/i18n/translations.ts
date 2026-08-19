@@ -138,7 +138,8 @@ type TranslationKeys = {
   scrollToTop: string;
   nameHelp: string;
   questionHelp: string;
-  loadAudio: string;
+   loadAudio: string;
+   loadingTopic: string;
 };
 
 const pt: TranslationKeys = {
@@ -272,6 +273,7 @@ const pt: TranslationKeys = {
   loadAudio: "Carregar áudio",
   nameHelp: "Nome opcional para a tua pergunta anónima",
   questionHelp: "A tua pergunta é anónima. Mínimo 1 carácter, máximo 2000.",
+  loadingTopic: "A carregar tópico…",
 };
 
 const en: TranslationKeys = {
@@ -405,6 +407,7 @@ const en: TranslationKeys = {
   loadAudio: "Load audio",
   nameHelp: "Optional name for your anonymous question",
   questionHelp: "Your question is anonymous. Minimum 1 character, maximum 2000.",
+  loadingTopic: "Loading topic…",
 };
 
 const es: TranslationKeys = {
@@ -538,6 +541,7 @@ const es: TranslationKeys = {
   loadAudio: "Cargar audio",
   nameHelp: "Nombre opcional para tu pregunta anónima",
   questionHelp: "Tu pregunta es anónima. Mínimo 1 carácter, máximo 2000.",
+  loadingTopic: "Cargando tema…",
 };
 
 export const translations: Record<Locale, TranslationKeys> = { pt, en, es };

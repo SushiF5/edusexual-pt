@@ -226,14 +226,14 @@ export default function Home() {
             </ErrorBoundary>
           </main>
 
-          <footer className="bg-gray-800 dark:bg-gray-950 text-white py-8 md:py-12 mt-auto">
+          <footer role="contentinfo" className="bg-gray-800 dark:bg-gray-950 text-white py-8 md:py-12 mt-auto">
             <div className="max-w-6xl mx-auto px-4 md:px-6">
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-8">
                 <div>
                   <h4 className="font-heading font-bold text-lg mb-3">EduSexual PT</h4>
                   <p className="text-gray-300 text-sm leading-relaxed">{t.footerAbout}</p>
                 </div>
-                <div>
+                <nav aria-label={t.navigate}>
                   <h4 className="font-heading font-bold text-lg mb-3">{t.navigate}</h4>
                   <ul className="space-y-2 text-sm text-gray-300">
                     <li><button onClick={() => setActiveTab("home")} className="hover:text-white transition">{t.home}</button></li>
@@ -244,7 +244,7 @@ export default function Home() {
                     <li><button onClick={() => setActiveTab("duvidas")} className="hover:text-white transition">{t.askQuestion}</button></li>
                     <li><button onClick={() => setShowAudienceSelector(true)} className="hover:text-white transition">{t.changeProfile}</button></li>
                   </ul>
-                </div>
+                </nav>
                 <div>
                   <h4 className="font-heading font-bold text-lg mb-3">{t.officialSources}</h4>
                   <ul className="space-y-2 text-sm text-gray-300">

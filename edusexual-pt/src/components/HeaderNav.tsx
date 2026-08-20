@@ -87,7 +87,7 @@ export default function HeaderNav({
   };
 
   return (
-    <header className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-100 dark:border-gray-800 py-3 px-4 md:px-6 sticky top-0 z-50 transition-all relative">
+    <header className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-100 dark:border-gray-800 py-3 px-4 md:px-6 sticky top-0 z-50 transition-all relative" role="banner">
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
         <button
           onClick={() => setShowAudienceSelector(true)}

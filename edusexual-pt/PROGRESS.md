@@ -2,6 +2,40 @@
 
 Log de execuções e melhorias implementadas.
 
+## Execução — 20 Ago 2026 (3)
+
+### Melhoria: Correção de contraste do `btn-secondary` (WCAG 1.4.3)
+
+O `btn-secondary` usava texto branco (`text-white`) sobre o laranja
+`--secondary` (`#F4A261`), com contraste ≈2.1:1 — abaixo do mínimo AA
+(4.5:1) do critério **1.4.3 Contrast (Minimum)**. Esta era a única pendência
+de contraste conhecida da auditoria de 20 Ago 2026 (2).
+
+### Implementado
+
+1. **`src/app/globals.css`**: `.btn-secondary` passou de `text-white` para
+   `text-gray-900` (`#111827`). O texto escuro sobre o laranja atinge
+   ≈8.6:1, cumprindo AA **e** AAA (normal).
+
+2. **`src/__tests__/lib/contrast.test.ts`**: substituí o teste que
+   documentava o problema ("branco sobre laranja não cumpre AA") por dois
+   testes que confirmam que o par corrigido (`gray-900` sobre `secondary`)
+   cumpre AA e AAA — reforçando a guarda de regressão de contraste.
+
+### Verificação
+
+- Teste de contraste: 9 passam (inclui os 2 novos para `btn-secondary`).
+- Sem alterações de TypeScript (apenas CSS e teste).
+- Todos os usos de `btn-secondary` (`HomeTab`, `DoubtsTab`, `ResourcesTab`,
+  `error.tsx`) beneficiam da correção automaticamente.
+
+### Próximas melhorias pendentes (sugeridas)
+
+- [ ] Acessibilidade WCAG 2.1 completa (landmarks explícitos)
+- [ ] Testes E2E (Playwright)
+
+---
+
 ## Execução — 20 Ago 2026 (2)
 
 ### Melhoria: Auditoria de contraste WCAG 2.1 (1.4.3) + correção do rodapé

@@ -24,6 +24,7 @@ const PALETTE = {
   footerBg: "#1F2937",
   footerBgDark: "#0b0f19",
   gray300: "#D1D5DB",
+  gray900: "#111827",
 } as const;
 
 describe("contrast utilities", () => {
@@ -65,10 +66,14 @@ describe("EduSexual PT — contraste da paleta (WCAG 1.4.3 AA)", () => {
     expect(meetsContrast(PALETTE.gray300, PALETTE.footerBgDark, "AA")).toBe(true);
   });
 
-  // Achado da auditoria: texto branco sobre o laranja secundário (#F4A261)
-  // tem contraste ~2.1:1, abaixo do AA. Documentado para correção futura
-  // (escurecer o secondary ou usar texto mais escuro no btn-secondary).
-  it("conhecido: btn-secondary (branco sobre laranja) não cumpre AA hoje", () => {
-    expect(meetsContrast(PALETTE.white, PALETTE.secondary, "AA")).toBe(false);
+  // Corrigido na execução de 20 Ago 2026: o botão secundário usava texto
+  // branco sobre o laranja (#F4A261), com contraste ~2.1:1 (abaixo de AA).
+  // Agora usa texto escuro (gray-900, #111827), subindo para ~8.6:1 (AA + AAA).
+  it("btn-secondary (texto escuro sobre laranja) cumpre AA", () => {
+    expect(meetsContrast(PALETTE.gray900, PALETTE.secondary, "AA")).toBe(true);
+  });
+
+  it("btn-secondary (texto escuro sobre laranja) cumpre AAA", () => {
+    expect(meetsContrast(PALETTE.gray900, PALETTE.secondary, "AAA")).toBe(true);
   });
 });

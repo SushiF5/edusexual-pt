@@ -2,6 +2,49 @@
 
 Log de execuções e melhorias implementadas.
 
+## Execução — 20 Ago 2026 (2)
+
+### Melhoria: Auditoria de contraste WCAG 2.1 (1.4.3) + correção do rodapé
+
+O rodapé (`footer`) usava `text-gray-400`/`text-gray-500`/`text-gray-600` sobre
+o fundo escuro (`bg-gray-800`/`bg-gray-950`), com taxas de contraste abaixo do
+mínimo AA (ex.: `#4B5563` sobre `#1F2937` ≈ 1.98:1). Isto viola o critério
+**1.4.3 Contrast (Minimum)** do WCAG 2.1. Implementei uma auditoria automatizada
+e corrigi o rodapé.
+
+### Implementado
+
+1. **`src/lib/contrast.ts`** (novo): utilitários WCAG 2.1 para o critério 1.4.3 —
+   `hexToRgb`, `relativeLuminance`, `contrastRatio`, `meetsContrast` e
+   `threshold` (AA/AAA, texto normal/grande).
+
+2. **`src/__tests__/lib/contrast.test.ts`** (novo, 8 testes): valida os
+   utilitários e serve de **guarda de regressão** para a paleta do projeto —
+   texto primário sobre o fundo, branco no botão primário e o rodapé
+   (`gray-300` sobre fundo claro/escuro) cumprem AA. Documenta também o achado
+   conhecido: `btn-secondary` (branco sobre `#F4A261`) tem ~2.1:1 (abaixo de AA)
+   e deverá ser corrigido (escurecer o `secondary` ou usar texto mais escuro).
+
+3. **Correção do rodapé** (`src/app/page.tsx`): o texto fino e os links do
+   rodapé passaram de `gray-400/500/600` para `text-gray-300` (`#D1D5DB`),
+   subindo o contraste para ≈6.85:1 sobre `gray-800` (cumpre AA em modo claro e
+   escuro).
+
+### Verificação
+
+- 254 testes passam (suite completa, +8 novos de contraste).
+- `contrast.test.ts` confirma que os pares corrigidos cumprem AA.
+- Sem novos erros `tsc` (os erros pré-existentes permanecem apenas em
+  `pdf/route.test.ts`, `PodcastTab.test.tsx`, `translations.integrity.test.ts`).
+
+### Próximas melhorias pendentes (sugeridas)
+
+- [ ] Corrigir contraste do `btn-secondary` (branco sobre laranja #F4A261)
+- [ ] Acessibilidade WCAG 2.1 completa (foco visível, landmarks — em curso)
+- [ ] Testes E2E (Playwright)
+
+---
+
 ## Execução — 20 Ago 2026
 
 ### Melhoria: Navegação por teclado ARIA Tabs (WCAG 2.1)

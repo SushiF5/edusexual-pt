@@ -231,11 +231,11 @@ export default function Home() {
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-8">
                 <div>
                   <h4 className="font-heading font-bold text-lg mb-3">EduSexual PT</h4>
-                  <p className="text-gray-400 text-sm leading-relaxed">{t.footerAbout}</p>
+                  <p className="text-gray-300 text-sm leading-relaxed">{t.footerAbout}</p>
                 </div>
                 <div>
                   <h4 className="font-heading font-bold text-lg mb-3">{t.navigate}</h4>
-                  <ul className="space-y-2 text-sm text-gray-400">
+                  <ul className="space-y-2 text-sm text-gray-300">
                     <li><button onClick={() => setActiveTab("home")} className="hover:text-white transition">{t.home}</button></li>
                     <li><button onClick={() => setActiveTab("podcast")} className="hover:text-white transition">{t.tabPodcast || "Podcast"}</button></li>
                     <li><button onClick={() => setActiveTab("recursos")} className="hover:text-white transition">{t.tabResources || t.resourcesTitle}</button></li>
@@ -247,7 +247,7 @@ export default function Home() {
                 </div>
                 <div>
                   <h4 className="font-heading font-bold text-lg mb-3">{t.officialSources}</h4>
-                  <ul className="space-y-2 text-sm text-gray-400">
+                  <ul className="space-y-2 text-sm text-gray-300">
                     <li><a href="https://apf.pt" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">APF — Planeamento da Família</a></li>
                     <li><a href="https://dgs.pt" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">DGS — Direção-Geral da Saúde</a></li>
                     <li><a href="https://dge.mec.pt" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">DGE — Direção-Geral da Educação</a></li>
@@ -256,8 +256,8 @@ export default function Home() {
                 </div>
               </div>
               <div className="border-t border-gray-700 pt-6 flex flex-col sm:flex-row justify-between items-center gap-2">
-                <p className="text-gray-500 text-xs">{t.footerCopyright}</p>
-                <p className="text-gray-600 text-xs">{t.footerDisclaimer}</p>
+                <p className="text-gray-300 text-xs">{t.footerCopyright}</p>
+                <p className="text-gray-300 text-xs">{t.footerDisclaimer}</p>
               </div>
             </div>
           </footer>

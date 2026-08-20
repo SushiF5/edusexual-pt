@@ -2,6 +2,50 @@
 
 Log de execuções e melhorias implementadas.
 
+## Execução — 20 Ago 2026
+
+### Melhoria: Navegação por teclado ARIA Tabs (WCAG 2.1)
+
+A navegação principal usava botões com `aria-current="page"`, sem semântica de
+tablist nem navegação por teclado própria — um requisito de WCAG 2.1 (2.1.1
+Keyboard, 4.1.2 Name/Role/Value, 2.4.3 Focus Order). Implementei o padrão
+ARIA tabs (APG) na navegação desktop.
+
+### Implementado
+
+1. **Padrão ARIA tabs** (`src/components/HeaderNav.tsx`):
+   - `<nav>` passou a `role="tablist"` com `aria-label`.
+   - Cada botão de navegação: `role="tab"`, `id="tab-<id>"`,
+     `aria-selected`, `aria-controls="main-content"` e *roving tabindex*
+     (`tabIndex 0` no ativo, `-1` nos restantes).
+   - `<main>` passou a `role="tabpanel"`, `id="main-content"` e
+     `aria-labelledby="tab-<ativo>"`, ligando painel à aba ativa.
+   - Navegação por teclado: `ArrowRight`/`ArrowDown` (próximo),
+     `ArrowLeft`/`ArrowUp` (anterior), `Home` (primeiro) e `End` (último),
+     com ativação automática e transferência de foco (wrapping circular).
+
+2. **Extração de `HeaderNav`** (`src/app/page.tsx` → `src/components/HeaderNav.tsx`):
+   - O componente `HeaderNav` foi movido para o seu próprio ficheiro
+     (juntamente com `navTabIds`/`navLabel`), tornando-o testável de forma
+     isolada e alinhado com a estrutura de componentes existente.
+
+### Verificação
+
+- 246 testes passam (suite completa, +7 novos para `HeaderNav`).
+- `tsc --noEmit` limpo nos ficheiros alterados (`page.tsx`, `HeaderNav.tsx`);
+  erros pré-existentes apenas em `pdf/route.test.ts`, `PodcastTab.test.tsx` e
+  `translations.integrity.test.ts` (não tocados).
+- Novo teste `src/__tests__/components/HeaderNav.test.tsx` cobre tablist,
+  `aria-selected`/`tabindex`, ativação por clique e navegação por teclado
+  (ArrowRight com wrap, ArrowLeft, Home/End).
+
+### Próximas melhorias pendentes (sugeridas)
+
+- [ ] Acessibilidade WCAG 2.1 completa (auditoria: contraste, foco visível, landmarks)
+- [ ] Testes E2E (Playwright)
+
+---
+
 ## Execução — 19 Ago 2026 (4)
 
 ### Melhoria: Lazy loading de blocos de tópicos (LazySection)

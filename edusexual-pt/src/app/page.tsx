@@ -218,7 +218,7 @@ export default function Home() {
             </div>
           )}
 
-          <main id="main-content" role="tabpanel" aria-labelledby={`tab-${activeTab}`} className="max-w-6xl mx-auto px-4 md:px-6 py-6 md:py-8">
+          <main id="main-content" aria-labelledby={`tab-${activeTab}`} className="max-w-6xl mx-auto px-4 md:px-6 py-6 md:py-8">
             <ErrorBoundary>
               <Suspense fallback={<TabSkeleton />}>
                 <TabContent activeTab={activeTab} audience={audience} setActiveTab={setActiveTab} />

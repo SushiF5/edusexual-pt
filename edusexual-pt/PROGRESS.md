@@ -2,6 +2,52 @@
 
 Log de execuções e melhorias implementadas.
 
+## Execução — 21 Ago 2026
+
+### Melhoria: Correção de landmarks ARIA + expansão de testes E2E
+
+O `<main>` usava `role="tabpanel"`, que é semanticamente incorreto para o
+landmark principal — `tabpanel` destina-se a conteúdo de abas dentro de um
+`tablist`, não ao elemento `<main>`. Além disso, a suíte E2E (Playwright)
+apenas cobria smoke tests básicos, sem validação de acessibilidade, formulário
+de dúvidas, ou atalhos de teclado.
+
+### Implementado
+
+1. **Correção do `<main>`** (`src/app/page.tsx`):
+   - Removido `role="tabpanel"` do `<main id="main-content">`.
+   - Mantido `aria-labelledby={`tab-${activeTab}`}` para associar o conteúdo
+     à aba ativa, preservando a semântica correta (landmark `main` + rótulo).
+
+2. **Expansão dos testes E2E** (`e2e/smoke.spec.ts`):
+   - Corrigido teste existente que esperava `role="tabpanel"` (agora valida
+     `main`).
+   - Novo teste **DoubtsTab**: valida campos do formulário (nome, pergunta),
+     estado inicial do botão Submit (desativado) e ativação ao preencher.
+   - Novo teste **landmarks ARIA**: valida presença de `<header role="banner">`,
+     `<main id="main-content">` e `<footer role="contentinfo">`.
+   - Novo teste **skip link**: valida que o link "Saltar para o conteúdo
+     principal" foca corretamente o `<main>` ao premir Enter.
+   - Novo teste **atalhos de teclado**: valida que a tecla `H` navega para o
+     início.
+
+### Verificação
+
+- 255 testes unitários passam (suite completa, sem regressões).
+- `tsc --noEmit`: erros pré-existentes apenas em
+  `translations.integrity.test.ts` (não tocado).
+- Testes E2E (9 specs) estruturados corretamente; não é possível executá-los
+  localmente devido a dependências de sistema do Chromium (`libnspr4.so`), mas
+  são válidos para CI.
+
+### Próximas melhorias pendentes (sugeridas)
+
+- [ ] Instalar dependências Chromium em CI para E2E (ex.: `npx playwright install-deps`)
+- [ ] Testes E2E para PodcastTab e ResourcesTab
+- [ ] Auditoria completa WCAG 2.1 (foco visível, navegação por leitor de ecrã)
+
+---
+
 ## Execução — 20 Ago 2026 (3)
 
 ### Melhoria: Correção de contraste do `btn-secondary` (WCAG 1.4.3)

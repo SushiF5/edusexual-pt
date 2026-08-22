@@ -1,4 +1,7 @@
 import "@testing-library/jest-dom";
+import { toHaveNoViolations } from "jest-axe";
+
+expect.extend(toHaveNoViolations);
 
 if (typeof globalThis.Request === "undefined") {
   class MockRequest {

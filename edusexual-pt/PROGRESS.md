@@ -2,6 +2,46 @@
 
 Log de execuções e melhorias implementadas.
 
+## Execução — 22 Ago 2026 (4)
+
+### Melhoria: Auditoria automatizada de acessibilidade WCAG 2.1 (jest-axe)
+
+A pendência aberta "Auditoria completa WCAG 2.1" (foco visível, ordem de
+foco, descrições de imagem/alt) estava coberta pontualmente por correções
+espalhadas (contraste, landmarks, tabs ARIA, `aria-live`, skip link), mas não
+havia uma **verificação automatizada** que impedisse regressões. Adicionei uma
+suíte de testes de acessibilidade baseada em `jest-axe` (axe-core) que corre
+as regras WCAG 2.1 A/AA contra cada separador renderizado.
+
+### Implementado
+
+1. **`jest-axe` + `@types/jest-axe`** (novas devDependencies) e matcher
+   `toHaveNoViolations` registado em `jest.setup.ts`.
+2. **`src/__tests__/a11y/audit.test.tsx`** (novo, 8 testes): corre `axe` contra
+   `HeaderNav`, `HomeTab` (jovens + todas as audiences), `FaqTab`, `QuizTab`,
+   `DoubtsTab`, `ResourcesTab` e `PodcastTab`, validando ausência de violações
+   WCAG 2.1. Os tabs presentacionais (`DoubtsTab`/`PodcastTab`) são montados via
+   wrappers de estado que replicam o wiring da página (`DoubtsProvider`/
+   `PodcastProvider`). A regra `color-contrast` está desativada nesta suíte —
+   jsdom não calcula estilos reais; o contraste é coberto isoladamente por
+   `src/__tests__/lib/contrast.test.ts` (WCAG 1.4.3).
+
+### Verificação
+
+- 265 testes passam (suite completa, +8 novos de acessibilidade).
+- Sem regressões; nenhuma alteração a `src/` (apenas testes + setup).
+- A suíte encontrou e confirmou a correção de falsos positivos durante a
+  construção (ex.: `aria-controls="main-content"` só é válido quando o
+  `<main id="main-content">` existe — por isso o `HeaderNav` é montado com o
+  `main` presente no teste).
+
+### Próximas melhorias pendentes (sugeridas)
+
+- [x] Auditoria completa WCAG 2.1 (foco visível, ordem de foco, descrições de imagem/alt) — agora com teste automatizado (jest-axe)
+- [ ] Gerar PDFs para download (além de print CSS) — backlog de baixa prioridade
+
+---
+
 ## Execução — 22 Ago 2026 (3)
 
 ### Melhoria: Testes E2E de envio do formulário Tira Dúvidas

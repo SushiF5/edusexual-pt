@@ -71,6 +71,8 @@ type TranslationKeys = {
   quizCorrectAnswerLabel: string;
   quizNotAnswered: string;
   quizReviewOnlyWrong: string;
+  quizFeedbackCorrect: string;
+  quizFeedbackIncorrect: string;
   faqTitle: string;
   faqDescCrianca: string;
   faqDescJovem: string;
@@ -205,6 +207,8 @@ const pt: TranslationKeys = {
   quizCorrectAnswerLabel: "Resposta correta",
   quizNotAnswered: "Sem resposta",
   quizReviewOnlyWrong: "Mostrar apenas as que errei",
+  quizFeedbackCorrect: "Resposta correta!",
+  quizFeedbackIncorrect: "Resposta incorreta.",
   faqTitle: "Perguntas Frequentes",
   faqDescCrianca: "Respostas simples para as tuas dúvidas.",
   faqDescJovem: "Esclarece as tuas dúvidas com as perguntas mais comuns.",
@@ -339,6 +343,8 @@ const en: TranslationKeys = {
   quizCorrectAnswerLabel: "Correct answer",
   quizNotAnswered: "No answer",
   quizReviewOnlyWrong: "Show only the ones I got wrong",
+  quizFeedbackCorrect: "Correct answer!",
+  quizFeedbackIncorrect: "Incorrect answer.",
   faqTitle: "Frequently Asked Questions",
   faqDescCrianca: "Simple answers to your questions.",
   faqDescJovem: "Clarify your doubts with the most common questions.",
@@ -473,6 +479,8 @@ const es: TranslationKeys = {
   quizCorrectAnswerLabel: "Respuesta correcta",
   quizNotAnswered: "Sin respuesta",
   quizReviewOnlyWrong: "Mostrar solo las que fallé",
+  quizFeedbackCorrect: "¡Respuesta correcta!",
+  quizFeedbackIncorrect: "Respuesta incorrecta.",
   faqTitle: "Preguntas Frecuentes",
   faqDescCrianca: "Respuestas simples para tus dudas.",
   faqDescJovem: "Aclara tus dudas con las preguntas más comunes.",

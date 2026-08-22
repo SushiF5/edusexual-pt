@@ -207,6 +207,9 @@ export default function QuizTab({ audience }: QuizTabProps) {
     );
   }
 
+  const currentQuestionData = filteredQuiz[quizState.currentQuestion];
+  const isCurrentCorrect = quizState.selectedAnswer === currentQuestionData.correctAnswer;
+
   return (
     <div className="max-w-2xl mx-auto">
       <div className="card">
@@ -254,7 +257,10 @@ export default function QuizTab({ audience }: QuizTabProps) {
           })}
         </div>
         {quizState.showExplanation && (
-          <div className="mt-6 p-4 bg-accent/20 dark:bg-accent/10 rounded-lg">
+          <div className="mt-6 p-4 bg-accent/20 dark:bg-accent/10 rounded-lg" role="status" aria-live="polite" aria-atomic="true">
+            <p className={`font-semibold mb-2 text-sm md:text-base ${isCurrentCorrect ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}`}>
+              {isCurrentCorrect ? t.quizFeedbackCorrect : t.quizFeedbackIncorrect}
+            </p>
             <p className="text-gray-700 dark:text-gray-300 mb-4 text-sm md:text-base">{filteredQuiz[quizState.currentQuestion].explanation}</p>
             <div className="flex gap-3">
               <button onClick={nextQuestion} className="btn-primary flex-grow">

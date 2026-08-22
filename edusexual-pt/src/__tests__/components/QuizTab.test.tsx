@@ -23,6 +23,8 @@ jest.mock("@/i18n/context", () => ({
       quizCorrectAnswerLabel: "Correta",
       quizNotAnswered: "Sem resposta",
       quizReviewOnlyWrong: "Apenas erradas",
+      quizFeedbackCorrect: "Correta!",
+      quizFeedbackIncorrect: "Incorreta.",
     },
   }),
 }));
@@ -287,6 +289,23 @@ describe("QuizTab", () => {
     render(<QuizTab audience="jovens" />);
     fireEvent.click(screen.getByText("Resposta A"));
     expect(screen.getByText("A é a correta")).toBeInTheDocument();
+  });
+
+  it("announces answer feedback via aria-live region (correct)", () => {
+    render(<QuizTab audience="jovens" />);
+    fireEvent.click(screen.getByText("Resposta A"));
+    const feedback = screen.getByRole("status");
+    expect(feedback).toHaveAttribute("aria-live", "polite");
+    expect(feedback).toHaveAttribute("aria-atomic", "true");
+    expect(screen.getByText("Correta!")).toBeInTheDocument();
+  });
+
+  it("announces answer feedback via aria-live region (incorrect)", () => {
+    render(<QuizTab audience="jovens" />);
+    fireEvent.click(screen.getByText("Resposta B"));
+    const feedback = screen.getByRole("status");
+    expect(feedback).toHaveAttribute("aria-live", "polite");
+    expect(screen.getByText("Incorreta.")).toBeInTheDocument();
   });
 
   it("shows a review section after finishing the quiz", () => {

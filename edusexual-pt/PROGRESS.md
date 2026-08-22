@@ -2,6 +2,41 @@
 
 Log de execuções e melhorias implementadas.
 
+## Execução — 22 Ago 2026 (2)
+
+### Melhoria: Região `aria-live` para feedback do Quiz (WCAG 2.1)
+
+O bloco de explicação que aparece após o utilizador responder a uma pergunta
+não era anunciado por leitores de ecrã — violava o critério **4.1.3 Status
+Messages** (WCAG 2.1), uma lacuna da auditoria de acessibilidade pendente.
+
+### Implementado
+
+1. **`src/components/QuizTab.tsx`**: o bloco de feedback (correto/incorreto +
+   explicação) passou a ser um `role="status"` com `aria-live="polite"` e
+   `aria-atomic="true"`, pelo que o leitor de ecrã anuncia a mensagem assim que
+   é revelada. Adicionada uma linha de estado "Resposta correta!" /
+   "Resposta incorreta." com a cor semântica adequada.
+2. **i18n** (`src/i18n/translations.ts`): novas chaves `quizFeedbackCorrect` e
+   `quizFeedbackIncorrect` com paridade PT/EN/ES (validada pelo teste de
+   integridade).
+3. **Testes** (`src/__tests__/components/QuizTab.test.tsx`): 2 novos testes
+   validam a região `status` (aria-live/aria-atomic) e a mensagem correta/
+   incorreta.
+
+### Verificação
+
+- 257 testes passam (suite completa, +2 novos).
+- Sem regressões; `aria-live` já existia corretamente em `DoubtsTab` e `FaqTab`.
+
+### Próximas melhorias pendentes (sugeridas)
+
+- [ ] Auditoria completa WCAG 2.1 (foco visível, ordem de foco, descrições de imagem/alt)
+- [ ] Cobrir em E2E o envio real do formulário Tira Dúvidas (mock `/api/telegram`)
+- [ ] Gerar PDFs para download (além de print CSS) — backlog de baixa prioridade
+
+---
+
 ## Execução — 22 Ago 2026
 
 ### Melhoria: Testes E2E para PodcastTab e ResourcesTab

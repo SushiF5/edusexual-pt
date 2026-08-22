@@ -2,6 +2,54 @@
 
 Log de execuções e melhorias implementadas.
 
+## Execução — 22 Ago 2026
+
+### Melhoria: Testes E2E para PodcastTab e ResourcesTab
+
+A suíte E2E (Playwright) cobria Início, Quiz, FAQ, Tira Dúvidas, landmarks
+ARIA, skip link e atalhos de teclado, mas faltavam testes para os separadores
+**Podcast** e **Recursos** (pendência aberta em 21 Ago 2026).
+
+### Implementado
+
+1. **`e2e/tabs.spec.ts`** (novo): dois `describe` com 5 testes:
+   - **PodcastTab**: abre o separador e valida o título e o iframe do Spotify
+     (`title="Podcast Descomplicando no Spotify"`) e o cabeçalho "Todos os
+     Episódios".
+   - **PodcastTab (mock API)**: interceta `**/api/podcast` e devolve um
+     episódio de teste; valida o botão "Ouvir <título>" e que o leitor
+     (`role="region"` com `aria-label="Player de áudio"`) aparece ao clicar.
+   - **PodcastTab (erro API)**: interceta a API com HTTP 500 e valida a
+     mensagem de erro e o botão "Tentar novamente".
+   - **ResourcesTab**: abre o separador e valida o cabeçalho "Guias e
+     Recursos" e a presença dos cartões de guia ("Abrir guia").
+   - **ResourcesTab (abrir guia)**: clica no primeiro guia e valida as ações
+     "Guardar como PDF", "Ver todos os guias" e o link "Download HTML";
+     regressa à lista e confirma que os cartões voltam a aparecer.
+
+2. **`e2e.yml`** (CI, já existente) já instala Chromium com
+   `npx playwright install --with-deps chromium`, pelo que os novos testes
+   correm em CI sem dependências em falta.
+
+### Verificação
+
+- A suíte E2E não é executável localmente (faltam libs de sistema do
+  Chromium, `libnspr4.so`), mas os testes são válidos para CI (já com
+  `playwright install-deps`).
+- Nenhuma alteração a `src/` ou à build; os 255 testes unitários permanecem
+  intactos.
+- Os seletores usam `getByRole`/`getByTitle`, alinhados com os testes
+  existentes (acessibilidade-first).
+
+### Próximas melhorias pendentes (sugeridas)
+
+- [ ] Auditoria completa WCAG 2.1 (navegação por leitor de ecrã: `aria-live`,
+      ordem de foco, descrições de imagem)
+- [ ] Cobrir em E2E o envio real do formulário Tira Dúvidas (mock `/api/telegram`)
+- [ ] Gerar PDFs para download (além de print CSS) — backlog de baixa prioridade
+
+---
+
 ## Execução — 21 Ago 2026
 
 ### Melhoria: Correção de landmarks ARIA + expansão de testes E2E
@@ -42,8 +90,8 @@ de dúvidas, ou atalhos de teclado.
 
 ### Próximas melhorias pendentes (sugeridas)
 
-- [ ] Instalar dependências Chromium em CI para E2E (ex.: `npx playwright install-deps`)
-- [ ] Testes E2E para PodcastTab e ResourcesTab
+- [x] Instalar dependências Chromium em CI para E2E (ex.: `npx playwright install-deps`) — CI já usa `--with-deps`
+- [x] Testes E2E para PodcastTab e ResourcesTab — implementados em `e2e/tabs.spec.ts`
 - [ ] Auditoria completa WCAG 2.1 (foco visível, navegação por leitor de ecrã)
 
 ---

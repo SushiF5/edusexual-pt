@@ -2,6 +2,50 @@
 
 Log de execuções e melhorias implementadas.
 
+## Execução — 22 Ago 2026 (3)
+
+### Melhoria: Testes E2E de envio do formulário Tira Dúvidas
+
+A suíte E2E cobria Início, Quiz, FAQ, Podcast, Recursos, landmarks ARIA,
+skip link e atalhos de teclado, mas **não** cobria o envio real do
+formulário Tira Dúvidas — uma pendência aberta em 22 Ago 2026. Sem esta
+cobertura, uma regressão no fluxo de envio ou no `/api/telegram` passaria
+despercebida em CI.
+
+### Implementado
+
+1. **`e2e/doubts.spec.ts`** (novo, 3 testes):
+   - **Estado do botão**: valida que "Submeter Pergunta Anónima" está
+     `disabled` sem pergunta e fica `enabled` ao preencher o campo
+     obrigatório (via `aria-disabled`/`getByRole`).
+   - **Envio com sucesso (mock 200)**: interceta `**/api/telegram` e
+     devolve `{ success: true }`; preenche nome + pergunta e valida a
+     mensagem de sucesso ("Pergunta Enviada!") e o botão "Enviar outra
+     pergunta".
+   - **Erro da API (mock 500)**: interceta a API com HTTP 500 e valida a
+     mensagem de erro ("Erro ao enviar pergunta. Tenta novamente."),
+     confirmando que a via de falha é tratada no UI.
+
+2. Os seletores usam `getByLabel`/`getByRole`, alinhados com os testes
+   existentes (acessibilidade-first) e validados contra as strings PT de
+   `src/i18n/translations.ts` (audience `jovens`).
+
+### Verificação
+
+- A suíte E2E não é executável localmente (faltam libs de sistema do
+  Chromium, `libnspr4.so`), mas os testes são válidos para CI — o
+  `playwright.config.ts` arranca `npm run dev` e o `e2e.yml` instala
+  Chromium com `--with-deps`.
+- Nenhuma alteração a `src/` ou à build; os 257 testes unitários permanecem
+  intactos e passam.
+
+### Próximas melhorias pendentes (sugeridas)
+
+- [ ] Auditoria completa WCAG 2.1 (foco visível, ordem de foco, descrições de imagem/alt)
+- [ ] Gerar PDFs para download (além de print CSS) — backlog de baixa prioridade
+
+---
+
 ## Execução — 22 Ago 2026 (2)
 
 ### Melhoria: Região `aria-live` para feedback do Quiz (WCAG 2.1)

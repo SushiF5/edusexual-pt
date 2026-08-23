@@ -2,6 +2,47 @@
 
 Log de execuções e melhorias implementadas.
 
+## Execução — 23 Ago 2026 (2)
+
+### Melhoria: Cobertura E2E do download real do PDF (`/api/pdf`)
+
+Apendência "Cobrir em E2E o download real do PDF (validar `application/pdf`
+via Playwright)" estava em aberto desde a geração real de PDFs (23 Ago 2026).
+Os testes E2E cobriam Podcast e Recursos, mas não validavam que o endpoint
+`/api/pdf` devolve um PDF válido, nem que o botão "Guardar como PDF" dispara
+uma transferência com ficheiro `.pdf`.
+
+### Implementado
+
+1. **`e2e/pdf.spec.ts`** (novo, 2 testes):
+   - **Endpoint devolve PDF válido**: abre o primeiro guia no separador
+     Recursos, lê o `href` do link "Download HTML" (que aponta para
+     `/api/pdf?id=<id>`), e valida via `page.request.get` que o `Content-Type`
+     é `application/pdf`, o `Content-Disposition` contém
+     `filename="<id>.pdf"`, e o corpo começa por `%PDF-`.
+   - **Botão dispara download**: clica em "Guardar como PDF" e captura o
+     evento `download`, validando que o `suggestedFilename` termina em `.pdf`
+     e que o stream de leitura existe.
+
+2. Reutiliza os helpers `selectAudience`/`openTab` (padrão dos testes E2E
+   existentes) e seletores `getByRole`/`getByRole` (acessibilidade-first).
+
+### Verificação
+
+- A suíte E2E não é executável localmente (faltam libs de sistema do
+  Chromium, `libnspr4.so`), mas os testes são válidos para CI — o
+  `playwright.config.ts` arranca `npm run dev` e o `e2e.yml` instala
+  Chromium com `--with-deps`.
+- Nenhuma alteração a `src/` ou à build; a verificação da unidade de PDF
+  (`src/__tests__/api/pdf/route.test.ts`) permanece intacta e passa.
+
+### Próximas melhorias pendentes (sugeridas)
+
+- [x] Cobrir em E2E o download real do PDF (validar `application/pdf` via Playwright) — concluído em `e2e/pdf.spec.ts`
+- [ ] Auditoria de performance (Lighthouse) do bundle inicial
+
+---
+
 ## Execução — 23 Ago 2026
 
 ### Melhoria: Geração real de PDFs para download (`/api/pdf`)
@@ -41,7 +82,7 @@ parcialmente resolvida: o endpoint `/api/pdf` devolvia **HTML** com
 ### Próximas melhorias pendentes (sugeridas)
 
 - [x] Gerar PDFs para download (além de print CSS) — concluído com `@react-pdf/renderer`
-- [ ] Cobrir em E2E o download real do PDF (validar `application/pdf` via Playwright)
+- [x] Cobrir em E2E o download real do PDF (validar `application/pdf` via Playwright) — concluído em `e2e/pdf.spec.ts`
 
 ---
 

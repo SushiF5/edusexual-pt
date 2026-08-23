@@ -2,6 +2,49 @@
 
 Log de execuções e melhorias implementadas.
 
+## Execução — 23 Ago 2026
+
+### Melhoria: Geração real de PDFs para download (`/api/pdf`)
+
+A pendência "Gerar PDFs para download (além de print CSS)" estava apenas
+parcialmente resolvida: o endpoint `/api/pdf` devolvia **HTML** com
+`Content-Type: text/html` e o separador Recursos apontava para ele como
+"Guardar como PDF". Substituí a geração HTML por PDF real via
+`@react-pdf/renderer`, entregando um ficheiro `.pdf` válido para.download.
+
+### Implementado
+
+1. **`package.json`**: adicionada a dependência `@react-pdf/renderer@^4.6.1`
+   (e respetivo `package-lock.json`).
+2. **`src/lib/pdf.ts`** (novo): re-exporta `Document`, `Page`, `Text`, `View`,
+   `StyleSheet` e `pdf` de `@react-pdf/renderer` (ponto de importação único,
+   facilita mocking nos testes).
+3. **`src/app/api/pdf/route.ts` → `route.tsx`**: o `GET` passou a compor um
+   `GuidePDF` com `@react-pdf/renderer` (estilos com a paleta do projeto
+   `#2D5A5A`, título, descrição, secções e rodapé) e devolve
+   `application/pdf` com `Content-Disposition: attachment; filename="<id>.pdf"`
+   e `Content-Length`. Removido o `escapeHtml` e o template HTML.
+4. **`src/__tests__/api/pdf/route.test.ts`**: atualizado para validar
+   `Content-Type: application/pdf`, o `filename="<id>.pdf"` e o cabeçalho
+   `%PDF`. O mock de `@/lib/pdf` devolve um PDF fictício; a classe
+   `MockNextResponse` foi reescrita (sem `this` implícito) e os pedidos
+   fazem cast para `NextRequest`, eliminando os erros pré-existentes de `tsc`.
+
+### Verificação
+
+- `next build` compila com sucesso (inclui TypeScript) e a rota `/api/pdf`
+  é listada como dinâmica (`ƒ`).
+- 264 testes passam (suite completa, sem regressões); o teste `/api/pdf` já
+  não apresenta erros de tipo.
+- Fim da pendência "Gerar PDFs para download".
+
+### Próximas melhorias pendentes (sugeridas)
+
+- [x] Gerar PDFs para download (além de print CSS) — concluído com `@react-pdf/renderer`
+- [ ] Cobrir em E2E o download real do PDF (validar `application/pdf` via Playwright)
+
+---
+
 ## Execução — 22 Ago 2026 (4)
 
 ### Melhoria: Auditoria automatizada de acessibilidade WCAG 2.1 (jest-axe)

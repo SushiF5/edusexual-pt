@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#2D5A5A"/>
+  <rect x="40" y="40" width="1120" height="550" rx="32" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.3"/>
+  <text x="600" y="240" text-anchor="middle" font-size="72" font-family="sans-serif" font-weight="bold" fill="#ffffff">EduSexual PT</text>
+  <text x="600" y="320" text-anchor="middle" font-size="32" font-family="sans-serif" fill="#ffffff" opacity="0.9">Educação Sexual para Todas as Idades</text>
+  <text x="600" y="420" text-anchor="middle" font-size="24" font-family="sans-serif" fill="#ffffff" opacity="0.7">Conteúdo validado · Quizzes · FAQ · Linhas de apoio · 100% anónimo</text>
+  <text x="600" y="500" text-anchor="middle" font-size="20" font-family="sans-serif" fill="#ffffff" opacity="0.5">edusexual.pt</text>
+</svg>

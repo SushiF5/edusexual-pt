@@ -1,22 +1,9 @@
 import { NextResponse } from "next/server";
-
-interface Episode {
-  title: string;
-  description: string;
-  link: string;
-  pubDate: string;
-  duration: string;
-  episode: number | null;
-  season: number | null;
-  image: string | null;
-  audioUrl: string;
-}
+import { Episode } from "@/types";
+import { checkRateLimit } from "@/lib/rateLimit";
+import { headers } from "next/headers";
 
 const RSS_URL = "https://anchor.fm/s/111d0d7cc/podcast/rss";
-
-let cachedEpisodes: Episode[] | null = null;
-let cachedAt = 0;
-const CACHE_TTL = 1000 * 60 * 15;
 
 function parseRSS(xml: string): Episode[] {
   const items: Episode[] = [];
@@ -26,8 +13,8 @@ function parseRSS(xml: string): Episode[] {
   while ((match = itemRegex.exec(xml)) !== null) {
     const block = match[1];
 
-    const titleMatch = block.match(/<title><!\[CDATA\[(.*?)\]\]><\/title>/);
-    const descMatch = block.match(/<description><!\[CDATA\[([\s\S]*?)\]\]><\/description>/);
+    const titleMatch = block.match(/<title>(?:<!\[CDATA\[)?(.*?)(?:\]\]>)?<\/title>/);
+    const descMatch = block.match(/<description>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/description>/);
     const linkMatch = block.match(/<link>(.*?)<\/link>/);
     const dateMatch = block.match(/<pubDate>(.*?)<\/pubDate>/);
     const durationMatch = block.match(/<itunes:duration>(.*?)<\/itunes:duration>/);
@@ -35,6 +22,7 @@ function parseRSS(xml: string): Episode[] {
     const seasonMatch = block.match(/<itunes:season>(.*?)<\/itunes:season>/);
     const imageMatch = block.match(/<itunes:image href="(.*?)"\/>/);
     const audioMatch = block.match(/<enclosure url="(.*?)"/);
+    const guidMatch = block.match(/<guid[^>]*>(.*?)<\/guid>/);
 
     if (titleMatch && audioMatch) {
       let description = descMatch ? descMatch[1].replace(/<[^>]*>/g, "").trim() : "";
@@ -50,6 +38,7 @@ function parseRSS(xml: string): Episode[] {
         season: seasonMatch ? parseInt(seasonMatch[1]) : null,
         image: imageMatch ? imageMatch[1] : null,
         audioUrl: audioMatch[1],
+        guid: guidMatch ? guidMatch[1] : audioMatch[1],
       });
     }
   }
@@ -59,21 +48,26 @@ function parseRSS(xml: string): Episode[] {
 
 export async function GET() {
   try {
-    const now = Date.now();
-    if (cachedEpisodes && now - cachedAt < CACHE_TTL) {
-      return NextResponse.json({ episodes: cachedEpisodes });
+    const ip = (await headers()).get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+    if (!checkRateLimit(ip, 15, 60000)) {
+      return NextResponse.json({ error: "Too many requests" }, { status: 429 });
     }
 
-    const res = await fetch(RSS_URL, { next: { revalidate: 900 } });
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10000);
+
+    const res = await fetch(RSS_URL, {
+      next: { revalidate: 900 },
+      signal: controller.signal,
+    });
+    clearTimeout(timeout);
+
     if (!res.ok) {
       return NextResponse.json({ error: "Failed to fetch RSS" }, { status: 502 });
     }
 
     const xml = await res.text();
     const episodes = parseRSS(xml);
-
-    cachedEpisodes = episodes;
-    cachedAt = now;
 
     return NextResponse.json({ episodes });
   } catch (error) {

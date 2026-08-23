@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="96" fill="#2D5A5A"/>
+  <text x="256" y="200" text-anchor="middle" fill="white" font-family="system-ui, sans-serif" font-weight="700" font-size="140">ES</text>
+  <text x="256" y="340" text-anchor="middle" fill="#F4A261" font-family="system-ui, sans-serif" font-weight="600" font-size="80">PT</text>
+  <circle cx="256" cy="430" r="24" fill="#E9C46A"/>
+</svg>

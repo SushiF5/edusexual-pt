@@ -1,3 +1,8 @@
+# Audio files - generated
+public/audio/*.wav
+public/audio/**/*.wav
+public/audio/MP3/
+
 # Dependencies
 node_modules/
 .pnp
@@ -14,7 +19,6 @@ build/
 # Misc
 .DS_Store
 *.pem
-.env*.local
 
 # Debug
 npm-debug.log*
@@ -23,6 +27,11 @@ yarn-error.log*
 
 # Vercel
 .vercel
+
+# Playwright
+test-results/
+playwright-report/
+.playwright/
 
 # TypeScript
 *.tsbuildinfo

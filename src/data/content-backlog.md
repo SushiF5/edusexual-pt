@@ -239,7 +239,7 @@
 - [x] Linha Saúde Sexual: DGS
 - [x] Linha do Arco-Íris (LGBTQI+)
 - [x] Voz de Apoio: 21 354 4090
-- [ ] Linha de Emergência Social: 144
+ - [x] Linha de Emergência Social: 144
 
 ### Instituições (mencionadas no content.ts)
 - [x] APF - Associação para o Planeamento da Família
@@ -249,32 +249,35 @@
 - [x] Opus Diversidades
 - [x] Panteras Rosa
 - [x] GRES - Grupo de Reflexão sobre Saúde Sexual
-- [ ] CASO - Centro de Atendimento a Vítimas de Abuso Sexual
+ - [x] CASO - Centro de Atendimento a Vítimas de Abuso Sexual
 - [x] CPCJ - Comissão de Proteção de Crianças e Jovens
 
 ### Serviços de Saúde (mencionados no content.ts)
 - [x] Consultas de Planeamento Familiar nos Cuidados de Saúde Primários
 - [x] Centros de Saúde / SNS
-- [ ] Consultas Jovens nos Centros de Saúde (menção direta)
-- [ ] Gabinetes de Apoio ao Estudante (escolas)
+ - [x] Consultas Jovens nos Centros de Saúde (menção direta)
+ - [x] Gabinetes de Apoio ao Estudante (escolas)
 
 ### Recursos Online (mencionados no content.ts)
 - [x] SexoComCiência (APF)
 - [x] Escola de Sexualidade (DGE)
 - [x] Portal DGS (dgs.pt)
 - [x] Portal DGE (dge.mec.pt)
-- [ ] Portal da Saúde (Ministério da Saúde)
-- [ ] Recursos educativos da OMS
+ - [ ] Portal da Saúde (Ministério da Saúde) — referência parcial via DGS
+ - [ ] Recursos educativos da OMS — referência parcial no footer
 
 ---
 
 ## UI / FUNCIONALIDADE
 
 - [x] Seletor de audiência (Crianças / Jovens / Adultos)
-- [x] Tabs: Início, Quiz, FAQ, Tira Dúvidas
-- [x] FAQ filtrado por audiência
-- [x] Formulário Tira Dúvidas funcional (state ligado)
-- [x] Linhas de apoio por audiência no Tira Dúvidas
+ - [x] Tabs: Início, Podcast, Quiz, FAQ, Tira Dúvidas
+ - [x] FAQ filtrado por audiência
+ - [x] Formulário Tira Dúvidas funcional (state ligado)
+ - [x] Envio de perguntas para Telegram via /api/telegram
+ - [x] Podcast tab com Spotify embed + lista de episódios + player áudio
+ - [x] Modo escuro (toggle, localStorage, respeita preferência do sistema)
+ - [x] Linhas de apoio por audiência no Tira Dúvidas
 - [x] StitchLayout + API de geração IA (requer env vars)
 - [x] Fix: stitch.ts não crasheia no build sem env vars
 
@@ -293,13 +296,13 @@
    - Recursos em Portugal (parcial — referenciados nos artigos, falta secção dedicada) ⚠️
 
 3. **Prioridade baixa** (fase 2):
-   - [ ] Vídeos educativos
-   - [ ] PDFs para download
-   - [ ] Sistema de perguntas com Supabase
-   - [ ] i18n (EN/ES)
-   - [ ] Modo escuro
-   - [ ] Acessibilidade WCAG 2.1
-   - [ ] Expandir áudios curtos para ~2 min (ciclo-menstrual, contracepcao-jovens, prevencao-ist)
+ - [ ] Vídeos educativos
+ - [ ] PDFs para download
+ - [ ] i18n (EN/ES)
+ - [ ] Acessibilidade WCAG 2.1 completa
+ - [ ] Expandir áudios curtos para ~2 min (ciclo-menstrual, contracepcao-jovens, prevencao-ist)
+ - [ ] Testes (unit/integration)
+ - [ ] Configurar TELEGRAM_BOT_TOKEN e TELEGRAM_CHAT_ID na Vercel
 
 4. **Fontes a consultar**:
    - APF (apf.pt)

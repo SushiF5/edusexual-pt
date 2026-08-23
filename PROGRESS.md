@@ -1,0 +1,764 @@
+# PROGRESS.md — EduSexual PT
+
+Log de execuções e melhorias implementadas.
+
+## Execução — 23 Ago 2026 (2)
+
+### Melhoria: Cobertura E2E do download real do PDF (`/api/pdf`)
+
+Apendência "Cobrir em E2E o download real do PDF (validar `application/pdf`
+via Playwright)" estava em aberto desde a geração real de PDFs (23 Ago 2026).
+Os testes E2E cobriam Podcast e Recursos, mas não validavam que o endpoint
+`/api/pdf` devolve um PDF válido, nem que o botão "Guardar como PDF" dispara
+uma transferência com ficheiro `.pdf`.
+
+### Implementado
+
+1. **`e2e/pdf.spec.ts`** (novo, 2 testes):
+   - **Endpoint devolve PDF válido**: abre o primeiro guia no separador
+     Recursos, lê o `href` do link "Download HTML" (que aponta para
+     `/api/pdf?id=<id>`), e valida via `page.request.get` que o `Content-Type`
+     é `application/pdf`, o `Content-Disposition` contém
+     `filename="<id>.pdf"`, e o corpo começa por `%PDF-`.
+   - **Botão dispara download**: clica em "Guardar como PDF" e captura o
+     evento `download`, validando que o `suggestedFilename` termina em `.pdf`
+     e que o stream de leitura existe.
+
+2. Reutiliza os helpers `selectAudience`/`openTab` (padrão dos testes E2E
+   existentes) e seletores `getByRole`/`getByRole` (acessibilidade-first).
+
+### Verificação
+
+- A suíte E2E não é executável localmente (faltam libs de sistema do
+  Chromium, `libnspr4.so`), mas os testes são válidos para CI — o
+  `playwright.config.ts` arranca `npm run dev` e o `e2e.yml` instala
+  Chromium com `--with-deps`.
+- Nenhuma alteração a `src/` ou à build; a verificação da unidade de PDF
+  (`src/__tests__/api/pdf/route.test.ts`) permanece intacta e passa.
+
+### Próximas melhorias pendentes (sugeridas)
+
+- [x] Cobrir em E2E o download real do PDF (validar `application/pdf` via Playwright) — concluído em `e2e/pdf.spec.ts`
+- [ ] Auditoria de performance (Lighthouse) do bundle inicial
+
+---
+
+## Execução — 23 Ago 2026
+
+### Melhoria: Geração real de PDFs para download (`/api/pdf`)
+
+A pendência "Gerar PDFs para download (além de print CSS)" estava apenas
+parcialmente resolvida: o endpoint `/api/pdf` devolvia **HTML** com
+`Content-Type: text/html` e o separador Recursos apontava para ele como
+"Guardar como PDF". Substituí a geração HTML por PDF real via
+`@react-pdf/renderer`, entregando um ficheiro `.pdf` válido para.download.
+
+### Implementado
+
+1. **`package.json`**: adicionada a dependência `@react-pdf/renderer@^4.6.1`
+   (e respetivo `package-lock.json`).
+2. **`src/lib/pdf.ts`** (novo): re-exporta `Document`, `Page`, `Text`, `View`,
+   `StyleSheet` e `pdf` de `@react-pdf/renderer` (ponto de importação único,
+   facilita mocking nos testes).
+3. **`src/app/api/pdf/route.ts` → `route.tsx`**: o `GET` passou a compor um
+   `GuidePDF` com `@react-pdf/renderer` (estilos com a paleta do projeto
+   `#2D5A5A`, título, descrição, secções e rodapé) e devolve
+   `application/pdf` com `Content-Disposition: attachment; filename="<id>.pdf"`
+   e `Content-Length`. Removido o `escapeHtml` e o template HTML.
+4. **`src/__tests__/api/pdf/route.test.ts`**: atualizado para validar
+   `Content-Type: application/pdf`, o `filename="<id>.pdf"` e o cabeçalho
+   `%PDF`. O mock de `@/lib/pdf` devolve um PDF fictício; a classe
+   `MockNextResponse` foi reescrita (sem `this` implícito) e os pedidos
+   fazem cast para `NextRequest`, eliminando os erros pré-existentes de `tsc`.
+
+### Verificação
+
+- `next build` compila com sucesso (inclui TypeScript) e a rota `/api/pdf`
+  é listada como dinâmica (`ƒ`).
+- 264 testes passam (suite completa, sem regressões); o teste `/api/pdf` já
+  não apresenta erros de tipo.
+- Fim da pendência "Gerar PDFs para download".
+
+### Próximas melhorias pendentes (sugeridas)
+
+- [x] Gerar PDFs para download (além de print CSS) — concluído com `@react-pdf/renderer`
+- [x] Cobrir em E2E o download real do PDF (validar `application/pdf` via Playwright) — concluído em `e2e/pdf.spec.ts`
+
+---
+
+## Execução — 22 Ago 2026 (4)
+
+### Melhoria: Auditoria automatizada de acessibilidade WCAG 2.1 (jest-axe)
+
+A pendência aberta "Auditoria completa WCAG 2.1" (foco visível, ordem de
+foco, descrições de imagem/alt) estava coberta pontualmente por correções
+espalhadas (contraste, landmarks, tabs ARIA, `aria-live`, skip link), mas não
+havia uma **verificação automatizada** que impedisse regressões. Adicionei uma
+suíte de testes de acessibilidade baseada em `jest-axe` (axe-core) que corre
+as regras WCAG 2.1 A/AA contra cada separador renderizado.
+
+### Implementado
+
+1. **`jest-axe` + `@types/jest-axe`** (novas devDependencies) e matcher
+   `toHaveNoViolations` registado em `jest.setup.ts`.
+2. **`src/__tests__/a11y/audit.test.tsx`** (novo, 8 testes): corre `axe` contra
+   `HeaderNav`, `HomeTab` (jovens + todas as audiences), `FaqTab`, `QuizTab`,
+   `DoubtsTab`, `ResourcesTab` e `PodcastTab`, validando ausência de violações
+   WCAG 2.1. Os tabs presentacionais (`DoubtsTab`/`PodcastTab`) são montados via
+   wrappers de estado que replicam o wiring da página (`DoubtsProvider`/
+   `PodcastProvider`). A regra `color-contrast` está desativada nesta suíte —
+   jsdom não calcula estilos reais; o contraste é coberto isoladamente por
+   `src/__tests__/lib/contrast.test.ts` (WCAG 1.4.3).
+
+### Verificação
+
+- 265 testes passam (suite completa, +8 novos de acessibilidade).
+- Sem regressões; nenhuma alteração a `src/` (apenas testes + setup).
+- A suíte encontrou e confirmou a correção de falsos positivos durante a
+  construção (ex.: `aria-controls="main-content"` só é válido quando o
+  `<main id="main-content">` existe — por isso o `HeaderNav` é montado com o
+  `main` presente no teste).
+
+### Próximas melhorias pendentes (sugeridas)
+
+- [x] Auditoria completa WCAG 2.1 (foco visível, ordem de foco, descrições de imagem/alt) — agora com teste automatizado (jest-axe)
+- [ ] Gerar PDFs para download (além de print CSS) — backlog de baixa prioridade
+
+---
+
+## Execução — 22 Ago 2026 (3)
+
+### Melhoria: Testes E2E de envio do formulário Tira Dúvidas
+
+A suíte E2E cobria Início, Quiz, FAQ, Podcast, Recursos, landmarks ARIA,
+skip link e atalhos de teclado, mas **não** cobria o envio real do
+formulário Tira Dúvidas — uma pendência aberta em 22 Ago 2026. Sem esta
+cobertura, uma regressão no fluxo de envio ou no `/api/telegram` passaria
+despercebida em CI.
+
+### Implementado
+
+1. **`e2e/doubts.spec.ts`** (novo, 3 testes):
+   - **Estado do botão**: valida que "Submeter Pergunta Anónima" está
+     `disabled` sem pergunta e fica `enabled` ao preencher o campo
+     obrigatório (via `aria-disabled`/`getByRole`).
+   - **Envio com sucesso (mock 200)**: interceta `**/api/telegram` e
+     devolve `{ success: true }`; preenche nome + pergunta e valida a
+     mensagem de sucesso ("Pergunta Enviada!") e o botão "Enviar outra
+     pergunta".
+   - **Erro da API (mock 500)**: interceta a API com HTTP 500 e valida a
+     mensagem de erro ("Erro ao enviar pergunta. Tenta novamente."),
+     confirmando que a via de falha é tratada no UI.
+
+2. Os seletores usam `getByLabel`/`getByRole`, alinhados com os testes
+   existentes (acessibilidade-first) e validados contra as strings PT de
+   `src/i18n/translations.ts` (audience `jovens`).
+
+### Verificação
+
+- A suíte E2E não é executável localmente (faltam libs de sistema do
+  Chromium, `libnspr4.so`), mas os testes são válidos para CI — o
+  `playwright.config.ts` arranca `npm run dev` e o `e2e.yml` instala
+  Chromium com `--with-deps`.
+- Nenhuma alteração a `src/` ou à build; os 257 testes unitários permanecem
+  intactos e passam.
+
+### Próximas melhorias pendentes (sugeridas)
+
+- [ ] Auditoria completa WCAG 2.1 (foco visível, ordem de foco, descrições de imagem/alt)
+- [ ] Gerar PDFs para download (além de print CSS) — backlog de baixa prioridade
+
+---
+
+## Execução — 22 Ago 2026 (2)
+
+### Melhoria: Região `aria-live` para feedback do Quiz (WCAG 2.1)
+
+O bloco de explicação que aparece após o utilizador responder a uma pergunta
+não era anunciado por leitores de ecrã — violava o critério **4.1.3 Status
+Messages** (WCAG 2.1), uma lacuna da auditoria de acessibilidade pendente.
+
+### Implementado
+
+1. **`src/components/QuizTab.tsx`**: o bloco de feedback (correto/incorreto +
+   explicação) passou a ser um `role="status"` com `aria-live="polite"` e
+   `aria-atomic="true"`, pelo que o leitor de ecrã anuncia a mensagem assim que
+   é revelada. Adicionada uma linha de estado "Resposta correta!" /
+   "Resposta incorreta." com a cor semântica adequada.
+2. **i18n** (`src/i18n/translations.ts`): novas chaves `quizFeedbackCorrect` e
+   `quizFeedbackIncorrect` com paridade PT/EN/ES (validada pelo teste de
+   integridade).
+3. **Testes** (`src/__tests__/components/QuizTab.test.tsx`): 2 novos testes
+   validam a região `status` (aria-live/aria-atomic) e a mensagem correta/
+   incorreta.
+
+### Verificação
+
+- 257 testes passam (suite completa, +2 novos).
+- Sem regressões; `aria-live` já existia corretamente em `DoubtsTab` e `FaqTab`.
+
+### Próximas melhorias pendentes (sugeridas)
+
+- [ ] Auditoria completa WCAG 2.1 (foco visível, ordem de foco, descrições de imagem/alt)
+- [ ] Cobrir em E2E o envio real do formulário Tira Dúvidas (mock `/api/telegram`)
+- [ ] Gerar PDFs para download (além de print CSS) — backlog de baixa prioridade
+
+---
+
+## Execução — 22 Ago 2026
+
+### Melhoria: Testes E2E para PodcastTab e ResourcesTab
+
+A suíte E2E (Playwright) cobria Início, Quiz, FAQ, Tira Dúvidas, landmarks
+ARIA, skip link e atalhos de teclado, mas faltavam testes para os separadores
+**Podcast** e **Recursos** (pendência aberta em 21 Ago 2026).
+
+### Implementado
+
+1. **`e2e/tabs.spec.ts`** (novo): dois `describe` com 5 testes:
+   - **PodcastTab**: abre o separador e valida o título e o iframe do Spotify
+     (`title="Podcast Descomplicando no Spotify"`) e o cabeçalho "Todos os
+     Episódios".
+   - **PodcastTab (mock API)**: interceta `**/api/podcast` e devolve um
+     episódio de teste; valida o botão "Ouvir <título>" e que o leitor
+     (`role="region"` com `aria-label="Player de áudio"`) aparece ao clicar.
+   - **PodcastTab (erro API)**: interceta a API com HTTP 500 e valida a
+     mensagem de erro e o botão "Tentar novamente".
+   - **ResourcesTab**: abre o separador e valida o cabeçalho "Guias e
+     Recursos" e a presença dos cartões de guia ("Abrir guia").
+   - **ResourcesTab (abrir guia)**: clica no primeiro guia e valida as ações
+     "Guardar como PDF", "Ver todos os guias" e o link "Download HTML";
+     regressa à lista e confirma que os cartões voltam a aparecer.
+
+2. **`e2e.yml`** (CI, já existente) já instala Chromium com
+   `npx playwright install --with-deps chromium`, pelo que os novos testes
+   correm em CI sem dependências em falta.
+
+### Verificação
+
+- A suíte E2E não é executável localmente (faltam libs de sistema do
+  Chromium, `libnspr4.so`), mas os testes são válidos para CI (já com
+  `playwright install-deps`).
+- Nenhuma alteração a `src/` ou à build; os 255 testes unitários permanecem
+  intactos.
+- Os seletores usam `getByRole`/`getByTitle`, alinhados com os testes
+  existentes (acessibilidade-first).
+
+### Próximas melhorias pendentes (sugeridas)
+
+- [ ] Auditoria completa WCAG 2.1 (navegação por leitor de ecrã: `aria-live`,
+      ordem de foco, descrições de imagem)
+- [ ] Cobrir em E2E o envio real do formulário Tira Dúvidas (mock `/api/telegram`)
+- [ ] Gerar PDFs para download (além de print CSS) — backlog de baixa prioridade
+
+---
+
+## Execução — 21 Ago 2026
+
+### Melhoria: Correção de landmarks ARIA + expansão de testes E2E
+
+O `<main>` usava `role="tabpanel"`, que é semanticamente incorreto para o
+landmark principal — `tabpanel` destina-se a conteúdo de abas dentro de um
+`tablist`, não ao elemento `<main>`. Além disso, a suíte E2E (Playwright)
+apenas cobria smoke tests básicos, sem validação de acessibilidade, formulário
+de dúvidas, ou atalhos de teclado.
+
+### Implementado
+
+1. **Correção do `<main>`** (`src/app/page.tsx`):
+   - Removido `role="tabpanel"` do `<main id="main-content">`.
+   - Mantido `aria-labelledby={`tab-${activeTab}`}` para associar o conteúdo
+     à aba ativa, preservando a semântica correta (landmark `main` + rótulo).
+
+2. **Expansão dos testes E2E** (`e2e/smoke.spec.ts`):
+   - Corrigido teste existente que esperava `role="tabpanel"` (agora valida
+     `main`).
+   - Novo teste **DoubtsTab**: valida campos do formulário (nome, pergunta),
+     estado inicial do botão Submit (desativado) e ativação ao preencher.
+   - Novo teste **landmarks ARIA**: valida presença de `<header role="banner">`,
+     `<main id="main-content">` e `<footer role="contentinfo">`.
+   - Novo teste **skip link**: valida que o link "Saltar para o conteúdo
+     principal" foca corretamente o `<main>` ao premir Enter.
+   - Novo teste **atalhos de teclado**: valida que a tecla `H` navega para o
+     início.
+
+### Verificação
+
+- 255 testes unitários passam (suite completa, sem regressões).
+- `tsc --noEmit`: erros pré-existentes apenas em
+  `translations.integrity.test.ts` (não tocado).
+- Testes E2E (9 specs) estruturados corretamente; não é possível executá-los
+  localmente devido a dependências de sistema do Chromium (`libnspr4.so`), mas
+  são válidos para CI.
+
+### Próximas melhorias pendentes (sugeridas)
+
+- [x] Instalar dependências Chromium em CI para E2E (ex.: `npx playwright install-deps`) — CI já usa `--with-deps`
+- [x] Testes E2E para PodcastTab e ResourcesTab — implementados em `e2e/tabs.spec.ts`
+- [ ] Auditoria completa WCAG 2.1 (foco visível, navegação por leitor de ecrã)
+
+---
+
+## Execução — 20 Ago 2026 (3)
+
+### Melhoria: Correção de contraste do `btn-secondary` (WCAG 1.4.3)
+
+O `btn-secondary` usava texto branco (`text-white`) sobre o laranja
+`--secondary` (`#F4A261`), com contraste ≈2.1:1 — abaixo do mínimo AA
+(4.5:1) do critério **1.4.3 Contrast (Minimum)**. Esta era a única pendência
+de contraste conhecida da auditoria de 20 Ago 2026 (2).
+
+### Implementado
+
+1. **`src/app/globals.css`**: `.btn-secondary` passou de `text-white` para
+   `text-gray-900` (`#111827`). O texto escuro sobre o laranja atinge
+   ≈8.6:1, cumprindo AA **e** AAA (normal).
+
+2. **`src/__tests__/lib/contrast.test.ts`**: substituí o teste que
+   documentava o problema ("branco sobre laranja não cumpre AA") por dois
+   testes que confirmam que o par corrigido (`gray-900` sobre `secondary`)
+   cumpre AA e AAA — reforçando a guarda de regressão de contraste.
+
+### Verificação
+
+- Teste de contraste: 9 passam (inclui os 2 novos para `btn-secondary`).
+- Sem alterações de TypeScript (apenas CSS e teste).
+- Todos os usos de `btn-secondary` (`HomeTab`, `DoubtsTab`, `ResourcesTab`,
+  `error.tsx`) beneficiam da correção automaticamente.
+
+### Próximas melhorias pendentes (sugeridas)
+
+- [ ] Acessibilidade WCAG 2.1 completa (landmarks explícitos)
+- [ ] Testes E2E (Playwright)
+
+---
+
+## Execução — 20 Ago 2026 (2)
+
+### Melhoria: Auditoria de contraste WCAG 2.1 (1.4.3) + correção do rodapé
+
+O rodapé (`footer`) usava `text-gray-400`/`text-gray-500`/`text-gray-600` sobre
+o fundo escuro (`bg-gray-800`/`bg-gray-950`), com taxas de contraste abaixo do
+mínimo AA (ex.: `#4B5563` sobre `#1F2937` ≈ 1.98:1). Isto viola o critério
+**1.4.3 Contrast (Minimum)** do WCAG 2.1. Implementei uma auditoria automatizada
+e corrigi o rodapé.
+
+### Implementado
+
+1. **`src/lib/contrast.ts`** (novo): utilitários WCAG 2.1 para o critério 1.4.3 —
+   `hexToRgb`, `relativeLuminance`, `contrastRatio`, `meetsContrast` e
+   `threshold` (AA/AAA, texto normal/grande).
+
+2. **`src/__tests__/lib/contrast.test.ts`** (novo, 8 testes): valida os
+   utilitários e serve de **guarda de regressão** para a paleta do projeto —
+   texto primário sobre o fundo, branco no botão primário e o rodapé
+   (`gray-300` sobre fundo claro/escuro) cumprem AA. Documenta também o achado
+   conhecido: `btn-secondary` (branco sobre `#F4A261`) tem ~2.1:1 (abaixo de AA)
+   e deverá ser corrigido (escurecer o `secondary` ou usar texto mais escuro).
+
+3. **Correção do rodapé** (`src/app/page.tsx`): o texto fino e os links do
+   rodapé passaram de `gray-400/500/600` para `text-gray-300` (`#D1D5DB`),
+   subindo o contraste para ≈6.85:1 sobre `gray-800` (cumpre AA em modo claro e
+   escuro).
+
+### Verificação
+
+- 254 testes passam (suite completa, +8 novos de contraste).
+- `contrast.test.ts` confirma que os pares corrigidos cumprem AA.
+- Sem novos erros `tsc` (os erros pré-existentes permanecem apenas em
+  `pdf/route.test.ts`, `PodcastTab.test.tsx`, `translations.integrity.test.ts`).
+
+### Próximas melhorias pendentes (sugeridas)
+
+- [ ] Corrigir contraste do `btn-secondary` (branco sobre laranja #F4A261)
+- [ ] Acessibilidade WCAG 2.1 completa (foco visível, landmarks — em curso)
+- [ ] Testes E2E (Playwright)
+
+---
+
+## Execução — 20 Ago 2026
+
+### Melhoria: Navegação por teclado ARIA Tabs (WCAG 2.1)
+
+A navegação principal usava botões com `aria-current="page"`, sem semântica de
+tablist nem navegação por teclado própria — um requisito de WCAG 2.1 (2.1.1
+Keyboard, 4.1.2 Name/Role/Value, 2.4.3 Focus Order). Implementei o padrão
+ARIA tabs (APG) na navegação desktop.
+
+### Implementado
+
+1. **Padrão ARIA tabs** (`src/components/HeaderNav.tsx`):
+   - `<nav>` passou a `role="tablist"` com `aria-label`.
+   - Cada botão de navegação: `role="tab"`, `id="tab-<id>"`,
+     `aria-selected`, `aria-controls="main-content"` e *roving tabindex*
+     (`tabIndex 0` no ativo, `-1` nos restantes).
+   - `<main>` passou a `role="tabpanel"`, `id="main-content"` e
+     `aria-labelledby="tab-<ativo>"`, ligando painel à aba ativa.
+   - Navegação por teclado: `ArrowRight`/`ArrowDown` (próximo),
+     `ArrowLeft`/`ArrowUp` (anterior), `Home` (primeiro) e `End` (último),
+     com ativação automática e transferência de foco (wrapping circular).
+
+2. **Extração de `HeaderNav`** (`src/app/page.tsx` → `src/components/HeaderNav.tsx`):
+   - O componente `HeaderNav` foi movido para o seu próprio ficheiro
+     (juntamente com `navTabIds`/`navLabel`), tornando-o testável de forma
+     isolada e alinhado com a estrutura de componentes existente.
+
+### Verificação
+
+- 246 testes passam (suite completa, +7 novos para `HeaderNav`).
+- `tsc --noEmit` limpo nos ficheiros alterados (`page.tsx`, `HeaderNav.tsx`);
+  erros pré-existentes apenas em `pdf/route.test.ts`, `PodcastTab.test.tsx` e
+  `translations.integrity.test.ts` (não tocados).
+- Novo teste `src/__tests__/components/HeaderNav.test.tsx` cobre tablist,
+  `aria-selected`/`tabindex`, ativação por clique e navegação por teclado
+  (ArrowRight com wrap, ArrowLeft, Home/End).
+
+### Próximas melhorias pendentes (sugeridas)
+
+- [ ] Acessibilidade WCAG 2.1 completa (auditoria: contraste, foco visível, landmarks)
+- [ ] Testes E2E (Playwright)
+
+---
+
+## Execução — 19 Ago 2026 (4)
+
+### Melhoria: Lazy loading de blocos de tópicos (LazySection)
+
+A página inicial (HomeTab) renderizava, de forma eager, **todos** os blocos de
+tópicos da audiência selecionada, incluindo os que estavam fora do ecrã. Cada
+bloco contém artwork, áudio (LazyAudioPlayer), e múltiplos artigos expandíveis
+(`details`/`summary`). Com 108 referências `audioUrl` e dezenas de artigos por
+audiência, a carga inicial poderia ser pesada.
+
+Implementei carregamento preguiçoso (lazy) por visibilidade para blocos de
+tópicos, reutilizando o mesmo padrão já existente em `LazyAudioPlayer`.
+
+### Implementado
+
+1. **`LazySection`** (`src/components/LazySection.tsx`):
+   - Novo componente genérico que adia a montagem do seu conteúdo até o
+     elemento entrar (ou aproximar-se, `rootMargin: 300px`) do viewport, via
+     `IntersectionObserver`.
+   - Enquanto não é visível, mostra um skeleton acessível (`role="status"`,
+     `aria-live="polite"`) com label `loadingTopic` (PT/EN/ES).
+   - Sem `IntersectionObserver` (ex.: jsdom nos testes) ou navegadores
+     antigos, renderiza o conteúdo imediatamente — garante acesso ao conteúdo
+     (degradação graciosa).
+
+2. **Integração** (`src/components/HomeTab.tsx`): cada *topic card* no seu
+   grid passou a ser envolto por `<LazySection title={topic.title}>`, mantendo
+   a chave `key` no wrapper.
+
+3. **i18n** (`src/i18n/translations.ts`): nova chave `loadingTopic` com
+   paridade PT/EN/ES:
+   - PT: "A carregar tópico…"
+   - EN: "Loading topic…"
+   - ES: "Cargando tema…"
+
+4. **Testes** (`src/__tests__/components/LazySection.test.tsx`): 4 testes
+   cobrem renderização imediata (fallback), skeleton no placeholder,
+   renderização após interseção, e label sem título.
+
+### Verificação
+
+- 239 testes passam (235 originais + 4 novos).
+- `tsc --noEmit` limpo nos ficheiros alterados (erros pré-existentes apenas em
+  ficheiros de teste não tocados: `pdf/route.test.ts`,
+  `PodcastTab.test.tsx`, `translations.integrity.test.ts`).
+- Teste de integridade i18n continua a passar (paridade PT/EN/ES mantida).
+
+### Próximas melhorias pendentes (sugeridas)
+
+- [ ] Acessibilidade WCAG 2.1 completa (auditoria)
+- [ ] Testes E2E (Playwright)
+
+---
+
+### Melhoria: Lazy loading dos players de áudio (LazyAudioPlayer)
+
+A página inicial renderizava, de forma eager, todos os elementos `<audio>`
+presentes nas fichas (até 116 MP3 nas três audiências). Cada `<audio>` com
+`<source src>` faz o navegador pré-carregar metadados, pesando a página no
+arranque. Implementei carregamento preguiçoso (lazy) por visibilidade.
+
+### Implementado
+
+1. **`LazyAudioPlayer`** (`src/components/AudioPlayer.tsx`):
+   - Novo componente que adia a montagem do `AudioPlayer` até o elemento
+     entrar (ou aproximar-se, `rootMargin: 300px`) do viewport, via
+     `IntersectionObserver`.
+   - Sem `IntersectionObserver` (ex.: jsdom nos testes) ou em navegadores
+     antigos, recorre a um botão "Carregar áudio" que revela o player sob
+     demanda — garante sempre acesso ao conteúdo (degradação graciosa).
+   - `AudioPlayer` mantém-se inalterado para os testes existentes.
+
+2. **`preload="none"`** no `<audio>`: o navegador só vai buscar o ficheiro
+   quando o utilizador clica em "Reproduzir", poupando largura de banda.
+
+3. **Integração** (`src/components/HomeTab.tsx`): os players de tópico e de
+   artigo passaram a usar `LazyAudioPlayer` (com a chave i18n `loadAudio`,
+   PT/EN/ES).
+
+4. **i18n** (`src/i18n/translations.ts`): nova chave `loadAudio` com paridade
+   PT/EN/ES (validada pelo teste de integridade).
+
+5. **Testes** (`src/__tests__/components/LazyAudioPlayer.test.tsx`): 3 testes
+   cobrem renderização após montagem, botão de placeholder e `loadLabel`.
+
+### Verificação
+
+- 235 testes passam (suite completa).
+- `tsc --noEmit` limpo nos ficheiros alterados (erros pré-existentes apenas
+  em ficheiros de teste não tocados: `PodcastTab.test.tsx`,
+  `translations.integrity.test.ts`).
+
+### Próximas melhorias pendentes (sugeridas)
+
+- [ ] Acessibilidade WCAG 2.1 completa (auditoria)
+- [ ] Testes E2E (Playwright)
+- [ ] Lazy loading de blocos de tópicos por audiência (fora do ecrã)
+
+---
+
+## Execução — 19 Ago 2026 (2)
+
+### Melhoria: Expansão de áudios para Crianças e Adultos
+
+Concluída a melhoria pendente "Expandir áudios para as secções Crianças e
+Adultos". Até agora, os MP3 cobriam apenas a secção Jovens (75 ficheiros).
+Foram agora gerados e vinculados os áudios de todas as fichas das secções
+Crianças (17) e Adultos (24), totalizando 116 MP3 no disco.
+
+### Implementado
+
+1. **Geração de áudios** (`gerar_audios2.py`):
+   - O script já percorre as três secções (Crianças, Jovens, Adultos) e
+     seleciona a voz adequada (Raquel para Crianças/Jovens, Duarte para
+     Adultos). Apenas faltavam gerar os ficheiros das duas secções novas —
+     executado com sucesso (116 MP3 no total).
+   - Os grupos-pai (ex.: `corpo-criancas`, `guia-pais`) não têm `content:`
+     próprio, pelo que são corretamente ignorados pelo extrator.
+
+2. **Vinculação de `audioUrl`** (`src/data/content-topics.ts`):
+   - Adicionado `audioUrl: "/audio/MP3/<id>.mp3"` a 33 fichas das secções
+     Crianças e Adultos (colocado antes de `content:`, seguindo a
+     convenção canónica).
+   - Resultado: 108 referências `audioUrl` locais, 0 apontando para
+     ficheiros em falta (100% das fichas com MP3 gerado estão vinculadas).
+
+### Verificação
+
+- 232 testes passam (suite completa, incluindo integridade de conteúdo que
+  valida `audioUrl` → ficheiro existente).
+- Auditoria: nenhum `audioUrl` aponta para ficheiro inexistente.
+
+### Próximas melhorias pendentes (sugeridas)
+
+- [ ] Lazy loading de conteúdo por audiência
+- [ ] Acessibilidade WCAG 2.1 completa (auditoria)
+- [ ] Testes E2E (Playwright)
+
+---
+
+## Execução — 19 Ago 2026
+
+### Melhoria: Modo de Revisão do Quiz
+
+Após terminar o quiz, os utilizadores podiam ver apenas a pontuação. Adicionei
+uma secção de **revisão** que lista cada pergunta com a resposta dada, a
+resposta correta (quando errou) e a explicação — reforçando a aprendizagem.
+
+### Implementado
+
+1. **Secção de revisão** (`src/components/QuizTab.tsx`):
+   - Registo das respostas dadas (`userAnswers`) ao longo do quiz.
+   - Ecrã de resultado agora inclui uma lista ordenada (`<ol>`) com, para cada
+     pergunta: a resposta escolhida (✓/✗), a resposta correta (só quando
+     errada) e a explicação.
+   - Filtro opcional "Mostrar apenas as que errei" (`checkbox` com
+     `reviewOnlyWrong`) para rever só os erros.
+   - Semântica acessível: `<section aria-labelledby>`, `<ol>`, `aria-label`.
+
+2. **Persistência** (`QuizTab.tsx`): `userAnswers` passou a ser guardado/
+   restaurado em `localStorage` juntamente com o estado do quiz.
+
+3. **i18n** (`src/i18n/translations.ts`): novas chaves `quizReviewTitle`,
+   `quizReviewIntro`, `quizYourAnswer`, `quizCorrectAnswerLabel`,
+   `quizNotAnswered`, `quizReviewOnlyWrong` em PT/EN/ES (paridade mantida).
+
+4. **Testes** (`src/__tests__/components/QuizTab.test.tsx`): 3 novos testes
+   cobrem a secção de revisão, a marcação de erro/correto e o filtro.
+
+### Verificação
+
+- 232 testes passam (suite completa, incluindo integridade i18n e QuizTab).
+- `tsc --noEmit` limpo nos ficheiros alterados (erros pré-existentes apenas no
+  ficheiro de teste `translations.integrity.test.ts`, não tocado).
+
+### Próximas melhorias pendentes (sugeridas)
+
+- [ ] Expandir áudios para as secções Crianças e Adultos (o script cobre só Jovens)
+- [ ] Lazy loading de conteúdo por audiência
+- [ ] Acessibilidade WCAG 2.1 completa (auditoria)
+- [ ] Testes E2E (Playwright)
+
+---
+
+## Execução — 18 Ago 2026 (2)
+
+### Melhoria: Cobertura total de áudios dos artigos (Jovens)
+
+Concluída a tarefa pendente "Gerar os MP3 em falta" referida na execução
+anterior. Foram gerados os 11 ficheiros MP3 que faltavam para a secção
+Jovens e vinculados via `audioUrl` no `content-topics.ts`.
+
+### Implementado
+
+1. **Geração de áudios** (`gerar_audios2.py`):
+   - Corrigido o *parser* de extração: o regex global original dava falsos
+     negativos (falhava em 11 artigos que têm `category` entre `title` e
+     `content`), pelo que não eram gerados. Substituído por extração
+     isolada por `id:` (bloco-a-bloco), robusta e sem omissões.
+   - Gerados 11 MP3: `puberdade`, `metodos-contracetivos`, `o-que-sao-ist`,
+     `relacao-saudavel`, `regra-sim`, `orientacao-sexual`,
+     `como-acontece-gravidez`, `imagem-corporal`, `higiene-intima`,
+     `masturbacao`, `linhas-apoio`.
+
+2. **Vinculação de `audioUrl`** (`src/data/content-topics.ts`):
+   - Adicionado `audioUrl: "/audio/MP3/<id>.mp3"` a cada um dos 11 artigos
+     (colocado após `category:`, seguindo a convenção canónica).
+   - Resultado: 75 referências `audioUrl` locais, 0 apontando para ficheiros
+     em falta (100% dos artigos com MP3 gerado estão vinculados).
+
+### Verificação
+
+- 229 testes passam (inclui integridade de conteúdo que valida `audioUrl`
+  → ficheiro existente, e testes do `HomeTab`/`AudioPlayer`).
+- `npx tsc --noEmit` limpo nos ficheiros alterados (erros pré-existentes
+  apenas em ficheiros de teste não tocados: `pdf/route.test.ts`,
+  `PodcastTab.test.tsx`).
+- Auditoria: nenhum `audioUrl` aponta para ficheiro inexistente.
+
+### Próximas melhorias pendentes (sugeridas)
+
+- [ ] Lazy loading de conteúdo por audiência
+- [ ] Acessibilidade WCAG 2.1 completa (auditoria)
+- [ ] Testes E2E (Playwright)
+- [ ] Expandir áudios para as secções Crianças e Adultos (o script cobre só Jovens)
+
+---
+
+## Execução — 18 Ago 2026
+
+### Melhoria: Expansão dos áudios dos artigos (vinculação completa)
+
+O objetivo pendente "Expandir áudios para todos os artigos" foi concluído: todos os
+artigos cujo ficheiro MP3 existe em `public/audio/MP3/` agora têm `audioUrl` e
+apresentam o `AudioPlayer` na respetiva secção (componente `HomeTab`).
+
+Foram corrigidas também inconsistências de indentação em blocos de artigos
+introduzidas por alterações não finalizadas, normalizando a formatação para o
+padrão canónico (6 espaços no `{`, 8 nas propriedades).
+
+### Implementado
+
+1. **Vinculação de áudios** (`src/data/content-topics.ts`):
+   - 19 artigos passaram a referenciar o respetivo MP3 (`audioUrl`).
+   - Apenas se ligam ficheiros que **existem** no disco — evita-se players
+     quebrados (404). Artigos sem MP3 correspondente mantêm-se sem áudio.
+   - Resultado: 64 referências `audioUrl` locais, 0 apontando para ficheiros
+     inexistentes.
+
+2. **Normalização de indentação** dos blocos de artigo (formatação canónica).
+
+### Verificação
+
+- 229 testes passam (HomeTab inclui os players de áudio por artigo).
+- `tsc --noEmit` limpo em `content-topics.ts` (erros pré-existentes apenas no
+  ficheiro de teste `translations.integrity.test.ts`, não tocado).
+- Auditoria: nenhum `audioUrl` aponta para ficheiro em falta.
+
+### Próximas melhorias pendentes (sugeridas)
+
+- [ ] Gerar os MP3 em falta (ex.: `puberdade`, `metodos-contracetivos`,
+      `o-que-sao-ist`) via `gerar_audios2.py` para cobrir 100% dos artigos
+- [ ] Lazy loading de conteúdo por audiência
+- [ ] Acessibilidade WCAG 2.1 completa (auditoria)
+- [ ] Testes E2E (Playwright)
+
+---
+
+## Execução — 17 Ago 2026 (2)
+
+### Melhoria: Pesquisa na FAQ
+
+A FAQ só permitia filtrar por audiência. Adicionei uma caixa de pesquisa
+para os utilizadores encontrarem perguntas por palavra-chave (pergunta ou
+resposta), além do filtro existente por audiência.
+
+### Implementado
+
+1. **Pesquisa na FAQ** (`src/components/FaqTab.tsx`):
+   - Campo de pesquisa (`type="search"`) com `aria-label` e ícone.
+   - Filtra por `question` e `answer` (case-insensitive), mantendo o
+     filtro por audiência.
+   - Estado vazio dedicado (`noFaqFound` + `tryOtherTerms`) com live region.
+
+2. **Chaves i18n** (`src/i18n/translations.ts`): `searchFaq` e `noFaqFound`
+   adicionadas em PT, EN e ES (mantém paridade validada pelos testes).
+
+3. **Testes** (`src/__tests__/components/FaqTab.test.tsx`):
+   - Filtragem por pesquisa (mostra/esconde corretamente).
+   - Estado vazio quando não há correspondência.
+
+### Verificação
+
+- 229 testes passam (incluindo integridade i18n e testes da FAQ).
+- TypeScript limpo nos ficheiros alterados.
+
+### Próximas melhorias pendentes (sugeridas)
+
+- [ ] Expandir áudios para todos os artigos (ciclo-menstrual, contraceção, IST)
+- [ ] Lazy loading de conteúdo por audiência
+- [ ] Acessibilidade WCAG 2.1 completa (auditoria)
+- [ ] Testes E2E (Playwright)
+
+---
+
+## Execução — 17 Ago 2026
+
+### Próxima melhoria: Expansão do Quiz e FAQ
+
+Após analisar o conteúdo existente, identifiquei lacunas no quiz para jovens:
+os temas **Relações e Afetos** e **Consentimento** (para além de **Sexualidade e Prazer**)
+estavam sub-representados — apenas 2 de 13 perguntas cobrindo consentimento e nenhuma
+sobre relações saudáveis/toxicas, amor vs. atração, ciúmes, ou prazer feminino.
+
+### Implementado
+
+1. **4 novas perguntas de quiz** (`src/data/content-quiz.ts`):
+   - `q14` — Relações e Afetos: sinais de relação tóxica
+   - `q15` — Relações e Afetos: diferença entre atração e amor
+   - `q16` — Consentimento: consentimento é específico por atividade
+   - `q17` — Relações e Afetos: ciúme saudável vs. tóxico
+   - `q18` — Sexualidade e Prazer: estimulação clitoriana e prazer feminino
+
+2. **4 novas entradas de FAQ** (`src/data/content-faq.ts`):
+   - `faq-relacao-toxica` — Como reconhecer uma relação tóxica
+   - `faq-amor-atracao` — Diferença entre atração e amov
+   - `faq-consentimento-por-ato` — Consentimento é por atividade, não global
+   - `faq-ciumes-saudavel` — Como lidar com ciúmes de forma saudável
+   - `faq-orgasmo-feminino` — Realidade do prazer feminino e penetração
+
+### Verificação
+
+- Todos os 227 testes passam (incluindo testes de integridade de conteúdo
+  que validam IDs únicos e campos obrigatórios).
+
+### Decisões adotadas
+
+- Mantive a convenção de IDs (`q14`–`q18` após `q13`).
+- As perguntas cobrem temas já presentes nos artigos (q14 → artigo `sinais-toxicos`,
+  q15 → artigo `amor-vs-atracao`, q16 → artigo `regra-sim`, q17 → artigo `ciumes`,
+  q18 → artigo `prazer-sexual`).
+- FAQ mantém o formato `faq-*` com audiência `["jovens"]`.

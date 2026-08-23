@@ -1,19 +1,43 @@
 import { NextResponse } from "next/server";
+import { z } from "zod";
+import { checkRateLimit } from "@/lib/rateLimit";
+import { headers } from "next/headers";
+
+function escapeMarkdown(text: string): string {
+  return text.replace(/[_*[\]()~`>#+=|{}.!-]/g, "\\$&");
+}
+
+const TelegramSchema = z.object({
+  name: z.string().max(100).optional(),
+  question: z.string().min(1, "A pergunta é obrigatória").max(2000),
+  audience: z.enum(["criancas", "jovens", "adultos"]),
+});
 
 export async function POST(req: Request) {
   try {
-    const { name, question, audience } = await req.json();
-
-    if (!question || !question.trim()) {
-      return NextResponse.json({ error: "Question is required" }, { status: 400 });
+    const ip = (await headers()).get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+    if (!checkRateLimit(ip)) {
+      return NextResponse.json({ error: "Too many requests. Try again later." }, { status: 429 });
     }
 
+    const body = await req.json();
+    const parsed = TelegramSchema.safeParse(body);
+
+    if (!parsed.success) {
+      const errors = parsed.error.flatten().fieldErrors;
+      return NextResponse.json({ error: "Validation failed", details: errors }, { status: 422 });
+    }
+
+    const { name, question, audience } = parsed.data;
     const botToken = process.env.TELEGRAM_BOT_TOKEN;
     const chatId = process.env.TELEGRAM_CHAT_ID;
 
     if (!botToken || !chatId) {
       console.warn("Telegram env vars not configured — question was not sent.");
-      return NextResponse.json({ success: true, fallback: true });
+      return NextResponse.json(
+        { error: "Serviço temporariamente indisponível. Tenta novamente mais tarde." },
+        { status: 503 }
+      );
     }
 
     const audienceLabels: Record<string, string> = {
@@ -27,10 +51,10 @@ export async function POST(req: Request) {
     const text = [
       "📩 *Nova Pergunta Anónima*",
       "",
-      `👤 Nome: ${displayName}`,
-      `🎯 Perfil: ${audienceLabels[audience] || audience}`,
+      `👤 Nome: ${escapeMarkdown(displayName)}`,
+      `🎯 Perfil: ${escapeMarkdown(audienceLabels[audience] || audience)}`,
       `❓ Pergunta:`,
-      `${question.trim()}`,
+      `${escapeMarkdown(question.trim())}`,
     ].join("\n");
 
     const res = await fetch(

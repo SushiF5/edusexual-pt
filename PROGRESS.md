@@ -2,6 +2,43 @@
 
 Log de execuções e melhorias implementadas.
 
+## Execução — 24 Ago 2026 (2)
+
+### Melhoria: Otimização da imagem do hero (`next/image` + `priority`) e formato correto
+
+A pendência "Otimização de imagem do hero (`next/image` com `priority`) para
+melhorar LCP" estava em aberto. Durante a implementação detetei que os ficheiros
+`/hero.png` e `/hero-{criancas,jovens,adultos}.png` eram, na verdade, **JPEGs
+com extensão `.png`** (assinatura `ffd8ff`), o que impediria a otimização correta
+via `next/image` (e poderia quebrar o servidor de imagens do Next).
+
+### Implementado
+
+1. **Conversão de formato**: os 4 herois foram recodificados como JPEG válidos
+   com extensão `.jpg` (`/hero.jpg`, `/hero-criancas.jpg`, `/hero-jovens.jpg`,
+   `/hero-adultos.jpg`) via `sharp` (qualidade 82, mozjpeg) — reduzindo de
+   ~780 KB para ~130–200 KB por ficheiro. Os `.png` antigos foram removidos.
+2. **`next/image` com `priority`** em `HomeTab.tsx`: substituiu o `<img
+   loading="lazy">` por `<Image width={1024} height={1024} priority>`,
+   responsivo (`w-full h-auto`), mantendo `aria-hidden` (decorativo) e o
+   `animate-float`. O `priority` adiciona `<link rel="preload">` para melhorar
+   o LCP.
+3. **Hero por audiência**: o `HomeTab` agora usa a imagem específica de cada
+   audiência (`HERO_IMAGES[audience]`), reutilizando os assets
+   `/hero-{criancas,jovens,adultos}.jpg` que estavam não utilizados.
+
+### Verificação
+
+- `next build` compila e passa a verificação de TypeScript (sem novos erros).
+- Testes de `HomeTab` (30) passam com `next/image` em jsdom.
+
+### Próximas melhorias pendentes (sugeridas)
+
+- [x] Otimização de imagem do hero (`next/image` com `priority`) para melhorar LCP — concluída (+ correção de formato JPEG/.png e hero por audiência)
+- [ ] Lazy loading do conteúdo por audiência (`content-topics.ts` ~100 KB carregado eager no HomeTab)
+
+---
+
 ## Execução — 24 Ago 2026
 
 ### Melhoria: Auditoria de performance do bundle inicial + lazy-load de locales
@@ -53,7 +90,7 @@ bundle via `next build` (Turbopack) e análise dos chunks gerados em
 
 - [x] Auditoria de performance (Lighthouse) do bundle inicial — concluída como auditoria estática + lazy-load de locales
 - [ ] Lazy loading do conteúdo por audiência (`content-topics.ts` ~100 KB carregado eager no HomeTab)
-- [ ] Otimização de imagem do hero (`next/image` com `priority`) para melhorar LCP
+- [x] Otimização de imagem do hero (`next/image` com `priority`) para melhorar LCP — concluída em execução posterior (24 Ago 2026 (2))
 
 ---
 

@@ -1,11 +1,18 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import Image from "next/image";
 import { topics } from "@/data/content";
 import { useI18n } from "@/i18n/context";
 import AudioPlayer, { LazyAudioPlayer } from "@/components/AudioPlayer";
 import { LazySection } from "@/components/LazySection";
 import { Audience, TabId } from "@/types";
+
+const HERO_IMAGES: Record<Audience, string> = {
+  criancas: "/hero-criancas.jpg",
+  jovens: "/hero-jovens.jpg",
+  adultos: "/hero-adultos.jpg",
+};
 
 interface HomeTabProps {
   audience: Audience;
@@ -16,7 +23,7 @@ export default function HomeTab({ audience, setActiveTab }: HomeTabProps) {
   const { t } = useI18n();
   const [searchQuery, setSearchQuery] = useState("");
 
-  const heroImage = "/hero.png";
+  const heroImage = HERO_IMAGES[audience];
 
   const filteredTopics = useMemo(() => {
     const byAudience = topics.filter(topic => topic.audience === audience);
@@ -57,12 +64,14 @@ export default function HomeTab({ audience, setActiveTab }: HomeTabProps) {
             </div>
             <div className="flex-1 relative max-w-md lg:max-w-none">
               <div className="absolute inset-0 bg-primary/10 blur-[100px] rounded-full" aria-hidden="true"></div>
-              <img
+              <Image
                 src={heroImage}
                 alt=""
                 aria-hidden="true"
-                loading="lazy"
-                className="relative z-10 rounded-3xl shadow-2xl animate-float w-full"
+                width={1024}
+                height={1024}
+                priority
+                className="relative z-10 rounded-3xl shadow-2xl animate-float w-full h-auto"
               />
             </div>
           </div>

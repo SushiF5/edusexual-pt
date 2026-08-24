@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
-import { Locale, translations, T } from "@/i18n/translations";
+import { Locale, T, pt, loadTranslations } from "@/i18n/translations";
 
 interface I18nContextValue {
   locale: Locale;
@@ -12,11 +12,12 @@ interface I18nContextValue {
 const I18nContext = createContext<I18nContextValue>({
   locale: "pt",
   setLocale: () => {},
-  t: translations.pt,
+  t: pt,
 });
 
 export function I18nProvider({ children }: { children: ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>("pt");
+  const [t, setT] = useState<T>(pt);
 
   useEffect(() => {
     const saved = localStorage.getItem("edusexual-locale") as Locale | null;
@@ -29,12 +30,25 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
+  useEffect(() => {
+    let cancelled = false;
+    const result = loadTranslations(locale);
+    if (result instanceof Promise) {
+      result.then((dict) => {
+        if (!cancelled) setT(dict);
+      });
+    } else if (!cancelled) {
+      setT(result);
+    }
+    return () => {
+      cancelled = true;
+    };
+  }, [locale]);
+
   const setLocale = (l: Locale) => {
     setLocaleState(l);
     localStorage.setItem("edusexual-locale", l);
   };
-
-  const t = translations[locale];
 
   return (
     <I18nContext.Provider value={{ locale, setLocale, t }}>

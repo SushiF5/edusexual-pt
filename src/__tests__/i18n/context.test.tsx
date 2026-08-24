@@ -47,7 +47,7 @@ describe("I18n Context", () => {
     expect(screen.getByTestId("title")).toHaveTextContent("Início");
   });
 
-  it("switches locale to English", () => {
+  it("switches locale to English", async () => {
     render(
       <I18nProvider>
         <TestComponent />
@@ -57,10 +57,12 @@ describe("I18n Context", () => {
       screen.getByText("Switch EN").click();
     });
     expect(screen.getByTestId("locale")).toHaveTextContent("en");
-    expect(screen.getByTestId("title")).toHaveTextContent("Home");
+    await waitFor(() => {
+      expect(screen.getByTestId("title")).toHaveTextContent("Home");
+    });
   });
 
-  it("switches locale to Spanish", () => {
+  it("switches locale to Spanish", async () => {
     render(
       <I18nProvider>
         <TestComponent />
@@ -70,7 +72,7 @@ describe("I18n Context", () => {
       screen.getByText("Switch ES").click();
     });
     expect(screen.getByTestId("locale")).toHaveTextContent("es");
-    expect(screen.getByTestId("title")).toHaveTextContent("Inicio");
+    await waitFor(() => expect(screen.getByTestId("title")).toHaveTextContent("Inicio"));
   });
 
   it("persists locale to localStorage", () => {
@@ -95,7 +97,7 @@ describe("I18n Context", () => {
     expect(screen.getByTestId("locale")).toHaveTextContent("es");
   });
 
-  it("switches back to Portuguese from another locale", () => {
+  it("switches back to Portuguese from another locale", async () => {
     render(
       <I18nProvider>
         <TestComponent />
@@ -105,6 +107,9 @@ describe("I18n Context", () => {
       screen.getByText("Switch EN").click();
     });
     expect(screen.getByTestId("locale")).toHaveTextContent("en");
+    await waitFor(() => {
+      expect(screen.getByTestId("title")).toHaveTextContent("Home");
+    });
     act(() => {
       screen.getByText("Switch PT").click();
     });

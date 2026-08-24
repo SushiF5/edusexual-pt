@@ -2,6 +2,61 @@
 
 Log de execuções e melhorias implementadas.
 
+## Execução — 24 Ago 2026
+
+### Melhoria: Auditoria de performance do bundle inicial + lazy-load de locales
+
+A pendência "Auditoria de performance (Lighthouse) do bundle inicial" estava
+em aberto. O Lighthouse não é executável localmente (faltam libs de sistema do
+Chromium, `libnspr4.so`), pelo que realizei uma **auditoria estática** do
+bundle via `next build` (Turbopack) e análise dos chunks gerados em
+`.next/static/chunks`.
+
+### Constatações da auditoria
+
+- O app já aplica boas práticas: fontes via `next/font` (`display: swap`),
+  separadores com `next/dynamic` (`ssr:false`) para Quiz/Faq/Dúvidas/Podcast/
+  Recursos, e lazy loading de áudio e blocos de tópicos (`IntersectionObserver`).
+- O bundle inicial (chunk partilhado + runtime) carregava **as três traduções
+  completas** (PT/EN/ES ~24 KB de código-fonte) num único módulo
+  `translations.ts`, embora ~2/3 desse dicionário não fosse necessário na
+  primeira visita (a maioria dos utilizadores usa PT).
+- Chunks mais pesados antes da melhoria: 223 KB, 192 KB, 125 KB, 110 KB
+  (incluem runtime React + dados de conteúdo `content-topics.ts` ~100 KB, que
+  são necessários para o HomeTab e permanecem no bundle inicial por desenho).
+
+### Implementado (otimização)
+
+1. **Divisão das traduções por locale** (`src/i18n/locales/{pt,en,es}.ts`):
+   cada dicionário passou a ser um módulo próprio; o `pt` (default) é
+   importado de forma eager, `en`/`es` são carregados sob demanda.
+2. **`loadTranslations(locale)`** (`src/i18n/translations.ts`): devolve `pt`
+   sincronamente e faz `import()` dinâmico de `en`/`es`.
+3. **`I18nProvider`** (`src/i18n/context.tsx`): `t` arranca com `pt`
+   (renderização inicial/SSR correta) e atualiza assincronamente ao mudar de
+   idioma — sem flash de strings vazias.
+4. **`src/i18n/all-translations.ts`** (novo): agregado `pt/en/es` apenas para os
+   testes de integridade i18n (fora do grafo de cliente inicial).
+
+### Verificação
+
+- `next build` compila e passa a verificação de TypeScript (sem novos erros).
+- 264 testes passam (suite completa; o `context.test.tsx` passou a usar
+  `waitFor` para a troca assíncrona de locale).
+- **Code-splitting confirmado**: as strings exclusivas de EN
+  (`"Skip to main content"`) e ES (`"Saltar al contenido principal"`) aparecem
+  em chunks próprios (ex.: `1abcpd-*.js`, `1lxukqzn28syz.js`), enquanto o PT
+  permanece no chunk partilhado inicial. O dicionário EN/ES deixou de ser
+  transferido no primeiro carregamento para utilizadores PT.
+
+### Próximas melhorias pendentes (sugeridas)
+
+- [x] Auditoria de performance (Lighthouse) do bundle inicial — concluída como auditoria estática + lazy-load de locales
+- [ ] Lazy loading do conteúdo por audiência (`content-topics.ts` ~100 KB carregado eager no HomeTab)
+- [ ] Otimização de imagem do hero (`next/image` com `priority`) para melhorar LCP
+
+---
+
 ## Execução — 23 Ago 2026 (2)
 
 ### Melhoria: Cobertura E2E do download real do PDF (`/api/pdf`)
@@ -39,7 +94,7 @@ uma transferência com ficheiro `.pdf`.
 ### Próximas melhorias pendentes (sugeridas)
 
 - [x] Cobrir em E2E o download real do PDF (validar `application/pdf` via Playwright) — concluído em `e2e/pdf.spec.ts`
-- [ ] Auditoria de performance (Lighthouse) do bundle inicial
+- [x] Auditoria de performance (Lighthouse) do bundle inicial — concluída como auditoria estática + lazy-load de locales (24 Ago 2026)
 
 ---
 

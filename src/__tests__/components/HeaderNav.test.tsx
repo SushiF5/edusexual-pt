@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import HeaderNav, { navTabIds } from "@/components/HeaderNav";
-import { translations } from "@/i18n/translations";
+import { translations } from "@/i18n/all-translations";
 import { TabId } from "@/types";
 
 function renderHeader(activeTab: TabId = "home", setActiveTab = jest.fn()) {

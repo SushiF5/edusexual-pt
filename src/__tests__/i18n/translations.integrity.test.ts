@@ -1,4 +1,5 @@
-import { translations, TranslationKeys } from "@/i18n/translations";
+import { translations } from "@/i18n/all-translations";
+import type { TranslationKeys } from "@/i18n/translations";
 
 describe("i18n Translation Integrity", () => {
   const keys = Object.keys(translations.pt) as (keyof TranslationKeys)[];

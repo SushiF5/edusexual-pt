@@ -9,7 +9,7 @@ import QuizTab from "@/components/QuizTab";
 import DoubtsTab from "@/components/DoubtsTab";
 import ResourcesTab from "@/components/ResourcesTab";
 import PodcastTab from "@/components/PodcastTab";
-import { translations } from "@/i18n/translations";
+import { translations } from "@/i18n/all-translations";
 import { Audience, TabId } from "@/types";
 import { Episode } from "@/types";
 

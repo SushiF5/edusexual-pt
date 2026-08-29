@@ -2,6 +2,48 @@
 
 Log de execuções e melhorias implementadas.
 
+## Execução — 29 Ago 2026 (2)
+
+### Melhoria: Auditoria automatizada do bundle inicial (`audit:bundle`)
+
+A pendência "Auditoria de performance (Lighthouse) do bundle inicial" não podia
+ser resolvida com Lighthouse real localmente (falta Chromium, tal como na E2E) —
+e a auditoria foi apenas parcialmente endereçada pelo code-splitting dos tópicos
+(29 Ago 2026). Substituí a auditoria manual por uma **guarda automatizada e
+executável em CI** que mede o bundle entregue no arranque e impede regressões de
+performance e de code-splitting.
+
+### Implementado
+
+1. **`scripts/audit-bundle.mjs`** (novo, Node puro, sem dependências):
+   - Lê `.next/build-manifest.json` e mede os ficheiros entregues no pedido
+     inicial (`polyfillFiles` + `rootMainFiles`): peso raw + gzip por ficheiro.
+   - **Guarda de regressão do code-splitting**: falha se o conteúdo de tópicos
+     (marcadores `topicsCriancas`/`topicsJovens`/`topicsAdultos` + amostras de
+     conteúdo) aparecer no bundle inicial, ou se os 3 chunks lazy por audiência
+     deixarem de existir.
+   - **Limiares**: warn a 200K gzip total / 150K por ficheiro; falha a 350K gzip
+     total. Sai com código ≠ 0 em caso de falha (CI-friendly).
+2. **`package.json`**: novo script `npm run audit:bundle`
+   (`next build && node scripts/audit-bundle.mjs`).
+3. **`.github/workflows/audit.yml`** (novo): job CI que corre a auditoria em
+   cada push/PR — Node apenas, sem Chromium, complementando a E2E.
+
+### Verificação
+
+- Auditoria atual: **166.9K gzip no arranque, 3 chunks lazy confirmados**
+  (criancas ~4.3K, jovens ~20.1K, adultos ~9.4K gzip), OK sem falhas.
+- Simulação de regressão (conteúdo no bundle inicial / chunks em falta) →
+  script falha com exit 1 e mensagens explícitas.
+- 265 testes passam (suite completa, sem regressões).
+
+### Próximas melhorias pendentes (sugeridas)
+
+- [x] Auditoria de performance (Lighthouse) do bundle inicial — coberta por `scripts/audit-bundle.mjs` (CI)
+- [ ] Se o bundle inicial subir acima dos limiares, otimizar componentes de arranque (ex.: Hero)
+
+---
+
 ## Execução — 29 Ago 2026
 
 ### Melhoria: Code splitting dos tópicos por audiência (`loadTopicsByAudience`)

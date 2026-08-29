@@ -2,7 +2,50 @@
 
 Log de execuções e melhorias implementadas.
 
-## Execução — 29 Ago 2026 (2)
+## Execução — 29 Ago 2026 (3)
+
+### Melhoria: Tópicos Favoritos (bookmarks em localStorage)
+
+O backlog de conteúdo (Jovens/Crianças/Adultos) está concluído, pelo que a
+próxima melhoria de valor foi uma funcionalidade de UX autónoma e segura:
+permitir ao utilizador **guardar temas favoritos** (estrela ⭐ em cada cartão)
+e filtrar a vista para "Ver favoritos". O estado persiste em `localStorage`
+(conforme o padrão já usado noutras áreas, ex.: modo escuro, quiz), sem
+backend nem env vars, e está coberto por testes.
+
+### Implementado
+
+1. **`HomeTab`** (`src/components/HomeTab.tsx`):
+   - Estado `favorites: Set<string>` inicializado a partir de
+     `localStorage["edusexual:favorites"]`; um `useEffect` persistência a cada
+     alteração. Função `toggleFavorite` (memoizada) e seletor
+     `showFavoritesOnly`.
+   - Botão estrela (`aria-pressed`, `aria-label` adicionar/remover) em cada
+     cartão de tópico; o `filteredTopics` aplica o filtro de favoritos antes da
+     pesquisa.
+   - Botão "Ver favoritos / Ver todos os temas" com contador (`aria-pressed`),
+     cabeçalho de favoritos e estado vazio dedicado com live region.
+2. **i18n** (`src/i18n/translations.ts`): 8 novas chaves
+   (`favoritesTitle`, `showFavorites`, `showAllTopics`, `addToFavorites`,
+   `removeFromFavorites`, `noFavorites`, `favoritesCount`, `loadingTopic` já
+   existia) em PT/EN/ES, com paridade validada pelo teste de integridade.
+3. **Testes** (`src/__tests__/components/HomeTab.test.tsx`): 4 novos testes —
+   adicionar aos favoritos + persistência em localStorage, filtro "ver
+   favoritos", estado vazio, e restauro a partir de localStorage no mount
+   (`beforeEach` limpa o storage para isolamento).
+
+### Verificação
+
+- 269 testes passam (suite completa, +4 novos de favoritos).
+- `next build` compila; bundle inicial inalterado (166.9K gzip) — a feature não
+  introduz conteúdo novo no bundle, mantendo a guarda de code-splitting.
+
+### Próximas melhorias pendentes (sugeridas)
+
+- [ ] Otimizar componentes de arranque se o bundle subir dos limiares (Hero)
+- [x] Tópicos Favoritos (bookmarks em localStorage) — concluído em `HomeTab.tsx`
+
+---
 
 ### Melhoria: Auditoria automatizada do bundle inicial (`audit:bundle`)
 

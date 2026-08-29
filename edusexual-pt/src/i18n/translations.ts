@@ -142,6 +142,13 @@ type TranslationKeys = {
   questionHelp: string;
    loadAudio: string;
    loadingTopic: string;
+   favoritesTitle: string;
+   showFavorites: string;
+   showAllTopics: string;
+   addToFavorites: string;
+   removeFromFavorites: string;
+   noFavorites: string;
+   favoritesCount: string;
 };
 
 const pt: TranslationKeys = {
@@ -278,6 +285,13 @@ const pt: TranslationKeys = {
   nameHelp: "Nome opcional para a tua pergunta anónima",
   questionHelp: "A tua pergunta é anónima. Mínimo 1 carácter, máximo 2000.",
   loadingTopic: "A carregar tópico…",
+  favoritesTitle: "Os teus temas favoritos",
+  showFavorites: "Ver favoritos",
+  showAllTopics: "Ver todos os temas",
+  addToFavorites: "Adicionar aos favoritos",
+  removeFromFavorites: "Remover dos favoritos",
+  noFavorites: "Ainda não tens temas favoritos. Toca na estrela para guardar os temas que mais te interessam.",
+  favoritesCount: "tema(s) guardado(s)",
 };
 
 const en: TranslationKeys = {
@@ -414,6 +428,13 @@ const en: TranslationKeys = {
   nameHelp: "Optional name for your anonymous question",
   questionHelp: "Your question is anonymous. Minimum 1 character, maximum 2000.",
   loadingTopic: "Loading topic…",
+  favoritesTitle: "Your favourite topics",
+  showFavorites: "Show favourites",
+  showAllTopics: "Show all topics",
+  addToFavorites: "Add to favourites",
+  removeFromFavorites: "Remove from favourites",
+  noFavorites: "You haven't saved any favourite topics yet. Tap the star to save the topics you care about.",
+  favoritesCount: "saved topic(s)",
 };
 
 const es: TranslationKeys = {
@@ -550,6 +571,13 @@ const es: TranslationKeys = {
   nameHelp: "Nombre opcional para tu pregunta anónima",
   questionHelp: "Tu pregunta es anónima. Mínimo 1 carácter, máximo 2000.",
   loadingTopic: "Cargando tema…",
+  favoritesTitle: "Tus temas favoritos",
+  showFavorites: "Ver favoritos",
+  showAllTopics: "Ver todos los temas",
+  addToFavorites: "Añadir a favoritos",
+  removeFromFavorites: "Quitar de favoritos",
+  noFavorites: "Aún no tienes temas favoritos. Toca la estrella para guardar los temas que más te interesan.",
+  favoritesCount: "tema(s) guardado(s)",
 };
 
 export const translations: Record<Locale, TranslationKeys> = { pt, en, es };

@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, within } from "@testing-library/react";
 import HomeTab from "@/components/HomeTab";
 import { Audience } from "@/types";
 
@@ -25,6 +25,13 @@ jest.mock("@/i18n/context", () => ({
       tryOtherTerms: "Tenta outros termos",
       audioPlayer: "Player de áudio",
       loadingTopic: "A carregar tópico…",
+      favoritesTitle: "Os teus temas favoritos",
+      showFavorites: "Ver favoritos",
+      showAllTopics: "Ver todos os temas",
+      addToFavorites: "Adicionar aos favoritos",
+      removeFromFavorites: "Remover dos favoritos",
+      noFavorites: "Ainda não tens temas favoritos.",
+      favoritesCount: "tema(s) guardado(s)",
     },
   }),
 }));
@@ -95,6 +102,10 @@ async function waitForTopics(audience: Audience = "jovens") {
 }
 
 describe("HomeTab", () => {
+  beforeEach(() => {
+    window.localStorage.clear();
+  });
+
   it("renders hero for youth audience", () => {
     render(<HomeTab audience="jovens" />);
     expect(screen.getByText("Para jovens")).toBeInTheDocument();
@@ -332,5 +343,39 @@ describe("HomeTab", () => {
     expect(screen.queryByText("Multi Artigos")).not.toBeInTheDocument();
     expect(screen.getByText("Para jovens")).toBeInTheDocument();
     await screen.findByText("Multi Artigos");
+  });
+
+  it("adds a topic to favorites when the star is clicked", async () => {
+    render(<HomeTab audience="jovens" />);
+    await waitForTopics();
+    const anatomiaCard = screen.getByText("Anatomia").closest(".card") as HTMLElement;
+    const addButton = within(anatomiaCard).getByRole("button", { name: "Adicionar aos favoritos" });
+    fireEvent.click(addButton);
+    expect(within(anatomiaCard).getByRole("button", { name: "Remover dos favoritos" })).toBeInTheDocument();
+    expect(JSON.parse(window.localStorage.getItem("edusexual:favorites") || "[]")).toContain("anatomia-jovens");
+  });
+
+  it("filters to favorites only when the toggle is activated", async () => {
+    render(<HomeTab audience="jovens" />);
+    await waitForTopics();
+    const anatomiaCard = screen.getByText("Anatomia").closest(".card") as HTMLElement;
+    fireEvent.click(within(anatomiaCard).getByRole("button", { name: "Adicionar aos favoritos" }));
+    fireEvent.click(screen.getByText("Ver favoritos"));
+    expect(screen.getAllByText("Anatomia").length).toBeGreaterThan(0);
+    expect(screen.queryByText("Multi Artigos")).not.toBeInTheDocument();
+  });
+
+  it("shows an empty state when viewing favorites with none saved", async () => {
+    render(<HomeTab audience="jovens" />);
+    await waitForTopics();
+    fireEvent.click(screen.getByText("Ver favoritos"));
+    expect(screen.getByText("Ainda não tens temas favoritos.")).toBeInTheDocument();
+  });
+
+  it("restores favorites from localStorage on mount", async () => {
+    window.localStorage.setItem("edusexual:favorites", JSON.stringify(["anatomia-jovens"]));
+    render(<HomeTab audience="jovens" />);
+    await waitForTopics();
+    expect(screen.getByLabelText("Remover dos favoritos")).toBeInTheDocument();
   });
 });

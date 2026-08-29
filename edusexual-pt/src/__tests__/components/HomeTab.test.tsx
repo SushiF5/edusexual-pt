@@ -1,6 +1,7 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import HomeTab from "@/components/HomeTab";
+import { Audience } from "@/types";
 
 jest.mock("@/i18n/context", () => ({
   useI18n: () => ({
@@ -22,14 +23,14 @@ jest.mock("@/i18n/context", () => ({
       listen: "Ouvir",
       noTopicsFound: "Nenhum tema encontrado",
       tryOtherTerms: "Tenta outros termos",
-       audioPlayer: "Player de áudio",
-       loadingTopic: "A carregar tópico…",
-     },
+      audioPlayer: "Player de áudio",
+      loadingTopic: "A carregar tópico…",
+    },
   }),
 }));
 
-jest.mock("@/data/content", () => ({
-  topics: [
+jest.mock("@/data/content-topics", () => {
+  const topics = [
     {
       id: "anatomia-jovens",
       title: "Anatomia",
@@ -74,8 +75,24 @@ jest.mock("@/data/content", () => ({
         { id: "audioart2", title: "Audio Art 2", content: "Corpo", category: "Audio" },
       ],
     },
-  ],
-}));
+  ];
+
+  return {
+    loadTopicsByAudience: jest.fn((audience: Audience) =>
+      Promise.resolve(topics.filter((t) => t.audience === audience))
+    ),
+  };
+});
+
+const firstTopicOfAudience: Record<Audience, string> = {
+  jovens: "Multi Artigos",
+  criancas: "Teste Crianças",
+  adultos: "Teste Crianças",
+};
+
+async function waitForTopics(audience: Audience = "jovens") {
+  await screen.findByText(firstTopicOfAudience[audience]);
+}
 
 describe("HomeTab", () => {
   it("renders hero for youth audience", () => {
@@ -93,21 +110,24 @@ describe("HomeTab", () => {
     expect(screen.getByText("Para adultos")).toBeInTheDocument();
   });
 
-  it("renders topics filtered by audience", () => {
+  it("renders topics filtered by audience", async () => {
     render(<HomeTab audience="jovens" />);
+    await waitForTopics();
     const anatomiaElements = screen.getAllByText("Anatomia");
     expect(anatomiaElements.length).toBeGreaterThan(0);
     expect(screen.queryByText("Teste Crianças")).not.toBeInTheDocument();
   });
 
-  it("renders AudioPlayer for topics with audioUrl", () => {
+  it("renders AudioPlayer for topics with audioUrl", async () => {
     render(<HomeTab audience="jovens" />);
+    await waitForTopics();
     const audioSections = screen.getAllByRole("region");
     expect(audioSections.some(r => r.getAttribute("aria-label")?.includes("Audio"))).toBe(true);
   });
 
-  it("renders articles under topic details", () => {
+  it("renders articles under topic details", async () => {
     render(<HomeTab audience="jovens" />);
+    await waitForTopics();
     const summary = screen.getByText("Multi Artigos");
     fireEvent.click(summary);
     expect(screen.getByText("Art A")).toBeInTheDocument();
@@ -115,17 +135,19 @@ describe("HomeTab", () => {
     expect(screen.getByText("Art C")).toBeInTheDocument();
   });
 
-it("renders AudioPlayer for articles with audioUrl inside details", () => {
+  it("renders AudioPlayer for articles with audioUrl inside details", async () => {
     render(<HomeTab audience="jovens" />);
+    await waitForTopics();
     const summary = screen.getByText("Tema Audio");
     fireEvent.click(summary);
     expect(
-      screen.getByLabelText(/Reproduzir: Audio Art 1/i)
+      await screen.findByLabelText(/Reproduzir: Audio Art 1/i)
     ).toBeInTheDocument();
   });
 
-  it("closes other topics on search", () => {
+  it("closes other topics on search", async () => {
     render(<HomeTab audience="jovens" />);
+    await waitForTopics();
     const input = screen.getByPlaceholderText("Pesquisar...");
     fireEvent.change(input, { target: { value: "Anatomia" } });
     const anatomiaElements = screen.getAllByText("Anatomia");
@@ -133,22 +155,24 @@ it("renders AudioPlayer for articles with audioUrl inside details", () => {
     expect(screen.queryByText("Multi Artigos")).not.toBeInTheDocument();
   });
 
-  it("shows no results message when search has no matches", () => {
+  it("shows no results message when search has no matches", async () => {
     render(<HomeTab audience="jovens" />);
+    await waitForTopics();
     const input = screen.getByPlaceholderText("Pesquisar...");
     fireEvent.change(input, { target: { value: "zzzzzz" } });
     expect(screen.getByText(/Nenhum tema encontrado/)).toBeInTheDocument();
     expect(screen.getByText("Tenta outros termos")).toBeInTheDocument();
   });
 
-  it("includes the search query in the no-results message", () => {
+  it("includes the search query in the no-results message", async () => {
     render(<HomeTab audience="jovens" />);
+    await waitForTopics();
     const input = screen.getByPlaceholderText("Pesquisar...");
     fireEvent.change(input, { target: { value: "xyz123" } });
     expect(screen.getByText(/xyz123/)).toBeInTheDocument();
   });
 
-  it("renders hero description for each audience", () => {
+  it("renders hero description for each audience", async () => {
     const { rerender } = render(<HomeTab audience="jovens" />);
     expect(screen.getByText("Desc jovens")).toBeInTheDocument();
     rerender(<HomeTab audience="criancas" />);
@@ -162,46 +186,52 @@ it("renders AudioPlayer for articles with audioUrl inside details", () => {
     expect(screen.getByText("Portal")).toBeInTheDocument();
   });
 
-  it("renders search input with correct aria-label and placeholder", () => {
+  it("renders search input with correct aria-label and placeholder", async () => {
     render(<HomeTab audience="jovens" />);
+    await waitForTopics();
     const input = screen.getByLabelText("Pesquisar...");
     expect(input).toHaveAttribute("type", "search");
     expect(input).toHaveAttribute("placeholder", "Pesquisar...");
     expect(input).toHaveValue("");
   });
 
-  it("updates search input value when typing", () => {
+  it("updates search input value when typing", async () => {
     render(<HomeTab audience="jovens" />);
+    await waitForTopics();
     const input = screen.getByLabelText("Pesquisar...");
     fireEvent.change(input, { target: { value: "Anatomia" } });
     expect(input).toHaveValue("Anatomia");
   });
 
-  it("filters topics by description match", () => {
+  it("filters topics by description match", async () => {
     render(<HomeTab audience="jovens" />);
+    await waitForTopics();
     const input = screen.getByPlaceholderText("Pesquisar...");
     fireEvent.change(input, { target: { value: "vários artigos" } });
     expect(screen.getByText("Multi Artigos")).toBeInTheDocument();
     expect(screen.queryByText("Anatomia")).not.toBeInTheDocument();
   });
 
-  it("filters topics by article title match", () => {
+  it("filters topics by article title match", async () => {
     render(<HomeTab audience="jovens" />);
+    await waitForTopics();
     const input = screen.getByPlaceholderText("Pesquisar...");
     fireEvent.change(input, { target: { value: "Art A" } });
     expect(screen.getByText("Multi Artigos")).toBeInTheDocument();
     expect(screen.queryByText("Anatomia")).not.toBeInTheDocument();
   });
 
-  it("renders article content after opening details", () => {
+  it("renders article content after opening details", async () => {
     render(<HomeTab audience="jovens" />);
+    await waitForTopics();
     const summary = screen.getByText("Artigo 1");
     fireEvent.click(summary);
     expect(screen.getByText("Conteúdo do artigo")).toBeInTheDocument();
   });
 
-  it("renders article content for multiple articles in a topic", () => {
+  it("renders article content for multiple articles in a topic", async () => {
     render(<HomeTab audience="jovens" />);
+    await waitForTopics();
     fireEvent.click(screen.getByText("Multi Artigos"));
     expect(screen.getByText("Corpo A")).toBeInTheDocument();
     expect(screen.getByText("Corpo B")).toBeInTheDocument();
@@ -236,21 +266,24 @@ it("renders AudioPlayer for articles with audioUrl inside details", () => {
     expect(setActiveTab).toHaveBeenCalledTimes(1);
   });
 
-  it("renders topics heading and description", () => {
+  it("renders topics heading and description", async () => {
     render(<HomeTab audience="jovens" />);
+    await waitForTopics();
     expect(screen.getByText("Explorar")).toBeInTheDocument();
     expect(screen.getByText("Escolhe um tema")).toBeInTheDocument();
   });
 
-  it("renders only topics matching the audience", () => {
+  it("renders only topics matching the audience", async () => {
     render(<HomeTab audience="criancas" />);
+    await waitForTopics("criancas");
     expect(screen.getByText("Teste Crianças")).toBeInTheDocument();
     expect(screen.queryByText("Multi Artigos")).not.toBeInTheDocument();
     expect(screen.queryByText("Anatomia")).not.toBeInTheDocument();
   });
 
-  it("renders no topics status region when search has no matches", () => {
+  it("renders no topics status region when search has no matches", async () => {
     render(<HomeTab audience="jovens" />);
+    await waitForTopics();
     fireEvent.change(screen.getByPlaceholderText("Pesquisar..."), {
       target: { value: "zzzzzz" },
     });
@@ -258,34 +291,46 @@ it("renders AudioPlayer for articles with audioUrl inside details", () => {
     expect(status).toHaveAttribute("aria-live", "polite");
   });
 
-  it("does not show no-results message when search is empty", () => {
+  it("does not show no-results message when search is empty", async () => {
     render(<HomeTab audience="jovens" />);
+    await waitForTopics();
     expect(screen.queryByRole("status")).not.toBeInTheDocument();
   });
 
-  it("does not show no-results message for matching search", () => {
+  it("does not show no-results message for matching search", async () => {
     render(<HomeTab audience="jovens" />);
+    await waitForTopics();
     fireEvent.change(screen.getByPlaceholderText("Pesquisar..."), {
       target: { value: "Anatomia" },
     });
     expect(screen.queryByRole("status")).not.toBeInTheDocument();
   });
 
-  it("renders special icon for anatomia-jovens topic", () => {
+  it("renders special icon for anatomia-jovens topic", async () => {
     render(<HomeTab audience="jovens" />);
+    await waitForTopics();
     const iconContainers = screen.getAllByRole("img", { hidden: true });
     expect(iconContainers.some(el => el.textContent === "🧬")).toBe(true);
   });
 
-  it("renders AudioPlayer for topic with audioUrl", () => {
+  it("renders AudioPlayer for topic with audioUrl", async () => {
     render(<HomeTab audience="jovens" />);
+    await waitForTopics();
     const audioSections = screen.getAllByLabelText(/Audio: Anatomia/i);
     expect(audioSections.length).toBeGreaterThan(0);
   });
 
-  it("does not render topic AudioPlayer when topic has no audioUrl", () => {
+  it("does not render topic AudioPlayer when topic has no audioUrl", async () => {
     render(<HomeTab audience="jovens" />);
+    await waitForTopics();
     expect(screen.queryByLabelText(/Audio: Multi Artigos/i)).not.toBeInTheDocument();
     expect(screen.queryByLabelText(/Audio: Tema Audio/i)).not.toBeInTheDocument();
+  });
+
+  it("shows loading skeleton before topics are loaded", async () => {
+    render(<HomeTab audience="jovens" />);
+    expect(screen.queryByText("Multi Artigos")).not.toBeInTheDocument();
+    expect(screen.getByText("Para jovens")).toBeInTheDocument();
+    await screen.findByText("Multi Artigos");
   });
 });

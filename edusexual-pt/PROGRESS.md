@@ -2,6 +2,56 @@
 
 Log de execuções e melhorias implementadas.
 
+## Execução — 29 Ago 2026
+
+### Melhoria: Code splitting dos tópicos por audiência (`loadTopicsByAudience`)
+
+A pendência "Auditoria de performance (Lighthouse) do bundle inicial" apontava
+para o bundle inicial carregar todo o conteúdo de tópicos das três audiências.
+Existia um WIP que dividia `content-topics.ts` em três módulos, mas em estado
+quebrado: os módulos parciais não tinham `export default` (o loader esperava
+`mod.default`), o ficheiro de Adultos tinha um `];` duplicado (erro de sintaxe)
+e o `content-topics.ts` mantinha **cópias duplicadas** de todos os arrays —
+anulando qualquer ganho. Completei o code splitting de forma correta.
+
+### Implementado
+
+1. **Módulos por audiência** (`src/data/content-topics-{criancas,jovens,adultos}.ts`):
+   - Cada ficheiro exporta a respetiva lista (`topicsCriancas`/`topicsJovens`/
+     `topicsAdultos`) **e** um `export default`, corrigido também o `];`
+     duplicado em Adultos. Conteúdo idêntico ao original (124 IDs entre tópicos
+     e artigos, sem perda de dados).
+2. **`src/data/content-topics.ts` → loader puro**: removidos os ~1950 linhas com
+   o conteúdo duplicado; o módulo passou a expor apenas
+   `loadTopicsByAudience(audience)` com `import()` dinâmico por audiência. Isto
+   garante que cada audiência é um chunk separado descarregado on-demand.
+3. **`src/data/content.ts`**: removido o re-export síncrono `topics`
+   (code-splitting só funciona se ninguém importar o array de forma estática).
+4. **`HomeTab`** (`src/components/HomeTab.tsx`): carrega tópicos de forma
+   assíncrona via `loadTopicsByAudience` com skeleton de carregamento
+   acessível; o filtro por audiência deixa de estar no cliente.
+5. **Testes**: `content.integrity.test.ts` passou a combinar os três arrays
+   pré-partidos (mesmas validações); `HomeTab.test.tsx` passou a mockar
+   `loadTopicsByAudience` e a aguardar o estado carregado (`findBy*`); o
+   `audit.test.tsx` (jest-axe) mocka o loader e corrido após o carregamento.
+
+### Verificação
+
+- 265 testes passam (suite completa, sem regressões).
+- `next build` (Turbopack) compila com sucesso; código dividido confirmado:
+  3 chunks lazy separados — criancas (~12K), jovens (~60K), adultos (~28K) —
+  e o texto dos tópicos **não** aparece no chunk inicial da página
+  (`/`), reduzindo o bundle inicial.
+- Sem novos erros `tsc` (mantêm-se apenas os pré-existentes em ficheiros de
+  teste não tocados: `PodcastTab.test.tsx`, `translations.integrity.test.ts`).
+
+### Próximas melhorias pendentes (sugeridas)
+
+- [ ] Auditoria de performance (Lighthouse) do bundle inicial
+- [x] Code splitting do conteúdo de tópicos por audiência — concluído em `content-topics-*.ts`
+
+---
+
 ## Execução — 23 Ago 2026 (2)
 
 ### Melhoria: Cobertura E2E do download real do PDF (`/api/pdf`)

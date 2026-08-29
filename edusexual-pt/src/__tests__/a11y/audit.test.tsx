@@ -1,5 +1,5 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { axe } from "jest-axe";
 import { I18nProvider } from "@/i18n/context";
 import HeaderNav, { navTabIds } from "@/components/HeaderNav";
@@ -12,6 +12,23 @@ import PodcastTab from "@/components/PodcastTab";
 import { translations } from "@/i18n/translations";
 import { Audience, TabId } from "@/types";
 import { Episode } from "@/types";
+
+jest.mock("@/data/content-topics", () => ({
+  loadTopicsByAudience: jest.fn(() =>
+    Promise.resolve([
+      {
+        id: "t1",
+        title: "Tópico A",
+        description: "Descrição do tópico",
+        icon: "📘",
+        audience: "jovens",
+        articles: [
+          { id: "a1", title: "Artigo A", content: "Conteúdo do artigo", category: "Geral" },
+        ],
+      },
+    ])
+  ),
+}));
 
 const t = translations.pt;
 
@@ -94,6 +111,7 @@ describe("Auditoria de acessibilidade WCAG 2.1 (jest-axe)", () => {
 
   it("HomeTab (jovens) não tem violações de acessibilidade", async () => {
     const { container } = mount(<HomeTab audience="jovens" setActiveTab={jest.fn()} />);
+    await screen.findByText("Tópico A");
     expect(await axe(container, axeOptions)).toHaveNoViolations();
   });
 
@@ -126,6 +144,7 @@ describe("Auditoria de acessibilidade WCAG 2.1 (jest-axe)", () => {
     const audiences: Audience[] = ["criancas", "jovens", "adultos"];
     for (const audience of audiences) {
       const { container, unmount } = mount(<HomeTab audience={audience} setActiveTab={jest.fn()} />);
+      await screen.findByText("Tópico A");
       expect(await axe(container, axeOptions)).toHaveNoViolations();
       unmount();
     }

@@ -1,7 +1,11 @@
-import { topics } from "@/data/content-topics";
+import { topicsCriancas } from "@/data/content-topics-criancas";
+import { topicsJovens } from "@/data/content-topics-jovens";
+import { topicsAdultos } from "@/data/content-topics-adultos";
 import { quizQuestions } from "@/data/content-quiz";
 import { frequentlyAskedQuestions } from "@/data/content-faq";
 import { guides } from "@/data/content-guides";
+
+const topics = [...topicsCriancas, ...topicsJovens, ...topicsAdultos];
 
 describe("Content Integrity", () => {
   describe("Topics", () => {

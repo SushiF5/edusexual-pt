@@ -189,7 +189,12 @@ export default function HomeTab({ audience, setActiveTab }: HomeTabProps) {
                 <p className="text-gray-500 dark:text-gray-400 mb-4 md:mb-6 line-clamp-2 leading-relaxed text-sm md:text-base">{topic.description}</p>
 
                 {topic.audioUrl && (
-                  <LazyAudioPlayer src={topic.audioUrl} title={topic.title} loadLabel={t.loadAudio} />
+                  <LazyAudioPlayer
+                    src={topic.audioUrl}
+                    title={topic.title}
+                    loadLabel={t.loadAudio}
+                    textToRead={`${topic.title}. ${topic.description}`}
+                  />
                 )}
 
                 <div className="space-y-3">
@@ -204,7 +209,12 @@ export default function HomeTab({ audience, setActiveTab }: HomeTabProps) {
                       </summary>
                       <div className="mt-4 p-4 md:p-5 bg-gray-50 dark:bg-gray-700/50 rounded-2xl text-sm text-gray-700 dark:text-gray-300 whitespace-pre-line leading-relaxed shadow-inner">
                         {article.audioUrl && (
-                          <LazyAudioPlayer src={article.audioUrl} title={article.title} loadLabel={t.loadAudio} />
+                          <LazyAudioPlayer
+                            src={article.audioUrl}
+                            title={article.title}
+                            loadLabel={t.loadAudio}
+                            textToRead={`${article.title}. ${article.content}`}
+                          />
                         )}
                         {article.content}
                       </div>

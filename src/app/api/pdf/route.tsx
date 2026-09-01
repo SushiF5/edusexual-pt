@@ -30,7 +30,7 @@ function GuidePDF({ guide }: { guide: typeof guides[0] }) {
           </View>
         ))}
         <View style={styles.footer}>
-          <Text>EduSexual PT — {guide.title} — edusexual.pt</Text>
+          <Text>EduSexual PT — {guide.title} — edusexual-pt.vercel.app</Text>
         </View>
       </Page>
     </Document>

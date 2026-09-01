@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
-Sitemap: https://edusexual.pt/sitemap.xml
+Sitemap: https://edusexual-pt.vercel.app/sitemap.xml

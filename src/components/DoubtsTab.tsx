@@ -73,7 +73,7 @@ export default function DoubtsTab({
 
         <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
           {error && (
-            <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-4 text-red-700 dark:text-red-400 text-sm" role="alert">
+            <div className="bg-rose-50/90 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-800/60 rounded-2xl p-4 text-rose-800 dark:text-rose-300 text-sm" role="alert">
               {t.questionSendError || "Erro ao enviar pergunta. Tenta novamente."}
             </div>
           )}

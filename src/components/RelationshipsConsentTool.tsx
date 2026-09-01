@@ -119,10 +119,10 @@ export default function RelationshipsConsentTool({
                 </div>
 
                 <div className="border-t border-gray-100 dark:border-gray-700 pt-3 space-y-1.5">
-                  <div className="text-[11px] text-red-600 dark:text-red-400">
+                  <div className="text-[11px] text-rose-700 dark:text-rose-300">
                     <span className="font-bold">Mito:</span> {item.mythVsFact.myth}
                   </div>
-                  <div className="text-[11px] text-green-600 dark:text-green-400">
+                  <div className="text-[11px] text-emerald-700 dark:text-emerald-300">
                     <span className="font-bold">Facto:</span> {item.mythVsFact.fact}
                   </div>
                 </div>
@@ -183,10 +183,10 @@ export default function RelationshipsConsentTool({
             {filteredFlags.map((flag) => {
               const flagBadge =
                 flag.type === "green"
-                  ? { color: "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300", icon: "🟢", label: "Sinal Verde (Saudável)" }
+                  ? { color: "bg-emerald-100 text-emerald-800 dark:bg-emerald-950/50 dark:text-emerald-300 dark:border dark:border-emerald-800/40", icon: "🟢", label: "Sinal Verde (Saudável)" }
                   : flag.type === "yellow"
-                  ? { color: "bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300", icon: "🟡", label: "Atenção (Conversar)" }
-                  : { color: "bg-rose-100 text-rose-800 dark:bg-rose-900/40 dark:text-rose-300", icon: "🔴", label: "Sinal de Alerta (Tóxico/Abusivo)" };
+                  ? { color: "bg-amber-100 text-amber-800 dark:bg-amber-950/50 dark:text-amber-300 dark:border dark:border-amber-800/40", icon: "🟡", label: "Atenção (Conversar)" }
+                  : { color: "bg-rose-100 text-rose-800 dark:bg-rose-950/50 dark:text-rose-300 dark:border dark:border-rose-800/40", icon: "🔴", label: "Sinal de Alerta (Tóxico/Abusivo)" };
 
               return (
                 <div

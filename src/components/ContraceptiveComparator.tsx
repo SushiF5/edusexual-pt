@@ -21,6 +21,7 @@ export default function ContraceptiveComparator({
   const [compareList, setCompareList] = useState<string[]>([]);
   const [modalMethod, setModalMethod] = useState<ContraceptiveMethod | null>(null);
   const [showComparisonModal, setShowComparisonModal] = useState(false);
+  const [compareNotice, setCompareNotice] = useState<string | null>(null);
 
   const categories = [
     { id: "all", label: "Todos os Métodos" },
@@ -49,9 +50,11 @@ export default function ContraceptiveComparator({
   const toggleCompare = (id: string) => {
     if (compareList.includes(id)) {
       setCompareList(compareList.filter((mId) => mId !== id));
+      setCompareNotice(null);
     } else {
       if (compareList.length >= 3) {
-        alert("Podes comparar no máximo 3 métodos em simultâneo.");
+        setCompareNotice("Podes comparar no máximo 3 métodos em simultâneo.");
+        setTimeout(() => setCompareNotice(null), 3500);
         return;
       }
       setCompareList([...compareList, id]);
@@ -87,6 +90,22 @@ export default function ContraceptiveComparator({
           )}
         </div>
       </div>
+
+      {/* Compare Limit Notice Banner */}
+      {compareNotice && (
+        <div className="bg-amber-50 dark:bg-amber-950/60 border border-amber-300 dark:border-amber-700 text-amber-900 dark:text-amber-200 px-4 py-3 rounded-2xl flex items-center justify-between text-sm animate-fadeIn">
+          <div className="flex items-center gap-2">
+            <span>⚠️</span>
+            <span className="font-semibold">{compareNotice}</span>
+          </div>
+          <button
+            onClick={() => setCompareNotice(null)}
+            className="text-amber-700 dark:text-amber-300 hover:opacity-80 text-xs font-bold"
+          >
+            Fechar
+          </button>
+        </div>
+      )}
 
       {/* Filter and Search Bar */}
       <div className="bg-white dark:bg-gray-800 p-5 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 space-y-4">

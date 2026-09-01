@@ -121,7 +121,7 @@ export default function ResourcesTab({
                     ))}
                   </div>
                   <div className="mt-8 pt-6 border-t border-gray-100 dark:border-gray-700 text-center text-xs text-gray-400">
-                    EduSexual PT — {guide.title} — edusexual.pt
+                    EduSexual PT — {guide.title} — edusexual-pt.vercel.app
                   </div>
                 </div>
                 <div className="flex flex-wrap gap-3 justify-center no-print">

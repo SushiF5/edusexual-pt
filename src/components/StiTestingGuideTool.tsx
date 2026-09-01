@@ -30,21 +30,21 @@ export default function StiTestingGuideTool({
   return (
     <div className="space-y-10 animate-fadeIn">
       {/* PEP Urgent Warning Alert */}
-      <div className="bg-rose-50 dark:bg-rose-950/40 border-2 border-rose-300 dark:border-rose-800 p-5 md:p-6 rounded-3xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-sm">
+      <div className="bg-rose-50/90 dark:bg-rose-950/30 border-2 border-rose-200 dark:border-rose-800/60 p-5 md:p-6 rounded-3xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-sm">
         <div className="flex items-start gap-3">
-          <span className="text-3xl p-2 bg-rose-100 dark:bg-rose-900 rounded-2xl">🚨</span>
+          <span className="text-3xl p-2 bg-rose-100 dark:bg-rose-900/50 rounded-2xl">🚨</span>
           <div>
-            <h4 className="text-base md:text-lg font-heading font-bold text-rose-900 dark:text-rose-200">
+            <h4 className="text-base md:text-lg font-heading font-bold text-rose-950 dark:text-rose-200">
               Exposição de Risco Recente (Menos de 72 Horas)?
             </h4>
-            <p className="text-xs md:text-sm text-rose-700 dark:text-rose-300 mt-1 leading-relaxed">
+            <p className="text-xs md:text-sm text-rose-800 dark:text-rose-300 mt-1 leading-relaxed">
               Existe a <strong>PEP (Profilaxia Pós-Exposição)</strong> para o VIH. É um tratamento com comprimidos que deve ser iniciado no prazo máximo de <strong>72 horas</strong> após o contacto para evitar a infeção.
             </p>
           </div>
         </div>
         <a
           href="tel:808242424"
-          className="btn-primary bg-rose-600 hover:bg-rose-700 text-white shrink-0 text-xs md:text-sm py-2.5 px-5 shadow-lg"
+          className="btn-primary bg-rose-600 hover:bg-rose-700 dark:bg-rose-600 dark:hover:bg-rose-500 text-white shrink-0 text-xs md:text-sm py-2.5 px-5 shadow-sm"
         >
           📞 Ligar SNS 24 (808 24 24 24)
         </a>

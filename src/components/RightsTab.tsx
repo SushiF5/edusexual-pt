@@ -70,37 +70,37 @@ export default function RightsTab({
 
       {/* Emergency Highlights Banner */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="bg-gradient-to-r from-red-600 to-rose-700 text-white p-6 rounded-3xl shadow-md flex items-center justify-between gap-4">
+        <div className="bg-gradient-to-r from-rose-600 to-rose-700 dark:from-rose-950/70 dark:to-slate-900 dark:border dark:border-rose-700/40 text-white p-6 rounded-3xl shadow-sm flex items-center justify-between gap-4">
           <div className="space-y-1">
-            <span className="text-xs font-bold uppercase tracking-wider bg-white/20 px-2.5 py-0.5 rounded-full inline-block">
+            <span className="text-xs font-bold uppercase tracking-wider bg-white/20 dark:bg-rose-900/60 dark:text-rose-200 px-2.5 py-0.5 rounded-full inline-block">
               Emergência Nacional
             </span>
-            <h3 className="text-2xl font-heading font-bold">112</h3>
-            <p className="text-xs text-white/90">
+            <h3 className="text-2xl font-heading font-bold text-white">112</h3>
+            <p className="text-xs text-white/90 dark:text-rose-100/90">
               {t.emergencyNotice}
             </p>
           </div>
           <a
             href="tel:112"
-            className="bg-white text-red-700 font-bold px-6 py-3 rounded-full hover:bg-gray-100 transition shadow-lg shrink-0 text-sm"
+            className="bg-white dark:bg-rose-100 text-rose-800 dark:text-rose-950 font-bold px-6 py-3 rounded-full hover:bg-gray-100 dark:hover:bg-white transition shadow-md shrink-0 text-sm"
           >
             Ligar 112 📞
           </a>
         </div>
 
-        <div className="bg-gradient-to-r from-blue-700 to-teal-700 text-white p-6 rounded-3xl shadow-md flex items-center justify-between gap-4">
+        <div className="bg-gradient-to-r from-teal-700 to-cyan-800 dark:from-teal-950/70 dark:to-slate-900 dark:border dark:border-teal-700/40 text-white p-6 rounded-3xl shadow-sm flex items-center justify-between gap-4">
           <div className="space-y-1">
-            <span className="text-xs font-bold uppercase tracking-wider bg-white/20 px-2.5 py-0.5 rounded-full inline-block">
+            <span className="text-xs font-bold uppercase tracking-wider bg-white/20 dark:bg-teal-900/60 dark:text-teal-200 px-2.5 py-0.5 rounded-full inline-block">
               Saúde & Triagem 24/7
             </span>
-            <h3 className="text-2xl font-heading font-bold">SNS 24 — 808 24 24 24</h3>
-            <p className="text-xs text-white/90">
+            <h3 className="text-2xl font-heading font-bold text-white">SNS 24 — 808 24 24 24</h3>
+            <p className="text-xs text-white/90 dark:text-teal-100/90">
               Apoio clínico, psicológico e encaminhamento para consultas de urgência.
             </p>
           </div>
           <a
             href="tel:808242424"
-            className="bg-white text-blue-800 font-bold px-6 py-3 rounded-full hover:bg-gray-100 transition shadow-lg shrink-0 text-sm"
+            className="bg-white dark:bg-teal-100 text-teal-900 dark:text-teal-950 font-bold px-6 py-3 rounded-full hover:bg-gray-100 dark:hover:bg-white transition shadow-md shrink-0 text-sm"
           >
             Ligar SNS 24 📞
           </a>

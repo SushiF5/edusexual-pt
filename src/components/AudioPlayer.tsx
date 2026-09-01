@@ -25,12 +25,12 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, fallbackText }) =
   const mimeType = useMemo(() => getMimeType(src), [src]);
 
   return (
-    <div className="p-3 bg-primary/5 rounded-2xl border border-primary/10 my-3" role="region" aria-label={`Audio: ${title}`}>
+    <div className="p-3 bg-primary/5 dark:bg-primary/20 rounded-2xl border border-primary/10 dark:border-primary/30 my-3" role="region" aria-label={`Audio: ${title}`}>
       <div className="flex items-center gap-3 mb-2">
         <span className="text-lg" role="img" aria-hidden="true">🎧</span>
-        <span className="text-sm font-semibold text-primary">{title}</span>
+        <span className="text-sm font-semibold text-primary dark:text-primary-light">{title}</span>
       </div>
-      <audio controls preload="none" className="w-full rounded-xl" controlsList="nodownload" aria-label={`Reproduzir: ${title}`}>
+      <audio controls preload="none" className="w-full rounded-xl dark:opacity-90" controlsList="nodownload" aria-label={`Reproduzir: ${title}`}>
         <source src={src} type={mimeType} />
         <p>{fallbackText || "O teu navegador não suporta a reprodução de áudio."}</p>
       </audio>
@@ -81,7 +81,7 @@ export const LazyAudioPlayer: React.FC<LazyAudioPlayerProps> = ({
     return (
       <div
         ref={ref}
-        className="p-3 bg-primary/5 rounded-2xl border border-primary/10 my-3"
+        className="p-3 bg-primary/5 dark:bg-primary/20 rounded-2xl border border-primary/10 dark:border-primary/30 my-3"
         role="region"
         aria-label={`Audio: ${title}`}
       >
@@ -90,7 +90,7 @@ export const LazyAudioPlayer: React.FC<LazyAudioPlayerProps> = ({
           <button
             type="button"
             onClick={() => setVisible(true)}
-            className="text-sm font-semibold text-primary underline underline-offset-2 hover:text-secondary focus-visible:ring-2 focus-visible:ring-primary rounded"
+            className="text-sm font-semibold text-primary dark:text-primary-light underline underline-offset-2 hover:text-secondary focus-visible:ring-2 focus-visible:ring-primary rounded"
           >
             {`${loadLabel}: ${title}`}
           </button>

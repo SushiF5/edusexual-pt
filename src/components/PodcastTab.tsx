@@ -86,7 +86,7 @@ export default function PodcastTab({
           </div>
         ) : fetchError ? (
           <div className="text-center py-12 text-gray-400">
-            <p className="text-red-500 dark:text-red-400 mb-2">{t.podcastLoadError || "Erro ao carregar episódios."}</p>
+            <p className="text-rose-600 dark:text-rose-400 font-medium mb-2">{t.podcastLoadError || "Erro ao carregar episódios."}</p>
             <button
               onClick={() => { hasFetched.current = false; setPodcastLoading(true); }}
               className="text-secondary hover:underline"

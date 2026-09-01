@@ -10,14 +10,27 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: "#2D5A5A",
-        secondary: "#F4A261",
-        accent: "#E9C46A",
-        background: "#FAFAF9",
+        primary: {
+          DEFAULT: "#2D5A5A",
+          light: "#4A8B8B",
+          dark: "#1D3B3B",
+        },
+        secondary: {
+          DEFAULT: "#F4A261",
+          light: "#F8C29B",
+          dark: "#E76F51",
+        },
+        accent: {
+          DEFAULT: "#E9C46A",
+          light: "#F2D99E",
+          dark: "#D4A373",
+        },
+        background: "var(--background)",
+        foreground: "var(--foreground)",
       },
       fontFamily: {
-        heading: ["Outfit", "sans-serif"],
-        body: ["Source Sans 3", "sans-serif"],
+        heading: ["var(--font-outfit)", "sans-serif"],
+        body: ["var(--font-source-sans)", "sans-serif"],
       },
     },
   },

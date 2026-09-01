@@ -187,12 +187,12 @@ export default function QuizTab({ audience }: QuizTabProps) {
                     <span className="text-gray-400 mr-1">{index + 1}.</span>{q.question}
                   </p>
                   <div className="space-y-1 text-sm">
-                    <p className={isCorrect ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}>
+                    <p className={isCorrect ? "text-emerald-600 dark:text-emerald-400 font-medium" : "text-rose-600 dark:text-rose-400 font-medium"}>
                       {t.quizYourAnswer}: {chosen === null || chosen === undefined ? t.quizNotAnswered : q.options[chosen]}
                       {isCorrect ? " ✓" : " ✗"}
                     </p>
                     {!isCorrect && (
-                      <p className="text-green-600 dark:text-green-400">
+                      <p className="text-emerald-600 dark:text-emerald-400 font-medium">
                         {t.quizCorrectAnswerLabel}: {q.options[q.correctAnswer]} ✓
                       </p>
                     )}
@@ -235,11 +235,11 @@ export default function QuizTab({ audience }: QuizTabProps) {
             let ariaLabel = `${optionLetter}) ${option}`;
             if (quizState.showExplanation) {
               if (index === filteredQuiz[quizState.currentQuestion].correctAnswer) {
-                btnClass += "border-green-500 bg-green-50 dark:bg-green-900/30";
+                btnClass += "border-emerald-500 bg-emerald-50 dark:bg-emerald-950/40 dark:border-emerald-500/70 text-emerald-950 dark:text-emerald-100";
                 suffix = " ✓";
                 ariaLabel += " - Resposta correta";
               } else if (quizState.selectedAnswer === index) {
-                btnClass += "border-red-500 bg-red-50 dark:bg-red-900/30";
+                btnClass += "border-rose-500 bg-rose-50 dark:bg-rose-950/40 dark:border-rose-500/70 text-rose-950 dark:text-rose-100";
                 suffix = " ✗";
                 ariaLabel += " - Resposta incorreta";
               }
@@ -257,8 +257,8 @@ export default function QuizTab({ audience }: QuizTabProps) {
           })}
         </div>
         {quizState.showExplanation && (
-          <div className="mt-6 p-4 bg-accent/20 dark:bg-accent/10 rounded-lg" role="status" aria-live="polite" aria-atomic="true">
-            <p className={`font-semibold mb-2 text-sm md:text-base ${isCurrentCorrect ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}`}>
+          <div className="mt-6 p-4 bg-accent/20 dark:bg-accent/10 rounded-2xl border border-accent/20 dark:border-accent/15" role="status" aria-live="polite" aria-atomic="true">
+            <p className={`font-bold mb-2 text-sm md:text-base ${isCurrentCorrect ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"}`}>
               {isCurrentCorrect ? t.quizFeedbackCorrect : t.quizFeedbackIncorrect}
             </p>
             <p className="text-gray-700 dark:text-gray-300 mb-4 text-sm md:text-base">{filteredQuiz[quizState.currentQuestion].explanation}</p>

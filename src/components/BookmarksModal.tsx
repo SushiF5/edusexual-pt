@@ -94,7 +94,7 @@ export default function BookmarksModal({
                   </button>
                   <button
                     onClick={() => onRemoveBookmark(item.id)}
-                    className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-950/40 rounded-xl transition text-sm"
+                    className="p-2 text-gray-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 rounded-xl transition text-sm"
                     title={t.removeBookmark}
                   >
                     🗑️

@@ -155,10 +155,10 @@ export default function StepByStepGuides({
           )}
 
           {currentStep.warning && (
-            <div className="bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800 p-4 rounded-2xl flex items-start gap-2.5 text-xs md:text-sm text-rose-950 dark:text-rose-200">
+            <div className="bg-rose-50/90 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-800/60 p-4 rounded-2xl flex items-start gap-2.5 text-xs md:text-sm text-rose-950 dark:text-rose-200">
               <span className="text-base">⚠️</span>
               <div>
-                <span className="font-bold block mb-0.5">Atenção:</span>
+                <span className="font-bold block mb-0.5 text-rose-900 dark:text-rose-300">Atenção:</span>
                 {currentStep.warning}
               </div>
             </div>

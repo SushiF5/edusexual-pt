@@ -178,7 +178,7 @@ export default function MythBusterGame({
           <div className="grid grid-cols-2 gap-4 max-w-md mx-auto pt-2">
             <button
               onClick={() => handleAnswer(false)}
-              className="bg-red-50 hover:bg-red-100 text-red-700 dark:bg-red-950/40 dark:hover:bg-red-900/50 dark:text-red-300 font-bold py-4 px-6 rounded-2xl border-2 border-red-200 dark:border-red-800 transition-all hover:scale-105 active:scale-95 shadow-sm text-base md:text-lg flex items-center justify-center gap-2"
+              className="bg-rose-50 hover:bg-rose-100 text-rose-800 dark:bg-rose-950/30 dark:hover:bg-rose-900/40 dark:text-rose-300 font-bold py-4 px-6 rounded-2xl border-2 border-rose-200 dark:border-rose-800/60 transition-all hover:scale-105 active:scale-95 shadow-sm text-base md:text-lg flex items-center justify-center gap-2"
             >
               <span>❌</span>
               <span>MITO</span>
@@ -186,7 +186,7 @@ export default function MythBusterGame({
 
             <button
               onClick={() => handleAnswer(true)}
-              className="bg-emerald-50 hover:bg-emerald-100 text-emerald-700 dark:bg-emerald-950/40 dark:hover:bg-emerald-900/50 dark:text-emerald-300 font-bold py-4 px-6 rounded-2xl border-2 border-emerald-200 dark:border-emerald-800 transition-all hover:scale-105 active:scale-95 shadow-sm text-base md:text-lg flex items-center justify-center gap-2"
+              className="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 dark:bg-emerald-950/30 dark:hover:bg-emerald-900/40 dark:text-emerald-300 font-bold py-4 px-6 rounded-2xl border-2 border-emerald-200 dark:border-emerald-800/60 transition-all hover:scale-105 active:scale-95 shadow-sm text-base md:text-lg flex items-center justify-center gap-2"
             >
               <span>✅</span>
               <span>VERDADE</span>
@@ -198,8 +198,8 @@ export default function MythBusterGame({
             <div
               className={`p-6 rounded-2xl border ${
                 isAnswerCorrect
-                  ? "bg-emerald-50 dark:bg-emerald-950/40 border-emerald-300 text-emerald-900 dark:text-emerald-100"
-                  : "bg-red-50 dark:bg-red-950/40 border-red-300 text-red-900 dark:text-red-100"
+                  ? "bg-emerald-50/90 dark:bg-emerald-950/30 border-emerald-300 dark:border-emerald-800/60 text-emerald-950 dark:text-emerald-100"
+                  : "bg-rose-50/90 dark:bg-rose-950/30 border-rose-300 dark:border-rose-800/60 text-rose-950 dark:text-rose-100"
               }`}
             >
               <div className="text-2xl mb-1">
@@ -211,8 +211,8 @@ export default function MythBusterGame({
               <p className="text-sm md:text-base leading-relaxed mb-3">
                 {currentMyth.explanation}
               </p>
-              <div className="text-xs bg-white/70 dark:bg-gray-800/70 p-3 rounded-xl border border-black/5 dark:border-white/5 text-gray-700 dark:text-gray-300 text-left">
-                <span className="font-bold block mb-1">📚 Explicação Científica:</span>
+              <div className="text-xs bg-white/80 dark:bg-gray-900/70 p-3.5 rounded-xl border border-black/5 dark:border-white/10 text-gray-700 dark:text-gray-200 text-left">
+                <span className="font-bold block mb-1 text-primary dark:text-primary-light">📚 Explicação Científica:</span>
                 {currentMyth.scientificContext}
               </div>
             </div>

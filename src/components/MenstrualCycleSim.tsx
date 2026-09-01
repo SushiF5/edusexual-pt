@@ -30,7 +30,7 @@ export default function MenstrualCycleSim() {
     hormoneSummary = "Estrogénio e progesterona em níveis mínimos basais.";
     cervicalMucus = "Escasso ou mascarado pelo fluxo menstrual.";
     fertilityLevel = "Muito Baixa (mas não nula em ciclos curtos/irregulares).";
-    fertilityBadge = "bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300";
+    fertilityBadge = "bg-blue-100 text-blue-800 dark:bg-blue-950/50 dark:text-blue-300 dark:border dark:border-blue-800/40";
   } else if (selectedDay < fertileStart) {
     phaseName = "Fase Folicular (Pré-Ovulatória)";
     phaseColor = "from-amber-400 to-orange-500";
@@ -40,7 +40,7 @@ export default function MenstrualCycleSim() {
     hormoneSummary = "Estrogénio a subir progressivamente; FSH diminui.";
     cervicalMucus = "Pouco espesso, pegajoso ou leitoso.";
     fertilityLevel = "Baixa a Média (espermatozoides sobrevivem até 5 dias nas trompas).";
-    fertilityBadge = "bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300";
+    fertilityBadge = "bg-amber-100 text-amber-800 dark:bg-amber-950/50 dark:text-amber-300 dark:border dark:border-amber-800/40";
   } else if (selectedDay >= fertileStart && selectedDay <= fertileEnd) {
     phaseName = "Janela Fértil & Ovulação";
     phaseColor = "from-emerald-500 to-teal-600";
@@ -50,7 +50,7 @@ export default function MenstrualCycleSim() {
     hormoneSummary = "Pico acentuado de Hormona Luteinizante (LH) e Estrogénio máximo.";
     cervicalMucus = "Fluido, transparente e elástico (semelhante a clara de ovo crua).";
     fertilityLevel = "Máxima / Muito Alta (Período de maior probabilidade de fecundação).";
-    fertilityBadge = "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300 font-bold";
+    fertilityBadge = "bg-emerald-100 text-emerald-800 dark:bg-emerald-950/50 dark:text-emerald-300 dark:border dark:border-emerald-800/40 font-bold";
   } else {
     phaseName = "Fase Lútea (Pós-Ovulatória)";
     phaseColor = "from-indigo-500 to-purple-600";
@@ -60,7 +60,7 @@ export default function MenstrualCycleSim() {
     hormoneSummary = "Pico de Progesterona; subida ligeira da temperatura corporal basal (~0.3ºC a 0.5ºC).";
     cervicalMucus = "Mais espesso, seco ou pastoso (bloqueia o canal cervical).";
     fertilityLevel = "Baixa / Nula após a degradação do óvulo (sobrevida de 12-24h).";
-    fertilityBadge = "bg-indigo-100 text-indigo-800 dark:bg-indigo-900/40 dark:text-indigo-300";
+    fertilityBadge = "bg-indigo-100 text-indigo-800 dark:bg-indigo-950/50 dark:text-indigo-300 dark:border dark:border-indigo-800/40";
   }
 
   return (
@@ -126,41 +126,43 @@ export default function MenstrualCycleSim() {
           />
 
           {/* Cycle Phases Visual Bar */}
-          <div className="grid grid-cols-4 gap-1 text-[10px] md:text-xs font-semibold text-center pt-2">
+          <div className="grid grid-cols-4 gap-1.5 text-[10px] md:text-xs font-semibold text-center pt-2">
             <div
               onClick={() => setSelectedDay(3)}
-              className={`p-2 rounded-xl cursor-pointer transition ${
-                selectedDay <= 5 ? "bg-rose-500 text-white shadow-md font-bold" : "bg-rose-50 dark:bg-rose-950/40 text-rose-800 dark:text-rose-300"
+              className={`p-2.5 rounded-xl cursor-pointer transition ${
+                selectedDay <= 5
+                  ? "bg-rose-600 text-white shadow-sm font-bold"
+                  : "bg-rose-50 dark:bg-rose-950/30 text-rose-800 dark:text-rose-300 border border-rose-100 dark:border-rose-900/40 hover:bg-rose-100 dark:hover:bg-rose-950/50"
               }`}
             >
               Menstruação (Dias 1-5)
             </div>
             <div
               onClick={() => setSelectedDay(8)}
-              className={`p-2 rounded-xl cursor-pointer transition ${
+              className={`p-2.5 rounded-xl cursor-pointer transition ${
                 selectedDay > 5 && selectedDay < fertileStart
-                  ? "bg-amber-500 text-white shadow-md font-bold"
-                  : "bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300"
+                  ? "bg-amber-500 text-white shadow-sm font-bold"
+                  : "bg-amber-50 dark:bg-amber-950/30 text-amber-800 dark:text-amber-300 border border-amber-100 dark:border-amber-900/40 hover:bg-amber-100 dark:hover:bg-amber-950/50"
               }`}
             >
               Folicular (Dias 6-{fertileStart - 1})
             </div>
             <div
               onClick={() => setSelectedDay(ovulationDay)}
-              className={`p-2 rounded-xl cursor-pointer transition ${
+              className={`p-2.5 rounded-xl cursor-pointer transition ${
                 selectedDay >= fertileStart && selectedDay <= fertileEnd
-                  ? "bg-emerald-500 text-white shadow-md font-bold"
-                  : "bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300"
+                  ? "bg-emerald-600 text-white shadow-sm font-bold"
+                  : "bg-emerald-50 dark:bg-emerald-950/30 text-emerald-800 dark:text-emerald-300 border border-emerald-100 dark:border-emerald-900/40 hover:bg-emerald-100 dark:hover:bg-emerald-950/50"
               }`}
             >
               Ovulação (Dias {fertileStart}-{fertileEnd})
             </div>
             <div
               onClick={() => setSelectedDay(Math.min(cycleLength, fertileEnd + 4))}
-              className={`p-2 rounded-xl cursor-pointer transition ${
+              className={`p-2.5 rounded-xl cursor-pointer transition ${
                 selectedDay > fertileEnd
-                  ? "bg-indigo-500 text-white shadow-md font-bold"
-                  : "bg-indigo-50 dark:bg-indigo-950/40 text-indigo-800 dark:text-indigo-300"
+                  ? "bg-indigo-600 text-white shadow-sm font-bold"
+                  : "bg-indigo-50 dark:bg-indigo-950/30 text-indigo-800 dark:text-indigo-300 border border-indigo-100 dark:border-indigo-900/40 hover:bg-indigo-100 dark:hover:bg-indigo-950/50"
               }`}
             >
               Lútea (Dias {fertileEnd + 1}-{cycleLength})

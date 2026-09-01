@@ -71,7 +71,7 @@ describe("useKeyboardShortcuts", () => {
 
   it("navigates to tab by number keys 1-6", () => {
     renderHook(() => useKeyboardShortcuts(defaultProps));
-    const tabs = ["home", "podcast", "recursos", "quiz", "faq", "duvidas"];
+    const tabs = ["home", "podcast", "ferramentas", "glossario", "direitos", "recursos"];
     for (let i = 0; i < tabs.length; i++) {
       act(() => pressKey(String(i + 1)));
       expect(defaultProps.setActiveTab).toHaveBeenCalledWith(tabs[i]);

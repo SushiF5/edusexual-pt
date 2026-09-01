@@ -36,71 +36,71 @@ describe("HeaderNav — ARIA tabs pattern", () => {
   });
 
   it("marks the active tab as selected with tabIndex 0 and others as -1", () => {
-    renderHeader("faq");
-    const faq = screen.getByRole("tab", { name: /faq/i });
+    renderHeader("direitos");
+    const direitos = screen.getByRole("tab", { name: /linhas/i });
     const home = screen.getByRole("tab", { name: /início/i });
-    expect(faq).toHaveAttribute("aria-selected", "true");
-    expect(faq).toHaveAttribute("tabindex", "0");
+    expect(direitos).toHaveAttribute("aria-selected", "true");
+    expect(direitos).toHaveAttribute("tabindex", "0");
     expect(home).toHaveAttribute("aria-selected", "false");
     expect(home).toHaveAttribute("tabindex", "-1");
-    expect(faq).toHaveAttribute("aria-controls", "main-content");
+    expect(direitos).toHaveAttribute("aria-controls", "main-content");
   });
 
   it("activates a tab on click", () => {
     const { setActiveTab } = renderHeader("home");
-    fireEvent.click(screen.getByRole("tab", { name: /quiz/i }));
-    expect(setActiveTab).toHaveBeenCalledWith("quiz");
+    fireEvent.click(screen.getByRole("tab", { name: /ferramentas/i }));
+    expect(setActiveTab).toHaveBeenCalledWith("ferramentas");
   });
 
   it("moves focus and activates the next tab with ArrowRight", () => {
     const { setActiveTab } = renderHeader("home");
     const home = screen.getByRole("tab", { name: /início/i });
-    const podcast = screen.getByRole("tab", { name: /podcast/i });
+    const recursos = screen.getByRole("tab", { name: /aprender/i });
     home.focus();
     expect(document.activeElement).toBe(home);
 
     fireEvent.keyDown(home, { key: "ArrowRight" });
 
-    expect(podcast).toHaveFocus();
-    expect(setActiveTab).toHaveBeenCalledWith("podcast");
+    expect(recursos).toHaveFocus();
+    expect(setActiveTab).toHaveBeenCalledWith("recursos");
   });
 
   it("wraps from the last tab to the first with ArrowRight", () => {
-    const { setActiveTab } = renderHeader("duvidas");
-    const duvidas = screen.getByRole("tab", { name: /dúvidas/i });
+    const { setActiveTab } = renderHeader("direitos");
+    const direitos = screen.getByRole("tab", { name: /linhas/i });
     const home = screen.getByRole("tab", { name: /início/i });
-    duvidas.focus();
+    direitos.focus();
 
-    fireEvent.keyDown(duvidas, { key: "ArrowRight" });
+    fireEvent.keyDown(direitos, { key: "ArrowRight" });
 
     expect(home).toHaveFocus();
     expect(setActiveTab).toHaveBeenCalledWith("home");
   });
 
   it("moves to the previous tab with ArrowLeft", () => {
-    const { setActiveTab } = renderHeader("quiz");
-    const quiz = screen.getByRole("tab", { name: /quiz/i });
-    const recursos = screen.getByRole("tab", { name: /recursos/i });
-    quiz.focus();
+    const { setActiveTab } = renderHeader("ferramentas");
+    const ferramentas = screen.getByRole("tab", { name: /ferramentas/i });
+    const recursos = screen.getByRole("tab", { name: /aprender/i });
+    ferramentas.focus();
 
-    fireEvent.keyDown(quiz, { key: "ArrowLeft" });
+    fireEvent.keyDown(ferramentas, { key: "ArrowLeft" });
 
     expect(recursos).toHaveFocus();
     expect(setActiveTab).toHaveBeenCalledWith("recursos");
   });
 
   it("jumps to first/last tab with Home/End", () => {
-    const { setActiveTab } = renderHeader("faq");
-    const faq = screen.getByRole("tab", { name: /faq/i });
+    const { setActiveTab } = renderHeader("recursos");
+    const recursos = screen.getByRole("tab", { name: /aprender/i });
     const home = screen.getByRole("tab", { name: /início/i });
-    const duvidas = screen.getByRole("tab", { name: /dúvidas/i });
-    faq.focus();
+    const direitos = screen.getByRole("tab", { name: /linhas/i });
+    recursos.focus();
 
-    fireEvent.keyDown(faq, { key: "End" });
-    expect(duvidas).toHaveFocus();
-    expect(setActiveTab).toHaveBeenCalledWith("duvidas");
+    fireEvent.keyDown(recursos, { key: "End" });
+    expect(direitos).toHaveFocus();
+    expect(setActiveTab).toHaveBeenCalledWith("direitos");
 
-    fireEvent.keyDown(duvidas, { key: "Home" });
+    fireEvent.keyDown(direitos, { key: "Home" });
     expect(home).toHaveFocus();
     expect(setActiveTab).toHaveBeenCalledWith("home");
   });

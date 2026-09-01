@@ -216,23 +216,23 @@ it("renders AudioPlayer for articles with audioUrl inside details", () => {
 
   it("renders CTA buttons when setActiveTab is provided", () => {
     render(<HomeTab audience="jovens" setActiveTab={() => {}} />);
-    expect(screen.getByText("Começar Quiz")).toBeInTheDocument();
-    expect(screen.getByText("Tira Dúvidas")).toBeInTheDocument();
+    expect(screen.getByText(/Começar Quiz/)).toBeInTheDocument();
+    expect(screen.getByText(/Ferramentas Interativas/)).toBeInTheDocument();
   });
 
   it("calls setActiveTab with quiz when quiz button clicked", () => {
     const setActiveTab = jest.fn();
     render(<HomeTab audience="jovens" setActiveTab={setActiveTab} />);
-    fireEvent.click(screen.getByText("Começar Quiz"));
+    fireEvent.click(screen.getByText(/Começar Quiz/));
     expect(setActiveTab).toHaveBeenCalledWith("quiz");
     expect(setActiveTab).toHaveBeenCalledTimes(1);
   });
 
-  it("calls setActiveTab with duvidas when questions button clicked", () => {
+  it("calls setActiveTab with direitos when lines button clicked", () => {
     const setActiveTab = jest.fn();
     render(<HomeTab audience="jovens" setActiveTab={setActiveTab} />);
-    fireEvent.click(screen.getByText("Tira Dúvidas"));
-    expect(setActiveTab).toHaveBeenCalledWith("duvidas");
+    fireEvent.click(screen.getByText(/Linhas de Apoio/));
+    expect(setActiveTab).toHaveBeenCalledWith("direitos");
     expect(setActiveTab).toHaveBeenCalledTimes(1);
   });
 

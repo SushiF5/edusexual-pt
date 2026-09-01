@@ -106,14 +106,14 @@ export default function ResourcesTab({
                       {guide.icon}
                     </div>
                     <div>
-                      <h4 className="text-xl md:text-2xl font-heading font-bold text-primary">{guide.title}</h4>
+                      <h3 className="text-xl md:text-2xl font-heading font-bold text-primary">{guide.title}</h3>
                       <p className="text-gray-500 dark:text-gray-400 text-sm">{guide.description}</p>
                     </div>
                   </div>
                   <div className="space-y-6">
                     {guide.sections.map((section, i) => (
                       <div key={`${guide.id}-s${i}`}>
-                        <h5 className="text-lg font-heading font-semibold text-primary mb-3">{section.heading}</h5>
+                        <h4 className="text-lg font-heading font-semibold text-primary mb-3">{section.heading}</h4>
                         <p className="text-gray-700 dark:text-gray-300 whitespace-pre-line leading-relaxed text-sm md:text-base">
                           {section.body}
                         </p>
@@ -151,7 +151,7 @@ export default function ResourcesTab({
                     <div className="bg-primary/5 dark:bg-primary/20 w-14 h-14 rounded-2xl flex items-center justify-center text-3xl mb-4 group-hover:bg-primary group-hover:text-white transition-all duration-500">
                       {g.icon}
                     </div>
-                    <h4 className="text-lg font-heading font-bold text-primary mb-2">{g.title}</h4>
+                    <h3 className="text-lg font-heading font-bold text-primary mb-2">{g.title}</h3>
                     <p className="text-gray-500 dark:text-gray-400 text-sm mb-4">{g.description}</p>
                     <span className="text-secondary font-semibold text-sm">{t.openGuide}</span>
                   </button>
@@ -165,7 +165,7 @@ export default function ResourcesTab({
             )}
 
             <div className="card bg-accent/10 border-accent text-center no-print">
-              <h4 className="font-heading font-semibold text-primary mb-2">{t.howToPdfTitle}</h4>
+              <h3 className="font-heading font-semibold text-primary mb-2">{t.howToPdfTitle}</h3>
               <p className="text-sm text-gray-600 dark:text-gray-400">{t.howToPdfDesc}</p>
             </div>
           </div>

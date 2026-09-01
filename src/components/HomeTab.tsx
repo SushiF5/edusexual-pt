@@ -96,9 +96,9 @@ export default function HomeTab({ audience, setActiveTab }: HomeTabProps) {
             <span className="text-3xl p-3 bg-primary/10 dark:bg-primary/20 rounded-2xl inline-block mb-3 group-hover:scale-110 transition-transform">
               ⚖️
             </span>
-            <h4 className="font-heading font-bold text-gray-900 dark:text-white text-base">
+            <h3 className="font-heading font-bold text-gray-900 dark:text-white text-base">
               Comparador Contracetivo
-            </h4>
+            </h3>
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
               Eficácia, custos e métodos gratuitos no SNS.
             </p>
@@ -111,9 +111,9 @@ export default function HomeTab({ audience, setActiveTab }: HomeTabProps) {
             <span className="text-3xl p-3 bg-secondary/10 dark:bg-secondary/20 rounded-2xl inline-block mb-3 group-hover:scale-110 transition-transform">
               💡
             </span>
-            <h4 className="font-heading font-bold text-gray-900 dark:text-white text-base">
+            <h3 className="font-heading font-bold text-gray-900 dark:text-white text-base">
               Mito ou Verdade?
-            </h4>
+            </h3>
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
               Desmistifica crenças populares com factos.
             </p>
@@ -126,9 +126,9 @@ export default function HomeTab({ audience, setActiveTab }: HomeTabProps) {
             <span className="text-3xl p-3 bg-accent/10 dark:bg-accent/20 rounded-2xl inline-block mb-3 group-hover:scale-110 transition-transform">
               📖
             </span>
-            <h4 className="font-heading font-bold text-gray-900 dark:text-white text-base">
+            <h3 className="font-heading font-bold text-gray-900 dark:text-white text-base">
               Glossário de A a Z
-            </h4>
+            </h3>
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
               Dicionário claro sobre termos e conceitos.
             </p>
@@ -141,9 +141,9 @@ export default function HomeTab({ audience, setActiveTab }: HomeTabProps) {
             <span className="text-3xl p-3 bg-rose-50 dark:bg-rose-950/40 rounded-2xl inline-block mb-3 group-hover:scale-110 transition-transform">
               📞
             </span>
-            <h4 className="font-heading font-bold text-gray-900 dark:text-white text-base">
+            <h3 className="font-heading font-bold text-gray-900 dark:text-white text-base">
               Linhas & Direitos SNS
-            </h4>
+            </h3>
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
               Contactos diretos, sigilo jovem e urgência.
             </p>

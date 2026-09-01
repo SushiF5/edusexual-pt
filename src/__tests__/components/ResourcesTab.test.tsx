@@ -5,6 +5,8 @@ import ResourcesTab from "@/components/ResourcesTab";
 jest.mock("@/i18n/context", () => ({
   useI18n: () => ({
     t: {
+      tabLearn: "Aprender",
+      tabLearnDesc: "Glossário A-Z, guias práticos",
       resourcesTitle: "Guias e Recursos",
       resourcesSubtitle: "Guias práticos",
       openGuide: "Abrir guia",
@@ -61,7 +63,7 @@ describe("ResourcesTab", () => {
 
   it("renders title", () => {
     render(<ResourcesTab audience="jovens" />);
-    expect(screen.getByText("Guias e Recursos")).toBeInTheDocument();
+    expect(screen.getByText(/Aprender/)).toBeInTheDocument();
   });
 
   it("filters guides by audience", () => {

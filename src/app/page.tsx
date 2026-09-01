@@ -6,12 +6,14 @@ import { useI18n } from "@/i18n/context";
 import { T } from "@/i18n/translations";
 import { useFocusTrap } from "@/lib/useFocusTrap";
 import TabSkeleton from "@/components/TabSkeleton";
-import { Audience, TabId } from "@/types";
+import { Audience, TabId, BookmarkItem } from "@/types";
 import { PodcastProvider, usePodcast } from "@/contexts/PodcastContext";
 import { DoubtsProvider, useDoubts } from "@/contexts/DoubtsContext";
 import HomeTab from "@/components/HomeTab";
 import HeaderNav from "@/components/HeaderNav";
 import ErrorBoundary from "@/components/ErrorBoundary";
+import BookmarksModal from "@/components/BookmarksModal";
+import GlobalSearchModal from "@/components/GlobalSearchModal";
 import { useKeyboardShortcuts } from "@/lib/useKeyboardShortcuts";
 
 const QuizTab = dynamic(() => import("@/components/QuizTab"), { ssr: false, loading: () => <TabSkeleton /> });
@@ -19,6 +21,9 @@ const FaqTab = dynamic(() => import("@/components/FaqTab"), { ssr: false, loadin
 const DoubtsTab = dynamic(() => import("@/components/DoubtsTab"), { ssr: false, loading: () => <TabSkeleton /> });
 const PodcastTab = dynamic(() => import("@/components/PodcastTab"), { ssr: false, loading: () => <TabSkeleton /> });
 const ResourcesTab = dynamic(() => import("@/components/ResourcesTab"), { ssr: false, loading: () => <TabSkeleton /> });
+const ToolsTab = dynamic(() => import("@/components/ToolsTab"), { ssr: false, loading: () => <TabSkeleton /> });
+const GlossaryTab = dynamic(() => import("@/components/GlossaryTab"), { ssr: false, loading: () => <TabSkeleton /> });
+const RightsTab = dynamic(() => import("@/components/RightsTab"), { ssr: false, loading: () => <TabSkeleton /> });
 
 interface AudienceSelectorProps {
   show: boolean;
@@ -30,6 +35,8 @@ interface TabContentProps {
   activeTab: TabId;
   audience: Audience;
   setActiveTab: (tab: TabId) => void;
+  onBookmark: (item: BookmarkItem) => void;
+  isBookmarked: (id: string) => boolean;
 }
 
 function AudienceSelector({ show, onSelect, t }: AudienceSelectorProps) {
@@ -69,7 +76,7 @@ function AudienceSelector({ show, onSelect, t }: AudienceSelectorProps) {
   );
 }
 
-function TabContent({ activeTab, audience, setActiveTab }: TabContentProps) {
+function TabContent({ activeTab, audience, setActiveTab, onBookmark, isBookmarked }: TabContentProps) {
   const podcastCtx = usePodcast();
   const doubtsCtx = useDoubts();
 
@@ -87,6 +94,12 @@ function TabContent({ activeTab, audience, setActiveTab }: TabContentProps) {
           setPlayingEpisode={podcastCtx.setPlayingEpisode}
         />
       );
+    case "ferramentas":
+      return <ToolsTab onBookmark={onBookmark} isBookmarked={isBookmarked} />;
+    case "glossario":
+      return <GlossaryTab onBookmark={onBookmark} isBookmarked={isBookmarked} />;
+    case "direitos":
+      return <RightsTab onBookmark={onBookmark} isBookmarked={isBookmarked} />;
     case "recursos":
       return <ResourcesTab audience={audience} />;
     case "quiz":
@@ -116,6 +129,9 @@ export default function Home() {
   const [darkMode, setDarkMode] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [bookmarks, setBookmarks] = useState<BookmarkItem[]>([]);
+  const [bookmarksModalOpen, setBookmarksModalOpen] = useState(false);
+  const [searchModalOpen, setSearchModalOpen] = useState(false);
 
   const { helpOpen, setHelpOpen } = useKeyboardShortcuts({
     activeTab,
@@ -128,6 +144,17 @@ export default function Home() {
   const shortcutsDialogRef = useFocusTrap(helpOpen);
 
   useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        setSearchModalOpen((prev) => !prev);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+  useEffect(() => {
     setDarkMode(document.documentElement.classList.contains("dark"));
     const saved = localStorage.getItem("edusexual-audience");
     if (saved && ["criancas", "jovens", "adultos"].includes(saved)) {
@@ -135,10 +162,47 @@ export default function Home() {
       setShowAudienceSelector(false);
     }
 
+    try {
+      const savedBookmarks = localStorage.getItem("edusexual_bookmarks");
+      if (savedBookmarks) {
+        setBookmarks(JSON.parse(savedBookmarks));
+      }
+    } catch {
+      // ignore
+    }
+
     const onScroll = () => setShowScrollTop(window.scrollY > 500);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const toggleBookmark = (item: BookmarkItem) => {
+    setBookmarks((prev) => {
+      const exists = prev.some((b) => b.id === item.id);
+      let updated: BookmarkItem[];
+      if (exists) {
+        updated = prev.filter((b) => b.id !== item.id);
+      } else {
+        updated = [item, ...prev];
+      }
+      try {
+        localStorage.setItem("edusexual_bookmarks", JSON.stringify(updated));
+      } catch {}
+      return updated;
+    });
+  };
+
+  const removeBookmark = (id: string) => {
+    setBookmarks((prev) => {
+      const updated = prev.filter((b) => b.id !== id);
+      try {
+        localStorage.setItem("edusexual_bookmarks", JSON.stringify(updated));
+      } catch {}
+      return updated;
+    });
+  };
+
+  const isBookmarked = (id: string) => bookmarks.some((b) => b.id === id);
 
   const setAudience = (a: Audience) => {
     setAudienceState(a);
@@ -161,7 +225,7 @@ export default function Home() {
   return (
     <PodcastProvider>
       <DoubtsProvider>
-        <div className="min-h-screen bg-background">
+        <div className="min-h-screen bg-background flex flex-col">
           <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-primary focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">
             {t.skipToContent}
           </a>
@@ -176,6 +240,9 @@ export default function Home() {
             setShowAudienceSelector={setShowAudienceSelector}
             mobileMenuOpen={mobileMenuOpen}
             setMobileMenuOpen={setMobileMenuOpen}
+            bookmarksCount={bookmarks.length}
+            onOpenBookmarks={() => setBookmarksModalOpen(true)}
+            onOpenSearch={() => setSearchModalOpen(true)}
             t={t}
           />
 
@@ -183,6 +250,20 @@ export default function Home() {
             show={showAudienceSelector}
             onSelect={selectAudience}
             t={t}
+          />
+
+          <BookmarksModal
+            isOpen={bookmarksModalOpen}
+            onClose={() => setBookmarksModalOpen(false)}
+            bookmarks={bookmarks}
+            onRemoveBookmark={removeBookmark}
+            onNavigateTab={setActiveTab}
+          />
+
+          <GlobalSearchModal
+            isOpen={searchModalOpen}
+            onClose={() => setSearchModalOpen(false)}
+            onNavigateTab={setActiveTab}
           />
 
           {helpOpen && (
@@ -204,7 +285,7 @@ export default function Home() {
                   <div className="flex justify-between"><kbd className="bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded font-mono">R</kbd><span>{t.shortcutResources}</span></div>
                   <div className="flex justify-between"><kbd className="bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded font-mono">Q</kbd><span>{t.shortcutQuiz}</span></div>
                   <div className="flex justify-between"><kbd className="bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded font-mono">F</kbd><span>{t.shortcutSearch}</span></div>
-                  <div className="flex justify-between"><kbd className="bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded font-mono">1-6</kbd><span>{t.shortcutNavigateTabs}</span></div>
+                  <div className="flex justify-between"><kbd className="bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded font-mono">1-9</kbd><span>{t.shortcutNavigateTabs}</span></div>
                   <div className="flex justify-between"><kbd className="bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded font-mono">?</kbd><span>{t.shortcutToggleHelp}</span></div>
                   <div className="flex justify-between"><kbd className="bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded font-mono">Esc</kbd><span>{t.shortcutClose}</span></div>
                 </div>
@@ -218,26 +299,40 @@ export default function Home() {
             </div>
           )}
 
-          <main id="main-content" aria-labelledby={`tab-${activeTab}`} className="max-w-6xl mx-auto px-4 md:px-6 py-6 md:py-8">
+          <main id="main-content" aria-labelledby={`tab-${activeTab}`} className="max-w-6xl mx-auto px-4 md:px-6 py-6 md:py-8 flex-1 w-full">
             <ErrorBoundary>
               <Suspense fallback={<TabSkeleton />}>
-                <TabContent activeTab={activeTab} audience={audience} setActiveTab={setActiveTab} />
+                <TabContent
+                  activeTab={activeTab}
+                  audience={audience}
+                  setActiveTab={setActiveTab}
+                  onBookmark={toggleBookmark}
+                  isBookmarked={isBookmarked}
+                />
               </Suspense>
             </ErrorBoundary>
           </main>
 
           <footer role="contentinfo" className="bg-gray-800 dark:bg-gray-950 text-white py-8 md:py-12 mt-auto">
             <div className="max-w-6xl mx-auto px-4 md:px-6">
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-8">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-8">
                 <div>
                   <h4 className="font-heading font-bold text-lg mb-3">EduSexual PT</h4>
                   <p className="text-gray-300 text-sm leading-relaxed">{t.footerAbout}</p>
                 </div>
                 <nav aria-label={t.navigate}>
                   <h4 className="font-heading font-bold text-lg mb-3">{t.navigate}</h4>
-                  <ul className="space-y-2 text-sm text-gray-300">
+                  <ul className="space-y-1.5 text-sm text-gray-300">
                     <li><button onClick={() => setActiveTab("home")} className="hover:text-white transition">{t.home}</button></li>
                     <li><button onClick={() => setActiveTab("podcast")} className="hover:text-white transition">{t.tabPodcast || "Podcast"}</button></li>
+                    <li><button onClick={() => setActiveTab("ferramentas")} className="hover:text-white transition">{t.tabTools || "Ferramentas"}</button></li>
+                    <li><button onClick={() => setActiveTab("glossario")} className="hover:text-white transition">{t.tabGlossary || "Glossário"}</button></li>
+                    <li><button onClick={() => setActiveTab("direitos")} className="hover:text-white transition">{t.tabRights || "Linhas & Direitos"}</button></li>
+                  </ul>
+                </nav>
+                <nav aria-label="Conteúdos e Interação">
+                  <h4 className="font-heading font-bold text-lg mb-3">Explorar</h4>
+                  <ul className="space-y-1.5 text-sm text-gray-300">
                     <li><button onClick={() => setActiveTab("recursos")} className="hover:text-white transition">{t.tabResources || t.resourcesTitle}</button></li>
                     <li><button onClick={() => setActiveTab("quiz")} className="hover:text-white transition">{t.tabQuiz || "Quiz"}</button></li>
                     <li><button onClick={() => setActiveTab("faq")} className="hover:text-white transition">{t.tabFaq || "FAQ"}</button></li>
@@ -247,10 +342,11 @@ export default function Home() {
                 </nav>
                 <div>
                   <h4 className="font-heading font-bold text-lg mb-3">{t.officialSources}</h4>
-                  <ul className="space-y-2 text-sm text-gray-300">
+                  <ul className="space-y-1.5 text-sm text-gray-300">
                     <li><a href="https://apf.pt" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">APF — Planeamento da Família</a></li>
                     <li><a href="https://dgs.pt" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">DGS — Direção-Geral da Saúde</a></li>
-                    <li><a href="https://dge.mec.pt" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">DGE — Direção-Geral da Educação</a></li>
+                    <li><a href="https://sns24.gov.pt" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">SNS 24 (808 24 24 24)</a></li>
+                    <li><a href="https://ipdj.gov.pt" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">IPDJ — Sexualidade em Linha</a></li>
                     <li><a href="https://who.int" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">OMS — Organização Mundial de Saúde</a></li>
                   </ul>
                 </div>

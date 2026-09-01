@@ -1,6 +1,26 @@
 export type Audience = "criancas" | "jovens" | "adultos";
 
-export type TabId = "home" | "podcast" | "recursos" | "quiz" | "faq" | "duvidas";
+export type TabId =
+  | "home"
+  | "ferramentas"
+  | "podcast"
+  | "recursos"
+  | "quiz"
+  | "glossario"
+  | "direitos"
+  | "faq"
+  | "duvidas";
+
+export type FontSizeOption = "sm" | "base" | "lg" | "xl";
+
+export interface BookmarkItem {
+  id: string;
+  type: "topic" | "guide" | "myth" | "glossary" | "tool" | "right";
+  title: string;
+  category?: string;
+  tabTarget?: TabId;
+  savedAt: number;
+}
 
 export interface Episode {
   title: string;
@@ -14,3 +34,4 @@ export interface Episode {
   audioUrl: string;
   guid: string;
 }
+

@@ -4,7 +4,7 @@ import { useState, useMemo } from "react";
 import Image from "next/image";
 import { topics } from "@/data/content";
 import { useI18n } from "@/i18n/context";
-import AudioPlayer, { LazyAudioPlayer } from "@/components/AudioPlayer";
+import { LazyAudioPlayer } from "@/components/AudioPlayer";
 import { LazySection } from "@/components/LazySection";
 import { Audience, TabId } from "@/types";
 
@@ -37,7 +37,8 @@ export default function HomeTab({ audience, setActiveTab }: HomeTabProps) {
   }, [audience, searchQuery]);
 
   return (
-    <div className="space-y-12 md:space-y-20">
+    <div className="space-y-12 md:space-y-16">
+      {/* Hero Section */}
       <section aria-labelledby="hero-heading">
         <div className="relative overflow-hidden rounded-[2rem] md:rounded-[3rem] bg-primary/5 dark:bg-primary/10 p-6 md:p-16 hero-gradient">
           <div className="flex flex-col lg:flex-row items-center gap-8 md:gap-12">
@@ -56,9 +57,16 @@ export default function HomeTab({ audience, setActiveTab }: HomeTabProps) {
                 t.heroDescJovem}
               </p>
               {setActiveTab && (
-                <div className="flex flex-wrap justify-center lg:justify-start gap-4">
-                  <button onClick={() => setActiveTab("quiz")} className="btn-primary">{t.startQuiz}</button>
-                  <button onClick={() => setActiveTab("duvidas")} className="btn-secondary">{t.askQuestion}</button>
+                <div className="flex flex-wrap justify-center lg:justify-start gap-3">
+                  <button onClick={() => setActiveTab("ferramentas")} className="btn-primary shadow-lg">
+                    ⚡ {t.tabTools || "Ferramentas Interativas"}
+                  </button>
+                  <button onClick={() => setActiveTab("quiz")} className="btn-secondary">
+                    🧠 {t.startQuiz}
+                  </button>
+                  <button onClick={() => setActiveTab("direitos")} className="px-5 py-2.5 rounded-full border-2 border-primary text-primary dark:text-primary-light font-bold hover:bg-primary/10 transition text-sm">
+                    📞 {t.tabRights || "Linhas de Apoio"}
+                  </button>
                 </div>
               )}
             </div>
@@ -78,6 +86,72 @@ export default function HomeTab({ audience, setActiveTab }: HomeTabProps) {
         </div>
       </section>
 
+      {/* Feature Highlights Grid */}
+      {setActiveTab && (
+        <section aria-label="Acessos Rápidos" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <button
+            onClick={() => setActiveTab("ferramentas")}
+            className="bg-white dark:bg-gray-800 p-5 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md hover:border-primary/50 text-left transition group"
+          >
+            <span className="text-3xl p-3 bg-primary/10 dark:bg-primary/20 rounded-2xl inline-block mb-3 group-hover:scale-110 transition-transform">
+              ⚖️
+            </span>
+            <h4 className="font-heading font-bold text-gray-900 dark:text-white text-base">
+              Comparador Contracetivo
+            </h4>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+              Eficácia, custos e métodos gratuitos no SNS.
+            </p>
+          </button>
+
+          <button
+            onClick={() => setActiveTab("ferramentas")}
+            className="bg-white dark:bg-gray-800 p-5 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md hover:border-secondary text-left transition group"
+          >
+            <span className="text-3xl p-3 bg-secondary/10 dark:bg-secondary/20 rounded-2xl inline-block mb-3 group-hover:scale-110 transition-transform">
+              💡
+            </span>
+            <h4 className="font-heading font-bold text-gray-900 dark:text-white text-base">
+              Mito ou Verdade?
+            </h4>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+              Desmistifica crenças populares com factos.
+            </p>
+          </button>
+
+          <button
+            onClick={() => setActiveTab("glossario")}
+            className="bg-white dark:bg-gray-800 p-5 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md hover:border-accent text-left transition group"
+          >
+            <span className="text-3xl p-3 bg-accent/10 dark:bg-accent/20 rounded-2xl inline-block mb-3 group-hover:scale-110 transition-transform">
+              📖
+            </span>
+            <h4 className="font-heading font-bold text-gray-900 dark:text-white text-base">
+              Glossário de A a Z
+            </h4>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+              Dicionário claro sobre termos e conceitos.
+            </p>
+          </button>
+
+          <button
+            onClick={() => setActiveTab("direitos")}
+            className="bg-white dark:bg-gray-800 p-5 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md hover:border-rose-400 text-left transition group"
+          >
+            <span className="text-3xl p-3 bg-rose-50 dark:bg-rose-950/40 rounded-2xl inline-block mb-3 group-hover:scale-110 transition-transform">
+              📞
+            </span>
+            <h4 className="font-heading font-bold text-gray-900 dark:text-white text-base">
+              Linhas & Direitos SNS
+            </h4>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+              Contactos diretos, sigilo jovem e urgência.
+            </p>
+          </button>
+        </section>
+      )}
+
+      {/* Topics Section */}
       <section aria-labelledby="topics-heading">
         <div className="text-center mb-8 md:mb-12">
           <h3 id="topics-heading" className="text-2xl md:text-4xl font-heading font-bold text-primary mb-3 md:mb-4">

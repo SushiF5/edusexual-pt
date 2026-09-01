@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useI18n } from "@/i18n/context";
 import { Episode } from "@/types";
+import AudioTranscriptModal from "@/components/AudioTranscriptModal";
 
 interface PodcastTabProps {
   episodes: Episode[];
@@ -19,6 +20,7 @@ export default function PodcastTab({
   const { t } = useI18n();
   const hasFetched = useRef(false);
   const [fetchError, setFetchError] = useState(false);
+  const [transcriptEpisode, setTranscriptEpisode] = useState<Episode | null>(null);
 
   useEffect(() => {
     if (episodes.length === 0 && !hasFetched.current) {
@@ -115,11 +117,19 @@ export default function PodcastTab({
                       </div>
                       {ep.description && <p className="text-gray-500 dark:text-gray-400 text-xs mt-2 line-clamp-2">{ep.description}</p>}
                     </div>
-                    {ep.link && (
-                      <a href={ep.link} target="_blank" rel="noopener noreferrer" className="text-xs text-gray-400 hover:text-secondary transition underline shrink-0 text-center sm:text-right">
-                        {t.spotify} ↗
-                      </a>
-                    )}
+                    <div className="flex sm:flex-col items-center sm:items-end gap-2 shrink-0">
+                      <button
+                        onClick={() => setTranscriptEpisode(ep)}
+                        className="text-xs px-3 py-1.5 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 transition font-medium"
+                      >
+                        📄 {t.viewTranscript || "Transcrição"}
+                      </button>
+                      {ep.link && (
+                        <a href={ep.link} target="_blank" rel="noopener noreferrer" className="text-xs text-gray-400 hover:text-secondary transition underline">
+                          {t.spotify} ↗
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </div>
               );
@@ -134,6 +144,11 @@ export default function PodcastTab({
           </div>
         )}
       </div>
+
+      <AudioTranscriptModal
+        episode={transcriptEpisode}
+        onClose={() => setTranscriptEpisode(null)}
+      />
 
       <div className="card bg-accent/10 border-accent text-center">
         <p className="text-sm text-gray-600 dark:text-gray-400">{t.followOnSpotify}</p>

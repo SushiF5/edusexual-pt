@@ -25,7 +25,7 @@ const securityHeaders = [
     key: "Content-Security-Policy",
     value: [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' https://podcasters.spotify.com",
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://podcasters.spotify.com",
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: blob: https:",
       "font-src 'self' data:",

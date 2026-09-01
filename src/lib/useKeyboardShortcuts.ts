@@ -53,15 +53,27 @@ export function useKeyboardShortcuts({
         e.preventDefault();
         setActiveTab("quiz");
         break;
+      case "t":
+        e.preventDefault();
+        setActiveTab("ferramentas");
+        break;
+      case "g":
+        e.preventDefault();
+        setActiveTab("glossario");
+        break;
+      case "d":
+        e.preventDefault();
+        setActiveTab("direitos");
+        break;
       case "f":
         e.preventDefault();
-        const homeElement = document.querySelector("input[type='search']");
+        const homeElement = document.querySelector("input[type='search'], input[type='text']");
         if (homeElement) {
           (homeElement as HTMLInputElement).focus();
         } else {
           setActiveTab("home");
           setTimeout(() => {
-            const el = document.querySelector("input[type='search']");
+            const el = document.querySelector("input[type='search'], input[type='text']");
             if (el) (el as HTMLInputElement).focus();
           }, 100);
         }
@@ -71,9 +83,9 @@ export function useKeyboardShortcuts({
         setHelpOpen((prev) => !prev);
         break;
       default:
-        if (/^[1-6]$/.test(e.key)) {
+        if (/^[1-9]$/.test(e.key)) {
           e.preventDefault();
-          const tabs: TabId[] = ["home", "podcast", "recursos", "quiz", "faq", "duvidas"];
+          const tabs: TabId[] = ["home", "podcast", "ferramentas", "glossario", "direitos", "recursos", "quiz", "faq", "duvidas"];
           const index = parseInt(e.key) - 1;
           if (index >= 0 && index < tabs.length) {
             setActiveTab(tabs[index]);

@@ -3,11 +3,16 @@
 import { useRef } from "react";
 import { Locale, T, locales, localeNames } from "@/i18n/translations";
 import { useFocusTrap } from "@/lib/useFocusTrap";
-import { Audience, TabId } from "@/types";
+import { TabId } from "@/types";
+import QuickExitButton from "@/components/QuickExitButton";
+import FontSizeControls from "@/components/FontSizeControls";
 
 export const navTabIds = [
   { id: "home" as const, icon: "🏠" },
   { id: "podcast" as const, icon: "🎙️" },
+  { id: "ferramentas" as const, icon: "⚙️" },
+  { id: "glossario" as const, icon: "📖" },
+  { id: "direitos" as const, icon: "📞" },
   { id: "recursos" as const, icon: "📋" },
   { id: "quiz" as const, icon: "🧠" },
   { id: "faq" as const, icon: "❓" },
@@ -18,6 +23,9 @@ export function navLabel(tabId: TabId, t: T): string {
   const map: Record<TabId, string> = {
     home: t.home,
     podcast: t.tabPodcast || "Podcast",
+    ferramentas: t.tabTools || "Ferramentas",
+    glossario: t.tabGlossary || "Glossário",
+    direitos: t.tabRights || "Linhas & Direitos",
     recursos: t.tabResources || t.resourcesTitle,
     quiz: t.tabQuiz || "Quiz",
     faq: t.tabFaq || "FAQ",
@@ -36,6 +44,9 @@ interface HeaderNavProps {
   setShowAudienceSelector: (show: boolean) => void;
   mobileMenuOpen: boolean;
   setMobileMenuOpen: (open: boolean) => void;
+  bookmarksCount?: number;
+  onOpenBookmarks?: () => void;
+  onOpenSearch?: () => void;
   t: T;
 }
 
@@ -49,6 +60,9 @@ export default function HeaderNav({
   setShowAudienceSelector,
   mobileMenuOpen,
   setMobileMenuOpen,
+  bookmarksCount = 0,
+  onOpenBookmarks,
+  onOpenSearch,
   t,
 }: HeaderNavProps) {
   const mobileMenuRef = useFocusTrap(mobileMenuOpen);
@@ -87,25 +101,29 @@ export default function HeaderNav({
   };
 
   return (
-    <header className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-100 dark:border-gray-800 py-3 px-4 md:px-6 sticky top-0 z-50 transition-all relative" role="banner">
+    <header className="bg-white/85 dark:bg-gray-900/85 backdrop-blur-md border-b border-gray-100 dark:border-gray-800 py-2.5 px-3 md:px-6 sticky top-0 z-50 transition-all relative" role="banner">
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
-        <button
-          onClick={() => setShowAudienceSelector(true)}
-          className="flex items-center gap-2 hover:opacity-80 transition group shrink-0"
-          aria-label={t.changeProfile}
-        >
-          <div className="bg-primary/10 p-1.5 md:p-2 rounded-xl group-hover:bg-primary group-hover:text-white transition-colors">
-            <span className="text-lg md:text-2xl" role="img" aria-hidden="true">🧠</span>
-          </div>
-          <div className="text-left hidden sm:block">
-            <h1 className="text-base md:text-xl font-heading font-bold text-primary leading-tight">EduSexual PT</h1>
-            <span className="text-[9px] md:text-[10px] uppercase tracking-widest font-bold text-gray-400 dark:text-gray-500">{t.profile}: {activeTab === "home" ? t.home : navLabel(activeTab, t)}</span>
-          </div>
-        </button>
+        {/* Brand & Logo */}
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setShowAudienceSelector(true)}
+            className="flex items-center gap-2 hover:opacity-80 transition group shrink-0"
+            aria-label={t.changeProfile}
+          >
+            <div className="bg-primary/10 p-1.5 md:p-2 rounded-xl group-hover:bg-primary group-hover:text-white transition-colors">
+              <span className="text-lg md:text-2xl" role="img" aria-hidden="true">🧠</span>
+            </div>
+            <div className="text-left hidden sm:block">
+              <h1 className="text-sm md:text-lg font-heading font-bold text-primary leading-tight">EduSexual PT</h1>
+              <span className="text-[9px] md:text-[10px] uppercase tracking-widest font-bold text-gray-400 dark:text-gray-500">{t.profile}: {activeTab === "home" ? t.home : navLabel(activeTab, t)}</span>
+            </div>
+          </button>
+        </div>
 
+        {/* Desktop Navigation Tabs */}
         <nav
           ref={navRef}
-          className="hidden md:flex bg-gray-100 dark:bg-gray-800 p-2 rounded-full gap-2 shadow-sm"
+          className="hidden xl:flex bg-gray-100 dark:bg-gray-800 p-1.5 rounded-full gap-1 shadow-sm overflow-x-auto"
           aria-label={t.navigate}
           role="tablist"
           onKeyDown={onTabKeyDown}
@@ -119,30 +137,62 @@ export default function HeaderNav({
               aria-controls="main-content"
               tabIndex={activeTab === tab.id ? 0 : -1}
               onClick={() => setActiveTab(tab.id)}
-              className={`px-6 py-2 rounded-full transition-all duration-300 font-medium ${activeTab === tab.id ? "bg-primary text-white shadow-md" : "text-gray-600 dark:text-gray-300 hover:text-primary hover:bg-white dark:hover:bg-gray-700"}`}
+              className={`px-3.5 py-1.5 rounded-full transition-all duration-200 text-xs md:text-sm font-semibold flex items-center gap-1.5 ${
+                activeTab === tab.id
+                  ? "bg-primary text-white shadow-md font-bold"
+                  : "text-gray-600 dark:text-gray-300 hover:text-primary hover:bg-white dark:hover:bg-gray-700"
+              }`}
             >
-              {navLabel(tab.id, t)}
+              <span>{tab.icon}</span>
+              <span>{navLabel(tab.id, t)}</span>
             </button>
           ))}
         </nav>
 
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition"
-          aria-label={mobileMenuOpen ? t.closeMenu : t.openMenu}
-          aria-expanded={mobileMenuOpen}
-        >
-          <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            {mobileMenuOpen ? (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            ) : (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            )}
-          </svg>
-        </button>
+        {/* Top Right Utilities */}
+        <div className="flex items-center gap-1.5 md:gap-2">
+          {/* Global Search Button */}
+          {onOpenSearch && (
+            <button
+              onClick={onOpenSearch}
+              className="p-1.5 md:px-3 md:py-1.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 hover:bg-primary/10 text-gray-700 dark:text-gray-300 transition flex items-center gap-1.5 text-xs font-bold"
+              title="Pesquisar em todo o portal (Ctrl+K)"
+              aria-label="Pesquisar em todo o portal"
+            >
+              <span>🔍</span>
+              <span className="hidden md:inline">Pesquisar</span>
+              <kbd className="hidden xl:inline text-[9px] bg-gray-200 dark:bg-gray-700 px-1 py-0.2 rounded font-mono text-gray-500">
+                ⌘K
+              </kbd>
+            </button>
+          )}
 
-        <div className="hidden md:flex items-center gap-2">
-          <div className="flex items-center bg-gray-100 dark:bg-gray-800 rounded-full p-1 gap-0.5" role="radiogroup" aria-label={t.selectProfile}>
+          {/* Quick Exit (Panic Button) */}
+          <QuickExitButton />
+
+          {/* Bookmarks Trigger */}
+          {onOpenBookmarks && (
+            <button
+              onClick={onOpenBookmarks}
+              className="p-1.5 md:px-3 md:py-1.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 hover:bg-amber-50 dark:hover:bg-amber-950/30 text-gray-700 dark:text-gray-300 transition flex items-center gap-1 text-xs font-bold"
+              title={t.bookmarks}
+              aria-label={t.bookmarks}
+            >
+              <span className="text-amber-500">★</span>
+              {bookmarksCount > 0 && (
+                <span className="bg-amber-500 text-white text-[10px] font-bold px-1.5 py-0.2 rounded-full">
+                  {bookmarksCount}
+                </span>
+              )}
+              <span className="hidden lg:inline">{t.bookmarks}</span>
+            </button>
+          )}
+
+          {/* Font Size A11y Controller */}
+          <FontSizeControls />
+
+          {/* Locale switcher */}
+          <div className="hidden lg:flex items-center bg-gray-100 dark:bg-gray-800 rounded-full p-1 gap-0.5" role="radiogroup" aria-label={t.selectProfile}>
             {locales.map((l) => (
               <button
                 key={l}
@@ -155,6 +205,8 @@ export default function HeaderNav({
               </button>
             ))}
           </div>
+
+          {/* Dark mode */}
           <button
             onClick={toggleDarkMode}
             className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition"
@@ -162,52 +214,70 @@ export default function HeaderNav({
           >
             <span role="img" aria-hidden="true">{darkMode ? "☀️" : "🌙"}</span>
           </button>
+
+          {/* Audience switcher button */}
           <button
             onClick={() => setShowAudienceSelector(true)}
-            className="btn-primary text-xs md:text-sm py-2 px-3 md:px-6"
+            className="hidden sm:inline-flex btn-primary text-xs py-1.5 px-3 md:px-4"
           >
             {t.changeProfile}
+          </button>
+
+          {/* Mobile hamburger menu */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="xl:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition"
+            aria-label={mobileMenuOpen ? t.closeMenu : t.openMenu}
+            aria-expanded={mobileMenuOpen}
+          >
+            <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              {mobileMenuOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
           </button>
         </div>
       </div>
 
+      {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div ref={mobileMenuRef} className="absolute top-full left-0 right-0 bg-white dark:bg-gray-900 shadow-lg md:hidden z-50 border-t dark:border-gray-800" role="dialog" aria-modal="true" aria-label={t.navigate}>
-          {navTabIds.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => { setActiveTab(tab.id); setMobileMenuOpen(false); }}
-              className={`w-full text-left px-6 py-4 border-b border-gray-100 dark:border-gray-800 transition flex items-center gap-3 ${activeTab === tab.id ? "bg-primary text-white font-bold" : "text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"}`}
-            >
-              <span role="img" aria-hidden="true">{tab.icon}</span>
-              {navLabel(tab.id, t)}
-            </button>
-          ))}
-          <div className="flex items-center justify-center gap-1 px-6 py-3 border-b border-gray-100 dark:border-gray-800">
-            {locales.map((l) => (
+        <div ref={mobileMenuRef} className="absolute top-full left-0 right-0 bg-white dark:bg-gray-900 shadow-2xl xl:hidden z-50 border-t dark:border-gray-800 max-h-[85vh] overflow-y-auto" role="dialog" aria-modal="true" aria-label={t.navigate}>
+          <div className="p-3 grid grid-cols-2 gap-2 border-b border-gray-100 dark:border-gray-800">
+            {navTabIds.map((tab) => (
               <button
-                key={l}
-                onClick={() => { setLocale(l); setMobileMenuOpen(false); }}
-                className={`px-3 py-1.5 text-xs font-bold rounded-full transition ${locale === l ? "bg-primary text-white" : "text-gray-500 hover:text-primary bg-gray-100 dark:bg-gray-800"}`}
+                key={tab.id}
+                onClick={() => { setActiveTab(tab.id); setMobileMenuOpen(false); }}
+                className={`p-3 rounded-2xl text-left transition flex items-center gap-2.5 ${activeTab === tab.id ? "bg-primary text-white font-bold shadow-md" : "text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 bg-gray-50/60 dark:bg-gray-800/40"}`}
               >
-                {localeNames[l]}
+                <span className="text-xl" role="img" aria-hidden="true">{tab.icon}</span>
+                <span className="text-xs md:text-sm font-semibold">{navLabel(tab.id, t)}</span>
               </button>
             ))}
           </div>
-          <button
-            onClick={() => { setShowAudienceSelector(true); setMobileMenuOpen(false); }}
-            className="w-full text-left px-6 py-4 text-primary font-bold hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center gap-3"
-          >
-            <span role="img" aria-hidden="true">🔄</span>
-            {t.changeProfile}
-          </button>
-          <button
-            onClick={() => { toggleDarkMode(); setMobileMenuOpen(false); }}
-            className="w-full text-left px-6 py-4 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center gap-3"
-          >
-            <span role="img" aria-hidden="true">{darkMode ? "☀️" : "🌙"}</span>
-            {darkMode ? t.lightMode : t.darkMode}
-          </button>
+
+          <div className="p-4 space-y-3">
+            <div className="flex items-center justify-center gap-1 pb-3 border-b border-gray-100 dark:border-gray-800">
+              {locales.map((l) => (
+                <button
+                  key={l}
+                  onClick={() => { setLocale(l); setMobileMenuOpen(false); }}
+                  className={`px-3 py-1.5 text-xs font-bold rounded-full transition ${locale === l ? "bg-primary text-white" : "text-gray-500 hover:text-primary bg-gray-100 dark:bg-gray-800"}`}
+                >
+                  {localeNames[l]}
+                </button>
+              ))}
+            </div>
+
+            <button
+              onClick={() => { setShowAudienceSelector(true); setMobileMenuOpen(false); }}
+              className="w-full text-left p-3 rounded-xl text-primary font-bold hover:bg-gray-50 dark:hover:bg-gray-800 flex items-center gap-3"
+            >
+              <span role="img" aria-hidden="true">🔄</span>
+              {t.changeProfile}
+            </button>
+          </div>
         </div>
       )}
     </header>

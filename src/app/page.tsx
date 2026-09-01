@@ -95,29 +95,19 @@ function TabContent({ activeTab, audience, setActiveTab, onBookmark, isBookmarke
         />
       );
     case "ferramentas":
-      return <ToolsTab onBookmark={onBookmark} isBookmarked={isBookmarked} />;
-    case "glossario":
-      return <GlossaryTab onBookmark={onBookmark} isBookmarked={isBookmarked} />;
-    case "direitos":
-      return <RightsTab onBookmark={onBookmark} isBookmarked={isBookmarked} />;
+      return <ToolsTab audience={audience} onBookmark={onBookmark} isBookmarked={isBookmarked} initialSubTool="comparator" />;
     case "recursos":
-      return <ResourcesTab audience={audience} />;
-    case "quiz":
-      return <QuizTab audience={audience} />;
+      return <ResourcesTab audience={audience} onBookmark={onBookmark} isBookmarked={isBookmarked} initialSubTab="guias" />;
+    case "glossario":
+      return <ResourcesTab audience={audience} onBookmark={onBookmark} isBookmarked={isBookmarked} initialSubTab="glossario" />;
     case "faq":
-      return <FaqTab audience={audience} />;
+      return <ResourcesTab audience={audience} onBookmark={onBookmark} isBookmarked={isBookmarked} initialSubTab="faq" />;
+    case "quiz":
+      return <ToolsTab audience={audience} onBookmark={onBookmark} isBookmarked={isBookmarked} initialSubTool="quiz" />;
+    case "direitos":
+      return <RightsTab audience={audience} onBookmark={onBookmark} isBookmarked={isBookmarked} initialSection="helplines" />;
     case "duvidas":
-      return (
-        <DoubtsTab
-          audience={audience}
-          submitted={doubtsCtx.submitted}
-          setSubmitted={doubtsCtx.setSubmitted}
-          questionForm={doubtsCtx.questionForm}
-          setQuestionForm={doubtsCtx.setQuestionForm}
-          isSending={doubtsCtx.isSending}
-          setIsSending={doubtsCtx.setIsSending}
-        />
-      );
+      return <RightsTab audience={audience} onBookmark={onBookmark} isBookmarked={isBookmarked} initialSection="duvidas" />;
   }
 }
 

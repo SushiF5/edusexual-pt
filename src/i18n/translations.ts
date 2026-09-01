@@ -135,6 +135,12 @@ export type TranslationKeys = {
   tabTools: string;
   tabGlossary: string;
   tabRights: string;
+  tabLearn: string;
+  tabLearnDesc: string;
+  tabToolsDesc: string;
+  tabPodcastDesc: string;
+  tabRightsDesc: string;
+  settings: string;
   quickExit: string;
   quickExitAria: string;
   fontSize: string;

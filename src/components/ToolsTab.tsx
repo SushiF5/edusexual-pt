@@ -1,28 +1,46 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ContraceptiveComparator from "@/components/ContraceptiveComparator";
 import MythBusterGame from "@/components/MythBusterGame";
 import MenstrualCycleSim from "@/components/MenstrualCycleSim";
 import StepByStepGuides from "@/components/StepByStepGuides";
 import RelationshipsConsentTool from "@/components/RelationshipsConsentTool";
 import StiTestingGuideTool from "@/components/StiTestingGuideTool";
-import { BookmarkItem } from "@/types";
+import QuizTab from "@/components/QuizTab";
+import { Audience, BookmarkItem } from "@/types";
 import { useI18n } from "@/i18n";
 
 interface ToolsTabProps {
+  audience?: Audience;
+  initialSubTool?: SubToolId;
   onBookmark?: (item: BookmarkItem) => void;
   isBookmarked?: (id: string) => boolean;
 }
 
-type SubToolId = "comparator" | "mythbuster" | "consent" | "stis" | "cycle" | "steps";
+export type SubToolId =
+  | "comparator"
+  | "mythbuster"
+  | "quiz"
+  | "consent"
+  | "stis"
+  | "cycle"
+  | "steps";
 
 export default function ToolsTab({
+  audience = "jovens",
+  initialSubTool = "comparator",
   onBookmark,
   isBookmarked = () => false,
 }: ToolsTabProps) {
   const { t } = useI18n();
-  const [activeSubTool, setActiveSubTool] = useState<SubToolId>("comparator");
+  const [activeSubTool, setActiveSubTool] = useState<SubToolId>(initialSubTool);
+
+  useEffect(() => {
+    if (initialSubTool) {
+      setActiveSubTool(initialSubTool);
+    }
+  }, [initialSubTool]);
 
   const subTools = [
     {
@@ -36,6 +54,12 @@ export default function ToolsTab({
       label: t.toolMythBuster,
       icon: "💡",
       description: "Jogo de mitos vs verdades",
+    },
+    {
+      id: "quiz" as SubToolId,
+      label: t.tabQuiz || "Quiz Interativo",
+      icon: "🧠",
+      description: "Testa os teus conhecimentos",
     },
     {
       id: "consent" as SubToolId,
@@ -64,14 +88,14 @@ export default function ToolsTab({
   ];
 
   return (
-    <div className="space-y-8 animate-fadeIn">
+    <div className="space-y-8 animate-fadeIn max-w-6xl mx-auto">
       {/* Tab Header */}
       <div className="text-center max-w-3xl mx-auto space-y-3">
         <span className="text-xs font-bold uppercase tracking-widest text-primary dark:text-primary-light px-3 py-1 bg-primary/10 rounded-full">
           Educação Prática & Interativa
         </span>
         <h2 className="text-3xl md:text-4xl font-heading font-bold text-gray-900 dark:text-white">
-          {t.toolsTitle}
+          {t.toolsTitle} & Jogos
         </h2>
         <p className="text-gray-600 dark:text-gray-300 text-sm md:text-base">
           {t.toolsSubtitle}
@@ -79,20 +103,20 @@ export default function ToolsTab({
       </div>
 
       {/* Subtool navigation pills */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 max-w-6xl mx-auto">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-2.5 max-w-6xl mx-auto">
         {subTools.map((tool) => {
           const isActive = activeSubTool === tool.id;
           return (
             <button
               key={tool.id}
               onClick={() => setActiveSubTool(tool.id)}
-              className={`p-3.5 rounded-2xl border text-left transition flex flex-col justify-between ${
+              className={`p-3 rounded-2xl border text-left transition flex flex-col justify-between ${
                 isActive
                   ? "bg-primary text-white border-primary shadow-lg ring-2 ring-primary/30"
                   : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50"
               }`}
             >
-              <div className="text-2xl mb-1.5">{tool.icon}</div>
+              <div className="text-2xl mb-1">{tool.icon}</div>
               <div>
                 <h4 className="font-bold text-xs md:text-sm leading-snug">{tool.label}</h4>
                 <p
@@ -123,6 +147,8 @@ export default function ToolsTab({
             isBookmarked={isBookmarked}
           />
         )}
+
+        {activeSubTool === "quiz" && <QuizTab audience={audience} />}
 
         {activeSubTool === "consent" && (
           <RelationshipsConsentTool

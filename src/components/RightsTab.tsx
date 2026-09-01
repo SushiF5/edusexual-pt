@@ -1,22 +1,35 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { helplinesData, legalRightsData, Helpline, LegalRight } from "@/data/content-rights-helplines";
-import { BookmarkItem } from "@/types";
+import { Audience, BookmarkItem } from "@/types";
 import { useI18n } from "@/i18n";
+import DoubtsTab from "@/components/DoubtsTab";
+import { useDoubts } from "@/contexts/DoubtsContext";
 
 interface RightsTabProps {
+  audience?: Audience;
+  initialSection?: "helplines" | "rights" | "duvidas";
   onBookmark?: (item: BookmarkItem) => void;
   isBookmarked?: (id: string) => boolean;
 }
 
 export default function RightsTab({
+  audience = "jovens",
+  initialSection = "helplines",
   onBookmark,
   isBookmarked = () => false,
 }: RightsTabProps) {
   const { t } = useI18n();
-  const [activeSection, setActiveSection] = useState<"helplines" | "rights">("helplines");
+  const doubtsCtx = useDoubts();
+  const [activeSection, setActiveSection] = useState<"helplines" | "rights" | "duvidas">(initialSection);
   const [searchQuery, setSearchQuery] = useState("");
+
+  useEffect(() => {
+    if (initialSection) {
+      setActiveSection(initialSection);
+    }
+  }, [initialSection]);
 
   const filteredHelplines = helplinesData.filter((h) => {
     if (!searchQuery.trim()) return true;
@@ -48,10 +61,10 @@ export default function RightsTab({
           Apoio Oficial & Legislação Portuguesa
         </span>
         <h2 className="text-3xl md:text-4xl font-heading font-bold text-gray-900 dark:text-white">
-          {t.rightsTitle}
+          {t.tabRights} & Apoio Confidencial
         </h2>
         <p className="text-gray-600 dark:text-gray-300 text-sm md:text-base">
-          {t.rightsSubtitle}
+          {t.tabRightsDesc}
         </p>
       </div>
 
@@ -95,43 +108,57 @@ export default function RightsTab({
       </div>
 
       {/* Section Switcher */}
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 bg-white dark:bg-gray-800 p-4 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-sm">
-        <div className="flex gap-2">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 bg-white dark:bg-gray-800 p-3.5 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-sm">
+        <div className="flex flex-wrap gap-2">
           <button
             onClick={() => setActiveSection("helplines")}
-            className={`px-5 py-2.5 rounded-2xl text-xs md:text-sm font-bold transition flex items-center gap-2 ${
+            className={`px-4 py-2.5 rounded-2xl text-xs md:text-sm font-bold transition flex items-center gap-2 ${
               activeSection === "helplines"
                 ? "bg-primary text-white shadow-sm"
-                : "bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200"
+                : "bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"
             }`}
           >
             <span>📞</span>
-            <span>Linhas de Apoio Telefónico ({helplinesData.length})</span>
+            <span>Linhas de Apoio ({helplinesData.length})</span>
           </button>
 
           <button
             onClick={() => setActiveSection("rights")}
-            className={`px-5 py-2.5 rounded-2xl text-xs md:text-sm font-bold transition flex items-center gap-2 ${
+            className={`px-4 py-2.5 rounded-2xl text-xs md:text-sm font-bold transition flex items-center gap-2 ${
               activeSection === "rights"
                 ? "bg-primary text-white shadow-sm"
-                : "bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200"
+                : "bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"
             }`}
           >
             <span>⚖️</span>
-            <span>Direitos no SNS e na Lei ({legalRightsData.length})</span>
+            <span>Direitos no SNS ({legalRightsData.length})</span>
+          </button>
+
+          <button
+            onClick={() => setActiveSection("duvidas")}
+            className={`px-4 py-2.5 rounded-2xl text-xs md:text-sm font-bold transition flex items-center gap-2 ${
+              activeSection === "duvidas"
+                ? "bg-primary text-white shadow-sm"
+                : "bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"
+            }`}
+          >
+            <span>💬</span>
+            <span>{t.askQuestion}</span>
           </button>
         </div>
 
-        <div className="relative">
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Pesquisar contacto ou direito..."
-            className="w-full sm:w-64 pl-9 pr-4 py-2 rounded-xl border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-xs md:text-sm text-gray-800 dark:text-gray-100"
-          />
-          <span className="absolute left-3 top-2.5 text-gray-400 text-xs">🔍</span>
-        </div>
+        {activeSection !== "duvidas" && (
+          <div className="relative">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Pesquisar contacto ou direito..."
+              className="w-full sm:w-60 pl-9 pr-4 py-2 rounded-xl border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-xs md:text-sm text-gray-800 dark:text-gray-100"
+            />
+            <span className="absolute left-3 top-2.5 text-gray-400 text-xs">🔍</span>
+          </div>
+        )}
       </div>
 
       {/* Helplines Grid */}
@@ -281,6 +308,19 @@ export default function RightsTab({
             })}
           </div>
         </div>
+      )}
+
+      {/* Doubts and Anonymous Questions Form */}
+      {activeSection === "duvidas" && (
+        <DoubtsTab
+          audience={audience}
+          submitted={doubtsCtx.submitted}
+          setSubmitted={doubtsCtx.setSubmitted}
+          questionForm={doubtsCtx.questionForm}
+          setQuestionForm={doubtsCtx.setQuestionForm}
+          isSending={doubtsCtx.isSending}
+          setIsSending={doubtsCtx.setIsSending}
+        />
       )}
     </div>
   );

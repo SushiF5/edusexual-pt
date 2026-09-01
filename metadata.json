@@ -1,0 +1,6 @@
+{
+  "name": "EduSexual PT",
+  "description": "Portal de educação sexual em português para crianças, jovens e adultos com quizzes, FAQ e recursos de apoio.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -149,7 +149,9 @@ type TranslationKeys = {
    removeFromFavorites: string;
    noFavorites: string;
    favoritesCount: string;
-};
+   quizShareResult: string;
+   quizResultCopied: string;
+}
 
 const pt: TranslationKeys = {
   skipToContent: "Saltar para o conteúdo principal",
@@ -292,6 +294,8 @@ const pt: TranslationKeys = {
   removeFromFavorites: "Remover dos favoritos",
   noFavorites: "Ainda não tens temas favoritos. Toca na estrela para guardar os temas que mais te interessam.",
   favoritesCount: "tema(s) guardado(s)",
+  quizShareResult: "Partilhar resultado",
+  quizResultCopied: "Resultado copiado!",
 };
 
 const en: TranslationKeys = {
@@ -435,6 +439,8 @@ const en: TranslationKeys = {
   removeFromFavorites: "Remove from favourites",
   noFavorites: "You haven't saved any favourite topics yet. Tap the star to save the topics you care about.",
   favoritesCount: "saved topic(s)",
+  quizShareResult: "Share result",
+  quizResultCopied: "Result copied!",
 };
 
 const es: TranslationKeys = {
@@ -578,6 +584,8 @@ const es: TranslationKeys = {
   removeFromFavorites: "Quitar de favoritos",
   noFavorites: "Aún no tienes temas favoritos. Toca la estrella para guardar los temas que más te interesan.",
   favoritesCount: "tema(s) guardado(s)",
+  quizShareResult: "Compartir resultado",
+  quizResultCopied: "¡Resultado copiado!",
 };
 
 export const translations: Record<Locale, TranslationKeys> = { pt, en, es };

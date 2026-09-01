@@ -2,6 +2,47 @@
 
 Log de execuções e melhorias implementadas.
 
+## Execução — 29 Ago 2026 (4)
+
+### Melhoria: Quiz — Partilhar resultado (copiar para clipboard)
+
+Uma funcionalidade de UX simples, autónoma e testável: no ecrã de resultados
+do quiz, adicionar um botão "Partilhar resultado" que copia um resumo
+(pontuação + link implícito) para a área de transferência. Usa `navigator.clipboard`
+com fallback `document.execCommand` para navegadores antigos. Sem backend,
+sem env vars, completamente coberto por testes.
+
+### Implementado
+
+1. **`src/components/QuizTab.tsx`**:
+   - Novo estado `copied` para feedback visual.
+   - Função `shareResult()` que compõe o texto (`quizFinished` + pontuação)
+     e copia via `navigator.clipboard.writeText`; em caso de falha ou API
+     indisponível, cai no fallback `document.execCommand("copy")` usando um
+     `<textarea>` temporário.
+   - Botão "Partilhar resultado" no ecrã de resultados, ao lado de "Tentar
+     novamente". Muda o label para "Resultado copiado!" após sucesso
+     (`aria-live="polite"` `role="status"`).
+2. **i18n** (`src/i18n/translations.ts`): 2 novas chaves (`quizShareResult`,
+   `quizResultCopied`) em PT/EN/ES, com paridade validada pelo teste de integridade.
+3. **Testes** (`src/__tests__/components/QuizTab.test.tsx`): 2 novos testes —
+   cópia via Clipboard API (verifica `writeText` chamado com texto esperado) e
+   fallback `execCommand` quando `navigator.clipboard` indisponível.
+
+### Verificação
+
+- 271 testes passam (suite completa, +2 novos de partilha de quiz).
+- `next build` compila; bundle inicial inalterado (166.9K gzip) — a feature não
+  introduz conteúdo novo no bundle, mantendo a guarda de code-splitting.
+
+### Próximas melhorias pendentes (sugeridas)
+
+- [ ] Otimizar componentes de arranque se o bundle subir dos limiares (Hero)
+- [x] Tópicos Favoritos (bookmarks em localStorage) — concluído em `HomeTab.tsx`
+- [x] Quiz — Partilhar resultado (clipboard) — concluído em `QuizTab.tsx`
+
+---
+
 ## Execução — 29 Ago 2026 (3)
 
 ### Melhoria: Tópicos Favoritos (bookmarks em localStorage)

@@ -25,6 +25,8 @@ jest.mock("@/i18n/context", () => ({
       quizReviewOnlyWrong: "Apenas erradas",
       quizFeedbackCorrect: "Correta!",
       quizFeedbackIncorrect: "Incorreta.",
+      quizShareResult: "Partilhar resultado",
+      quizResultCopied: "Resultado copiado!",
     },
   }),
 }));
@@ -338,5 +340,40 @@ describe("QuizTab", () => {
     fireEvent.click(screen.getByLabelText("Apenas erradas"));
     expect(screen.queryByText(/Tua resposta: Resposta A/)).not.toBeInTheDocument();
     expect(screen.getByText(/Tua resposta: Opção X/)).toBeInTheDocument();
+  });
+
+  it("copies the result to the clipboard via share button", async () => {
+    const writeText = jest.fn().mockResolvedValue(undefined);
+    Object.defineProperty(navigator, "clipboard", {
+      configurable: true,
+      value: { writeText },
+    });
+    render(<QuizTab audience="jovens" />);
+    fireEvent.click(screen.getByText("Resposta A"));
+    fireEvent.click(screen.getByText("Seguinte"));
+    fireEvent.click(screen.getByText("Opção Y"));
+    fireEvent.click(screen.getByText("Ver Resultado"));
+    fireEvent.click(screen.getByText("Partilhar resultado"));
+    expect(await screen.findByText("Resultado copiado!")).toBeInTheDocument();
+    expect(writeText).toHaveBeenCalledWith(
+      expect.stringMatching(/Terminado! 2\/2 — EduSexual PT/)
+    );
+  });
+
+  it("falls back to execCommand when clipboard API is unavailable", () => {
+    Object.defineProperty(navigator, "clipboard", { configurable: true, value: undefined });
+    const execCommand = jest.fn(() => true);
+    Object.defineProperty(document, "execCommand", {
+      configurable: true,
+      value: execCommand,
+    });
+    render(<QuizTab audience="jovens" />);
+    fireEvent.click(screen.getByText("Resposta A"));
+    fireEvent.click(screen.getByText("Seguinte"));
+    fireEvent.click(screen.getByText("Opção Y"));
+    fireEvent.click(screen.getByText("Ver Resultado"));
+    fireEvent.click(screen.getByText("Partilhar resultado"));
+    expect(execCommand).toHaveBeenCalledWith("copy");
+    expect(screen.getByText("Resultado copiado!")).toBeInTheDocument();
   });
 });

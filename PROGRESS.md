@@ -2,6 +2,24 @@
 
 Log de execuções e melhorias implementadas.
 
+## Execução — 01 Set 2026 — Limpeza + Share Result no main
+
+### Contexto
+
+Projeto limpo após divergência `master` (estrutura `edusexual-pt/`) vs `main` (raiz). `edusexual-pt/` (925 MB, `node_modules` + `.next`) removido para backup `BOT/backups/educacao_20260901/` e branch `main` fast-forward para `0df817b` (2 commits do outro PC: `3902b82` a11y + `0df817b` TTS/rateLimit). Pendência `share result` do `master` (ef9597b) portada para `main`.
+
+### Implementado
+
+1. **Limpeza:** `edusexual-pt/` e `edusexual-pt-github/` (untracked, 1.8 GB) movidos para backup; `npm install` refeito (841 pacotes, 0 vuln); `264/264` testes, `tsc` limpo, `next build` OK.
+2. **`QuizTab.tsx` (main):** portado `buildShareText` + `shareResult` (clipboard API com fallback `execCommand`) + estado `copied` + botão `Partilhar resultado / Resultado copiado!` no ecrã de resultados (reutiliza `quizShareResult`/`quizResultCopied` já em `translations.ts`).
+3. **i18n:** adicionadas chaves `quizShareResult`/`quizResultCopied` a `TranslationKeys` e aos 3 locales (`pt/en/es`).
+4. **Testes:** 2 novos em `QuizTab.test.tsx` (clipboard + fallback) — `266/266` passam (+2).
+
+### Verificação
+
+- `npm test` 266/266, `tsc --noEmit` limpo, `next build` 9/9 static pages.
+- Próximo: `lazy loading content-topics.ts` (~100 KB eager) ainda pendente em `PROGRESS.md:42`.
+
 ## Execução — 24 Ago 2026 (2)
 
 ### Melhoria: Otimização da imagem do hero (`next/image` + `priority`) e formato correto

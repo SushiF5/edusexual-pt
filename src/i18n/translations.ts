@@ -184,6 +184,8 @@ export type TranslationKeys = {
   questionHelp: string;
   loadAudio: string;
   loadingTopic: string;
+  quizShareResult: string;
+  quizResultCopied: string;
 };
 
 export type T = TranslationKeys;

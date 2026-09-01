@@ -174,4 +174,6 @@ export const es: TranslationKeys = {
   nameHelp: "Nombre opcional para tu pregunta anónima",
   questionHelp: "Tu pregunta es anónima. Mínimo 1 carácter, máximo 2000.",
   loadingTopic: "Cargando tema…",
+  quizShareResult: "Compartir resultado",
+  quizResultCopied: "¡Resultado copiado!",
 };

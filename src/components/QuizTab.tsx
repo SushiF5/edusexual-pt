@@ -5,6 +5,9 @@ import { quizQuestions } from "@/data/content";
 import { useI18n } from "@/i18n/context";
 import { Audience } from "@/types";
 
+const buildShareText = (t: ReturnType<typeof useI18n>["t"], score: number, total: number) =>
+  `${t.quizFinished} ${score}/${total} — EduSexual PT`;
+
 interface QuizTabProps {
   audience: Audience;
 }
@@ -80,6 +83,30 @@ export default function QuizTab({ audience }: QuizTabProps) {
   });
 
   const [reviewOnlyWrong, setReviewOnlyWrong] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const shareResult = async () => {
+    const text = buildShareText(t, quizState.score, filteredQuiz.length);
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(text);
+      } else {
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        ta.setAttribute("readonly", "");
+        ta.style.position = "fixed";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+      }
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (e) {
+      console.warn("Failed to copy quiz result:", e);
+    }
+  };
 
   useEffect(() => {
     if (quizState.showResult || quizState.currentQuestion === 0) {
@@ -134,6 +161,7 @@ export default function QuizTab({ audience }: QuizTabProps) {
       userAnswers: Array<number | null>(filteredQuiz.length).fill(null),
     });
     setReviewOnlyWrong(false);
+    setCopied(false);
     clearState(audience);
   };
 
@@ -162,6 +190,9 @@ export default function QuizTab({ audience }: QuizTabProps) {
           <p className="text-4xl font-bold text-primary mb-6">{quizState.score} / {filteredQuiz.length}</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <button onClick={resetQuiz} className="btn-primary">{t.tryAgain}</button>
+            <button onClick={shareResult} className="btn-secondary" aria-live="polite">
+              {copied ? t.quizResultCopied : t.quizShareResult}
+            </button>
           </div>
         </div>
 

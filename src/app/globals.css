@@ -125,6 +125,16 @@ h1, h2, h3, h4, h5, h6 {
   outline-color: var(--primary-light);
 }
 
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-float, .animate-fadeIn, .animate-scaleUp { animation: none !important; }
+}
+
 /* Print Styles */
 @media print {
   .no-print, header, footer, nav, .btn-primary, .btn-secondary, button, .quick-exit {

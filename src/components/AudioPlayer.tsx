@@ -87,39 +87,46 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
     }
   }, []);
 
-  const startSpeech = useCallback(() => {
-    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
-
-    window.speechSynthesis.cancel();
-
-    const utterance = new SpeechSynthesisUtterance(contentToSpeak);
+  // Shared helper to create utterance with pt-PT voice + chunking safeguard (Chrome limit ~32k chars)
+  const createUtterance = useCallback((text: string, rate: number) => {
+    const chunk = text.length > 30000 ? text.slice(0, 30000) : text;
+    const utterance = new SpeechSynthesisUtterance(chunk);
     utterance.lang = "pt-PT";
-    utterance.rate = playbackRate;
+    utterance.rate = rate;
     utterance.pitch = 1.0;
-
-    // Pick best Portuguese voice if available
     const voices = window.speechSynthesis.getVoices();
     const ptVoice =
-      voices.find((v) => v.lang === "pt-PT" || v.lang.startsWith("pt-PT")) ||
-      voices.find((v) => v.lang.startsWith("pt")) ||
-      null;
-
-    if (ptVoice) {
-      utterance.voice = ptVoice;
-    }
-
+      voices.find((v) => v.lang === "pt-PT") ||
+      voices.find((v) => v.lang.startsWith("pt-PT")) ||
+      voices.find((v) => v.lang.startsWith("pt")) || null;
+    if (ptVoice) utterance.voice = ptVoice;
     utterance.onstart = () => setSpeechStatus("playing");
     utterance.onend = () => setSpeechStatus("idle");
     utterance.onerror = (e) => {
-      if (e.error !== "canceled") {
-        console.warn("Speech synthesis notice:", e.error);
+      if ((e as SpeechSynthesisErrorEvent).error !== "canceled") {
+        console.warn("Speech synthesis notice:", (e as SpeechSynthesisErrorEvent).error);
       }
       setSpeechStatus("idle");
     };
+    return utterance;
+  }, []);
 
+  // Ensure voices are loaded (Chrome loads async)
+  useEffect(() => {
+    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+    const loadVoices = () => window.speechSynthesis.getVoices();
+    loadVoices();
+    window.speechSynthesis.addEventListener?.("voiceschanged", loadVoices);
+    return () => window.speechSynthesis.removeEventListener?.("voiceschanged", loadVoices);
+  }, []);
+
+  const startSpeech = useCallback(() => {
+    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+    window.speechSynthesis.cancel();
+    const utterance = createUtterance(contentToSpeak, playbackRate);
     utteranceRef.current = utterance;
     window.speechSynthesis.speak(utterance);
-  }, [contentToSpeak, playbackRate]);
+  }, [contentToSpeak, playbackRate, createUtterance]);
 
   const toggleSpeech = () => {
     if (speechStatus === "playing") {
@@ -132,20 +139,15 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
   };
 
   const cyclePlaybackRate = () => {
-    const rates = [1.0, 1.25, 1.5];
-    const nextRate = rates[(rates.indexOf(playbackRate) + 1) % rates.length];
+    const rates = [1.0, 1.25, 1.5] as const;
+    const nextRate = rates[(rates.indexOf(playbackRate as typeof rates[number]) + 1) % rates.length];
     setPlaybackRate(nextRate);
     if (speechStatus === "playing") {
       stopSpeech();
       setTimeout(() => {
         if (typeof window !== "undefined" && "speechSynthesis" in window) {
-          const utterance = new SpeechSynthesisUtterance(contentToSpeak);
-          utterance.lang = "pt-PT";
-          utterance.rate = nextRate;
-          utterance.pitch = 1.0;
-          utterance.onstart = () => setSpeechStatus("playing");
-          utterance.onend = () => setSpeechStatus("idle");
-          utterance.onerror = () => setSpeechStatus("idle");
+          const utterance = createUtterance(contentToSpeak, nextRate);
+          utteranceRef.current = utterance;
           window.speechSynthesis.speak(utterance);
         }
       }, 50);

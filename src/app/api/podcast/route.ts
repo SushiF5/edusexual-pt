@@ -49,8 +49,10 @@ function parseRSS(xml: string): Episode[] {
 export async function GET() {
   try {
     const ip = (await headers()).get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
-    if (!checkRateLimit(ip, 15, 60000)) {
-      return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+    const { checkRateLimitWithInfo } = await import("@/lib/rateLimit");
+    const rl = checkRateLimitWithInfo(ip, 15, 60000);
+    if (!rl.allowed) {
+      return NextResponse.json({ error: "Too many requests" }, { status: 429, headers: { "Retry-After": String(Math.ceil((rl.retryAfterMs || 60000) / 1000)) } });
     }
 
     const controller = new AbortController();

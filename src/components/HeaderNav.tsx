@@ -168,6 +168,7 @@ export default function HeaderNav({
           className="hidden lg:flex bg-gray-100/90 dark:bg-gray-800/90 p-1 rounded-full gap-1 shadow-inner"
           aria-label={t.navigate}
           role="tablist"
+          aria-orientation="horizontal"
           onKeyDown={onTabKeyDown}
         >
           {navTabIds.map((tab) => {

@@ -16,8 +16,10 @@ const TelegramSchema = z.object({
 export async function POST(req: Request) {
   try {
     const ip = (await headers()).get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
-    if (!checkRateLimit(ip)) {
-      return NextResponse.json({ error: "Too many requests. Try again later." }, { status: 429 });
+    const { checkRateLimitWithInfo } = await import("@/lib/rateLimit");
+    const rl = checkRateLimitWithInfo(ip, 5, 60000);
+    if (!rl.allowed) {
+      return NextResponse.json({ error: "Too many requests. Try again later." }, { status: 429, headers: { "Retry-After": String(Math.ceil((rl.retryAfterMs || 60000) / 1000)) } });
     }
 
     const body = await req.json();

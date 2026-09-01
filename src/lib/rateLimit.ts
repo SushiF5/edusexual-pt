@@ -13,7 +13,17 @@ if (typeof setInterval !== "undefined") {
   }, 5 * 60 * 1000);
 }
 
+export interface RateLimitResult {
+  allowed: boolean;
+  retryAfterMs?: number;
+  remaining?: number;
+}
+
 export function checkRateLimit(ip: string, maxRequests = 5, windowMs = 60000): boolean {
+  return checkRateLimitWithInfo(ip, maxRequests, windowMs).allowed;
+}
+
+export function checkRateLimitWithInfo(ip: string, maxRequests = 5, windowMs = 60000): RateLimitResult {
   const now = Date.now();
 
   // Evict oldest entries if map is too large
@@ -29,13 +39,16 @@ export function checkRateLimit(ip: string, maxRequests = 5, windowMs = 60000): b
 
   if (!entry || now > entry.resetAt) {
     rateMap.set(ip, { count: 1, resetAt: now + windowMs });
-    return true;
+    return { allowed: true, remaining: maxRequests - 1 };
   }
 
   if (entry.count >= maxRequests) {
-    return false;
+    return { allowed: false, retryAfterMs: entry.resetAt - now, remaining: 0 };
   }
 
   entry.count++;
-  return true;
+  return { allowed: true, remaining: maxRequests - entry.count };
 }
+
+// Note: In serverless (Vercel) this Map is per-instance and resets on cold start.
+// For strict global limiting, replace with Upstash Redis or similar edge store.

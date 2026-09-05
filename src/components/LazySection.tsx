@@ -46,6 +46,7 @@ export const LazySection: React.FC<LazySectionProps> = ({
         aria-label={title ? `${t.loadingTopic}: ${title}` : t.loadingTopic}
         aria-live="polite"
       >
+        <p className="sr-only">{title ? `${t.loadingTopic}: ${title}` : t.loadingTopic}</p>
         <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
         <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full"></div>
         <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-5/6"></div>

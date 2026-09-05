@@ -2,6 +2,35 @@
 
 Log de execuções e melhorias implementadas.
 
+## Execução — 04 Set 2026 — Lazy Loading do content-topics.ts por audiência
+
+### Contexto
+
+A pendência "Lazy loading do conteúdo por audiência (`content-topics.ts` ~100 KB carregado eager no HomeTab)" estava aberta desde 24 Ago 2026. O `content-topics.ts` único (1936 linhas, ~100 KB) era importado de forma estática no `HomeTab`, incluindo todos os tópicos das 3 audiências no bundle inicial, mesmo que só uma fosse necessária.
+
+### Implementado
+
+1. **Divisão em 3 ficheiros por audiência** (`src/data/content-topics-{criancas,jovens,adultos}.ts`):
+   - Cada ficheiro exporta `topicsCriancas` / `topicsJovens` / `topicsAdultos` (named) **e** `default` (para o loader dinâmico).
+   - Conteúdo idêntico ao original (19 tópicos no total: 4 crianças, 11 jovens, 4 adultos), sem perda de dados.
+2. **`src/data/content-topics.ts` → loader assíncrono**: agora só exporta `loadTopicsByAudience(audience)` que faz `import()` dinâmico do chunk correspondente. O array `topics` vazio fica como fallback para compatibilidade (testes, integrity checks).
+3. **`HomeTab.tsx`**: passou a carregar tópicos via `loadTopicsByAudience(audience)` com `useEffect` + estado `loading`. Enquanto carrega, mostra o Hero + skeleton acessível (`aria-live="polite"`, label `loadingTopic`). O filtro por audiência deixou de ser no cliente (o chunk já traz só a audiência certa).
+4. **Testes** (`HomeTab.test.tsx`): atualizados para mockar `loadTopicsByAudience` e aguardar o carregamento assíncrono (`waitForTopics`).
+
+### Verificação
+
+- 266 testes passam (suite completa, sem regressões).
+- `next build` (Turbopack) compila com sucesso; **code-splitting confirmado**: 3 chunks lazy separados (crianças, jovens, adultos) + bundle inicial inalterado (~167 KB gzip).
+- `tsc --noEmit` limpo.
+- Teste de integridade i18n continua a passar (paridade PT/EN/ES mantida).
+
+### Próximas melhorias pendentes (sugeridas)
+
+- [x] Lazy loading do conteúdo por audiência (`content-topics.ts`) — **concluído**
+- [ ] Otimizar componentes de arranque se o bundle subir dos limiares (Hero)
+
+---
+
 ## Execução — 01 Set 2026 — Limpeza + Share Result no main
 
 ### Contexto

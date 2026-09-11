@@ -2,6 +2,25 @@
 
 Log de execuções e melhorias implementadas.
 
+## Execução — 05 Set 2026 — Otimização de Imagens (Hero)
+
+### Contexto
+
+Pendência do `PROGRESS.md`: "Otimizar componentes de arranque se o bundle subir dos limiares (Hero)". Embora o bundle esteja dentro dos limites, a performance do LCP (Largest Contentful Paint) é crucial para uma webapp educacional. Faltava a propriedade `sizes` nos componentes `next/image` da Hero section, o que impedia o Next.js de servir a imagem corretamente dimensionada para cada breakpoint, penalizando o carregamento em dispositivos móveis.
+
+### Implementado
+
+1. **`HomeTab.tsx`**: Adicionada a propriedade `sizes="(max-width: 768px) 100vw, 50vw"` aos componentes `Image` da Hero section (tanto na view de loading quanto na normal).
+2. **Verificação**: A funcionalidade de lazy-loading por audiência (`content-topics.ts` -> 3 chunks) permanece intacta.
+
+### Verificação
+
+- 266 testes passam.
+- `next build` OK.
+- `scripts/audit-bundle.mjs` OK (bundle inicial continua ~165.5 KB gzip).
+
+---
+
 ## Execução — 04 Set 2026 — Lazy Loading do content-topics.ts por audiência
 
 ### Contexto

@@ -94,6 +94,7 @@ export default function HomeTab({ audience, setActiveTab }: HomeTabProps) {
                   width={1024}
                   height={1024}
                   priority
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   className="relative z-10 rounded-3xl shadow-2xl animate-float w-full h-auto"
                 />
               </div>
@@ -180,6 +181,7 @@ export default function HomeTab({ audience, setActiveTab }: HomeTabProps) {
                 width={1024}
                 height={1024}
                 priority
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="relative z-10 rounded-3xl shadow-2xl animate-float w-full h-auto"
               />
             </div>

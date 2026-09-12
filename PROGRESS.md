@@ -46,7 +46,7 @@ A pendência "Lazy loading do conteúdo por audiência (`content-topics.ts` ~100
 ### Próximas melhorias pendentes (sugeridas)
 
 - [x] Lazy loading do conteúdo por audiência (`content-topics.ts`) — **concluído**
-- [ ] Otimizar componentes de arranque se o bundle subir dos limiares (Hero)
+- [x] Otimizar componentes de arranque se o bundle subir dos limiares (Hero) — **concluído (adicionado `sizes` ao Image Hero)**
 
 ---
 

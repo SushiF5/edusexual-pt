@@ -2,6 +2,28 @@
 
 Log de execuções e melhorias implementadas.
 
+## Execução — 07 Set 2026 — Schema Organization no JSON-LD
+
+### Contexto
+
+O ciclo anterior (06 Set) adicionou o schema `WebSite` ao `<head>`. Faltava o
+schema `Organization` (publicador/entidade por trás do site), que ajuda os
+motores de busca a associar o site a uma entidade e melhora dados ricos.
+
+### Implementado
+
+1. **`src/app/layout.tsx`**: Adicionado segundo `<script type="application/ld+json">`
+   com schema `Organization` (name, url, description, logo apontando para
+   `/icon.svg`). O `<head>` passa a ter 2 JSON-LD: `WebSite` + `Organization`.
+
+### Verificação
+
+- `grep -c schema.org .next/server/app/index.html` → 2; `"@type":"Organization"` presente.
+- 266 testes passam; `tsc --noEmit` limpo; `next build` OK.
+- Sem novas chaves i18n.
+
+---
+
 ## Execução — 06 Set 2026 — Structured Data JSON-LD (SEO)
 
 ### Contexto

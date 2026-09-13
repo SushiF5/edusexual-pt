@@ -71,6 +71,23 @@ export default function RootLayout({
           }),
         }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: "EduSexual PT",
+            url: "https://edusexual-pt.vercel.app",
+            description:
+              "Portal de educação sexual em português para crianças, jovens e adultos.",
+            logo: {
+              "@type": "ImageObject",
+              url: "https://edusexual-pt.vercel.app/icon.svg",
+            },
+          }),
+        }}
+      />
       <script dangerouslySetInnerHTML={{ __html: `
 (function() {
   try {

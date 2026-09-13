@@ -125,6 +125,21 @@ h1, h2, h3, h4, h5, h6 {
   outline-color: var(--primary-light);
 }
 
+/* Font-size preference (FontSizeControls: sm 85% / md 100% / lg 115% / xl 130%).
+   Scales everything proportionally since Tailwind sizes are rem-based. */
+html.text-size-sm { font-size: 13.5px; }
+html.text-size-md { font-size: 16px; }
+html.text-size-lg { font-size: 18px; }
+html.text-size-xl { font-size: 21px; }
+
+/* Mobile reading comfort: long-form content never below ~16px on phones */
+@media (max-width: 767px) {
+  body {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+}
+
 /* Respect prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

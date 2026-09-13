@@ -2,6 +2,29 @@
 
 Log de execuções e melhorias implementadas.
 
+## Execução — 10 Set 2026 — FAQPage JSON-LD (SEO)
+
+### Contexto
+
+O site tem 27 perguntas frequentes no FaqTab, mas não havia schema
+`FAQPage` no markup — os motores de busca não captam a estrutura
+perguntas-respostas para rich snippets.
+
+### Implementado
+
+1. **`src/app/layout.tsx`**: Adicionado terceiro `<script type="application/ld+json">`
+   com schema `FAQPage` (27 entradas mapeadas via `mainEntity`), usando
+   os dados importados de `content-faq.ts`. Os 3 schemas no `<head>`
+   passam a ser: `WebSite` + `Organization` + `FAQPage`.
+
+### Verificação
+
+- `grep -c FAQPage .next/server/app/index.html` → 2 (schema presente).
+- 266 testes passam; `tsc --noEmit` limpo; `next build` OK.
+- Sem novas chaves i18n.
+
+---
+
 ## Execução — 09 Set 2026 — Expandir audioUrl para Crianças e Adultos
 
 ### Contexto

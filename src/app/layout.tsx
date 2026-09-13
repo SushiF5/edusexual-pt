@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Outfit, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 import { I18nProvider } from "@/i18n/context";
+import { frequentlyAskedQuestions } from "@/data/content-faq";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -85,6 +86,23 @@ export default function RootLayout({
               "@type": "ImageObject",
               url: "https://edusexual-pt.vercel.app/icon.svg",
             },
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: frequentlyAskedQuestions.map((faq) => ({
+              "@type": "Question",
+              name: faq.question,
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: faq.answer,
+              },
+            })),
           }),
         }}
       />

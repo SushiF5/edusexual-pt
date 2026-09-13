@@ -7,11 +7,13 @@ export const topicsAdultos: Topic[] = [
     description: "Como falar sobre sexualidade com os mais novos.",
     icon: "👨‍👩‍👧‍👦",
     audience: "adultos",
+    audioUrl: "/audio/MP3/guia-pais.mp3",
     articles: [
       {
         id: "como-falar",
         title: "Como iniciar a conversa",
         category: "Educação",
+        audioUrl: "/audio/MP3/como-falar.mp3",
         content: `Falar sobre sexualidade não deve ser um evento único (a "conversa"), mas sim um diálogo contínuo.
         
 Dicas para pais:
@@ -162,11 +164,13 @@ Impacto: Estudos mostram que jovens LGBTQI+ com famílias aceitantes têm 40% me
     description: "O que diz a lei e como funciona na prática",
     icon: "🏫",
     audience: "adultos",
+    audioUrl: "/audio/MP3/educacao-sexual-escola.mp3",
     articles: [
       {
         id: "lei-educacao-sexual",
         title: "O que Diz a Lei sobre Educação Sexual em Portugal",
         category: "Lei",
+        audioUrl: "/audio/MP3/lei-educacao-sexual.mp3",
         content: `A educação sexual é obrigatória nas escolas portuguesas desde 2001:
 
 - Lei n.º 129/99 (alterada pela Lei n.º 60/2002): Estabelece o regime jurídico da educação sexual nas escolas.
@@ -268,11 +272,13 @@ Plataformas online:
     description: "Prevenir o abuso e proteger as crianças",
     icon: "🛡️",
     audience: "adultos",
+    audioUrl: "/audio/MP3/protecao-prevencao.mp3",
     articles: [
       {
         id: "identificar-abuso",
         title: "Como Identificar Sinais de Abuso Sexual em Crianças",
         category: "Proteção",
+        audioUrl: "/audio/MP3/identificar-abuso.mp3",
         content: `O abuso sexual infantil é mais comum do que se pensa e, na maioria dos casos, o agressor é alguém conhecido da criança (familiar, amigo, professor). Estar atento é essencial:
 
 Sinais comportamentais:
@@ -392,11 +398,13 @@ Serviços de Saúde:
     description: "A sexualidade muda, mas não desaparece",
     icon: "🌿",
     audience: "adultos",
+    audioUrl: "/audio/MP3/sexualidade-vida.mp3",
     articles: [
       {
         id: "sexualidade-gravidez",
         title: "Sexualidade na Gravidez",
         category: "Saúde",
+        audioUrl: "/audio/MP3/sexualidade-gravidez.mp3",
         content: `A sexualidade durante a gravidez é segura na maioria dos casos, mas passa por mudanças naturais:
 
 O que é normal:

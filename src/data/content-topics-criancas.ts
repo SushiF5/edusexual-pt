@@ -8,11 +8,13 @@ export const topicsCriancas: Topic[] = [
     description: "Aprende os nomes das partes do corpo e como cuidar de ti.",
     icon: "🧑‍🤝‍🧑",
     audience: "criancas",
+    audioUrl: "/audio/MP3/corpo-criancas.mp3",
     articles: [
       {
         id: "partes-corpo",
         title: "O meu corpo é único",
         category: "Corpo",
+        audioUrl: "/audio/MP3/partes-corpo.mp3",
         content: `O teu corpo é a tua casa! Assim como uma casa tem várias divisões, o teu corpo tem várias partes. Algumas partes toda a gente vê, como a cara e as mãos. Outras partes são privadas e ficam tapadas pelo fato de banho.
         
 É importante saberes que o teu corpo pertence-te a ti. Ninguém deve tocar nas tuas partes privadas sem a tua autorização, a menos que seja por uma questão de saúde (como o médico ou os pais para te limparem).`
@@ -63,11 +65,13 @@ Cada pessoa cresce ao seu ritmo. O teu amigo pode crescer mais rápido que tu, e
     description: "Aprende a proteger-te e a dizer não.",
     icon: "🛡️",
     audience: "criancas",
+    audioUrl: "/audio/MP3/seguranca-criancas.mp3",
     articles: [
       {
         id: "consentimento-criancas",
         title: "O que é o consentimento?",
         category: "Segurança",
+        audioUrl: "/audio/MP3/consentimento-criancas.mp3",
         content: `Consentimento é uma palavra difícil, mas significa algo simples: perguntar se a outra pessoa quer e concordar com isso.
 
 Por exemplo, antes de dares um abraço a um amigo, podes perguntar: "Posso dar-te um abraço?". Se ele disser "Sim", podes dar. Se disser "Não", tudo bem, respeitamos a vontade dele. O mesmo vale para ti: tu podes dizer "Não" se não quiseres um abraço!`
@@ -75,6 +79,7 @@ Por exemplo, antes de dares um abraço a um amigo, podes perguntar: "Posso dar-t
       {id: "superpoder-nao",
         title: "Dizer 'Não' é um superpoder",
         category: "Segurança",
+        audioUrl: "/audio/MP3/superpoder-nao.mp3",
         content: `O teu corpo é teu e só tu decides quem pode tocar nele. Se alguém tentar tocar-te de forma que não gostas, tens o direito de dizer "NÃO!" bem alto.
 
 Dizer "Não" não é feio, não é mal-educado — é um superpoder que te protege. Mesmo que seja um adulto ou alguém mais velho, se te sentires desconfortável, dizes "Não" e vais contar a outro adulto em quem confies.`
@@ -82,6 +87,7 @@ Dizer "Não" não é feio, não é mal-educado — é um superpoder que te prote
       {id: "segredos-bons-maus",
         title: "Segredos bons e segredos maus",
         category: "Segurança",
+        audioUrl: "/audio/MP3/segredos-bons-maus.mp3",
         content: `Há segredos giros (como uma surpresa de aniversário) e segredos perigosos.
 
 Um segredo bom: "Vamos fazer um bolo para a mãe, mas é segredo até domingo!"
@@ -90,6 +96,7 @@ Um segredo mau: "Isto fica entre nós, não contes a ninguém, senão..." — se
       {id: "pedir-ajuda",
         title: "Como pedir ajuda se algo está errado",
         category: "Segurança",
+        audioUrl: "/audio/MP3/pedir-ajuda.mp3",
         content: `Se alguma vez te sentires inseguro(a), assustado(a) ou confuso(a) com o que alguém fez ou disse:
 
 1. Diz "NÃO!" bem alto.
@@ -102,6 +109,7 @@ Não é "queixa", é protegeres-te. Tu importas!`
       {id: "online-seguranca",
         title: "Regras de segurança online",
         category: "Segurança",
+        audioUrl: "/audio/MP3/online-seguranca.mp3",
         content: `A internet é fixe, mas tem regras:
 - Nunca dês o teu nome verdadeiro, morada, escola ou telefone a estranhos online.
 - Não aceites amizades de gente que não conheces na vida real.
@@ -116,11 +124,13 @@ Não é "queixa", é protegeres-te. Tu importas!`
     description: "Entende o que sentes e como te relacionas.",
     icon: "💛",
     audience: "criancas",
+    audioUrl: "/audio/MP3/emocoes-criancas.mp3",
     articles: [
       {
         id: "emocoes-importantes",
         title: "As minhas emoções são importantes",
         category: "Emoções",
+        audioUrl: "/audio/MP3/emocoes-importantes.mp3",
         content: `Todas as emoções são bem-vindas: alegria, tristeza, raiva, medo, surpresa, nojo. Não há emoções "más" — todas nos dizem algo.
 
 Se te sentires triste, podes chorar. Se estiveres zangado, podes dizer "Estou zangado porque...". Falar do que sentes ajuda a acalmar. Podes desenhar, escrever ou falar com quem confias.`
@@ -128,6 +138,7 @@ Se te sentires triste, podes chorar. Se estiveres zangado, podes dizer "Estou za
       {id: "amizade-bom-amigo",
         title: "Amizade: o que é ser um bom amigo?",
         category: "Relações",
+        audioUrl: "/audio/MP3/amizade-bom-amigo.mp3",
         content: `Um bom amigo:
 - Escuta-te quando precisas de falar.
 - Partilha (brinquedos, lanche, segredos giros).
@@ -140,11 +151,13 @@ Tu também podes ser esse amigo!`
       {id: "respeitar-sentimentos",
         title: "Respeitar os sentimentos dos outros",
         category: "Relações",
+        audioUrl: "/audio/MP3/respeitar-sentimentos.mp3",
         content: `Toda a gente tem sentimentos, mesmo que não os mostre. Se um amigo chorar, não gozes — abraça ou pergunta "Queres falar?". Se alguém disser "Não gosto disso", para logo. O respeito faz as amizades durarem.`
       },
       {id: "triste-confuso",
         title: "Quando me sinto triste ou confuso",
         category: "Emoções",
+        audioUrl: "/audio/MP3/triste-confuso.mp3",
         content: `Dias maus acontecem a toda a gente. Se te sentires triste:
 - Não te isoles: fala com alguém.
 - Faz algo que gostes: desenhar, saltar, ouvir música.
@@ -160,21 +173,25 @@ Se a tristeza durar muitos dias ou não conseguires fazer as tuas coisas normais
     description: "Todas as famílias são especiais.",
     icon: "🏠",
     audience: "criancas",
+    audioUrl: "/audio/MP3/familias-criancas.mp3",
     articles: [
       {
         id: "familias-diferentes",
         title: "As famílias são diferentes e todas são especiais",
         category: "Família",
+        audioUrl: "/audio/MP3/familias-diferentes.mp3",
         content: `Há famílias com pai e mãe, só com a mãe, só com o pai, com duas mães, dois pais, avós, tios, ou famílias de acolhimento. Não há uma "família certa" — o que importa é o amor e o cuidado.`
       },
       {id: "tipos-familias",
         title: "Há famílias de muitos modos",
         category: "Família",
+        audioUrl: "/audio/MP3/tipos-familias.mp3",
         content: `Algumas famílias nascem juntas, outras fazem-se por adoção, outras juntam-se quando adultos se apaixonam. Todas são verdadeiras famílias. O que conta é: "Aqui cuida-se de mim e eu cuido dos outros."`
       },
       {id: "bebes-onde-vem",
         title: "Bebés: de onde vêm? (versão adequada à idade)",
         category: "Família",
+        audioUrl: "/audio/MP3/bebes-onde-vem.mp3",
         content: `Um bebé começa quando um espermatozoide (do pai) encontra um óvulo (da mãe) — isso acontece dentro do corpo da mãe, num sítio especial chamado útero. O bebé cresce lá 9 meses até nascer.
 
 Às vezes as famílias não podem ter bebés assim e adotam — escolhem uma criança para amar e cuidar para sempre. De onde vens não importa: és amado(a) lo mesmo.`

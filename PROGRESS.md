@@ -2,6 +2,32 @@
 
 Log de execuções e melhorias implementadas.
 
+## Execução — 09 Set 2026 — Expandir audioUrl para Crianças e Adultos
+
+### Contexto
+
+O script `generate-audio.py` (ciclo anterior) detetou 99 audioUrl — mas só 4 em
+Crianças (de 21 blocos) e 20 em Adultos (de 28). Jovens estava a 100% (75/75).
+A pendência "Expandir áudios para as secções Crianças e Adultos" ficou por
+fazer porque o script antigo (mono-repo) cobria só jovens.
+
+### Implementado
+
+1. **`src/data/content-topics-criancas.ts`**: Adicionado `audioUrl` aos 4
+   topics e 13 articles que não o tinham (21/21 agora).
+2. **`src/data/content-topics-adultos.ts`**: Adicionado `audioUrl` aos 4
+   topics e 4 articles que não o tinham (28/28 agora).
+
+### Verificação
+
+- Audio coverage: 21 + 75 + 28 = **124 audioUrl** (antes: 99).
+- `python3 -m py_compile scripts/generate-audio.py` OK; parsing 124/124.
+- 266 testes passam; `tsc --noEmit` limpo.
+- Os MP3 continuam a ser gerados localmente via `generate-audio.py`
+  (gitignored em `public/audio/MP3/`).
+
+---
+
 ## Execução — 08 Set 2026 — Script de geração de áudio (novo layout)
 
 ### Contexto

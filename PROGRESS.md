@@ -2,6 +2,28 @@
 
 Log de execuções e melhorias implementadas.
 
+## Execução — 06 Set 2026 — Structured Data JSON-LD (SEO)
+
+### Contexto
+
+O `layout.tsx` já tinha metadata completa (Open Graph, Twitter, manifest,
+robots, sitemap), mas faltava markup estruturado schema.org para ajudar os
+motores de busca a compreender o site (dados ricos / rich snippets).
+
+### Implementado
+
+1. **`src/app/layout.tsx`**: Adicionado `<script type="application/ld+json">`
+   com schema `WebSite` (name, url, description, inLanguage `pt-PT`),
+   renderizado no `<head>` da raiz.
+
+### Verificação
+
+- JSON-LD presente no HTML estático gerado (`grep schema.org .next/server/app/index.html`).
+- 266 testes passam; `tsc --noEmit` limpo; `next build` OK.
+- Sem novas chaves i18n (não afeta o teste de integridade).
+
+---
+
 ## Execução — 05 Set 2026 — Otimização de Imagens (Hero)
 
 ### Contexto

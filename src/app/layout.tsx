@@ -57,6 +57,20 @@ export default function RootLayout({
       <meta name="mobile-web-app-capable" content="yes" />
       <meta name="format-detection" content="telephone=no" />
       <link rel="manifest" href="/manifest.json" />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: "EduSexual PT",
+            url: "https://edusexual-pt.vercel.app",
+            description:
+              "Portal de educação sexual em português para crianças, jovens e adultos. Conteúdo validado, quizzes, FAQ e linhas de apoio em Portugal.",
+            inLanguage: "pt-PT",
+          }),
+        }}
+      />
       <script dangerouslySetInnerHTML={{ __html: `
 (function() {
   try {

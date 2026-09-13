@@ -2,6 +2,31 @@
 
 Log de execuções e melhorias implementadas.
 
+## Execução — 08 Set 2026 — Script de geração de áudio (novo layout)
+
+### Contexto
+
+O projeto referenciou desde cedo ~99 `audioUrl` em `content-topics-{criancas,jovens,adultos}.ts`, mas os MP3 eram gerados por um script (`gerar_audios2.py`) desenhado para o **antigo mono-repo** (um ficheiro `content-topics.ts` com marcadores `// --- SECÇÃO ... ---`). Após a divisão em 3 ficheiros por audiência (lazy loading), o script antigo deixou de funcionar. Faltava um script adaptado ao novo layout para regenerar os MP3 locais.
+
+### Implementado
+
+1. **`scripts/generate-audio.py`**: Novo script que lê os 3 ficheiros
+   `content-topics-{criancas,jovens,adultos}.ts`, extrai os blocos com
+   `audioUrl` (id, título, conteúdo/descrição) e gera os MP3 em falta via
+   `edge-tts` (voz Raquel p/ crianças+jovens, Duarte p/ adultos) para
+   `public/audio/MP3/`. Flags: `--audience`, `--limit`.
+
+### Verificação
+
+- `python3 -m py_compile scripts/generate-audio.py` OK.
+- Teste real (`python3 scripts/generate-audio.py --audience adultos --limit 1`)
+  gerou `sinais-alerta.mp3` (141 KB, frame sync MP3 `\xff\xf3`).
+- Parsing: 99 audioUrl detetados (4 criancas, 75 jovens, 20 adultos) —
+  consistente com o grep do código-fonte.
+- Os MP3 são gitignored (`public/audio/MP3/`) — gerados localmente, não entram no repo.
+
+---
+
 ## Execução — 07 Set 2026 — Schema Organization no JSON-LD
 
 ### Contexto

@@ -2,6 +2,33 @@
 
 Log de execuções e melhorias implementadas.
 
+## Execução — 12 Set 2026 — Testes do QuickExitButton
+
+### Contexto
+
+O `QuickExitButton` é um componente de segurança crítica — redireciona para
+o Google com um clique ou tecla Esc para proteger utilizadores vulneráveis.
+Não tinha testes unitários. A jsdom não permite mock de `window.location`
+(no-configurable), pelo que os testes focam-se no render, acessibilidade
+e registo do listener de teclado.
+
+### Implementado
+
+1. **`src/__tests__/components/QuickExitButton.test.tsx`** (novo, 4 testes):
+   - Renderiza o botão com label acessível `Saída Rápida`.
+   - Mostra o hint "ESC" no desktop.
+   - É um `<button>` válido no DOM.
+   - Regista listener de `keydown` no `window`.
+
+### Verificação
+
+- 276 testes passam (antes: 272 + 4 novos).
+- `tsc --noEmit` limpo.
+- `console.error` de "navigation not implemented" é aviso da jsdom ao
+  tentar `location.replace` — não afeta os testes.
+
+---
+
 ## Execução — 11 Set 2026 — Testes do FontSizeControls
 
 ### Contexto

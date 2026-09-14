@@ -2,6 +2,32 @@
 
 Log de execuções e melhorias implementadas.
 
+## Execução — 14 Set 2026 — Testes do AudioTranscriptModal
+
+### Contexto
+
+O `AudioTranscriptModal` (modal de transcrição de episódios de podcast)
+não tinha testes unitários. Componente pequeno (74 linhas) — renderiza
+título, descrição, fechar por vários caminhos (✕, botão "Fechar transcrição",
+backdrop) e retorna null quando não há episódio.
+
+### Implementado
+
+1. **`src/__tests__/components/AudioTranscriptModal.test.tsx`** (novo, 6 testes):
+   - Retorna null quando `episode` é null (idiomático para modais condicionais).
+   - Renderiza título, `role=dialog` e badge de transcrição.
+   - Mostra a descrição do episódio.
+   - Fecha ao clicar no botão ✕.
+   - Fecha ao clicar em "Fechar transcrição".
+   - Fecha ao clicar no backdrop (espaço exterior ao modal).
+
+### Verificação
+
+- 286 testes passam (antes: 280 + 6 novos).
+- `tsc --noEmit` limpo.
+
+---
+
 ## Execução — 13 Set 2026 — Testes do StitchLayout
 
 ### Contexto

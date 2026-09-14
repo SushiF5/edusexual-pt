@@ -2,6 +2,29 @@
 
 Log de execuções e melhorias implementadas.
 
+## Execução — 13 Set 2026 — Testes do StitchLayout
+
+### Contexto
+
+O `StitchLayout` (modal de iframe para layouts dinâmicos) não tinha testes
+unitários. Componente pequeno (43 linhas) — render, spinner de loading,
+botão de fechar e `src` do iframe.
+
+### Implementado
+
+1. **`src/__tests__/components/StitchLayout.test.tsx`** (novo, 4 testes):
+   - Renderiza o heading e o iframe com `title`.
+   - Mostra o texto de loading enquanto carrega.
+   - Chama `onClose` ao clicar no botão de fechar.
+   - Passa `htmlUrl` ao `src` do iframe.
+
+### Verificação
+
+- 280 testes passam (antes: 276 + 4 novos).
+- `tsc --noEmit` limpo.
+
+---
+
 ## Execução — 12 Set 2026 — Testes do QuickExitButton
 
 ### Contexto

@@ -2,6 +2,34 @@
 
 Log de execuções e melhorias implementadas.
 
+## Execução — 11 Set 2026 — Testes do FontSizeControls
+
+### Contexto
+
+O componente `FontSizeControls` (botão "A-A" no header) foi adicionado para
+permitir ao utilizador ajustar o tamanho do texto, mas não tinha cobertura
+de testes. Com a correção mobile do commit `4fabf30`, o botão passou a
+funcionar — boa altura para garantir que a regressão não volta.
+
+### Implementado
+
+1. **`src/__tests__/components/FontSizeControls.test.tsx`** (novo, 6 testes):
+   - Renderiza o botão "A-A" com label acessível.
+   - Abre o dropdown e mostra as 4 opções (Pequeno, Normal, Grande, Muito Grande).
+   - Aplica a classe `text-size-lg` no `<html>` ao selecionar "Grande".
+   - Persiste a escolha em `localStorage`.
+   - Carrega preferência guardada do `localStorage` no mount.
+   - Fecha o dropdown após seleção.
+
+### Verificação
+
+- 272 testes passam (antes: 266 + 6 novos).
+- `tsc --noEmit` limpo.
+- Os `console.error` de `act(...)` são avisos do `I18nProvider` (assíncrono)
+  e não afetam os testes — presente em todos os testes que usam `I18nProvider`.
+
+---
+
 ## Execução — 10 Set 2026 — FAQPage JSON-LD (SEO)
 
 ### Contexto

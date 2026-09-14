@@ -2,6 +2,32 @@
 
 Log de execuções e melhorias implementadas.
 
+## Execução — 15 Set 2026 — Testes do BookmarksModal
+
+### Contexto
+
+O `BookmarksModal` (modal de favoritos/estrela) não tinha testes unitários.
+Componente médio (119 linhas) — estado vazio, listagem, navegar para tab,
+remover bookmark e fechar.
+
+### Implementado
+
+1. **`src/__tests__/components/BookmarksModal.test.tsx`** (novo, 7 testes):
+   - Retorna null quando `isOpen` é false.
+   - Renderiza dialog com contagem de favoritos.
+   - Mostra mensagem de estado vazio.
+   - Lista os títulos dos bookmarks.
+   - Navega para o tab alvo e fecha ao abrir um item.
+   - Remove um bookmark pelo botão 🗑️.
+   - Fecha ao clicar no backdrop.
+
+### Verificação
+
+- 293 testes passam (antes: 286 + 7 novos).
+- `tsc --noEmit` limpo.
+
+---
+
 ## Execução — 14 Set 2026 — Testes do AudioTranscriptModal
 
 ### Contexto

@@ -42,6 +42,18 @@ export default function GlobalSearchModal({
     }
   }, [isOpen]);
 
+  // ESC key triggers emergency quick exit
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, onClose]);
+
   const searchIndex: SearchResult[] = useMemo(() => {
     const list: SearchResult[] = [];
 

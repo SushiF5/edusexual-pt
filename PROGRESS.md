@@ -2,6 +2,38 @@
 
 Log de execuções e melhorias implementadas.
 
+## Execução — 16 Set 2026 — Testes do GlobalSearchModal + ESC handler
+
+### Contexto
+
+O `GlobalSearchModal` (pesquisa global em toda a base de conhecimento) não
+tinha testes unitários. Componente maior (315 linhas) — input, sugestões,
+filtro em tempo real, resultados, navegação e fecho. Faltava também o
+handler de tecla ESC para fechar o modal.
+
+### Implementado
+
+1. **`src/components/GlobalSearchModal.tsx`**: Adicionado `useEffect` com
+   listener de `keydown` em `window` que chama `onClose` na tecla `Escape`.
+2. **`src/__tests__/components/GlobalSearchModal.test.tsx`** (novo, 9 testes):
+   - Retorna null quando `isOpen` é false.
+   - Renderiza input + estado vazio com sugestões.
+   - Clica nas sugestões preenche o input.
+   - Filtra resultados em tempo real (3 matches para "pílula").
+   - Mostra "Nenhum resultado" para query inexistente.
+   - Limpa input ao clicar no ✕.
+   - Navega para o tab alvo e fecha ao selecionar resultado.
+   - Fecha na tecla Escape.
+   - Fecha ao clicar no backdrop.
+
+### Verificação
+
+- 302 testes passam (antes: 293 + 9 novos).
+- `tsc --noEmit` limpo.
+- Handler ESC funcional no componente e testado.
+
+---
+
 ## Execução — 15 Set 2026 — Testes do BookmarksModal
 
 ### Contexto

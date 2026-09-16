@@ -2,6 +2,37 @@
 
 Log de execuções e melhorias implementadas.
 
+## Execução — 18 Set 2026 — Testes do GlossaryTab
+
+### Contexto
+
+O `GlossaryTab` (dicionário de termos de educação sexual com pesquisa,
+filtros por categoria/letra e bookmarks) não tinha testes unitários.
+Componente de complexidade média (229 linhas) — input de pesquisa com
+sugestões, filtros por 6 categorias + 9 letras, listagem de 17 termos
+com definição, contexto detalhado e tags clicáveis.
+
+### Implementado
+
+1. **`src/__tests__/components/GlossaryTab.test.tsx`** (novo, 14 testes):
+   - Renderiza título, subtítulo e input de pesquisa.
+   - Renderiza 6 category pills + 10 letter jump buttons (C,D,E,H,I,J,O,P,S + Todos).
+   - Categoria "Todos" ativa por defeito; alterna entre category pills.
+   - Filtra por letra (C, S) e por query de pesquisa (3 matches para "vulva").
+   - Limpa input ao clicar no ✕.
+   - Renderiza cards de termos (clitóris, HPV, consentimento) e tags clicáveis.
+   - Mostra estado vazio para query inexistente.
+   - Renderiza definição e contexto detalhado (ex: "acordo mútuo" em Consentimento).
+   - Tags clicáveis (#anatomia).
+   - Estado vazio ao combinar filtro de categoria + query inexistente.
+
+### Verificação
+
+- 327 testes passam (antes: 313 + 14 novos).
+- `tsc --noEmit` limpo.
+
+---
+
 ## Execução — 17 Set 2026 — Testes do ToolsTab
 
 ### Contexto

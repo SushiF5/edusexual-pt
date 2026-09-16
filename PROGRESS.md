@@ -2,6 +2,34 @@
 
 Log de execuções e melhorias implementadas.
 
+## Execução — 17 Set 2026 — Testes do ToolsTab
+
+### Contexto
+
+O `ToolsTab` (hub de ferramentas interativas: comparador, mito/verdade, quiz,
+consentimento, ISTs, ciclo menstrual, guias passo a passo) não tinha testes
+unitários. Componente de orquestração que renderiza 7 sub-ferramentas via
+pills de navegação.
+
+### Implementado
+
+1. **`src/__tests__/components/ToolsTab.test.tsx`** (novo, 11 testes):
+   - Renderiza título e subtítulo.
+   - Renderiza 7 pills de navegação (comparator, mythbuster, quiz, consent,
+     stis, cycle, steps).
+   - Destaca a pill ativa por defeito (comparator).
+   - Alterna entre pills ao clicar (comportamento de tabs).
+   - Renderiza o `ContraceptiveComparator` quando a pill ativa é comparator.
+
+### Verificação
+
+- 313 testes passam (antes: 302 + 11 novos).
+- `tsc --noEmit` limpo.
+- O teste conta apenas os botões das pills (filtro por nome), não o
+  `QuickExitButton` do header nem botões internos das sub-ferramentas.
+
+---
+
 ## Execução — 16 Set 2026 — Testes do GlobalSearchModal + ESC handler
 
 ### Contexto

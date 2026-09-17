@@ -2,6 +2,34 @@
 
 Log de execuções e melhorias implementadas.
 
+## Execução — 17 Set 2026 — Testes do MenstrualCycleSim
+
+### Contexto
+
+O `MenstrualCycleSim` (simulador pedagógico do ciclo menstrual com seletor de dias,
+4 fases, informações detalhadas e aviso médico) não tinha testes unitários.
+Componente de complexidade média (257 linhas) — slider de seleção de dia, 4 botões
+de duração do ciclo (26/28/30/32), barra visual de fases, card de detalhe com 4 pilares
+(informação uterina, ovariana, hormonal e muco cervical), e aviso pedagógico.
+
+### Implementado
+
+1. **`src/__tests__/components/MenstrualCycleSim.test.tsx`** (novo, 14 testes):
+   - Renderiza título e banner introdutório.
+   - Renderiza botões de duração do ciclo (26, 28, 30, 32 dias).
+   - Estado por defeito: dia 14 de ciclo de 28 dias.
+   - Renderiza slider com aria-label correto.
+   - Renderiza 4 barras de fase (Menstruação, Folicular, Ovulação, Lútea).
+   - Mostra detalhes da fase fértil (dia 14 padrão).
+   - Mostra fase menstrual ao clicar na barra (dia 3).
+   - Mostra fase folicular ao clicar na barra (dia 8).
+   - Mostra fase lútea ao clicar na barra (dia 20).
+   - Renderiza os 4 pilares de informação (Útero, Ovários, Hormonas, Muco Cervical).
+   - Renderiza aviso pedagógico com estatísticas (24% ao ano, 5 dias).
+   - Altera duração do ciclo para 30 dias.
+   - Ajusta dia selecionado ao mudar para ciclo mais curto.
+   - Slider atualiza o dia selecionado.
+
 ## Execução — 18 Set 2026 — Testes do GlossaryTab
 
 ### Contexto

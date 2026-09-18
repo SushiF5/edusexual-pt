@@ -2,6 +2,44 @@
 
 Log de execuções e melhorias implementadas.
 
+## Execução — 18 Set 2026 — Testes do MythBusterGame
+
+### Contexto
+
+O `MythBusterGame` (jogo interactivo "Mito ou Verdade" com 12 afirmações
+de saúde sexual, pontuação, sequências, categorias e favoritos) não tinha
+testes unitários. Componente de complexidade média (242 linhas) — seletor
+de categorias (6), flashcard com afirmação, botões MITO/VERDADE, feedback
+correto/incorreto, explicação científica, navegação, pontuação, streak e
+bookmark.
+
+### Implementado
+
+1. **`src/__tests__/components/MythBusterGame.test.tsx`** (novo, 16 testes):
+   - Renderiza título do jogo e texto introdutório.
+   - Renderiza 6 botões de categoria.
+   - Estado por defeito: categoria "Todos", primeira afirmação.
+   - Renderiza botões MITO e VERDADE antes de responder.
+   - Mostra feedback correto ao acertar (m1 é falso → "Mito").
+   - Mostra feedback incorreto ao errar.
+   - Mostra explicação e contexto científico após responder.
+   - Atualiza pontuação e contagem de respostas.
+   - Navega para próxima afirmação após responder.
+   - Reinicia pontuação e histórico ao clicar em reiniciar.
+   - Alterna categoria e volta à primeira afirmação.
+   - Acompanha sequência de respostas corretas (streak).
+   - Esconde botão de reiniciar quando sem respostas.
+   - Chama onBookmark ao clicar no botão de favorito.
+   - Mostra estrela preenchida quando item está marcado.
+   - Esconde botões MITO/VERDADE após responder.
+
+### Verificação
+
+- 357 testes passam (antes: 341 + 16 novos).
+- `tsc --noEmit` limpo.
+
+---
+
 ## Execução — 17 Set 2026 — Testes do MenstrualCycleSim
 
 ### Contexto

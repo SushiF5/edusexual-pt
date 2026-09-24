@@ -6,10 +6,11 @@ import { useI18n } from "@/i18n/context";
 import { Audience, BookmarkItem } from "@/types";
 import GlossaryTab from "@/components/GlossaryTab";
 import FaqTab from "@/components/FaqTab";
+import ResourcesInPortugal from "@/components/ResourcesInPortugal";
 
 interface ResourcesTabProps {
   audience: Audience;
-  initialSubTab?: "guias" | "glossario" | "faq";
+  initialSubTab?: "guias" | "glossario" | "faq" | "portugal";
   onBookmark?: (item: BookmarkItem) => void;
   isBookmarked?: (id: string) => boolean;
 }
@@ -21,7 +22,7 @@ export default function ResourcesTab({
   isBookmarked = () => false,
 }: ResourcesTabProps) {
   const { t } = useI18n();
-  const [activeSubTab, setActiveSubTab] = useState<"guias" | "glossario" | "faq">(initialSubTab);
+  const [activeSubTab, setActiveSubTab] = useState<"guias" | "glossario" | "faq" | "portugal">(initialSubTab);
   const [selectedGuide, setSelectedGuide] = useState<string | null>(null);
 
   useEffect(() => {
@@ -91,6 +92,18 @@ export default function ResourcesTab({
         >
           <span>❓</span>
           <span>{t.tabFaq}</span>
+        </button>
+
+        <button
+          onClick={() => setActiveSubTab("portugal")}
+          className={`flex-1 py-2.5 px-4 rounded-xl text-xs md:text-sm font-bold transition flex items-center justify-center gap-2 ${
+            activeSubTab === "portugal"
+              ? "bg-primary text-white shadow-md"
+              : "text-gray-600 dark:text-gray-300 hover:text-primary hover:bg-white dark:hover:bg-gray-700"
+          }`}
+        >
+          <span>🇵🇹</span>
+          <span>{t.tabRights}</span>
         </button>
       </div>
 
@@ -176,6 +189,7 @@ export default function ResourcesTab({
         )}
 
         {activeSubTab === "faq" && <FaqTab audience={audience} />}
+        {activeSubTab === "portugal" && <ResourcesInPortugal />}
       </div>
     </div>
   );

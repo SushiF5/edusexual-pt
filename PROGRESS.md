@@ -2,6 +2,25 @@
 
 Log de execuções e melhorias implementadas.
 
+## Execução — 24 Set 2026 — Integração ResourcesInPortugal
+
+### Contexto
+
+O componente `ResourcesInPortugal` (lista de helplines: APAV, SOS Criança, SNS 24) estava criado mas não integrado no `ResourcesTab`.
+
+### Implementado
+
+1. **`src/components/ResourcesInPortugal.tsx`**: Componente funcional criado e estilizado.
+2. **`src/components/ResourcesTab.tsx`**: Importado e integrado no sub-tab "portugal" (Direitos e Apoio).
+
+### Verificação
+
+- 357 testes passam.
+- `tsc --noEmit` limpo.
+- `git commit` + `push` realizados.
+
+---
+
 ## Execução — 18 Set 2026 — Testes do MythBusterGame
 
 ### Contexto

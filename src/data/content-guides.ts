@@ -22,7 +22,7 @@ export const guides: Guide[] = [
       },
       {
         heading: "Recursos em Portugal",
-        body: "— APF (apf.pt): Consultas de planeamento familiar, materiais pedagógicos.\n— DGE (dge.mec.pt): Guias curriculares para educação sexual nas escolas.\n— DGS (dgs.pt): Informação de saúde sexual.\n— Linha Criança: 116 111 (grátis).\n— APAV: 800 200 2200 (apoio vítimas)."
+        body: "— APF (apf.pt): Consultas de planeamento familiar, materiais pedagógicos.\n— DGE (dge.mec.pt): Guias curriculares para educação sexual nas escolas.\n— DGS (dgs.pt): Informação de saúde sexual.\n— Portal da Saúde (sns.gov.pt): Informação do Ministério da Saúde.\n— Recursos da OMS (who.int): Recursos educativos sobre saúde sexual.\n— Linha Criança: 116 111 (grátis).\n— APAV: 800 200 2200 (apoio vítimas)."
       }
     ]
   },

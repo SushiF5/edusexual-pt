@@ -115,6 +115,7 @@ export default function ToolsTab({
                   ? "bg-primary text-white border-primary shadow-lg ring-2 ring-primary/30"
                   : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50"
               }`}
+              aria-pressed={isActive}
             >
               <div className="text-2xl mb-1">{tool.icon}</div>
               <div>

@@ -124,6 +124,7 @@ export default function MythBusterGame({
                 ? "bg-secondary text-gray-900 shadow-md font-bold"
                 : "bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 border border-gray-100 dark:border-gray-700"
             }`}
+            aria-pressed={selectedCategory === cat.id}
           >
             {cat.label}
           </button>

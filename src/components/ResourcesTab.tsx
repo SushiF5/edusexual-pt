@@ -65,6 +65,7 @@ export default function ResourcesTab({
               ? "bg-primary text-white shadow-md"
               : "text-gray-600 dark:text-gray-300 hover:text-primary hover:bg-white dark:hover:bg-gray-700"
           }`}
+          aria-pressed={activeSubTab === "guias"}
         >
           <span>📋</span>
           <span>{t.tabResources}</span>
@@ -77,6 +78,7 @@ export default function ResourcesTab({
               ? "bg-primary text-white shadow-md"
               : "text-gray-600 dark:text-gray-300 hover:text-primary hover:bg-white dark:hover:bg-gray-700"
           }`}
+          aria-pressed={activeSubTab === "glossario"}
         >
           <span>📖</span>
           <span>{t.tabGlossary}</span>
@@ -89,6 +91,7 @@ export default function ResourcesTab({
               ? "bg-primary text-white shadow-md"
               : "text-gray-600 dark:text-gray-300 hover:text-primary hover:bg-white dark:hover:bg-gray-700"
           }`}
+          aria-pressed={activeSubTab === "faq"}
         >
           <span>❓</span>
           <span>{t.tabFaq}</span>
@@ -101,6 +104,7 @@ export default function ResourcesTab({
               ? "bg-primary text-white shadow-md"
               : "text-gray-600 dark:text-gray-300 hover:text-primary hover:bg-white dark:hover:bg-gray-700"
           }`}
+          aria-pressed={activeSubTab === "portugal"}
         >
           <span>🇵🇹</span>
           <span>{t.tabRights}</span>

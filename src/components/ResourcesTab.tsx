@@ -193,7 +193,7 @@ export default function ResourcesTab({
         )}
 
         {activeSubTab === "faq" && <FaqTab audience={audience} />}
-        {activeSubTab === "portugal" && <ResourcesInPortugal />}
+        {activeSubTab === "portugal" && <ResourcesInPortugal audience={audience} />}
       </div>
     </div>
   );

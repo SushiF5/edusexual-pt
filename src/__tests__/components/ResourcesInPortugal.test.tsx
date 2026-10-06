@@ -20,13 +20,35 @@ describe("ResourcesInPortugal", () => {
     expect(screen.getByText(/diretório de linhas telefónicas/i)).toBeInTheDocument();
   });
 
-  it("renders all helplines from data", () => {
-    mount(<ResourcesInPortugal />);
+  it("renders all helplines for jovens (default audience)", () => {
+    mount(<ResourcesInPortugal audience="jovens" />);
     expect(screen.getByText("Sexualidade em Linha (IPDJ / APF)")).toBeInTheDocument();
     expect(screen.getByText("SNS 24 — Triagem e Saúde")).toBeInTheDocument();
     expect(screen.getByText("SOS Criança (IAC)")).toBeInTheDocument();
     expect(screen.getByText("Linha de Apoio à Vítima (APAV)")).toBeInTheDocument();
     expect(screen.getByText("Linha Juventude")).toBeInTheDocument();
+    expect(screen.getByText("Linha e Apoio LGBTI+ (Rede ex aequo / ILGA)")).toBeInTheDocument();
+    expect(screen.getByText("Número Nacional de Emergência")).toBeInTheDocument();
+  });
+
+  it("filters helplines for crianças audience", () => {
+    mount(<ResourcesInPortugal audience="criancas" />);
+    expect(screen.queryByText("Sexualidade em Linha (IPDJ / APF)")).not.toBeInTheDocument();
+    expect(screen.getByText("SNS 24 — Triagem e Saúde")).toBeInTheDocument();
+    expect(screen.getByText("SOS Criança (IAC)")).toBeInTheDocument();
+    expect(screen.queryByText("Linha de Apoio à Vítima (APAV)")).not.toBeInTheDocument();
+    expect(screen.queryByText("Linha Juventude")).not.toBeInTheDocument();
+    expect(screen.queryByText("Linha e Apoio LGBTI+ (Rede ex aequo / ILGA)")).not.toBeInTheDocument();
+    expect(screen.getByText("Número Nacional de Emergência")).toBeInTheDocument();
+  });
+
+  it("filters helplines for adultos audience", () => {
+    mount(<ResourcesInPortugal audience="adultos" />);
+    expect(screen.getByText("Sexualidade em Linha (IPDJ / APF)")).toBeInTheDocument();
+    expect(screen.getByText("SNS 24 — Triagem e Saúde")).toBeInTheDocument();
+    expect(screen.queryByText("SOS Criança (IAC)")).not.toBeInTheDocument();
+    expect(screen.getByText("Linha de Apoio à Vítima (APAV)")).toBeInTheDocument();
+    expect(screen.queryByText("Linha Juventude")).not.toBeInTheDocument();
     expect(screen.getByText("Linha e Apoio LGBTI+ (Rede ex aequo / ILGA)")).toBeInTheDocument();
     expect(screen.getByText("Número Nacional de Emergência")).toBeInTheDocument();
   });

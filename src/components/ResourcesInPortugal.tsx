@@ -1,8 +1,17 @@
 import { useI18n } from "@/i18n/context";
 import { helplinesData, legalRightsData } from "@/data/content-rights-helplines";
+import type { Audience } from "@/types";
 
-export default function ResourcesInPortugal() {
+interface ResourcesInPortugalProps {
+  audience?: Audience;
+}
+
+export default function ResourcesInPortugal({ audience = "jovens" }: ResourcesInPortugalProps) {
   const { t } = useI18n();
+
+  const filteredHelplines = helplinesData.filter((h) =>
+    h.audience.includes(audience)
+  );
 
   return (
     <div className="space-y-8 animate-fadeIn">
@@ -25,7 +34,7 @@ export default function ResourcesInPortugal() {
       <div className="card space-y-6">
         <h3 className="text-xl font-heading font-bold text-primary">{t.helplinesDirectory}</h3>
         <ul className="space-y-3" role="list">
-          {helplinesData.map((helpline) => (
+          {filteredHelplines.map((helpline) => (
             <li key={helpline.id} className="p-4 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-100 dark:border-gray-700 hover:border-primary/30 transition-colors">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                 <div className="flex items-center gap-3">

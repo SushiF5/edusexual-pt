@@ -119,7 +119,7 @@ export default function ToolsTab({
             >
               <div className="text-2xl mb-1">{tool.icon}</div>
               <div>
-                <h4 className="font-bold text-xs md:text-sm leading-snug">{tool.label}</h4>
+                <h3 className="font-bold text-xs md:text-sm leading-snug">{tool.label}</h3>
                 <p
                   className={`text-[10px] mt-0.5 line-clamp-1 ${
                     isActive ? "text-primary-light/90" : "text-gray-400"

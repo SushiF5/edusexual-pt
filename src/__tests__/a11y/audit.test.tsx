@@ -12,6 +12,12 @@ import PodcastTab from "@/components/PodcastTab";
 import MythBusterGame from "@/components/MythBusterGame";
 import MenstrualCycleSim from "@/components/MenstrualCycleSim";
 import GlossaryTab from "@/components/GlossaryTab";
+import ToolsTab from "@/components/ToolsTab";
+import ContraceptiveComparator from "@/components/ContraceptiveComparator";
+import RightsTab from "@/components/RightsTab";
+import ResourcesInPortugal from "@/components/ResourcesInPortugal";
+import RelationshipsConsentTool from "@/components/RelationshipsConsentTool";
+import StiTestingGuideTool from "@/components/StiTestingGuideTool";
 import { translations } from "@/i18n/all-translations";
 import { Audience, TabId } from "@/types";
 import { Episode } from "@/types";
@@ -147,6 +153,46 @@ describe("Auditoria de acessibilidade WCAG 2.1 (jest-axe)", () => {
 
   it("GlossaryTab não tem violações de acessibilidade", async () => {
     const { container } = mount(<GlossaryTab onBookmark={jest.fn()} isBookmarked={jest.fn()} />);
+    expect(await axe(container, axeOptions)).toHaveNoViolations();
+  });
+
+  it("ToolsTab não tem violações de acessibilidade", async () => {
+    const onBookmark = jest.fn();
+    const isBookmarked = jest.fn().mockReturnValue(false);
+    const { container } = mount(<ToolsTab onBookmark={onBookmark} isBookmarked={isBookmarked} />);
+    expect(await axe(container, axeOptions)).toHaveNoViolations();
+  });
+
+  it("ContraceptiveComparator não tem violações de acessibilidade", async () => {
+    const onBookmark = jest.fn();
+    const isBookmarked = jest.fn().mockReturnValue(false);
+    const { container } = mount(<ContraceptiveComparator onBookmark={onBookmark} isBookmarked={isBookmarked} />);
+    expect(await axe(container, axeOptions)).toHaveNoViolations();
+  });
+
+  it("RightsTab não tem violações de acessibilidade", async () => {
+    const onBookmark = jest.fn();
+    const isBookmarked = jest.fn().mockReturnValue(false);
+    const { container } = mount(<RightsTab onBookmark={onBookmark} isBookmarked={isBookmarked} />);
+    expect(await axe(container, axeOptions)).toHaveNoViolations();
+  });
+
+  it("ResourcesInPortugal não tem violações de acessibilidade", async () => {
+    const { container } = mount(<ResourcesInPortugal audience="jovens" />);
+    expect(await axe(container, axeOptions)).toHaveNoViolations();
+  });
+
+  it("RelationshipsConsentTool não tem violações de acessibilidade", async () => {
+    const onBookmark = jest.fn();
+    const isBookmarked = jest.fn().mockReturnValue(false);
+    const { container } = mount(<RelationshipsConsentTool onBookmark={onBookmark} isBookmarked={isBookmarked} />);
+    expect(await axe(container, axeOptions)).toHaveNoViolations();
+  });
+
+  it("StiTestingGuideTool não tem violações de acessibilidade", async () => {
+    const onBookmark = jest.fn();
+    const isBookmarked = jest.fn().mockReturnValue(false);
+    const { container } = mount(<StiTestingGuideTool onBookmark={onBookmark} isBookmarked={isBookmarked} />);
     expect(await axe(container, axeOptions)).toHaveNoViolations();
   });
 });

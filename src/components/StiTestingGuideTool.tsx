@@ -221,19 +221,23 @@ export default function StiTestingGuideTool({
 
         <div className="space-y-3 pt-2">
           <div className="flex justify-between items-center text-xs font-bold text-gray-700 dark:text-gray-300">
-            <span>Há quantos dias ocorreu o contacto?</span>
+            <label htmlFor="days-since-exposure" className="cursor-pointer">
+              Há quantos dias ocorreu o contacto?
+            </label>
             <span className="bg-primary text-white px-3 py-1 rounded-full text-sm">
               {daysSinceExposure} dias atrás
             </span>
           </div>
 
           <input
+            id="days-since-exposure"
             type="range"
             min="1"
             max="90"
             value={daysSinceExposure}
             onChange={(e) => setDaysSinceExposure(Number(e.target.value))}
             className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 accent-primary"
+            aria-label="Dias desde o contacto de risco"
           />
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3">
@@ -286,10 +290,15 @@ export default function StiTestingGuideTool({
           </div>
 
           <div className="flex items-center gap-2">
+            <label htmlFor="region-filter" className="sr-only">
+              Filtrar por região
+            </label>
             <select
+              id="region-filter"
               value={selectedRegion}
               onChange={(e) => setSelectedRegion(e.target.value)}
               className="p-2 rounded-xl text-xs font-bold border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 outline-none"
+              aria-label="Filtrar centros por região"
             >
               <option value="all">Todas as Regiões</option>
               <option value="Lisboa e Vale do Tejo">Lisboa e Vale do Tejo</option>

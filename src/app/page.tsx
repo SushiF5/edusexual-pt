@@ -337,6 +337,7 @@ export default function Home() {
                     <li><a href="https://dgs.pt" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">DGS — Direção-Geral da Saúde</a></li>
                     <li><a href="https://sns24.gov.pt" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">SNS 24 (808 24 24 24)</a></li>
                     <li><a href="https://ipdj.gov.pt" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">IPDJ — Sexualidade em Linha</a></li>
+                    <li><a href="https://portaldasaude.pt" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">Portal da Saúde — Ministério da Saúde</a></li>
                     <li><a href="https://who.int" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">OMS — Organização Mundial de Saúde</a></li>
                   </ul>
                 </div>

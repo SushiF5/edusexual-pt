@@ -9,6 +9,9 @@ import QuizTab from "@/components/QuizTab";
 import DoubtsTab from "@/components/DoubtsTab";
 import ResourcesTab from "@/components/ResourcesTab";
 import PodcastTab from "@/components/PodcastTab";
+import MythBusterGame from "@/components/MythBusterGame";
+import MenstrualCycleSim from "@/components/MenstrualCycleSim";
+import GlossaryTab from "@/components/GlossaryTab";
 import { translations } from "@/i18n/all-translations";
 import { Audience, TabId } from "@/types";
 import { Episode } from "@/types";
@@ -130,5 +133,20 @@ describe("Auditoria de acessibilidade WCAG 2.1 (jest-axe)", () => {
       unmount();
     }
     expect(navTabIds.length).toBeGreaterThan(0);
+  });
+
+  it("MythBusterGame não tem violações de acessibilidade", async () => {
+    const { container } = mount(<MythBusterGame onBookmark={jest.fn()} isBookmarked={jest.fn()} />);
+    expect(await axe(container, axeOptions)).toHaveNoViolations();
+  });
+
+  it("MenstrualCycleSim não tem violações de acessibilidade", async () => {
+    const { container } = mount(<MenstrualCycleSim />);
+    expect(await axe(container, axeOptions)).toHaveNoViolations();
+  });
+
+  it("GlossaryTab não tem violações de acessibilidade", async () => {
+    const { container } = mount(<GlossaryTab onBookmark={jest.fn()} isBookmarked={jest.fn()} />);
+    expect(await axe(container, axeOptions)).toHaveNoViolations();
   });
 });

@@ -225,6 +225,7 @@ export default function GlobalSearchModal({
       onClick={onClose}
       role="dialog"
       aria-modal="true"
+      aria-label="Pesquisa global em toda a base de conhecimento"
     >
       <div
         className="bg-white dark:bg-gray-800 rounded-3xl max-w-2xl w-full p-6 shadow-2xl border border-gray-100 dark:border-gray-700 space-y-4 max-h-[80vh] flex flex-col"

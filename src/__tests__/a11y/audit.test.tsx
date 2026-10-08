@@ -18,6 +18,9 @@ import RightsTab from "@/components/RightsTab";
 import ResourcesInPortugal from "@/components/ResourcesInPortugal";
 import RelationshipsConsentTool from "@/components/RelationshipsConsentTool";
 import StiTestingGuideTool from "@/components/StiTestingGuideTool";
+import AudioPlayer from "@/components/AudioPlayer";
+import GlobalSearchModal from "@/components/GlobalSearchModal";
+import BookmarksModal from "@/components/BookmarksModal";
 import { translations } from "@/i18n/all-translations";
 import { Audience, TabId } from "@/types";
 import { Episode } from "@/types";
@@ -193,6 +196,42 @@ describe("Auditoria de acessibilidade WCAG 2.1 (jest-axe)", () => {
     const onBookmark = jest.fn();
     const isBookmarked = jest.fn().mockReturnValue(false);
     const { container } = mount(<StiTestingGuideTool onBookmark={onBookmark} isBookmarked={isBookmarked} />);
+    expect(await axe(container, axeOptions)).toHaveNoViolations();
+  });
+
+  it("AudioPlayer não tem violações de acessibilidade", async () => {
+    const { container } = mount(
+      <AudioPlayer
+        src="/audio/MP3/test.mp3"
+        title="Teste de Áudio"
+        fallbackText="O teu navegador não suporta áudio."
+        textToRead="Texto para leitura"
+      />
+    );
+    expect(await axe(container, axeOptions)).toHaveNoViolations();
+  });
+
+  it("GlobalSearchModal não tem violações de acessibilidade", async () => {
+    const { container } = mount(
+      <GlobalSearchModal
+        isOpen={true}
+        onClose={jest.fn()}
+        onNavigateTab={jest.fn()}
+      />
+    );
+    expect(await axe(container, axeOptions)).toHaveNoViolations();
+  });
+
+  it("BookmarksModal não tem violações de acessibilidade", async () => {
+    const { container } = mount(
+      <BookmarksModal
+        isOpen={true}
+        onClose={jest.fn()}
+        bookmarks={[]}
+        onRemoveBookmark={jest.fn()}
+        onNavigateTab={jest.fn()}
+      />
+    );
     expect(await axe(container, axeOptions)).toHaveNoViolations();
   });
 });

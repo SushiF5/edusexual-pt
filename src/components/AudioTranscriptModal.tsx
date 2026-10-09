@@ -22,6 +22,7 @@ export default function AudioTranscriptModal({
       onClick={onClose}
       role="dialog"
       aria-modal="true"
+      aria-label={t.transcriptTitle}
     >
       <div
         className="bg-white dark:bg-gray-800 rounded-3xl max-w-2xl w-full p-6 md:p-8 shadow-2xl border border-gray-100 dark:border-gray-700 space-y-6 my-8 max-h-[85vh] flex flex-col"

@@ -21,6 +21,11 @@ import StiTestingGuideTool from "@/components/StiTestingGuideTool";
 import AudioPlayer from "@/components/AudioPlayer";
 import GlobalSearchModal from "@/components/GlobalSearchModal";
 import BookmarksModal from "@/components/BookmarksModal";
+import AudioTranscriptModal from "@/components/AudioTranscriptModal";
+import FontSizeControls from "@/components/FontSizeControls";
+import StepByStepGuides from "@/components/StepByStepGuides";
+import StitchLayout from "@/components/StitchLayout";
+import QuickExitButton from "@/components/QuickExitButton";
 import { translations } from "@/i18n/all-translations";
 import { Audience, TabId } from "@/types";
 import { Episode } from "@/types";
@@ -232,6 +237,47 @@ describe("Auditoria de acessibilidade WCAG 2.1 (jest-axe)", () => {
         onNavigateTab={jest.fn()}
       />
     );
+    expect(await axe(container, axeOptions)).toHaveNoViolations();
+  });
+
+  it("AudioTranscriptModal não tem violações de acessibilidade", async () => {
+    const episode: Episode = {
+      title: "Episódio Teste",
+      description: "Descrição do episódio teste.",
+      link: "https://example.com/1",
+      pubDate: "2026-01-01",
+      duration: "10:00",
+      episode: 1,
+      season: 1,
+      image: null,
+      audioUrl: "https://example.com/1.mp3",
+      guid: "guid-1",
+    };
+    const { container } = mount(
+      <AudioTranscriptModal episode={episode} onClose={jest.fn()} />
+    );
+    expect(await axe(container, axeOptions)).toHaveNoViolations();
+  });
+
+  it("FontSizeControls não tem violações de acessibilidade", async () => {
+    const { container } = mount(<FontSizeControls />);
+    expect(await axe(container, axeOptions)).toHaveNoViolations();
+  });
+
+  it("StepByStepGuides não tem violações de acessibilidade", async () => {
+    const { container } = mount(<StepByStepGuides />);
+    expect(await axe(container, axeOptions)).toHaveNoViolations();
+  });
+
+  it("StitchLayout não tem violações de acessibilidade", async () => {
+    const { container } = mount(
+      <StitchLayout htmlUrl="https://example.com" onClose={jest.fn()} />
+    );
+    expect(await axe(container, axeOptions)).toHaveNoViolations();
+  });
+
+  it("QuickExitButton não tem violações de acessibilidade", async () => {
+    const { container } = mount(<QuickExitButton />);
     expect(await axe(container, axeOptions)).toHaveNoViolations();
   });
 });

@@ -176,4 +176,5 @@ export const pt: TranslationKeys = {
   loadingTopic: "A carregar tópico…",
   quizShareResult: "Partilhar resultado",
   quizResultCopied: "Resultado copiado!",
+  politicaPrivacidade: "Política de Privacidade",
 };

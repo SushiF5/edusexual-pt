@@ -58,6 +58,7 @@ export default function ResourcesInPortugal({ audience = "jovens" }: ResourcesIn
                 </div>
               </div>
               <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">{helpline.description}</p>
+              <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">{t.politicaPrivacidade}</p>
               <div className="mt-3 flex flex-wrap items-center gap-3 text-xs">
                 <span className="px-2 py-0.5 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300">
                   🕐 {helpline.hours}

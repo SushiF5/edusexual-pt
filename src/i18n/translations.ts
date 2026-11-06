@@ -186,6 +186,7 @@ export type TranslationKeys = {
   loadingTopic: string;
   quizShareResult: string;
   quizResultCopied: string;
+  politicaPrivacidade: string;
 };
 
 export type T = TranslationKeys;

@@ -86,7 +86,7 @@ export default function ResourcesInPortugal({ audience = "jovens" }: ResourcesIn
 
       {/* Free Services Note */}
       <div className="card bg-accent/10 border-accent text-center">
-        <span className="text-2xl" role="img" aria-hidden="true">🏥</span>
+        <span className="text-2xl" role="img" aria-label="Consulta de planeamento familiar gratuita">🏥</span>
         <h3 className="font-heading font-semibold text-primary mt-2 mb-2">{t.freeInSns}</h3>
         <p className="text-sm text-gray-600 dark:text-gray-400">
           Consultas de Planeamento Familiar e contracetivos são 100% gratuitos em qualquer Centro de Saúde / USF em Portugal.

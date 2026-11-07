@@ -53,6 +53,7 @@ export default function FaqTab({ audience }: FaqTabProps) {
         <div className="text-center py-12 text-gray-500 dark:text-gray-400" role="status" aria-live="polite">
           <p className="text-lg mb-2">{t.noFaqFound} &ldquo;{searchQuery}&rdquo;</p>
           <p className="text-sm">{t.tryOtherTerms}</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">{t.politicaPrivacidade}</p>
         </div>
       ) : (
       <div className="space-y-3 md:space-y-4">

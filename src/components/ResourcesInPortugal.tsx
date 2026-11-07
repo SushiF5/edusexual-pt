@@ -52,7 +52,7 @@ export default function ResourcesInPortugal({ audience = "jovens" }: ResourcesIn
                       {helpline.phone}
                     </a>
                   </span>
-                  <span className="px-2 py-0.5 text-xs font-medium rounded-full bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary-light">
+                  <span className="px-2 py-0.5 text-xs font-medium rounded-full bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary-light" aria-label={helpline.cost}>
                     {helpline.cost}
                   </span>
                 </div>

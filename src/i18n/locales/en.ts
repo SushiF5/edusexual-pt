@@ -133,6 +133,7 @@ export const en: TranslationKeys = {
   settings: "Settings",
   quickExit: "Quick Exit",
   quickExitAria: "Emergency Quick Exit (Closes this page immediately)",
+  whatsappAcessible: "WhatsApp Support Line",
   fontSize: "Font Size",
   fontSizeSmall: "Small",
   fontSizeNormal: "Normal",

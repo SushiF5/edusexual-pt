@@ -143,6 +143,7 @@ export type TranslationKeys = {
   settings: string;
   quickExit: string;
   quickExitAria: string;
+  whatsappAcessible: string;
   fontSize: string;
   fontSizeSmall: string;
   fontSizeNormal: string;

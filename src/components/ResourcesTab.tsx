@@ -149,6 +149,7 @@ export default function ResourcesTab({
                     href={`/api/pdf?id=${guide.id}`}
                     download={`${guide.id}.html`}
                     className="btn-secondary"
+                    aria-label={t.download}
                   >
                     {t.download}
                   </a>

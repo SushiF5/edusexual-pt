@@ -162,6 +162,25 @@ export const frequentlyAskedQuestions: FAQEntry[] = [
     audience: ["jovens"],
     question: "A penetração sozinha é suficiente para o prazer feminino?",
     answer: "Não, para a maioria das mulheres (70-80%) a estimulação direta do clitóris é necessária para atingir o orgasmo. A penetração sozinha raramente é suficiente — e isso é completamente normal. Comunica com o teu parceiro sobre o que te gosta. O prazer não é uma competição."
+  },
+  // Additional FAQ entries for adultos audience
+  {
+    id: "faq-saude-sexual-adulto",
+    audience: ["adultos"],
+    question: "Como manter a saúde sexual após os 50 anos?",
+    answer: "A saúde sexual continua importante na terceira idade. É normal que mudanças hormonais afetem a libido e a função sexual. Consulte regularmente o seu médico, mantenha comunicação aberta com o seu parceiro(a) e explore novas formas de intimidade e prazer que se adaptem às suas necessidades atuais.",
+  },
+  {
+    id: "faq-gravidez-planejada",
+    audience: ["adultos"],
+    question: "Quais as opções de contracetivo para adultos além da pílula?",
+    answer: "Existem várias opções de contracetivo para adultos: DIU (coil), implante subcutâneo, patch hormonal, anel vaginal, métodos barreira (preservativos) e métodos naturais (observação da fertilidade). Cada método tem eficácia e efeitos secundários diferentes. Consulte o seu profissional de saúde para escolher o mais adequado.",
+  },
+  {
+    id: "faq-menopausa",
+    audience: ["adultos"],
+    question: "A menopausa afeta a vida sexual?",
+    answer: "Sim, as mudanças hormonais da menopausa podem afetar a libido, a lubrificação vaginal e a função sexual. No entanto, muitas pessoas vivem uma fase sexual satisfatória após a menopausa. Lubrificantes à base de água ou silicone, terapia hormonal substitutiva (após consulta médica) e comunicação com o parceiro podem ajudar. Não hesite em falar com o seu médico sobre quaisquer preocupações.",
   }
 ];
 

@@ -182,7 +182,7 @@ export default function HeaderNav({
                 aria-controls="main-content"
                 tabIndex={isSelected ? 0 : -1}
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-4 py-1.5 rounded-full transition-all duration-200 text-xs md:text-sm font-semibold flex items-center gap-1.5 ${
+                className={`px-4 py-1.5 rounded-full transition-all duration-200 text-xs md:text-sm font-semibold flex items-center gap-1.5 outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 ${
                   isSelected
                     ? "bg-primary text-white shadow-md font-bold scale-[1.02]"
                     : "text-gray-600 dark:text-gray-300 hover:text-primary hover:bg-white dark:hover:bg-gray-700"

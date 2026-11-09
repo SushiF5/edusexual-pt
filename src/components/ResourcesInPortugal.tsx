@@ -14,7 +14,7 @@ export default function ResourcesInPortugal({ audience = "jovens" }: ResourcesIn
   );
 
   return (
-    <div className="space-y-8 animate-fadeIn">
+    <div className="space-y-8 animate-fadeIn" role="region" aria-label={t.resourcesRegion}>
       {/* Emergency Notice */}
       <div className="card bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800 p-4">
         <div className="flex items-start gap-3">

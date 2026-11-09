@@ -159,6 +159,7 @@ export const pt: TranslationKeys = {
   rightsSubtitle: "Contactos oficiais, confidenciais e gratuitos para tirar dúvidas, apoio psicológico e conhecer os teus direitos no SNS.",
   helplinesDirectory: "Diretório de Linhas Telefónicas",
   emergencyNotice: "Em caso de emergência médica imediata ou perigo iminente, liga sempre 112.",
+  resourcesRegion: "Recursos de Portugal",
   freeInSns: "Consultas de Planeamento Familiar e contracetivos são 100% gratuitos em qualquer Centro de Saúde / USF em Portugal.",
   transcriptTitle: "Transcrição de Áudio",
   closeTranscript: "Fechar transcrição",

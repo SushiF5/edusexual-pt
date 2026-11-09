@@ -159,6 +159,7 @@ export const es: TranslationKeys = {
   rightsSubtitle: "Contactos oficiales, confidenciales y gratuitos para resolver dudas, apoyo psicológico y conocer tus derechos en el SNS.",
   helplinesDirectory: "Directorio de Líneas Telefónicas",
   emergencyNotice: "En caso de emergencia médica inmediata o peligro inminente, llama siempre al 112.",
+  resourcesRegion: "Recursos de Portugal",
   freeInSns: "Las consultas de Planificación Familiar y anticonceptivos son 100% gratuitos en cualquier Centro de Salud en Portugal.",
   transcriptTitle: "Transcripción de Audio",
   closeTranscript: "Cerrar transcripción",

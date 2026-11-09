@@ -159,6 +159,7 @@ export const en: TranslationKeys = {
   rightsSubtitle: "Official, confidential, and free contacts for questions, psychological support, and knowing your rights in the NHS.",
   helplinesDirectory: "Telephone Helplines Directory",
   emergencyNotice: "In case of immediate medical emergency or imminent danger, always dial 112.",
+  resourcesRegion: "Resources Portugal",
   freeInSns: "Family Planning consultations and contraceptives are 100% free at any Health Center in Portugal.",
   transcriptTitle: "Audio Transcript",
   closeTranscript: "Close transcript",

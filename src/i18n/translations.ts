@@ -169,6 +169,7 @@ export type TranslationKeys = {
   rightsSubtitle: string;
   helplinesDirectory: string;
   emergencyNotice: string;
+  resourcesRegion: string;
   freeInSns: string;
   transcriptTitle: string;
   closeTranscript: string;
